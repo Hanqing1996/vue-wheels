@@ -48,6 +48,7 @@
 ```
     
 #### 经验
+* css 兼容查询：www.canIuse.com
 * 字体不要设置固定 font-size ,应该用变量
 * 应该在完成一个阶段后 commit ,而不是频繁 commit  
 * 如果一个包是给用户使用的
@@ -58,7 +59,7 @@ npm i vue
 ```
 npm install -D parcel-bundler
 ``` 
-* 用&表示当前的选择器
+* 用&表示当前的选择器（scss）
 ```
     .g-button{
         font-size: var(--font-size);
@@ -72,5 +73,8 @@ npm install -D parcel-bundler
         border-color: var(--border-color-hover);
     }
 ```
+
+#### vue 知识点
+* 单文件组件的好处是集成 js,html,style 。让我们能一目了然地知道一个组件的样式，功能，内容。
 
 
