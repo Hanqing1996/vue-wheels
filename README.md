@@ -13,6 +13,33 @@
     * webpack
     * parcel
 7.     
+
+#### parcel
+* parcel 的作用：运行 parcel 前， app 不认识 g-button ；运行 parcel 后， app 会去问 app.js，g-button 是什么；
+    ```
+  <div id="app">
+      <g-button></g-button>
+  </div>
+  
+  <script src="./src/app.js"></script>
+    ```
+
+
+* ./node_modules/.bin/parcel index.html 要在vue-wheels目录下运行
+* [运行 parcel 时，出现 No entries found 报错怎么办？](https://blog.csdn.net/weixin_42971942/article/details/88345351)
+* [[Vue warn]: You are using the runtime-only build of Vue where the template compiler is not available. ]()
+根据[ vue 文档](https://cn.vuejs.org/v2/guide/installation.html#%E8%BF%90%E8%A1%8C%E6%97%B6-%E7%BC%96%E8%AF%91%E5%99%A8-vs-%E5%8F%AA%E5%8C%85%E5%90%AB%E8%BF%90%E8%A1%8C%E6%97%B6)描述，需在 package.json 中添加如下内容
+```
+  "alias": {
+    // 只包含运行时版->完整版
+    "vue" : "./node_modules/vue/dist/vue.common.js"
+  }
+```
+然后运行
+```
+./node_modules/.bin/parcel index.html --no-cache
+```
+
  
 ## 安装
 使用本框架前，请在 css 中开启 border-box
@@ -31,6 +58,19 @@ npm i vue
 ```
 npm install -D parcel-bundler
 ``` 
-    
+* 用&表示当前的选择器
+```
+    .g-button{
+        font-size: var(--font-size);
+        height: var(--button-height);
+        padding: 0 1em;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        background: var(--button-bg);
+    }
+    &:hover {
+        border-color: var(--border-color-hover);
+    }
+```
 
 

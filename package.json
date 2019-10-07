@@ -21,9 +21,17 @@
   },
   "homepage": "https://github.com/Hanqing1996/vue-wheels#readme",
   "dependencies": {
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-hot-reload-api": "^2.3.4"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "@vue/component-compiler-utils": "^3.0.0",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.23.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "alias": {
+    "vue" : "./node_modules/vue/dist/vue.common.js"
   }
+
 }
