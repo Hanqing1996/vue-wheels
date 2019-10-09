@@ -23,8 +23,6 @@
   
   <script src="./src/app.js"></script>
     ```
-
-
 * ./node_modules/.bin/parcel index.html 要在vue-wheels目录下运行
 * [运行 parcel 时，出现 No entries found 报错怎么办？](https://blog.csdn.net/weixin_42971942/article/details/88345351)
 * [[Vue warn]: You are using the runtime-only build of Vue where the template compiler is not available. ]()
@@ -39,7 +37,12 @@
 ```
 ./node_modules/.bin/parcel index.html --no-cache
 ```
-
+* npx parcel index.html
+等价于
+```
+./node_modules/.bin/parcel index.html
+```
+ * parcel 会在代码更新时自动重新编译
  
 ## 安装
 使用本框架前，请在 css 中开启 border-box
@@ -51,7 +54,7 @@
 * css 兼容查询：www.canIuse.com
 * 字体不要设置固定 font-size ,应该用变量
 * 应该在完成一个阶段后 commit ,而不是频繁 commit  
-* 如果一个包是给用户使用的
+* 如果一个包是给用户（用这个组件的程序员）使用的
 ```
 npm i vue
 ```
@@ -73,8 +76,26 @@ npm install -D parcel-bundler
         border-color: var(--border-color-hover);
     }
 ```
-
+* Button.log 按 Tab 键
+```
+console.log(Button)
+```
+* [使用 icon-font 挑选/修改图标](https://xiedaimala.com/tasks/feb587c8-7139-4b1e-95f3-ac429247747a/video_tutorials/88747efd-1306-4752-a8c0-e1b8e63f1862)
+    * 左图标->右图标
+    * 获取代码：symbol->在线链接
+    
 #### vue 知识点
 * 单文件组件的好处是集成 js,html,style 。让我们能一目了然地知道一个组件的样式，功能，内容。
+
+#### 
+1. 工程知识：知道用法
+    * webpack/parcel
+    * scss
+2. 语言特性：深入掌握
+    * promise
+    * vue
+3. 抽象的东西：逐渐迭代   
+      
+
 
 
