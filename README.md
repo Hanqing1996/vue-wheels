@@ -98,10 +98,23 @@ g.button{
 props:{
     icon:{},
     iconPosition:{
-        type:String,
+        type:String,                validator(value){
+                    return value=='left'||value!='right'
+                }
         default:'left'
     }
 }
+```
+* 属性检查器
+```
+validator(value){
+    return value=='left'||value!='right'
+}
+```
+* <g-icon :name=`${icon}`></g-icon>
+等价于
+```
+<g-icon :name=`icon`></g-icon>
 ```
 
 #### 

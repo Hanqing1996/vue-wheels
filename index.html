@@ -7,15 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>轮子</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --button--height: 32px;
-            --font-size: 14px;
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        html {
             --button-height: 32px;
             --font-size: 14px;
             --button-bg: white;
@@ -25,19 +18,11 @@
             --border-color: #999;
             --border-color-hover: #666;
         }
-
         #app {
             margin: 20px;
         }
-
         body {
             font-size: var(--font-size);
-        }
-    </style>
-    <style>
-        .icon {
-            width: 1em;
-            height: 1em;
         }
     </style>
 </head>
@@ -48,7 +33,7 @@
         icon在右边的button
     </g-button>
 
-    <g-button icon="settings">
+    <g-button icon="settings" icon-position="left">
         icon在左边的button
     </g-button>
 
@@ -56,9 +41,9 @@
         没有传入icon的button
     </g-button>
 
-    <g-button  icon="settings" icon-position="up">
-        传入iconPosition为无效值的button
-    </g-button>
+<!--    <g-button  icon="settings" icon-position="up">-->
+<!--        传入iconPosition为无效值的button-->
+<!--    </g-button>-->
 </div>
 
 <script src="./src/app.js"></script>
