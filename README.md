@@ -83,6 +83,13 @@ console.log(Button)
 * [使用 icon-font 挑选/修改图标](https://xiedaimala.com/tasks/feb587c8-7139-4b1e-95f3-ac429247747a/video_tutorials/88747efd-1306-4752-a8c0-e1b8e63f1862)
     * 左图标->右图标
     * 获取代码：symbol->在线链接
+* 遇到同排元素不对齐
+```
+g.button{
+    vertical-align: middle;
+}
+```
+
     
 #### vue 知识点
 * 单文件组件的好处是集成 js,html,style 。让我们能一目了然地知道一个组件的样式，功能，内容。

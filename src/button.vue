@@ -15,7 +15,13 @@
 </template>
 <script>
     export default {
-        props: ['icon', 'iconPosition']
+        props:{
+            icon:{},
+            iconPosition:{
+                type:String,
+                default:'left'
+            }
+        }
     }
 </script>
 <style lang="scss">
@@ -29,6 +35,7 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
+        vertical-align: middle;
 
         // &表示当前选择器（button）
         &:hover {border-color: var(--border-color-hover);}
