@@ -93,6 +93,16 @@ g.button{
     
 #### vue 知识点
 * 单文件组件的好处是集成 js,html,style 。让我们能一目了然地知道一个组件的样式，功能，内容。
+* 用props为iconPosition设置默认值
+```
+props:{
+    icon:{},
+    iconPosition:{
+        type:String,
+        default:'left'
+    }
+}
+```
 
 #### 
 1. 工程知识：知道用法
