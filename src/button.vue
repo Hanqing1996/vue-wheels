@@ -2,7 +2,14 @@
 <template>
     <!--通过icon-${iconPosition}来设置样式-->
     <button class="g-button" :class="{[`icon-${iconPosition}`]: true}">
-        <g-icon v-if="icon" class="icon" :name=`${icon}`></g-icon>
+
+        <!--注意class的icon值为字符串，而v-if，v-bind绑定的icon值由用户传入-->
+        <!--v-if="icon"：用户传入icon值，则渲染svg-->
+        <!--:name="icon"：用户传入icon的值（svg的名字）-->
+        <g-icon v-if="icon" class="icon" :name="icon"></g-icon>
+
+        <!--这里的loading是字符串，不是变量名，所以用name而不是:name-->
+        <g-icon class="loading" name="loading"></g-icon>
         <div class="content">
             <slot></slot>
         </div>
@@ -24,6 +31,11 @@
     }
 </script>
 <style lang="scss">
+    @keyframes spin {
+        0%{transform: rotate(0deg);}
+        100%{transform: rotate(360deg);}
+    }
+
     .g-button { font-size: var(--font-size); height: var(--button-height); padding: 0 1em;
         border-radius: var(--border-radius); border: 1px solid var(--border-color);
         background: var(--button-bg);
@@ -37,6 +49,11 @@
         &.icon-right {
             > .content { order: 1; }
             > .icon { order: 2; margin-right: 0; margin-left: .1em;}
+        }
+
+        // 让loading旋转
+        .loading{
+            animation: spin 1s infinite linear;
         }
     }
 </style>

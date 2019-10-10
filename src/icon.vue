@@ -1,5 +1,5 @@
 <template>
-    <!--用户传入icon值，则渲染svg-->
+
     <svg class="g-icon">
         <use :xlink:href="`#i-${name}`"></use>
     </svg>

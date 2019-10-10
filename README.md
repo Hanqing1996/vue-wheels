@@ -83,6 +83,7 @@ console.log(Button)
 * [使用 icon-font 挑选/修改图标](https://xiedaimala.com/tasks/feb587c8-7139-4b1e-95f3-ac429247747a/video_tutorials/88747efd-1306-4752-a8c0-e1b8e63f1862)
     * 左图标->右图标
     * 获取代码：symbol->在线链接
+    * 让“加载”图标旋转：
 * 遇到同排元素不对齐
 ```
 g.button{
@@ -125,7 +126,4 @@ validator(value){
     * promise
     * vue
 3. 抽象的东西：逐渐迭代   
-      
-
-
 
