@@ -1,15 +1,15 @@
 <!--将 button.js 改为集成 js,html,style 的单文件组件 button.vue-->
 <template>
     <!--通过icon-${iconPosition}来设置样式-->
-    <button class="g-button" :class="{[`icon-${iconPosition}`]: true}">
+    <button class="g-button" :class="{[`icon-${iconPosition}`]: true}" @click="$emit('touch')">
 
         <!--注意class的icon值为字符串，而v-if，v-bind绑定的icon值由用户传入-->
-        <!--v-if="icon"：用户传入icon值，则渲染svg-->
+        <!--v-if="icon&&!loading"：没有loading的情况下，用户传入icon值，则渲染svg-->
         <!--:name="icon"：用户传入icon的值（svg的名字）-->
-        <g-icon v-if="icon" class="icon" :name="icon"></g-icon>
+        <g-icon v-if="icon&&!loading" class="icon" :name=icon></g-icon>
 
         <!--这里的loading是字符串，不是变量名，所以用name而不是:name-->
-        <g-icon class="loading" name="loading"></g-icon>
+        <g-icon v-if="loading" class="loading icon" name="loading"></g-icon>
         <div class="content">
             <slot></slot>
         </div>
@@ -19,14 +19,20 @@
     export default {
         props: {
             icon: {},
+            loading:{
+                type:Boolean,
+                default: false
+            },
             iconPosition: {
                 type: String,
                 default: 'left',
+
                 // 属性检查器
                 validator(value) {
                     return value === 'left' || value === 'right'
                 }
-            }
+            },
+            loadingStatus:{}
         }
     }
 </script>
@@ -44,8 +50,11 @@
         &:hover { border-color: var(--border-color-hover); }
         &:active { background-color: var(--button-active-bg); }
         &:focus { outline: none; }
+
+        // 默认的 icon 与 content 排列：icon 左，content 右
         > .content { order: 2; }
         > .icon { order: 1; margin-right: .1em; }
+
         &.icon-right {
             > .content { order: 1; }
             > .icon { order: 2; margin-right: 0; margin-left: .1em;}
