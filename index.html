@@ -7,7 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>轮子</title>
     <style>
-        * {margin: 0; padding: 0; box-sizing: border-box;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         html {
             --button-height: 32px;
             --font-size: 14px;
@@ -18,9 +23,11 @@
             --border-color: #999;
             --border-color-hover: #666;
         }
+
         #app {
             margin: 20px;
         }
+
         body {
             font-size: var(--font-size);
         }
@@ -32,7 +39,6 @@
     <!--用户不传入 loading 的值，则默认 loading 的值为 false-->
     <!--loading 优先级高于 icon，用户既传入 loading，又传入 icon的情况下，只显示 loading，不显示 icon -->
     <!--icon-position 对 icon 和 loading 都有效，谁在就对谁生效-->
-
 
 
     <!--传入 loading，且传入 icon-->
@@ -51,9 +57,17 @@
         没有传入icon的button
     </g-button>
 
-<!--    <g-button  icon="settings" icon-position="up">-->
-<!--        传入iconPosition为无效值的button-->
-<!--    </g-button>-->
+    <g-button-group>
+        <div>
+            <g-button icon="left">上一页</g-button>
+        </div>
+        <g-button>更多</g-button>
+        <g-button icon="right" icon-position="right">下一页</g-button>
+    </g-button-group>
+
+    <!--    <g-button  icon="settings" icon-position="up">-->
+    <!--        传入iconPosition为无效值的button-->
+    <!--    </g-button>-->
 </div>
 
 <script src="./src/app.js"></script>

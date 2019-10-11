@@ -112,10 +112,11 @@ validator(value){
     return value=='left'||value!='right'
 }
 ```
-* <g-icon :name=`${icon}`></g-icon>
-等价于
+* 每个Vue组件，都是一个可复用的vue实例。但根Vue实例只有一个
+* 
 ```
-<g-icon :name=`icon`></g-icon>
+<div class="g-button-group">
+<div>
 ```
 
 #### 
