@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Button from './button'
 import Icon from './icon'
 import ButtonGroup from './button-group'
+import chai from 'chai'
+import spies from 'chai-spies'
 
 // 所有组件在这里注册，注意 loadingStatus1,loadingStatus2 属于new的Vue例的data对象，不属于以下组件的data函数
 Vue.component('g-button',Button)
@@ -16,11 +18,10 @@ new Vue({
     }
 })
 
-import chai from 'chai'
 const expect=chai.expect
 
 // 单元测试
-// g-button 输入参数（props里看）个数，事件个数，样式
+// 组件输入参数（props里看）个数，事件个数，样式
 
 // 测试 icon
 {
@@ -97,7 +98,8 @@ const expect=chai.expect
     vm.$el.remove()
     vm.$destroy()
 }
-// 测试 g-button内部的 click 事件
+chai.use(spies)
+// 测试节点 button 的 click 事件能否触发 vue实例的touch事件
 {
     const Constructor=Vue.extend(Button)
     const vm=new Constructor({
@@ -107,16 +109,15 @@ const expect=chai.expect
         }
     })
     vm.$mount()
-
-    vm.$on('touch',function(){
-        console.log(1)
-    })
-
+    let spy=chai.spy(function () {})
+    // 监听当前实例上的自定义事件 touch
+    vm.$on('touch',spy)
     // 注意 vm 是一个vue实例，button 是一个真实的选择器（DOM节点）
     let button=vm.$el
-
     // 触发 button 的 click 事件
     button.click()
+    // 期待 button 的 click 事件被触发后，spy 被调用
+    expect(spy).to.have.been.called()
 
     vm.$el.remove()
     vm.$destroy()
