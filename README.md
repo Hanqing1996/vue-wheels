@@ -44,6 +44,7 @@
 ```
  * parcel 会在代码更新时自动重新编译
  
+ 
 ## 安装
 使用本框架前，请在 css 中开启 border-box
 ```
@@ -54,28 +55,6 @@
 * css 兼容查询：www.canIuse.com
 * 字体不要设置固定 font-size ,应该用变量
 * 应该在完成一个阶段后 commit ,而不是频繁 commit  
-* 如果一个包是给用户（用这个组件的程序员）使用的
-```
-npm i vue
-```
-* 如果一个包是给开发者使用的（-D表示给 developer 使用）
-```
-npm install -D parcel-bundler
-``` 
-* 用&表示当前的选择器（scss）
-```
-    .g-button{
-        font-size: var(--font-size);
-        height: var(--button-height);
-        padding: 0 1em;
-        border-radius: var(--border-radius);
-        border: 1px solid var(--border-color);
-        background: var(--button-bg);
-    }
-    &:hover {
-        border-color: var(--border-color-hover);
-    }
-```
 * Button.log 按 Tab 键
 ```
 console.log(Button)
@@ -84,14 +63,20 @@ console.log(Button)
     * 左图标->右图标
     * 获取代码：symbol->在线链接
     * 让“加载”图标旋转：
-* 遇到同排元素不对齐
+* flex布局遇到同排元素不对齐
 ```
 g.button{
     vertical-align: middle;
 }
 ```
-
-    
+* BDD
+Behavior Driven Development（行为驱动开发）
+* TDD
+Test Driven Development（测试驱动开发）
+* assert（断言）
+```
+console.assert(1===2)
+``` 
 #### vue 知识点
 * 单文件组件的好处是集成 js,html,style 。让我们能一目了然地知道一个组件的样式，功能，内容。
 * 用props为iconPosition设置默认值
@@ -113,11 +98,40 @@ validator(value){
 }
 ```
 * 每个Vue组件，都是一个可复用的vue实例。但根Vue实例只有一个
-* 
+* 组件的class会最终加到组件的根元素上 
 ```
-<div class="g-button-group">
-<div>
+<g-icon class="icon">
+</g-icon>
+......
+<template>
+    <svg class="g-icon"></svg> 
+</template>
 ```
+最终渲染结果为
+```
+<svg class="g-icon icon"></svg>
+```
+* propsDate用在单元测试中
+```
+const button=new Constructor({
+    propsData:{
+        icon:'settings',
+        loading:true
+    }
+})
+```
+等效于
+```
+<g-button icon="settings" :loading="true"></g-button>
+```
+* el:提供一个在页面上已存在的 DOM 元素作为 Vue 实例的挂载目标
+提供的元素只能作为挂载点。所有的挂载元素会被 Vue 生成的 DOM 替换
+```
+g-button.$mount(div)
+```
+结果div会被g-button的根元素button替换
+    * g-button.$el = <button><svg>...</svg></button>
+    * g-button.$el常用在单元测试中，用于访问vue实例的样式，子节点等
 
 #### 
 1. 工程知识：知道用法
@@ -127,4 +141,33 @@ validator(value){
     * promise
     * vue
 3. 抽象的东西：逐渐迭代   
+
+#### 工具安装
+[淘宝 NPM 镜像](https://npm.taobao.org/)，之后用 cnpm 代替 npm 即可
+* 如果一个包是给用户（用这个组件的程序员）使用的
+```
+npm i vue
+```
+* 如果一个包是给开发者使用的（-D表示给 developer 使用）,比如 chai
+```
+npm i -D parcel-bundler
+``` 
+
+#### vue 生命周期
+[测试](https://www.jianshu.com/p/b88572d8f80a)
+![vue 生命周期图示](https://upload-images.jianshu.io/upload_images/11892234-64ee73fa10e1b20a.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)
+1. create:vue实例被创建；
+    * beforeCreate：
+    * created：
+2. mount:vue实例被挂载到真实的DOM节点；
+    * beforeMount：
+    * mounted：
+    * 每刷新一次页面，就重新 create 和 mount 一次
+3. update:当vue实例里面的data数据变化时，触发组件的重新渲染
+    * beforeUpdate：
+    * updated：
+4. destroy:vue实例被销毁
+    * beforeDestroy：
+    * destroyed：
+
 

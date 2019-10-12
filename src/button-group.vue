@@ -9,8 +9,6 @@
         // mounted:当这个button-group出现在页面中时
         mounted () {
 
-            console.log(this.$el.children)
-
             // 检查当前组件实例的子元素不是 button,则予以警告
             for (let node of this.$el.children) {
                 let name = node.nodeName.toLowerCase()

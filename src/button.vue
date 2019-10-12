@@ -32,8 +32,7 @@
                     return value === 'left' || value === 'right'
                 }
             },
-            loadingStatus:{}
-        }
+        },
     }
 </script>
 <style lang="scss">
