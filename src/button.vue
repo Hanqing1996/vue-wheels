@@ -17,11 +17,12 @@
 </template>
 <script>
 
-    // 全局注册icon
     import Icon from './icon'
 
-    Vue.component('g-icon',Icon)
     export default {
+        components:{
+            'g-icon':Icon
+        },
         props: {
             icon: {},
             loading:{
