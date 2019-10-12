@@ -12,10 +12,10 @@
 6. 选择构建工具 
     * webpack
     * parcel
-7.     
+    
 
 #### parcel
-* parcel 的作用：运行 parcel 前， app 不认识 g-button ；运行 parcel 后， app 会去问 app.js，g-button 是什么；
+* parcel 的作用：打包，运行 parcel 前， div#app 不认识 g-button ；运行 parcel 后， div#app 会去问 app.js，g-button 是什么；
     ```
   <div id="app">
       <g-button></g-button>
@@ -33,7 +33,7 @@
     "vue" : "./node_modules/vue/dist/vue.common.js"
   }
 ```
-然后运行
+然后运行（起了别名：usep）
 ```
 ./node_modules/.bin/parcel index.html --no-cache
 ```
@@ -42,7 +42,7 @@
 ```
 ./node_modules/.bin/parcel index.html
 ```
- * parcel 会在代码更新时自动重新编译
+* parcel 会在代码更新时自动重新编译
  
  
 ## 安装
@@ -77,6 +77,14 @@ Test Driven Development（测试驱动开发）
 ```
 console.assert(1===2)
 ``` 
+#### 自动化测试
+* 自动化
+    * 自动打包js(app.js)
+    * 自动打开浏览器，输入网址回车，运行测试用例
+    * 自动关闭浏览器，保留浏览器输出到命令行
+* 运行 npm run test 前，要运行 rm -rf .cache dist       
+    
+    
 #### vue 知识点
 * 单文件组件的好处是集成 js,html,style 。让我们能一目了然地知道一个组件的样式，功能，内容。
 * 用props为iconPosition设置默认值
@@ -132,6 +140,9 @@ g-button.$mount(div)
 结果div会被g-button的根元素button替换
     * g-button.$el = <button><svg>...</svg></button>
     * g-button.$el常用在单元测试中，用于访问vue实例的样式，子节点等
+#### 组件注册
+* 记住全局注册的行为必须在根 Vue 实例 (通过 new Vue) 创建之前发生 
+
 
 #### 
 1. 工程知识：知道用法
