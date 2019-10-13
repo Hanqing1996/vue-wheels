@@ -31,15 +31,6 @@ Test Driven Development（测试驱动开发）
 ```
 console.assert(1===2)
 ``` 
-* [淘宝 NPM 镜像](https://npm.taobao.org/)，之后用 cnpm 代替 npm 即可
-* 如果一个包是给用户（用这个组件的程序员）使用的
-```
-npm i vue
-```
-* 如果一个包是给开发者使用的（-D表示给 developer 使用）,比如 chai
-```
-npm i -D parcel-bundler
-```  
 * 打包：parcel build test/* --no-cache --no-minify
     * 把 test 目录下的文件打包到 dist 目录下
 
@@ -60,10 +51,6 @@ npm i -D parcel-bundler
     * 只打包一次+执行测试一次（这意味着每改变一次代码就必须再输入一次命令）:parcel build test/* --no-cache --no-minify && karma start --single-run
     * 自动打包+自动执行测试用例（这意味着只要输入一次命令，从此再不必输入，代码自己打包，自己测试，随时看到最新的结果）：parcel watch test/* --no-cache & karma start
         * 注意如果只有karma start的话，那么代码的变化就无法被karma检测到，测试有效性就不好。也就是说 karma 必须有人告诉他要测试的代码变了，它只会自动测试，不会自动打包
-
-#### TravisCI
-
-
 
 
 * [运行 parcel 时，出现 No entries found 报错怎么办？](https://blog.csdn.net/weixin_42971942/article/details/88345351)
@@ -193,3 +180,21 @@ g-button.$mount(div)
 4. destroy:vue实例被销毁
     * beforeDestroy：
     * destroyed：
+   
+#### npm知识点
+* npm init：初始化一个package.json
+    * 适用场景：需要创建一个新项目
+* npm install:根据package-lock.json下载相应包
+    * 
+    * 适用场景：从github上下了一个不含node_modules的项目
+* npm run
+    * 在 package.json 的 scripts 属性中加入命令（例如："foo": "echo foo"）就可以通过 npm run foo 运行对应命令。
+    * 这是 npm 提供的一个很方便的运行项目相关的自动化任务的机制，
+* npm i -D xx:
+    * xx 将出现在 package.json 的 devdependencies 对象中   
+    * 无-D，则xx 将出现在 package.json 的 dependencies 对象中      
+    
+    
+#### 
+p    
+    
