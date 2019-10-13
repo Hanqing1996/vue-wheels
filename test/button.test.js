@@ -5,9 +5,10 @@ import Button from '../src/button'
 Vue.config.productionTip = false
 Vue.config.devtools = false
 
+// describe 和 it 來自 mocha
 describe('Button', () => {
     it('存在.', () => {
-        expect(Button).to.be.ok
+        expect(Button).to.be.ok // 不是假值，就不报错
     })
     it('可以设置icon.', () => {
         const Constructor = Vue.extend(Button)
@@ -62,7 +63,7 @@ describe('Button', () => {
         vm.$el.remove()
         vm.$destroy()
     })
-    it('点击 button 触发 click 事件', () => {
+    it('点击 button 触发 touch 事件', () => {
         const Constructor = Vue.extend(Button)
         const vm = new Constructor({
             propsData: {

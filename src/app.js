@@ -115,7 +115,7 @@ try {
         vm.$mount()
         let spy = chai.spy(function () {
         })
-        // 监听当前实例上的自定义事件 touch
+        // 监听当前实例上的自定义事件 touch，回调函数为 spy
         vm.$on('touch', spy)
         // 注意 vm 是一个vue实例，button 是一个真实的选择器（DOM节点）
         let button = vm.$el

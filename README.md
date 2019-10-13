@@ -1,29 +1,71 @@
 # 我造的轮子们
 
-## 流程 
-1. 需求分析/UI设计
-2. [LICENSE选择](http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html)
-    * 最开放：MIT
-3. 选择第三方工具
-    * npm
-4. 选择底层代码
-    * vue    
-5. [选择不要上传的文件（.idea,node_modules等等，第一次就不要push）](https://github.com/Hanqing1996/blog/blob/master/github%E7%9B%B8%E5%85%B3/README.md)    
-6. 选择构建工具 
-    * webpack
-    * parcel
-    
+#### 分类
+1. 工程知识：知道用法
+    * webpack/parcel
+    * scss
+2. 语言特性：深入掌握
+    * promise
+    * vue
+3. 抽象的东西：逐渐迭代 
 
-#### parcel
-* parcel 的作用：打包，运行 parcel 前， div#app 不认识 g-button ；运行 parcel 后， div#app 会去问 app.js，g-button 是什么；
-    ```
-  <div id="app">
-      <g-button></g-button>
-  </div>
-  
-  <script src="./src/app.js"></script>
-    ```
-* ./node_modules/.bin/parcel index.html 要在vue-wheels目录下运行
+#### 工程知识
+* [LICENSE选择](http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html)
+    * 最开放：MIT
+* [选择不要上传的文件（第一次就不要push）](https://github.com/Hanqing1996/blog/blob/master/github%E7%9B%B8%E5%85%B3/README.md)  
+    * .idea
+    * node_modules
+    * .cache
+* 没有全局部安装的包，如何执行命令
+```
+npx ......
+```
+* [使用 icon-font 挑选/修改图标](https://xiedaimala.com/tasks/feb587c8-7139-4b1e-95f3-ac429247747a/video_tutorials/88747efd-1306-4752-a8c0-e1b8e63f1862)
+    * 左图标->右图标
+    * 获取代码：symbol->在线链接
+* BDD
+Behavior Driven Development（行为驱动开发）
+* TDD
+Test Driven Development（测试驱动开发）
+* assert（断言）
+```
+console.assert(1===2)
+``` 
+* [淘宝 NPM 镜像](https://npm.taobao.org/)，之后用 cnpm 代替 npm 即可
+* 如果一个包是给用户（用这个组件的程序员）使用的
+```
+npm i vue
+```
+* 如果一个包是给开发者使用的（-D表示给 developer 使用）,比如 chai
+```
+npm i -D parcel-bundler
+```  
+* 打包：parcel build test/* --no-cache --no-minify
+    * 把 test 目录下的文件打包到 dist 目录下
+
+#### [parcel](https://parceljs.org/)
+非全局安装（报错：未找到命令）注意加 npx
+* parcel的作用是打包
+    * parcel的服务对象是浏览器
+    * 之所以要打包，是因为浏览器不认识 Vue,import等语法，打包其实是把原先的文件解析成浏览器可以看懂的东西
+    * 打包后的东西（js,css,html等资源）会被放在 dist 目录下
+    * 打包是"顺藤摸瓜"的打包，比如parcel index.html，实际会将g-button.vue,g-icon.vue等都进行打包，因为index.html中出现了这些
+* parcel index.html
+打包 index.html,并打开浏览器
+* paecel build index.html     
+打包一次，之后改动代码不重新打包，不打开浏览器
+* parcel watch index.html
+第一次打包后，一旦改动代码，立即重新打包，不打开浏览器。注意执行这条命令后就算输入别的命令（比如执行单元测试），在别的命令执行前也会自动先打包文件，这正是"watch"的意义所在
+* 配合 karma 单元测试
+    * 只打包一次+执行测试一次（这意味着每改变一次代码就必须再输入一次命令）:parcel build test/* --no-cache --no-minify && karma start --single-run
+    * 自动打包+自动执行测试用例（这意味着只要输入一次命令，从此再不必输入，代码自己打包，自己测试，随时看到最新的结果）：parcel watch test/* --no-cache & karma start
+        * 注意如果只有karma start的话，那么代码的变化就无法被karma检测到，测试有效性就不好。也就是说 karma 必须有人告诉他要测试的代码变了，它只会自动测试，不会自动打包
+
+#### TravisCI
+
+
+
+
 * [运行 parcel 时，出现 No entries found 报错怎么办？](https://blog.csdn.net/weixin_42971942/article/details/88345351)
 * [[Vue warn]: You are using the runtime-only build of Vue where the template compiler is not available. ]()
 根据[ vue 文档](https://cn.vuejs.org/v2/guide/installation.html#%E8%BF%90%E8%A1%8C%E6%97%B6-%E7%BC%96%E8%AF%91%E5%99%A8-vs-%E5%8F%AA%E5%8C%85%E5%90%AB%E8%BF%90%E8%A1%8C%E6%97%B6)描述，需在 package.json 中添加如下内容
@@ -33,58 +75,49 @@
     "vue" : "./node_modules/vue/dist/vue.common.js"
   }
 ```
-然后运行（起了别名：usep）
+
+#### 单元测试
+* 要点：作用域隔离，断言
+* Mocha可以用来写测试用例
+``` 
+describe '人类'
+    it has a hed
+    it has two eyes
+    it can run
+```  
+* 为什么测试‘点击 button 触发 touch 事件’不能用以下方式
 ```
-./node_modules/.bin/parcel index.html --no-cache
+vm.$on('touch', function(){
+    // console.log('touch')
+    // expect(1).to.eq(1)
+})
+vm.$el.click()
 ```
-* npx parcel index.html
-等价于
+    * 因为我们要用 expect 实现“监听touch事件”，不能用 console.log
+    * 但是 expect(1).to.eq(1) 这种写法不能让我们知道回调函数是否执行
+所以我们需要的是：用 expect 描述‘回调函数被执行’这件事情
 ```
-./node_modules/.bin/parcel index.html
-```
-* parcel 会在代码更新时自动重新编译
- 
- 
-## 安装
-使用本框架前，请在 css 中开启 border-box
-```
-*{box-sizing: border-box;}
-```
+const callback = sinon.fake(); // 一但 callback 被调用，会再内存中留下标记
+vm.$on('touch', callback)
+vm.$el.click() // 注意如果测试正确，这里 callback 已经被调用了
+expect(callback).to.have.been.called // 去问内存：callback 是否被调用了？
+``` 
+* [expex](https://www.chaijs.com/api/bdd/)
+    * 判断是否存在（存在=不为假值）：expect(Button).to.be.ok
+    * 判断是否相等：expect(xxx).to.eq(yyy)
+    * 判断对象/数组值是否相等：expect([1,2]).to.deep.equal([1,2])\
+    * 判断值是否为NaN：expect(NaN).to.be.NaN
     
-#### 经验
+#### CSS 知识点
 * css 兼容查询：www.canIuse.com
 * 字体不要设置固定 font-size ,应该用变量
-* 应该在完成一个阶段后 commit ,而不是频繁 commit  
-* Button.log 按 Tab 键
-```
-console.log(Button)
-```
-* [使用 icon-font 挑选/修改图标](https://xiedaimala.com/tasks/feb587c8-7139-4b1e-95f3-ac429247747a/video_tutorials/88747efd-1306-4752-a8c0-e1b8e63f1862)
-    * 左图标->右图标
-    * 获取代码：symbol->在线链接
-    * 让“加载”图标旋转：
 * flex布局遇到同排元素不对齐
 ```
 g.button{
     vertical-align: middle;
 }
-```
-* BDD
-Behavior Driven Development（行为驱动开发）
-* TDD
-Test Driven Development（测试驱动开发）
-* assert（断言）
-```
-console.assert(1===2)
-``` 
-#### 自动化测试
-* 自动化
-    * 自动打包js(app.js)
-    * 自动打开浏览器，输入网址回车，运行测试用例
-    * 自动关闭浏览器，保留浏览器输出到命令行
-* 运行 npm run test 前，要运行 rm -rf .cache dist       
-    
-    
+```     
+
 #### vue 知识点
 * 单文件组件的好处是集成 js,html,style 。让我们能一目了然地知道一个组件的样式，功能，内容。
 * 用props为iconPosition设置默认值
@@ -140,30 +173,10 @@ g-button.$mount(div)
 结果div会被g-button的根元素button替换
     * g-button.$el = <button><svg>...</svg></button>
     * g-button.$el常用在单元测试中，用于访问vue实例的样式，子节点等
-#### 组件注册
-* 记住全局注册的行为必须在根 Vue 实例 (通过 new Vue) 创建之前发生 
-
-
-#### 
-1. 工程知识：知道用法
-    * webpack/parcel
-    * scss
-2. 语言特性：深入掌握
-    * promise
-    * vue
-3. 抽象的东西：逐渐迭代   
-
-#### 工具安装
-[淘宝 NPM 镜像](https://npm.taobao.org/)，之后用 cnpm 代替 npm 即可
-* 如果一个包是给用户（用这个组件的程序员）使用的
-```
-npm i vue
-```
-* 如果一个包是给开发者使用的（-D表示给 developer 使用）,比如 chai
-```
-npm i -D parcel-bundler
-``` 
-
+    
+* 组件注册
+    * 记住全局注册的行为必须在根 Vue 实例 (通过 new Vue) 创建之前发生 
+  
 #### vue 生命周期
 [测试](https://www.jianshu.com/p/b88572d8f80a)
 ![vue 生命周期图示](https://upload-images.jianshu.io/upload_images/11892234-64ee73fa10e1b20a.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)
@@ -180,5 +193,3 @@ npm i -D parcel-bundler
 4. destroy:vue实例被销毁
     * beforeDestroy：
     * destroyed：
-
-

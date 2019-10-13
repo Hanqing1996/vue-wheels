@@ -1,7 +1,7 @@
 <!--将 button.js 改为集成 js,html,style 的单文件组件 button.vue-->
 <template>
     <!--通过icon-${iconPosition}来设置样式-->
-    <button class="g-button" :class="{[`icon-${iconPosition}`]: true}" @click="$emit('touch')">
+    <button class="g-button" :class="{[`icon-${iconPosition}`]: true}" @click="$emit('tpouch')">
 
         <!--注意class的icon值为字符串，而v-if，v-bind绑定的icon值由用户传入-->
         <!--v-if="icon&&!loading"：没有loading的情况下，用户传入icon值，则渲染svg-->
