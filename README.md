@@ -3,34 +3,46 @@
 ## 介绍
 
 ## 开始使用
-1. 添加以下 css 样式（emmm 因为 index.css 没有封装好）
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+1. 添加以下 css 样式
+    ```
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        html {
-            --button-height: 32px;
-            --font-size: 14px;
-            --button-bg: white;
-            --button-active-bg: #eee;
-            --border-radius: 4px;
-            --color: #333;
-            --border-color: #999;
-            --border-color-hover: #666;
-        }
+    html {
+        --button-height: 32px;
+        --font-size: 14px;
+        --button-bg: white;
+        --button-active-bg: #eee;
+        --border-radius: 4px;
+        --color: #333;
+        --border-color: #999;
+        --border-color-hover: #666;
+    }
+    ```
+2. 安装 wheel
+    ```
+    npm install wheel-10.14 -save
+    ```
+3. 引入
+    ```
+    import { Button, ButtonGroup, Icon } from "wheel-10.14/"
 
-        #app {
-            margin: 20px;
-        }
+    export default {
+    name: "app",
+    components: {
+        "g-button": Button,
+        "g-icon":Icon,
+        "g-button-group":ButtonGroup
+    }
+    };
+    ```
+4. 引入 svg symbols
+```
 
-        body {
-            font-size: var(--font-size);
-        }
-2. 
-
-## 安装
+```   
 
 ## 文档
 

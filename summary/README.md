@@ -169,6 +169,21 @@ g-button.$mount(div)
     * g-button.$el常用在单元测试中，用于访问vue实例的样式，子节点等
     
 
+#### 发布 wheel 包（需FQ）
+1. 更新 package.json
+2. 在 package.json 里将版本号改为 0.0.1，等我们做完了再改成 1.0.0
+3. 创建 index.js，在 index.js 里将你想要导出的内容全部导出
+   * export {Button,ButtonGroup,Icon}
+4. 去 https://www.npmjs.com/ 注册一个账户
+5. 确认一下邮箱（必须）
+6. 在项目根目录运行 npm adduser
+7. 如果错误提示里面含有 https://registry.npm.taobao.org 则说明你的 npm 源目前为淘宝源，需要更换为 npm 官方源（https://registry.npmjs.org/）
+   * npm config list,修改npmrc实现
+8. 运行 npm publish
+   * 报错：You do not have permission to publish "package-demo".说明包重名了，在package.json修改name
+   * 允许先publish,再push。因为publish是从本地上传的
+   * 每次 bump version 后记得修改 package.json 的 version,再publish
+   * 由于 node 不认识 import,我们需要每次需要先 npx parcel build index.js，再publish
 
 
 #### 组件注册
@@ -222,6 +237,8 @@ Vue.component('g-icon', Icon)
 4. destroy:vue实例被销毁
     * beforeDestroy：
     * destroyed：
+   
+   
    
      
     
