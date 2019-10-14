@@ -168,7 +168,6 @@ g-button.$mount(div)
     * g-button.$el = <button><svg>...</svg></button>
     * g-button.$el常用在单元测试中，用于访问vue实例的样式，子节点等
     
-
 #### 发布 wheel 包（需FQ）
 1. 更新 package.json
 2. 在 package.json 里将版本号改为 0.0.1，等我们做完了再改成 1.0.0
@@ -218,8 +217,6 @@ import Icon from '../src/icon'
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
 ```
-
-
   
 #### vue 生命周期
 [测试](https://www.jianshu.com/p/b88572d8f80a)
@@ -237,6 +234,22 @@ Vue.component('g-icon', Icon)
 4. destroy:vue实例被销毁
     * beforeDestroy：
     * destroyed：
+   
+#### input 需求分析
+* 输入
+    * 提示 
+    * 报错
+* 复制/粘贴
+* 键盘 Tab 空位
+* 敲击回车
+* 不可输入   
+* hovered
+* focused
+* disabled
+* readonly
+* error(可与上面状态叠加)
+* success(同上)
+
    
    
    
