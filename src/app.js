@@ -1,3 +1,7 @@
+/**
+ * 1. npx parcel index.html 打开浏览器并执行以下测试用例
+ * 2. 将 app.js 去掉后运行 npx parcel build test/* --no-cache --no-minify ,npx karma start --single-run 仍然能正常测试
+ */
 import Vue from 'vue'
 import Button from './button'
 import Icon from './icon'
@@ -7,13 +11,16 @@ import spies from 'chai-spies'
 
 chai.use(spies)
 
-// 所有组件在这里注册，注意 loadingStatus1,loadingStatus2 属于new的Vue例的data对象，不属于以下组件的data函数
+/**
+ * 1. 所有组件在这里全局注册，注意 loadingStatus1,loadingStatus2 属于new的Vue例的data对象，不属于以下组件的data函数
+ * 2. 全局注册意味着：这三个组件在各自内部也都可以相互使用。
+ */
+
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
 Vue.component('g-button-group', ButtonGroup)
 
-// 全局注册意味着：这三个组件在各自内部也都可以相互使用。
-
+// new Vue 和组件注册没有任何关系
 new Vue({
     el: "#app",
     data: {

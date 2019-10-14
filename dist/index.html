@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮子</title>
+    <style>* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            --button-height: 32px;
+            --font-size: 14px;
+            --button-bg: white;
+            --button-active-bg: #eee;
+            --border-radius: 4px;
+            --color: #333;
+            --border-color: #999;
+            --border-color-hover: #666;
+        }
+
+        #app {
+            margin: 20px;
+        }
+
+        body {
+            font-size: var(--font-size);
+        }</style>
+<link rel="stylesheet" href="/app.a6a4d504.css"></head>
+<body>
+<div id="app">
+    <!--用户不传入 icon-position 的值，则默认 icon-position的值为 left-->
+    <!--用户不传入 loading 的值，则默认 loading 的值为 false-->
+    <!--loading 优先级高于 icon，用户既传入 loading，又传入 icon的情况下，只显示 loading，不显示 icon -->
+    <!--icon-position 对 icon 和 loading 都有效，谁在就对谁生效-->
+
+
+    <!--传入 loading，且传入 icon-->
+    <g-button icon="settings" icon-position="right" :loading="loadingStatus1" @touch="loadingStatus1=!loadingStatus1">
+        icon在右边的button
+    </g-button>
+
+    <!--不传入 loading,只传入 icon-->
+    <g-button icon="settings">
+        icon在左边的button
+    </g-button>
+
+    <!--传入 loading，不传入 icon -->
+    <!--组件不会被点击，组件的内部元素才会被点击。所以这里的 touch 是被动触发的-->
+    <g-button :loading="loadingStatus2" icon-position="right" @touch="loadingStatus2=!loadingStatus2">
+        没有传入icon的button
+    </g-button>
+
+    <g-button-group>
+        <div>
+            <g-button icon="left">上一页</g-button>
+        </div>
+        <g-button>更多</g-button>
+        <g-button icon="right" icon-position="right">下一页</g-button>
+    </g-button-group>
+
+    <!--    <g-button  icon="settings" icon-position="up">-->
+    <!--        传入iconPosition为无效值的button-->
+    <!--    </g-button>-->
+<div id="test"></div>
+</div>
+
+<script src="/app.a6a4d504.js"></script>
+<script src="//at.alicdn.com/t/font_1446019_g8iosj154pn.js"></script>
+
+</body>
+</html>

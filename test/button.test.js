@@ -1,9 +1,13 @@
 const expect = chai.expect;
 import Vue from 'vue'
 import Button from '../src/button'
+// import Icon from '../src/icon'
 
 Vue.config.productionTip = false
 Vue.config.devtools = false
+
+// Vue.component('g-button', Button)
+// Vue.component('g-icon', Icon)
 
 // describe 和 it 來自 mocha
 describe('Button', () => {
@@ -12,6 +16,8 @@ describe('Button', () => {
     })
     it('可以设置icon.', () => {
         const Constructor = Vue.extend(Button)
+
+        // 通过Constructor生成一个vue实例
         const vm = new Constructor({
             propsData: {
                 icon: 'settings'

@@ -20,6 +20,8 @@
     import Icon from './icon'
 
     export default {
+
+        //局部注册
         components:{
             'g-icon':Icon
         },

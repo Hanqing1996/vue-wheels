@@ -49,6 +49,8 @@ console.assert(1===2)
     * 只打包一次+执行测试一次（这意味着每改变一次代码就必须再输入一次命令）:parcel build test/* --no-cache --no-minify && karma start --single-run
     * 自动打包+自动执行测试用例（这意味着只要输入一次命令，从此再不必输入，代码自己打包，自己测试，随时看到最新的结果）：parcel watch test/* --no-cache & karma start
         * 注意如果只有karma start的话，那么代码的变化就无法被karma检测到，测试有效性就不好。也就是说 karma 必须有人告诉他要测试的代码变了，它只会自动测试，不会自动打包
+* 发布 npm 包后，发现 node 不认识 含有 import 的index.js，因此需要先用 parcel build index.js,再在package.json中将 main 选项改为 dist/index.js 
+* 之后更新 npm 包，也要 parcel build       
 
 
 * [运行 parcel 时，出现 No entries found 报错怎么办？](https://blog.csdn.net/weixin_42971942/article/details/88345351)
@@ -62,6 +64,7 @@ console.assert(1===2)
 ```
 
 #### 单元测试
+* 在 button 的单元测试中，没有测试 g-button-group,因此不需要为了测试注册buttonGroup 
 * 要点：作用域隔离，断言
 * Mocha可以用来写测试用例
 ``` 
@@ -92,6 +95,7 @@ expect(callback).to.have.been.called // 去问内存：callback 是否被调用�
     * 判断是否相等：expect(xxx).to.eq(yyy)
     * 判断对象/数组值是否相等：expect([1,2]).to.deep.equal([1,2])\
     * 判断值是否为NaN：expect(NaN).to.be.NaN
+* 进行单元测试只需要确保组件都被（全局/局部）注册了（这样才能使用 Constructor）,new Vue{}不需要    
     
 #### CSS 知识点
 * css 兼容查询：www.canIuse.com
@@ -164,8 +168,43 @@ g-button.$mount(div)
     * g-button.$el = <button><svg>...</svg></button>
     * g-button.$el常用在单元测试中，用于访问vue实例的样式，子节点等
     
-* 组件注册
-    * 记住全局注册的行为必须在根 Vue 实例 (通过 new Vue) 创建之前发生 
+
+
+
+#### 组件注册
+* 全局注册
+全局注册的组件在各自内部也都可以相互使用。
+```
+import Vue from 'vue'
+import Button from './button'
+import Icon from './icon'
+import ButtonGroup from './button-group'
+
+Vue.component('g-button', Button)
+Vue.component('g-icon', Icon)
+Vue.component('g-button-group', ButtonGroup)
+```
+* 局部注册
+在 g-button 中局部注册 g-icon
+```
+import Icon from './icon'
+
+export default {
+
+    components:{
+        'g-icon':Icon
+    }
+```
+等效于以下全局注册
+```
+import Button from '../src/button'
+import Icon from '../src/icon'
+
+Vue.component('g-button', Button)
+Vue.component('g-icon', Icon)
+```
+
+
   
 #### vue 生命周期
 [测试](https://www.jianshu.com/p/b88572d8f80a)
