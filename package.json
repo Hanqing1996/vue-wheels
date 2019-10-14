@@ -1,6 +1,6 @@
 {
   "name": "wheel-10.14",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "UI框架",
   "main": "dist/index.js",
   "scripts": {
