@@ -2,7 +2,11 @@
     <!--:class="{error:error}的简写，第一个error表示类名，第二个error表示props.error.-->
     <!--error值不为空时，类error有效，对应样式才有效-->
     <div class="wrapper" :class="{error}">
-        <input type="text" :value=value :disabled="disabled" :readonly="readonly">
+        <input type="text" :value=value :disabled="disabled" :readonly="readonly"
+               @change="$emit('change', $event)"
+               @input="$emit('input', $event)"
+               @focus="$emit('focus', $event)"
+               @focus="$emit('blur', $event)"/>
 
         <template v-if="error">
             <Icon name="error" class="icon-error"></Icon>
@@ -46,11 +50,14 @@
     $box-shadow-color: rgba(0, 0, 0, 0.5);
     $red: #F1453D;
     .wrapper {
-        font-size: $font-size;display: inline-flex;align-items: center;
+        font-size: $font-size;
+        display: inline-flex;
+        align-items: center;
 
         > :not(:last-child) {
             margin-right: .5em;
         }
+
         > input {
             height: 32px;
             border: 1px solid $border-color;

@@ -25,14 +25,17 @@ Vue.component('g-button-group', ButtonGroup)
 
 Vue.component('g-input', Input)
 
-
-
 // new Vue 和组件注册没有任何关系
 new Vue({
     el: "#app",
     data: {
         loadingStatus1: false,
         loadingStatus2: false
+    },
+    methods: {
+        inputChange(e) {
+            console.log(e.target.value)
+        }
     }
 })
 
