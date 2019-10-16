@@ -167,6 +167,16 @@ g-button.$mount(div)
 结果div会被g-button的根元素button替换
     * g-button.$el = <button><svg>...</svg></button>
     * g-button.$el常用在单元测试中，用于访问vue实例的样式，子节点等
+* 组件的name作用
+```
+export default {
+    name: "WheelInput"
+}
+```  
+1. 配合 vue.js.devtools 使用
+2. 
+* scoped
+为组件设置 css 作用域（本质是不同组件设置不同ID）
     
 #### 发布 wheel 包（需FQ）
 1. 更新 package.json
@@ -199,7 +209,7 @@ Vue.component('g-icon', Icon)
 Vue.component('g-button-group', ButtonGroup)
 ```
 * 局部注册
-在 g-button 中局部注册 g-icon
+想要在 g-button 的 template 内使用 g-icon,就要在 g-button 中局部注册 g-icon
 ```
 import Icon from './icon'
 
@@ -217,6 +227,60 @@ import Icon from '../src/icon'
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
 ```
+* :value与value
+接收变量，用 :value。接收字符串，用 value。也就是说，:是被动添加的
+* class 绑定
+```
+<g-input value="王五" error="姓名不少于两个字"></g-input>
+......
+<template>
+    <div class="wrapper" :class="{errorstyle:error}">
+        <input type="text">
+    </div>
+</template>
+......
+props:{
+    error:{
+        type:String
+    }
+}
+......
+&.errorstyle {
+    > input { border-color: $red; }
+}
+```
+等价于
+```
+<g-input value="王五" error="姓名不少于两个字"></g-input>
+......
+<template>
+    <div class="wrapper" :class="{error}">
+        <input type="text">
+    </div>
+</template>
+......
+props:{
+    error:{
+        type:String
+    }
+}
+......
+&.error {
+    > input { border-color: $red; }
+}
+```
+* 使用 template 避免引入多余的 标签
+```
+<span v-if="error">
+    <Icon name="settings" class="icon"></Icon>
+    <span>{{error}}}</span>
+</span>
+```
+等价于
+```
+temp
+```
+第二种写法更好，因为没有引入多余的标签，至于 template，它会像雪一样融化
   
 #### vue 生命周期
 [测试](https://www.jianshu.com/p/b88572d8f80a)
@@ -234,6 +298,41 @@ Vue.component('g-icon', Icon)
 4. destroy:vue实例被销毁
     * beforeDestroy：
     * destroyed：
+    
+#### scss语法
+* &
+```
+a {
+  font-weight: bold;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+  body.firefox & { font-weight: normal; }
+}
+```
+编译为
+```
+a{
+  font-weight: bold;
+  text-decoration: none; 
+  }
+a:hover {
+  text-decoration: underline; 
+}
+body.firefox a {
+  font-weight: normal; 
+}
+```
+* 声明变量
+```
+
+$height: 32px;
+.wrapper {
+    > input {
+        height: 32px; // 使用变量 height
+    }
+}
+```
+    
    
 #### input 需求分析
 * 输入

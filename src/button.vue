@@ -1,15 +1,15 @@
 <!--将 button.js 改为集成 js,html,style 的单文件组件 button.vue-->
 <template>
     <!--通过icon-${iconPosition}来设置样式-->
-    <button class="g-button" :class="{[`icon-${iconPosition}`]: true}" @click="$emit('touch')">
+    <button class="button" :class="{[`icon-${iconPosition}`]: true}" @click="$emit('touch')">
 
         <!--注意class的icon值为字符串，而v-if，v-bind绑定的icon值由用户传入-->
         <!--v-if="icon&&!loading"：没有loading的情况下，用户传入icon值，则渲染svg-->
         <!--:name="icon"：用户传入icon的值（svg的名字）-->
-        <g-icon v-if="icon&&!loading" class="icon" :name=icon></g-icon>
+        <Icon v-if="icon&&!loading" class="icon" :name=icon></Icon>
 
         <!--这里的loading是字符串，不是变量名，所以用name而不是:name-->
-        <g-icon v-if="loading" class="loading icon" name="loading"></g-icon>
+        <Icon v-if="loading" class="loading icon" name="loading"></Icon>
         <div class="content">
             <slot></slot>
         </div>
@@ -20,11 +20,10 @@
     import Icon from './icon'
 
     export default {
+        name:"WheelButton",
 
         //局部注册
-        components:{
-            'g-icon':Icon
-        },
+        components:{Icon},
         props: {
             icon: {},
             loading:{
@@ -43,13 +42,13 @@
         },
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     @keyframes spin {
         0%{transform: rotate(0deg);}
         100%{transform: rotate(360deg);}
     }
 
-    .g-button { font-size: var(--font-size); height: var(--button-height); padding: 0 1em;
+    .button { font-size: var(--font-size); height: var(--button-height); padding: 0 1em;
         border-radius: var(--border-radius); border: 1px solid var(--border-color);
         background: var(--button-bg);
         display: inline-flex; justify-content: center; align-items: center;

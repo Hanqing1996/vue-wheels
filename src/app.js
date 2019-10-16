@@ -3,13 +3,16 @@
  * 2. 将 app.js 去掉后运行 npx parcel build test/* --no-cache --no-minify ,npx karma start --single-run 仍然能正常测试
  */
 import Vue from 'vue'
+// button
 import Button from './button'
 import Icon from './icon'
 import ButtonGroup from './button-group'
+// input
+import Input from './input'
+// 以下为 button 测试代码
 import chai from 'chai'
 import spies from 'chai-spies'
 
-chai.use(spies)
 
 /**
  * 1. 所有组件在这里全局注册，注意 loadingStatus1,loadingStatus2 属于new的Vue例的data对象，不属于以下组件的data函数
@@ -20,6 +23,10 @@ Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
 Vue.component('g-button-group', ButtonGroup)
 
+Vue.component('g-input', Input)
+
+
+
 // new Vue 和组件注册没有任何关系
 new Vue({
     el: "#app",
@@ -29,6 +36,7 @@ new Vue({
     }
 })
 
+chai.use(spies)
 const expect = chai.expect
 
 // 单元测试
