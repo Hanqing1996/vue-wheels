@@ -12,15 +12,21 @@ Vue.config.devtools = false
 // describe 和 it 來自 mocha
 describe('Button', () => {
     it('存在.', () => {
-        expect(Button).to.be.ok // 不是假值，就不报错
+        expect(Button).to.exist // 不是假值，就不报错
     })
     describe('props', () => {
 
+        const Constructor = Vue.extend(Button)
+        let vm = new Constructor({})
+        afterEach(() => {
+            vm.$destroy()
+        })
+
         it('可以设置icon.', () => {
-            const Constructor = Vue.extend(Button)
+
 
             // 通过Constructor生成一个vue实例
-            const vm = new Constructor({
+            vm = new Constructor({
                 propsData: {
                     icon: 'settings'
                 }
@@ -30,7 +36,6 @@ describe('Button', () => {
             vm.$destroy()
         })
         it('可以设置loading.', () => {
-            const Constructor = Vue.extend(Button)
             const vm = new Constructor({
                 propsData: {
                     icon: 'settings',
@@ -45,8 +50,7 @@ describe('Button', () => {
         it('icon 默认的 order 是 1', () => {
             const div = document.createElement('div')
             document.body.appendChild(div)
-            const Constructor = Vue.extend(Button)
-            const vm = new Constructor({
+            vm = new Constructor({
                 propsData: {
                     icon: 'settings',
                 }
@@ -59,8 +63,7 @@ describe('Button', () => {
         it('设置 iconPosition 可以改变 order', () => {
             const div = document.createElement('div')
             document.body.appendChild(div)
-            const Constructor = Vue.extend(Button)
-            const vm = new Constructor({
+            vm = new Constructor({
                 propsData: {
                     icon: 'settings',
                     iconPosition: 'right'
@@ -73,18 +76,31 @@ describe('Button', () => {
         })
     })
 
-    describe('props', () => {
+    describe('事件', () => {
+
+        const Constructor = Vue.extend(Button)
+
+        let vm = new Constructor({})
+        afterEach(function () {
+            vm.$destroy()
+        })
+
         it('点击 button 触发 touch 事件', () => {
-            const Constructor = Vue.extend(Button)
-            const vm = new Constructor({
+            vm = new Constructor({
                 propsData: {
                     icon: 'settings',
                 }
             }).$mount()
 
             const callback = sinon.fake();
-            vm.$on('touch', callback)
-            vm.$el.click()
+            vm.$on('click', callback)
+
+            //触发 button 的 click 事件.以下代码等效于 vm.$el.click()
+            let event = new Event('click');
+            let buttonElement = vm.$el
+            buttonElement.dispatchEvent(event)
+
+            // vm.$el.click()
             expect(callback).to.have.been.called
         })
     })

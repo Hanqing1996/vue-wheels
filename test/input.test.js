@@ -13,16 +13,25 @@ Vue.config.devtools = false
  *     inputElement.disabled 对应的是<input type="text" :disabled="disabled"/>
  */
 
-describe('Button', () => {
+
+describe('Input', () => {
 
     it('存在.', () => {
-        expect(Input).to.be.ok
+        expect(Input).to.exist
     })
 
     describe('props', () => {
+
+
+        const Constructor = Vue.extend(Input)
+
+        let vm = new Constructor({})
+        afterEach(() => {
+            vm.$destroy()
+        })
+
         it('接收 value', () => {
-            const Constructor = Vue.extend(Input)
-            const vm = new Constructor({
+            vm = new Constructor({
                 propsData: {
                     value: 'input的value'
                 }
@@ -30,11 +39,9 @@ describe('Button', () => {
             const inputElement = vm.$el.querySelector('input')
 
             expect(inputElement.value).to.equal('input的value')
-            vm.$destroy()
         })
         it('接收 disabled', () => {
-            const Constructor = Vue.extend(Input)
-            const vm = new Constructor({
+            vm = new Constructor({
                 propsData: {
                     disabled: true
                 }
@@ -42,21 +49,17 @@ describe('Button', () => {
             const inputElement = vm.$el.querySelector('input')
 
             expect(inputElement.disabled).to.equal(true)
-            vm.$destroy()
         })
         it('接收 readonly', () => {
-            const Constructor = Vue.extend(Input)
-            const vm = new Constructor({
+            vm = new Constructor({
                 propsData: {
                     readonly: true
                 }
             }).$mount()
             const inputElement = vm.$el.querySelector('input')
             expect(inputElement.readOnly).to.equal(true)
-            vm.$destroy()
         })
         it('接收 error', () => {
-            const Constructor = Vue.extend(Input)
             const vm = new Constructor({
                 propsData: {
                     error: 'something wrong'
@@ -68,21 +71,40 @@ describe('Button', () => {
             // 检测 errorMessage
             const errorMessage = vm.$el.querySelector('.errorMessage')
             expect(errorMessage.innerText).to.equal('something wrong')
-            vm.$destroy()
         })
     })
 
     describe('事件', () => {
-        it('触发 change 事件', () => {
-            const Constructor = Vue.extend(Input)
-            const vm = new Constructor({
-            }).$mount()
+        const Constructor = Vue.extend(Input)
 
-            const callback = sinon.fake();
-            vm.$on('change', callback)
-            vm.$el.querySelector('input').onchange
-            expect(callback).to.have.been.called
+        let vm = new Constructor({})
+        afterEach(function () {
+            vm.$destroy()
         })
-    })
 
+        it('支持 change/input/focus/blur 事件', () => {
+            ['change', 'input', 'focus', 'blur']
+                .forEach((eventName) => {
+                    vm = new Constructor({}).$mount()
+                    const callback = sinon.fake();
+
+                    // 为vue实例添加监听事件，注意这与index.html中有无为input添加事件无关
+                    vm.$on(eventName, callback)
+
+                    //触发input的change 事件，index.html 中的 input 没有添加 change,focus,blur 事件
+                    let event = new Event(eventName);
+                    let inputElement = vm.$el.querySelector('input')
+                    inputElement.dispatchEvent(event)
+
+                    /**
+                     * 触发input的change事件后,会按照input.vue内容执行emit('change',$event),即触发父组件的change事件，且回调参数为event
+                     * 我们接下来验证回调参数为event
+                     */
+
+                    expect(callback).to.have.been.calledWith(event)
+                })
+        })
+
+    })
 })
+

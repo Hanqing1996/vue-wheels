@@ -25,6 +25,7 @@ npx ......
 Behavior Driven Development（行为驱动开发）
 * TDD
 Test Driven Development（测试驱动开发）
+    * 不写index.html，手动添加vue实例监听事件及回调函数，手动触发元素事件，观察回调函数是否执行
 * assert（断言）
 ```
 console.assert(1===2)

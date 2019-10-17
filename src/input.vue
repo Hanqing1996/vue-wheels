@@ -6,7 +6,7 @@
                @change="$emit('change', $event)"
                @input="$emit('input', $event)"
                @focus="$emit('focus', $event)"
-               @focus="$emit('blur', $event)"/>
+               @blur="$emit('blur', $event)"/>
 
         <template v-if="error">
             <Icon name="error" class="icon-error"></Icon>
