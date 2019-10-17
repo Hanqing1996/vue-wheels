@@ -93,15 +93,26 @@ describe('Input', () => {
 
                     //触发input的change 事件，index.html 中的 input 没有添加 change,focus,blur 事件
                     let event = new Event(eventName);
+
+                    // /**
+                    //  * 触发input的change事件后,会按照input.vue内容执行emit('change',$event),即触发父组件的change事件，且回调参数为event
+                    //  * 我们接下来验证回调参数为event
+                    //  */
+                    // expect(callback).to.have.been.calledWith(event)
+
+
+                    // input 支持双向绑定后,input.vue 内容为 $emit('blur/focus/input', $event.target.value)"  因此 expect 中回调函数参数应该为 event.target.value
+
+                    // 这个 event.target.value 是我们伪造的
+                    Object.defineProperty(
+                        event, 'target', {
+                            value: {value: 'hi'}, enumerable: true
+                        }
+                    )
+
                     let inputElement = vm.$el.querySelector('input')
                     inputElement.dispatchEvent(event)
-
-                    /**
-                     * 触发input的change事件后,会按照input.vue内容执行emit('change',$event),即触发父组件的change事件，且回调参数为event
-                     * 我们接下来验证回调参数为event
-                     */
-
-                    expect(callback).to.have.been.calledWith(event)
+                    expect(callback).to.have.been.calledWith(event.target.value)
                 })
         })
 

@@ -22,7 +22,6 @@ import spies from 'chai-spies'
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
 Vue.component('g-button-group', ButtonGroup)
-
 Vue.component('g-input', Input)
 
 // new Vue 和组件注册没有任何关系
