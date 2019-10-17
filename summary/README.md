@@ -253,7 +253,9 @@ Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
 ```
 * :value与value
-接收变量，用 :value。接收字符串，用 value。也就是说，:是被动添加的
+    * 接收变量，用 :value。接收字符串，用 value。也就是说，:是被动添加的
+    * :span="2" 表示传递的是数值2, 而 span="2" 表示传递的是字符串"2"
+    * :loading="false" 表示传递的是布尔量false, 而 loading="false" 表示传递的是字符串"false"
 * class 绑定
 ```
 <g-input value="王五" error="姓名不少于两个字"></g-input>
@@ -306,6 +308,10 @@ props:{
 temp
 ```
 第二种写法更好，因为没有引入多余的标签，至于 template，它会像雪一样融化
+
+
+
+
 #### vue 生命周期
 [测试](https://www.jianshu.com/p/b88572d8f80a)
 ![vue 生命周期图示](https://upload-images.jianshu.io/upload_images/11892234-64ee73fa10e1b20a.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)

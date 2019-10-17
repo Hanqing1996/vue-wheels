@@ -9,6 +9,9 @@ import Icon from './icon'
 import ButtonGroup from './button-group'
 // input
 import Input from './input'
+// grid
+import Row from './row'
+import Col from './col'
 // 以下为 button 测试代码
 import chai from 'chai'
 import spies from 'chai-spies'
@@ -18,11 +21,12 @@ import spies from 'chai-spies'
  * 1. 所有组件在这里全局注册，注意 loadingStatus1,loadingStatus2 属于new的Vue例的data对象，不属于以下组件的data函数
  * 2. 全局注册意味着：这三个组件在各自内部也都可以相互使用。
  */
-
 Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
 Vue.component('g-button-group', ButtonGroup)
 Vue.component('g-input', Input)
+Vue.component('g-row', Row)
+Vue.component('g-col', Col)
 
 // new Vue 和组件注册没有任何关系
 new Vue({
