@@ -30,8 +30,15 @@ new Vue({
     el: "#app",
     data: {
         loadingStatus1: false,
-        loadingStatus2: false
+        loadingStatus2: false,
+        message:'hi'
     },
+    // 测试双向绑定
+    // created:function(){
+    //     setTimeout(()=>{
+    //         this.message+='1'
+    //     },1000)
+    // },
     methods: {
         inputChange(e) {
             console.log(e.target.value)

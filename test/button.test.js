@@ -10,6 +10,7 @@ Vue.config.devtools = false
 // Vue.component('g-icon', Icon)
 
 // describe 和 it 來自 mocha
+// expect 来自 chai
 describe('Button', () => {
     it('存在.', () => {
         expect(Button).to.exist // 不是假值，就不报错

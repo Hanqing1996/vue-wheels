@@ -25,7 +25,8 @@ npx ......
 Behavior Driven Development（行为驱动开发）
 * TDD
 Test Driven Development（测试驱动开发）
-    * 不写index.html，手动添加vue实例监听事件及回调函数，手动触发元素事件，观察回调函数是否执行
+    * 手动添加vue实例监听事件及回调函数，手动触发元素事件，观察回调函数是否执行
+    * 测试是针对组件的，与index.html无关
 * assert（断言）
 ```
 console.assert(1===2)
@@ -112,6 +113,29 @@ g.button{
 * 添加.travis.yml
 * 把项目 push 到 github
 * 在[travis-ci](https://www.travis-ci.org/)添加项目
+
+#### Karma
+* 具体配置写在 karma.conf,js 中
+* 用于呼起浏览器，加载测试脚本，然后运行测试用例
+
+#### Mocha
+describe,it 语法
+
+#### chai
+expect 语法
+
+#### Sinon
+为组件的事件测试设置回调函数 callback
+```
+const callback = sinon.fake();
+vm.$on('click', callback)
+```
+
+#### Sinon-Chai
+检测vue实例调用的回调函数的参数 calledWith
+```
+expect(callback).to.have.been.calledWith(event)
+```
 
 #### vue 知识点
 * 单文件组件的好处是集成 js,html,style 。让我们能一目了然地知道一个组件的样式，功能，内容。
@@ -282,7 +306,6 @@ props:{
 temp
 ```
 第二种写法更好，因为没有引入多余的标签，至于 template，它会像雪一样融化
-  
 #### vue 生命周期
 [测试](https://www.jianshu.com/p/b88572d8f80a)
 ![vue 生命周期图示](https://upload-images.jianshu.io/upload_images/11892234-64ee73fa10e1b20a.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)

@@ -12472,7 +12472,6 @@ require("./svg");
 //
 //
 //
-//
 var _default = {
   name: 'WheelIcon',
   props: ['name']
@@ -12599,7 +12598,7 @@ exports.default = _default;
       class: ((_obj = {}), (_obj["icon-" + _vm.iconPosition] = true), _obj),
       on: {
         click: function($event) {
-          return _vm.$emit("touch")
+          return _vm.$emit("click")
         }
       }
     },
@@ -12819,13 +12818,16 @@ exports.default = _default;
         domProps: { value: _vm.value },
         on: {
           change: function($event) {
-            return _vm.$emit("change", $event)
+            return _vm.$emit("change", $event.target.value)
           },
           input: function($event) {
-            return _vm.$emit("input", $event)
+            return _vm.$emit("input", $event.target.value)
           },
           focus: function($event) {
-            return _vm.$emit("focus", $event)
+            return _vm.$emit("focus", $event.target.value)
+          },
+          blur: function($event) {
+            return _vm.$emit("blur", $event.target.value)
           }
         }
       }),
@@ -23977,7 +23979,15 @@ new _vue.default({
   el: "#app",
   data: {
     loadingStatus1: false,
-    loadingStatus2: false
+    loadingStatus2: false,
+    message: 'hi'
+  },
+  created: function created() {
+    var _this = this;
+
+    setTimeout(function () {
+      _this.message += '1';
+    }, 1000);
   },
   methods: {
     inputChange: function inputChange(e) {
@@ -24150,7 +24160,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46201" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46297" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
