@@ -373,6 +373,19 @@ $height: 32px;
 * error(可与上面状态叠加)
 * success(同上)
 
+#### grid 需求分析
+* span 表示跨度,gutter 表示空隙长度
+```
+<g-row gutter=6>
+    <g-col span=12></g-col>
+    <g-col span=12></g-col>
+</g-row>
+<g-row gutter=10>
+    <g-col span=8></g-col>
+    <g-col span=8></g-col>
+    <g-col span=8></g-col>
+</g-row>
+```
    
    
    
