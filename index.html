@@ -33,99 +33,100 @@
         }
     </style>
     <style>
-        .box{
+        .box {
             margin: 20px;
         }
     </style>
 </head>
 <body>
 <div id="app">
+    <div style="border:1px solid black">
 
-    <!--offset表示间隙，span 表示格子长度-->
-    <!--加span的情况下，要求span的和为24-->
-    <g-row>
-        <g-col>1</g-col>
-        <g-col>2</g-col>
-    </g-row>
-    <g-row>
-        <g-col>1</g-col>
-        <g-col>2</g-col>
-        <g-col>3</g-col>
-    </g-row>
-    <g-row>
-        <g-col>1</g-col>
-        <g-col>2</g-col>
-        <g-col>3</g-col>
-        <g-col>4</g-col>
-    </g-row>
-    <g-row>
-        <g-col :span="2">2</g-col>
-        <g-col :span="22">22</g-col>
-    </g-row>
-    <g-row>
-        <g-col :span="2">2</g-col>
-        <g-col :span="20" :offset="2">20</g-col>
-    </g-row>
-    <hr>
+        <!--offset表示格子间空隙,span 表示格子长度,gutter表示中央空隙-->
+        <!--要求span,offset的和为24-->
+        <!--需要根据gutter调整col.padding和row.margin-->
+        <g-row :gutter="10">
+            <g-col :gutter="10">1</g-col>
+            <g-col :gutter="10">2</g-col>
+        </g-row>
+        <g-row>
+            <g-col>1</g-col>
+            <g-col>2</g-col>
+            <g-col>3</g-col>
+        </g-row>
+        <g-row>
+            <g-col>1</g-col>
+            <g-col>2</g-col>
+            <g-col>3</g-col>
+            <g-col>4</g-col>
+        </g-row>
+        <g-row>
+            <g-col :span="2">2</g-col>
+            <g-col :span="22">22</g-col>
+        </g-row>
+        <g-row>
+            <g-col :span="2">2</g-col>
+            <g-col :span="20" :offset="2">20</g-col>
+        </g-row>
+        <hr>
 
 
+        <div class="box">
+            <!-- 不可操作的 button -->
+            <g-input value="张三" :disabled="true"></g-input>
+
+            <!--只可读的 button -->
+            <g-input value="李四" :readonly="true"></g-input>
+        </div>
+        <div class="box">
+            <!-- error="",则class 列表不存在 error类,否则class 列表含有 error类-->
+            <g-input value="王五" error="姓名不少于两个字"></g-input>
+        </div>
+        <div class="box">
+            <!-- error="",则class 列表不存在 error类,否则class 列表含有 error类-->
+            <g-input value="赵六" v-model="message"></g-input>
+        </div>
+        <div>{{message}}</div>
+
+        <div style="margin-top: 20px">
+            <!--用户不传入 icon-position 的值，则默认 icon-position的值为 left-->
+            <!--用户不传入 loading 的值，则默认 loading 的值为 false-->
+            <!--loading 优先级高于 icon，用户既传入 loading，又传入 icon的情况下，只显示 loading，不显示 icon -->
+            <!--icon-position 对 icon 和 loading 都有效，谁在就对谁生效-->
 
 
-    <div class="box">
-        <!-- 不可操作的 button -->
-        <g-input value="张三" :disabled="true"></g-input>
+            <!--传入 loading，且传入 icon-->
+            <g-button icon="settings" icon-position="right" :loading="loadingStatus1"
+                      @touch="loadingStatus1=!loadingStatus1">
+                icon在右边的button
+            </g-button>
 
-        <!--只可读的 button -->
-        <g-input value="李四" :readonly="true"></g-input>
+            <!--不传入 loading,只传入 icon-->
+            <g-button icon="settings">
+                icon在左边的button
+            </g-button>
+
+            <!--传入 loading，不传入 icon -->
+            <!--组件不会被点击，组件的内部元素才会被点击。所以这里的 touch 是被动触发的-->
+            <g-button :loading="loadingStatus2" icon-position="right" @touch="loadingStatus2=!loadingStatus2">
+                没有传入icon的button
+            </g-button>
+
+            <g-button-group>
+                <div>
+                    <g-button icon="left">上一页</g-button>
+                </div>
+                <g-button>更多</g-button>
+                <g-button icon="right" icon-position="right">下一页</g-button>
+            </g-button-group>
+
+            <!--    <g-button  icon="settings" icon-position="up">-->
+            <!--        传入iconPosition为无效值的button-->
+            <!--    </g-button>-->
+        </div>
+
+        <div id="test"></div>
     </div>
-    <div class="box">
-        <!-- error="",则class 列表不存在 error类,否则class 列表含有 error类-->
-        <g-input value="王五" error="姓名不少于两个字"></g-input>
-    </div>
-    <div class="box">
-        <!-- error="",则class 列表不存在 error类,否则class 列表含有 error类-->
-        <g-input value="赵六" v-model="message"></g-input>
-    </div>
-    <div>{{message}}</div>
-
-    <div style="margin-top: 20px">
-        <!--用户不传入 icon-position 的值，则默认 icon-position的值为 left-->
-        <!--用户不传入 loading 的值，则默认 loading 的值为 false-->
-        <!--loading 优先级高于 icon，用户既传入 loading，又传入 icon的情况下，只显示 loading，不显示 icon -->
-        <!--icon-position 对 icon 和 loading 都有效，谁在就对谁生效-->
-
-
-        <!--传入 loading，且传入 icon-->
-        <g-button icon="settings" icon-position="right" :loading="loadingStatus1"
-                  @touch="loadingStatus1=!loadingStatus1">
-            icon在右边的button
-        </g-button>
-
-        <!--不传入 loading,只传入 icon-->
-        <g-button icon="settings">
-            icon在左边的button
-        </g-button>
-
-        <!--传入 loading，不传入 icon -->
-        <!--组件不会被点击，组件的内部元素才会被点击。所以这里的 touch 是被动触发的-->
-        <g-button :loading="loadingStatus2" icon-position="right" @touch="loadingStatus2=!loadingStatus2">
-            没有传入icon的button
-        </g-button>
-
-        <g-button-group>
-            <div>
-                <g-button icon="left">上一页</g-button>
-            </div>
-            <g-button>更多</g-button>
-            <g-button icon="right" icon-position="right">下一页</g-button>
-        </g-button-group>
-
-        <!--    <g-button  icon="settings" icon-position="up">-->
-        <!--        传入iconPosition为无效值的button-->
-        <!--    </g-button>-->
-    </div>
-
-    <div id="test"></div>
 </div>
 
 <script src="./src/app.js"></script>

@@ -1,13 +1,16 @@
 <template>
     <!--col-2,col-22-->
     <!--offset&& 用于避免 offset-undefined 的class出现-->
-    <div class="col" :class="[span&&`col-${span}`,offset&&`offset-${offset}`] ">
-        <slot></slot>
+    <div class="col" :class="[span&&`col-${span}`,offset&&`offset-${offset}`]"
+    :style="{paddingLeft:gutter/2+'px',paddingRight:gutter/2+'px'}">
+        <div style="border: 1px solid green;height: 100px">
+            <slot></slot>
+        </div>
     </div>
 </template>
 <script>
     export default {
-        name:"WheelCol",
+        name: "WheelCol",
 
         props: {
             span: {
@@ -15,16 +18,23 @@
             },
             offset: {
                 type: [Number, String]
-            }
+            },
+            gutter: {
+                type: [Number, String]
+            },
+        },
+        created(){
+            console.log("col is created")
+        },
+        mounted() {
+            console.log("col is mounted")
         }
     }
 </script>
 <style scoped lang="scss">
     .col {
-        height: 100px;
-        background: grey;
+        /*background: grey;*/
         width: 50%;
-        border: 1px solid red;
 
         // col-1 到 col-24,24种样式
         $class-prefix: col-;

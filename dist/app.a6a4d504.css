@@ -109,10 +109,8 @@
   display: flex;
 }
 .col[data-v-bd7354] {
-  height: 100px;
-  background: grey;
+  /*background: grey;*/
   width: 50%;
-  border: 1px solid red;
 }
 .col.col-1[data-v-bd7354] {
   width: 4.1666666667%;

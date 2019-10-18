@@ -328,7 +328,17 @@ temp
 4. destroy:vue实例被销毁
     * beforeDestroy：
     * destroyed：
-    
+
+#### created 和 mounted 的区别
+* vreated 类似于
+```
+var div=document.createElement('div')
+```    
+* mounted 类似于
+```
+document.body.appendChild(div)
+```    
+
 #### scss语法
 * &
 ```
