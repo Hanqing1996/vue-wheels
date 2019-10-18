@@ -12989,14 +12989,16 @@ exports.default = void 0;
 //
 var _default = {
   name: "WheelCol",
+  data: function data() {
+    return {
+      gutter: 0
+    };
+  },
   props: {
     span: {
       type: [Number, String]
     },
     offset: {
-      type: [Number, String]
-    },
-    gutter: {
       type: [Number, String]
     }
   } // created(){

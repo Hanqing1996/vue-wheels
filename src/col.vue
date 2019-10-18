@@ -12,15 +12,17 @@
     export default {
         name: "WheelCol",
 
+        data(){
+            return {
+                gutter:0
+            }
+        },
         props: {
             span: {
                 type: [Number, String]
             },
             offset: {
                 type: [Number, String]
-            },
-            gutter:{
-                type:[Number,String]
             }
         },
 
