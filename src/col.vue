@@ -1,6 +1,7 @@
 <template>
     <!--col-2,col-22-->
-    <div class="col" :class="{[`col-${span}`]: true}">
+    <!--offset&& 用于避免 offset-undefined 的class出现-->
+    <div class="col" :class="[span&&`col-${span}`,offset&&`offset-${offset}`] ">
         <slot></slot>
     </div>
 </template>
@@ -10,7 +11,10 @@
 
         props: {
             span: {
-                type: [Number,String]
+                type: [Number, String]
+            },
+            offset: {
+                type: [Number, String]
             }
         }
     }
@@ -29,6 +33,14 @@
             // #{$n} 类似于 js 的 ${n}
             &.#{$class-prefix}#{$n} {
                 width: ($n / 24) * 100%;
+            }
+        }
+
+        $class-prefix: offset-;
+        @for $n from 1 through 24 {
+
+            &.#{$class-prefix}#{$n} {
+                margin-left: ($n / 24) * 100%;
             }
         }
     }

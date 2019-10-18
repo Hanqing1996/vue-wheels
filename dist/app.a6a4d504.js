@@ -12944,10 +12944,14 @@ exports.default = void 0;
 //
 //
 //
+//
 var _default = {
   name: "WheelCol",
   props: {
     span: {
+      type: [Number, String]
+    },
+    offset: {
       type: [Number, String]
     }
   }
@@ -12962,7 +12966,6 @@ exports.default = _default;
         /* template */
         Object.assign($bd7354, (function () {
           var render = function() {
-  var _obj
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -12970,7 +12973,10 @@ exports.default = _default;
     "div",
     {
       staticClass: "col",
-      class: ((_obj = {}), (_obj["col-" + _vm.span] = true), _obj)
+      class: [
+        _vm.span && "col-" + _vm.span,
+        _vm.offset && "offset-" + _vm.offset
+      ]
     },
     [_vm._t("default")],
     2

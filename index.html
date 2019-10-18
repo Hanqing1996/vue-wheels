@@ -41,7 +41,8 @@
 <body>
 <div id="app">
 
-
+    <!--offset表示间隙，span 表示格子长度-->
+    <!--加span的情况下，要求span的和为24-->
     <g-row>
         <g-col>1</g-col>
         <g-col>2</g-col>
@@ -58,12 +59,12 @@
         <g-col>4</g-col>
     </g-row>
     <g-row>
-        <g-col :span="2">1</g-col>
-        <g-col :span="22">11</g-col>
+        <g-col :span="2">2</g-col>
+        <g-col :span="22">22</g-col>
     </g-row>
     <g-row>
-        <g-col :span="4">1</g-col>
-        <g-col :span="20">11</g-col>
+        <g-col :span="2">2</g-col>
+        <g-col :span="20" :offset="2">20</g-col>
     </g-row>
     <hr>
 
