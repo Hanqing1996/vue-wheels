@@ -12,11 +12,18 @@
             }
         },
 
-        created(){
-            console.log("row is created")
-        },
+        // created(){
+        //     console.log("row is created")
+        // },
         mounted() {
-            console.log("row is mounted")
+            // console.log("row is mounted")
+
+            // console.log(this.$children);
+
+            // 把父组件的 gutter 传递给子组件
+            this.$children.forEach((vm)=>{
+                vm.gutter=this.gutter
+            })
         }
     }
 </script>

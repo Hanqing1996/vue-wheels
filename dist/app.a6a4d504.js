@@ -12897,11 +12897,18 @@ var _default = {
       type: [Number, String]
     }
   },
-  created: function created() {
-    console.log("row is created");
-  },
+  // created(){
+  //     console.log("row is created")
+  // },
   mounted: function mounted() {
-    console.log("row is mounted");
+    var _this = this;
+
+    // console.log("row is mounted")
+    // console.log(this.$children);
+    // 把父组件的 gutter 传递给子组件
+    this.$children.forEach(function (vm) {
+      vm.gutter = _this.gutter;
+    });
   }
 };
 exports.default = _default;
@@ -12992,13 +12999,13 @@ var _default = {
     gutter: {
       type: [Number, String]
     }
-  },
-  created: function created() {
-    console.log("col is created");
-  },
-  mounted: function mounted() {
-    console.log("col is mounted");
-  }
+  } // created(){
+  //     console.log("col is created")
+  // },
+  // mounted() {
+  //     console.log("col is mounted")
+  // }
+
 };
 exports.default = _default;
         var $bd7354 = exports.default || module.exports;

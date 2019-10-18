@@ -338,6 +338,13 @@ var div=document.createElement('div')
 ```
 document.body.appendChild(div)
 ```    
+* 父子 created 和 mounted 顺序
+```
+father.created
+children.created
+children.mounted
+father.mounted
+```
 
 #### scss语法
 * &

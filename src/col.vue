@@ -19,16 +19,18 @@
             offset: {
                 type: [Number, String]
             },
-            gutter: {
-                type: [Number, String]
-            },
+            gutter:{
+                type:[Number,String]
+            }
         },
-        created(){
-            console.log("col is created")
-        },
-        mounted() {
-            console.log("col is mounted")
-        }
+
+
+        // created(){
+        //     console.log("col is created")
+        // },
+        // mounted() {
+        //     console.log("col is mounted")
+        // }
     }
 </script>
 <style scoped lang="scss">
