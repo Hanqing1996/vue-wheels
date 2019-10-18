@@ -36,7 +36,8 @@
 
                 // 属性检查器
                 validator(value) {
-                    return value === 'left' || value === 'right'
+                    return ['left','right'].includes(value)
+                    // return value === 'left' || value === 'right'
                 }
             },
         },

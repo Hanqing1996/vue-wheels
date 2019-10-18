@@ -12572,7 +12572,7 @@ var _default = {
       default: 'left',
       // 属性检查器
       validator: function validator(value) {
-        return value === 'left' || value === 'right';
+        return ['left', 'right'].includes(value); // return value === 'left' || value === 'right'
       }
     }
   }
@@ -12895,16 +12895,28 @@ var _default = {
   props: {
     gutter: {
       type: [Number, String]
+    },
+    align: {
+      type: String,
+      validate: function validate(value) {
+        return ['left', 'right', 'center'].includes(value);
+      }
     }
   },
-  // created(){
-  //     console.log("row is created")
-  // },
+  computed: {
+    rowStyle: function rowStyle() {
+      return {
+        marginLeft: -this.gutter / 2 + 'px',
+        marginRight: -this.gutter / 2 + 'px'
+      };
+    },
+    rowClass: function rowClass() {
+      return [this.align && "align-".concat(this.align), this.align && "align-".concat(this.align)];
+    }
+  },
   mounted: function mounted() {
     var _this = this;
 
-    // console.log("row is mounted")
-    // console.log(this.$children);
     // 把父组件的 gutter 传递给子组件
     this.$children.forEach(function (vm) {
       vm.gutter = _this.gutter;
@@ -12926,13 +12938,7 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "row",
-      style: {
-        marginLeft: -_vm.gutter / 2 + "px",
-        marginRight: -_vm.gutter / 2 + "px"
-      }
-    },
+    { staticClass: "row", class: _vm.rowClass, style: _vm.rowStyle },
     [_vm._t("default")],
     2
   )
@@ -12986,13 +12992,25 @@ exports.default = void 0;
 //
 //
 //
-//
 var _default = {
   name: "WheelCol",
   data: function data() {
     return {
       gutter: 0
-    };
+    }; // 写在 data 里的 colStyle 是不会随 gutter 更新的（只在 created 读取一次），所以含有 gutter 的 colStyle 不能写在 data 里面
+  },
+  // colStyle 作为计算属性使用，以保证 colstyle 这个对象能随 gutter 更新而更新
+  computed: {
+    colStyle: function colStyle() {
+      return {
+        paddingLeft: this.gutter / 2 + 'px',
+        paddingRight: this.gutter / 2 + 'px'
+      };
+    },
+    colClass: function colClass() {
+      // class 数组写法
+      return [this.span && "col-".concat(this.span), this.offset && "offset-".concat(this.offset)];
+    }
   },
   props: {
     span: {
@@ -13001,13 +13019,7 @@ var _default = {
     offset: {
       type: [Number, String]
     }
-  } // created(){
-  //     console.log("col is created")
-  // },
-  // mounted() {
-  //     console.log("col is mounted")
-  // }
-
+  }
 };
 exports.default = _default;
         var $bd7354 = exports.default || module.exports;
@@ -13024,17 +13036,7 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "col",
-      class: [
-        _vm.span && "col-" + _vm.span,
-        _vm.offset && "offset-" + _vm.offset
-      ],
-      style: {
-        paddingLeft: _vm.gutter / 2 + "px",
-        paddingRight: _vm.gutter / 2 + "px"
-      }
-    },
+    { staticClass: "col", class: _vm.colClass, style: _vm.colStyle },
     [
       _c(
         "div",
@@ -24191,12 +24193,6 @@ new _vue.default({
     loadingStatus2: false,
     message: 'hi'
   },
-  // 测试双向绑定
-  // created:function(){
-  //     setTimeout(()=>{
-  //         this.message+='1'
-  //     },1000)
-  // },
   methods: {
     inputChange: function inputChange(e) {
       console.log(e.target.value);

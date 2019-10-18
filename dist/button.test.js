@@ -12572,7 +12572,7 @@ var _default = {
       default: 'left',
       // 属性检查器
       validator: function validator(value) {
-        return value === 'left' || value === 'right';
+        return ['left', 'right'].includes(value); // return value === 'left' || value === 'right'
       }
     }
   }

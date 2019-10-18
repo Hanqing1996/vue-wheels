@@ -1,28 +1,39 @@
 <template>
-    <div class="row"  :style="{marginLeft:-gutter/2+'px',marginRight:-gutter/2+'px',}">
+    <div class="row" :style="rowStyle" :class="rowClass">
         <slot></slot>
     </div>
 </template>
 <script>
     export default {
-        name:'wheelRow',
-        props:{
-            gutter:{
-                type:[Number,String]
+        name: 'wheelRow',
+        props: {
+            gutter: {
+                type: [Number, String]
+            },
+            align: {
+                type: String,
+                validate(value) {
+                    return ['left', 'right', 'center'].includes(value)
+                }
+            }
+        },
+        computed: {
+            rowStyle: function () {
+                return {
+                    marginLeft: -this.gutter / 2 + 'px',
+                    marginRight: -this.gutter / 2 + 'px',
+                }
+            },
+            rowClass: function () {
+                return [this.align && `align-${this.align}`, this.align && `align-${this.align}`]
             }
         },
 
-        // created(){
-        //     console.log("row is created")
-        // },
         mounted() {
-            // console.log("row is mounted")
-
-            // console.log(this.$children);
 
             // 把父组件的 gutter 传递给子组件
-            this.$children.forEach((vm)=>{
-                vm.gutter=this.gutter
+            this.$children.forEach((vm) => {
+                vm.gutter = this.gutter
             })
         }
     }
@@ -30,5 +41,15 @@
 <style scoped lang="scss">
     .row {
         display: flex;
+        &.align-left{
+            justify-content: flex-start;
+        }
+        &.align-right{
+            justify-content: flex-end;
+        }
+        &.align-center{
+            justify-content: center;
+        }
     }
+
 </style>
