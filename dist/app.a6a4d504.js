@@ -12984,6 +12984,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 //
 //
 //
@@ -13020,12 +13028,10 @@ var _default = {
     colClass: function colClass() {
       // class 数组写法
       var span = this.span,
-          offset = this.offset,
           iPad = this.iPad,
-          narrowPc = this.narrowPc;
-      var iPadClass = iPad ? ["col-iPad-".concat(iPad.span)] : [];
-      var narrowPcClass = narrowPc ? ["col-narrowPc-".concat(narrowPc.span)] : [];
-      return [span && "col-".concat(span), offset && "offset-".concat(offset)].concat(iPadClass, narrowPcClass);
+          narrowPc = this.narrowPc,
+          widePc = this.widePc;
+      return [span && "col-".concat(span)].concat(_toConsumableArray(iPad ? ["col-iPad-".concat(iPad.span)] : []), _toConsumableArray(narrowPc ? ["col-narrowPc-".concat(narrowPc.span)] : []), _toConsumableArray(widePc ? ["col-widePc-".concat(widePc.span)] : []));
     }
   },
   props: {

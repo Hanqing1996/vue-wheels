@@ -36,17 +36,12 @@
             },
             colClass: function () {
                 // class 数组写法
-                let {span, offset,iPad,narrowPc} = this
-
-                let iPadClass=iPad?[`col-iPad-${iPad.span}`]:[]
-                let narrowPcClass=narrowPc?[`col-narrowPc-${narrowPc.span}`]:[]
-
-
+                let {span,iPad,narrowPc,widePc} = this
                 return [
                     span && `col-${span}`,
-                    offset && `offset-${offset}`,
-                    ...iPadClass,
-                    ...narrowPcClass
+                    ...iPad?[`col-iPad-${iPad.span}`]:[],
+                    ...narrowPc?[`col-narrowPc-${narrowPc.span}`]:[],
+                    ...widePc?[`col-widePc-${widePc.span}`]:[]
                 ]
             }
         },
@@ -81,16 +76,10 @@
             }
         }
 
-        $class-prefix: offset-;
-        @for $n from 1 through 24 {
+        /*设置不同样式最窄宽度可以保证当用户没有填写ipad.sapn时col样式与phone一致*/
 
-            &.#{$class-prefix}#{$n} {
-                margin-left: ($n / 24) * 100%;
-            }
-        }
-
-        /*iPad配适:(577px,768px)*/
-        @media (min-width: 577px)and(max-width: 768px) {
+        /*iPad配适:最窄577px*/
+        @media (min-width: 577px) {
             $class-prefix: col-iPad-;
             @for $n from 1 through 24 {
 
@@ -98,17 +87,10 @@
                     width: ($n / 24) * 100%;
                 }
             }
-
-            $class-prefix: offset-iPad-;
-            @for $n from 1 through 24 {
-
-                &.#{$class-prefix}#{$n} {
-                    margin-left: ($n / 24) * 100%;
-                }
-            }
         }
-        /*narrowPc配适:(769px,992px)*/
-        @media (min-width: 769px)and(max-width: 992px) {
+
+        /*narrowPc配适:最窄769px)*/
+        @media (min-width: 769px) {
             $class-prefix: col-narrowPc-;
             @for $n from 1 through 24 {
 
@@ -116,41 +98,22 @@
                     width: ($n / 24) * 100%;
                 }
             }
-
-            $class-prefix: offset-narrowPc-;
-            @for $n from 1 through 24 {
-                &.#{$class-prefix}#{$n} {
-                    margin-left: ($n / 24) * 100%;
-                }
-            }
         }
-        /*pc配适:(993px,1200px)*/
-        @media (min-width: 993px) and (max-width: 1200px) {
+        /*pc配适:最窄993px*/
+        @media (min-width: 993px) {
             $class-prefix: col-pc-;
             @for $n from 1 through 24 {
                 &.#{$class-prefix}#{$n} {
                     width: ($n / 24) * 100%;
                 }
             }
-            $class-prefix: offset-pc-;
-            @for $n from 1 through 24 {
-                &.#{$class-prefix}#{$n} {
-                    margin-left: ($n / 24) * 100%;
-                }
-            }
         }
-        /*widepc配适:大于1201px*/
+        /*widepc配适:最窄1201px*/
         @media (min-width: 1201px) {
-            $class-prefix: col-wide-pc-;
+            $class-prefix: col-widePc-;
             @for $n from 1 through 24 {
                 &.#{$class-prefix}#{$n} {
                     width: ($n / 24) * 100%;
-                }
-            }
-            $class-prefix: offset-wide-pc-;
-            @for $n from 1 through 24 {
-                &.#{$class-prefix}#{$n} {
-                    margin-left: ($n / 24) * 100%;
                 }
             }
         }

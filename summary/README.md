@@ -469,6 +469,8 @@ props: {
 -p对应P,即vue会把-后的第一个字母改为大写
    
    
+## 用户传入了phone,narrowPc的span,没有传入ipad.span,而页面宽度又处于ipad宽度，此时如何处理
+   
      
      
     
