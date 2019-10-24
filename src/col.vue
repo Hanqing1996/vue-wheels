@@ -36,9 +36,8 @@
             },
             colClass: function () {
                 // class 数组写法
-                let {span, offset, phone,iPad,narrowPc} = this
+                let {span, offset,iPad,narrowPc} = this
 
-                let phoneClass=phone?[`col-phone-${phone.span}`]:[]
                 let iPadClass=iPad?[`col-iPad-${iPad.span}`]:[]
                 let narrowPcClass=narrowPc?[`col-narrowPc-${narrowPc.span}`]:[]
 
@@ -46,7 +45,6 @@
                 return [
                     span && `col-${span}`,
                     offset && `offset-${offset}`,
-                    ...phoneClass,
                     ...iPadClass,
                     ...narrowPcClass
                 ]
@@ -60,7 +58,6 @@
             offset: {
                 type: [Number, String]
             },
-            phone: {type: Object, validator},
             iPad: {type: Object, validator},
             narrowPc:{type: Object, validator},
             pc: {type: Object, validator,},
@@ -92,24 +89,6 @@
             }
         }
 
-        /*phone配适:当页面宽度小于576px时*/
-        @media (max-width: 576px) {
-            $class-prefix: col-phone-;
-            @for $n from 1 through 24 {
-
-                &.#{$class-prefix}#{$n} {
-                    width: ($n / 24) * 100%;
-                }
-            }
-
-            $class-prefix: offset-phone-;
-            @for $n from 1 through 24 {
-
-                &.#{$class-prefix}#{$n} {
-                    margin-left: ($n / 24) * 100%;
-                }
-            }
-        }
         /*iPad配适:(577px,768px)*/
         @media (min-width: 577px)and(max-width: 768px) {
             $class-prefix: col-iPad-;

@@ -13021,13 +13021,11 @@ var _default = {
       // class 数组写法
       var span = this.span,
           offset = this.offset,
-          phone = this.phone,
           iPad = this.iPad,
           narrowPc = this.narrowPc;
-      var phoneClass = phone ? ["col-phone-".concat(phone.span)] : [];
       var iPadClass = iPad ? ["col-iPad-".concat(iPad.span)] : [];
       var narrowPcClass = narrowPc ? ["col-narrowPc-".concat(narrowPc.span)] : [];
-      return [span && "col-".concat(span), offset && "offset-".concat(offset)].concat(phoneClass, iPadClass, narrowPcClass);
+      return [span && "col-".concat(span), offset && "offset-".concat(offset)].concat(iPadClass, narrowPcClass);
     }
   },
   props: {
@@ -13036,10 +13034,6 @@ var _default = {
     },
     offset: {
       type: [Number, String]
-    },
-    phone: {
-      type: Object,
-      validator: validator
     },
     iPad: {
       type: Object,
