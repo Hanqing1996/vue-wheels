@@ -50,10 +50,9 @@
 </style>
 <div id="app">
 
-    <!--offset表示格子间空隙,span 表示格子长度,gutter表示中央空隙(针对两个格子)-->
-    <!--要求span,offset的和为24-->
+    <!--span表示格子长度, offset表示格子间左空隙,gutter表示中央空隙(针对两个格子)-->
+    <!--要求span,offset和为24,gutter随意-->
     <!--需要根据gutter调整col.padding和row.margin-->
-
 
     <g-row class="topbar">
         <g-col class="demoBox" span="9">
@@ -91,9 +90,49 @@
         <g-col class="demoBox" span="6"></g-col>
     </g-row>
     <g-row gutter="10">
-        <g-col></g-col>
-        <g-col></g-col>
+        <g-col span="12">1</g-col>
+        <g-col span="12">2</g-col>
     </g-row>
+    <g-row>
+        <g-col span="10" offset="2"></g-col>
+        <g-col span="10" offset="2"></g-col>
+    </g-row>
+    <g-row>
+        <g-col span="12" :phone="{span:6,offset:6}"></g-col>
+        <g-col span="12"></g-col>
+    </g-row>
+
+    <g-row>
+        <g-col span="12" :i-pad="{span:6,offset:6}"></g-col>
+        <g-col span="12"></g-col>
+    </g-row>
+
+    <g-row>
+        <g-col span="12" :narrow-pc="{span:6,offset:6}"></g-col>
+        <g-col span="12"></g-col>
+    </g-row>
+
+    <g-row gutter="20">
+        <g-col span="2"
+               :phone="{span:24}"
+               :i-pad="{span:8}"
+               :narrow-pc="{span:4}"
+               :pc="{span:2}"
+               :wide-pc="{span:1}">
+            1
+        </g-col>
+        <g-col span="22"
+               :phone="{span:24}"
+               :i-pad="{span:16}"
+               :narrow-pc="{span:20}"
+               :pc="{span:22}"
+               :wide-pc="{span:23}">
+            11
+        </g-col>
+    </g-row>
+
+
+
 
     <hr>
 
@@ -119,7 +158,6 @@
         <!--用户不传入 loading 的值，则默认 loading 的值为 false-->
         <!--loading 优先级高于 icon，用户既传入 loading，又传入 icon的情况下，只显示 loading，不显示 icon -->
         <!--icon-position 对 icon 和 loading 都有效，谁在就对谁生效-->
-        width: 50%;
         <!--传入 loading，且传入 icon-->
         <g-button icon="settings" icon-position="right" :loading="loadingStatus1"
                   @click="loadingStatus1=!loadingStatus1">

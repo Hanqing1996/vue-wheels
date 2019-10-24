@@ -153,6 +153,7 @@ props:{
 }
 ```
 * 属性检查器
+如果validate返回false,将在浏览器中返回 Vue warn
 ```
 validator(value){
     return value=='left'||value!='right'
@@ -199,10 +200,41 @@ export default {
     name: "WheelInput"
 }
 ```  
-1. 配合 vue.js.devtools 使用
+1. 配合 vue.js.devtools(chrome插件) 使用
 2. 
 * scoped
 为组件设置 css 作用域（本质是不同组件设置不同ID）
+* class绑定
+根据一个boolean数组来确定要加载哪些class
+```
+<div id="app">
+    <div :class="[class1,class2]">123</div>
+</div>
+
+var vm = new Vue({
+    el: '#app',
+    data: {
+        class1:1&&'9',
+        class2:'2'
+    }
+})
+```
+结果为 <div class="9 2">123</div>,因为class1为'9',class2为'2'',皆为真值;所以返回数组为[true,true]
+```
+<div id="app">
+    <div :class="[class1,class2]">123</div>
+</div>
+
+var vm = new Vue({
+    el: '#app',
+    data: {
+        class1:undefined&&'9',
+        class2:'2'
+    }
+})
+```
+结果为 <div class="2">123</div>,因为class1为undefined,假值,class2为'2'',皆为真值;所以返回数组为[false,true],如果为true,则class名有效
+
     
 #### 发布 wheel 包（需FQ）
 1. 更新 package.json
@@ -410,14 +442,34 @@ $height: 32px;
     <g-col span=8></g-col>
 </g-row>
 ```
+
+#### 响应式
+* 页面缩小时col的offset.span随之变化
    
 #### 重构
 * 重复两次及以上的代码
 * 一眼看不懂的代码
     * 排版复杂  
 * 提取变量法    
+
+
+#### 命名规范
+HTML中的
+```
+<g-col :narrow-pc="{span:6,offset:6}"></g-col>
+```
+对应col.vue中的
+```
+props: {
+    narrowPc:{
+        type: Object
+    }
+}
+```
+-p对应P,即vue会把-后的第一个字母改为大写
    
    
+     
      
     
     

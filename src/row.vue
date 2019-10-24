@@ -41,6 +41,8 @@
 <style scoped lang="scss">
     .row {
         display: flex;
+        /*允许col分行*/
+        flex-wrap: wrap;
         &.align-left{
             justify-content: flex-start;
         }

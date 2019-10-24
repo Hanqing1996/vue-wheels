@@ -12983,6 +12983,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
 //
 //
 //
@@ -12992,6 +12993,15 @@ exports.default = void 0;
 //
 //
 //
+var validator = function validator(value) {
+  var keys = Object.keys(value);
+  var arr = ['span', 'offset'];
+  var res = keys.filter(function (item) {
+    return !arr.includes(item);
+  });
+  return res.length === 0;
+};
+
 var _default = {
   name: "WheelCol",
   data: function data() {
@@ -13009,7 +13019,15 @@ var _default = {
     },
     colClass: function colClass() {
       // class 数组写法
-      return [this.span && "col-".concat(this.span), this.offset && "offset-".concat(this.offset)];
+      var span = this.span,
+          offset = this.offset,
+          phone = this.phone,
+          iPad = this.iPad,
+          narrowPc = this.narrowPc;
+      var phoneClass = phone ? ["col-phone-".concat(phone.span)] : [];
+      var iPadClass = iPad ? ["col-iPad-".concat(iPad.span)] : [];
+      var narrowPcClass = narrowPc ? ["col-narrowPc-".concat(narrowPc.span)] : [];
+      return [span && "col-".concat(span), offset && "offset-".concat(offset)].concat(phoneClass, iPadClass, narrowPcClass);
     }
   },
   props: {
@@ -13018,8 +13036,29 @@ var _default = {
     },
     offset: {
       type: [Number, String]
+    },
+    phone: {
+      type: Object,
+      validator: validator
+    },
+    iPad: {
+      type: Object,
+      validator: validator
+    },
+    narrowPc: {
+      type: Object,
+      validator: validator
+    },
+    pc: {
+      type: Object,
+      validator: validator
+    },
+    widePc: {
+      type: Object,
+      validator: validator
     }
-  }
+  },
+  mounted: function mounted() {}
 };
 exports.default = _default;
         var $bd7354 = exports.default || module.exports;
@@ -24364,7 +24403,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34097" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46515" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
