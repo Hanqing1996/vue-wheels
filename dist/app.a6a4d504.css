@@ -122,10 +122,7 @@
 }
 @charset "UTF-8";
 .col[data-v-bd7354] {
-  /*background: grey;*/
-  /*width: 50%;*/
   /*col-1 到 col-24,24种样式*/
-  /*设置不同样式最窄宽度可以保证当用户没有填写ipad.sapn时col样式与phone一致*/
   /*iPad配适:最窄577px*/
   /*narrowPc配适:最窄769px)*/
   /*pc配适:最窄993px*/
@@ -203,6 +200,78 @@
 .col.col-24[data-v-bd7354] {
   width: 100%;
 }
+.col.offset-1[data-v-bd7354] {
+  margin-left: 4.1666666667%;
+}
+.col.offset-2[data-v-bd7354] {
+  margin-left: 8.3333333333%;
+}
+.col.offset-3[data-v-bd7354] {
+  margin-left: 12.5%;
+}
+.col.offset-4[data-v-bd7354] {
+  margin-left: 16.6666666667%;
+}
+.col.offset-5[data-v-bd7354] {
+  margin-left: 20.8333333333%;
+}
+.col.offset-6[data-v-bd7354] {
+  margin-left: 25%;
+}
+.col.offset-7[data-v-bd7354] {
+  margin-left: 29.1666666667%;
+}
+.col.offset-8[data-v-bd7354] {
+  margin-left: 33.3333333333%;
+}
+.col.offset-9[data-v-bd7354] {
+  margin-left: 37.5%;
+}
+.col.offset-10[data-v-bd7354] {
+  margin-left: 41.6666666667%;
+}
+.col.offset-11[data-v-bd7354] {
+  margin-left: 45.8333333333%;
+}
+.col.offset-12[data-v-bd7354] {
+  margin-left: 50%;
+}
+.col.offset-13[data-v-bd7354] {
+  margin-left: 54.1666666667%;
+}
+.col.offset-14[data-v-bd7354] {
+  margin-left: 58.3333333333%;
+}
+.col.offset-15[data-v-bd7354] {
+  margin-left: 62.5%;
+}
+.col.offset-16[data-v-bd7354] {
+  margin-left: 66.6666666667%;
+}
+.col.offset-17[data-v-bd7354] {
+  margin-left: 70.8333333333%;
+}
+.col.offset-18[data-v-bd7354] {
+  margin-left: 75%;
+}
+.col.offset-19[data-v-bd7354] {
+  margin-left: 79.1666666667%;
+}
+.col.offset-20[data-v-bd7354] {
+  margin-left: 83.3333333333%;
+}
+.col.offset-21[data-v-bd7354] {
+  margin-left: 87.5%;
+}
+.col.offset-22[data-v-bd7354] {
+  margin-left: 91.6666666667%;
+}
+.col.offset-23[data-v-bd7354] {
+  margin-left: 95.8333333333%;
+}
+.col.offset-24[data-v-bd7354] {
+  margin-left: 100%;
+}
 @media (min-width: 577px) {
 .col.col-iPad-1[data-v-bd7354] {
     width: 4.1666666667%;
@@ -275,6 +344,78 @@
 }
 .col.col-iPad-24[data-v-bd7354] {
     width: 100%;
+}
+.col.offset-iPad-1[data-v-bd7354] {
+    margin-left: 4.1666666667%;
+}
+.col.offset-iPad-2[data-v-bd7354] {
+    margin-left: 8.3333333333%;
+}
+.col.offset-iPad-3[data-v-bd7354] {
+    margin-left: 12.5%;
+}
+.col.offset-iPad-4[data-v-bd7354] {
+    margin-left: 16.6666666667%;
+}
+.col.offset-iPad-5[data-v-bd7354] {
+    margin-left: 20.8333333333%;
+}
+.col.offset-iPad-6[data-v-bd7354] {
+    margin-left: 25%;
+}
+.col.offset-iPad-7[data-v-bd7354] {
+    margin-left: 29.1666666667%;
+}
+.col.offset-iPad-8[data-v-bd7354] {
+    margin-left: 33.3333333333%;
+}
+.col.offset-iPad-9[data-v-bd7354] {
+    margin-left: 37.5%;
+}
+.col.offset-iPad-10[data-v-bd7354] {
+    margin-left: 41.6666666667%;
+}
+.col.offset-iPad-11[data-v-bd7354] {
+    margin-left: 45.8333333333%;
+}
+.col.offset-iPad-12[data-v-bd7354] {
+    margin-left: 50%;
+}
+.col.offset-iPad-13[data-v-bd7354] {
+    margin-left: 54.1666666667%;
+}
+.col.offset-iPad-14[data-v-bd7354] {
+    margin-left: 58.3333333333%;
+}
+.col.offset-iPad-15[data-v-bd7354] {
+    margin-left: 62.5%;
+}
+.col.offset-iPad-16[data-v-bd7354] {
+    margin-left: 66.6666666667%;
+}
+.col.offset-iPad-17[data-v-bd7354] {
+    margin-left: 70.8333333333%;
+}
+.col.offset-iPad-18[data-v-bd7354] {
+    margin-left: 75%;
+}
+.col.offset-iPad-19[data-v-bd7354] {
+    margin-left: 79.1666666667%;
+}
+.col.offset-iPad-20[data-v-bd7354] {
+    margin-left: 83.3333333333%;
+}
+.col.offset-iPad-21[data-v-bd7354] {
+    margin-left: 87.5%;
+}
+.col.offset-iPad-22[data-v-bd7354] {
+    margin-left: 91.6666666667%;
+}
+.col.offset-iPad-23[data-v-bd7354] {
+    margin-left: 95.8333333333%;
+}
+.col.offset-iPad-24[data-v-bd7354] {
+    margin-left: 100%;
 }
 }
 @media (min-width: 769px) {
@@ -350,6 +491,78 @@
 .col.col-narrowPc-24[data-v-bd7354] {
     width: 100%;
 }
+.col.offset-narrowPc-1[data-v-bd7354] {
+    margin-left: 4.1666666667%;
+}
+.col.offset-narrowPc-2[data-v-bd7354] {
+    margin-left: 8.3333333333%;
+}
+.col.offset-narrowPc-3[data-v-bd7354] {
+    margin-left: 12.5%;
+}
+.col.offset-narrowPc-4[data-v-bd7354] {
+    margin-left: 16.6666666667%;
+}
+.col.offset-narrowPc-5[data-v-bd7354] {
+    margin-left: 20.8333333333%;
+}
+.col.offset-narrowPc-6[data-v-bd7354] {
+    margin-left: 25%;
+}
+.col.offset-narrowPc-7[data-v-bd7354] {
+    margin-left: 29.1666666667%;
+}
+.col.offset-narrowPc-8[data-v-bd7354] {
+    margin-left: 33.3333333333%;
+}
+.col.offset-narrowPc-9[data-v-bd7354] {
+    margin-left: 37.5%;
+}
+.col.offset-narrowPc-10[data-v-bd7354] {
+    margin-left: 41.6666666667%;
+}
+.col.offset-narrowPc-11[data-v-bd7354] {
+    margin-left: 45.8333333333%;
+}
+.col.offset-narrowPc-12[data-v-bd7354] {
+    margin-left: 50%;
+}
+.col.offset-narrowPc-13[data-v-bd7354] {
+    margin-left: 54.1666666667%;
+}
+.col.offset-narrowPc-14[data-v-bd7354] {
+    margin-left: 58.3333333333%;
+}
+.col.offset-narrowPc-15[data-v-bd7354] {
+    margin-left: 62.5%;
+}
+.col.offset-narrowPc-16[data-v-bd7354] {
+    margin-left: 66.6666666667%;
+}
+.col.offset-narrowPc-17[data-v-bd7354] {
+    margin-left: 70.8333333333%;
+}
+.col.offset-narrowPc-18[data-v-bd7354] {
+    margin-left: 75%;
+}
+.col.offset-narrowPc-19[data-v-bd7354] {
+    margin-left: 79.1666666667%;
+}
+.col.offset-narrowPc-20[data-v-bd7354] {
+    margin-left: 83.3333333333%;
+}
+.col.offset-narrowPc-21[data-v-bd7354] {
+    margin-left: 87.5%;
+}
+.col.offset-narrowPc-22[data-v-bd7354] {
+    margin-left: 91.6666666667%;
+}
+.col.offset-narrowPc-23[data-v-bd7354] {
+    margin-left: 95.8333333333%;
+}
+.col.offset-narrowPc-24[data-v-bd7354] {
+    margin-left: 100%;
+}
 }
 @media (min-width: 993px) {
 .col.col-pc-1[data-v-bd7354] {
@@ -422,6 +635,78 @@
     width: 95.8333333333%;
 }
 .col.col-pc-24[data-v-bd7354] {
+    width: 100%;
+}
+.col.offset-pc-1[data-v-bd7354] {
+    width: 4.1666666667%;
+}
+.col.offset-pc-2[data-v-bd7354] {
+    width: 8.3333333333%;
+}
+.col.offset-pc-3[data-v-bd7354] {
+    width: 12.5%;
+}
+.col.offset-pc-4[data-v-bd7354] {
+    width: 16.6666666667%;
+}
+.col.offset-pc-5[data-v-bd7354] {
+    width: 20.8333333333%;
+}
+.col.offset-pc-6[data-v-bd7354] {
+    width: 25%;
+}
+.col.offset-pc-7[data-v-bd7354] {
+    width: 29.1666666667%;
+}
+.col.offset-pc-8[data-v-bd7354] {
+    width: 33.3333333333%;
+}
+.col.offset-pc-9[data-v-bd7354] {
+    width: 37.5%;
+}
+.col.offset-pc-10[data-v-bd7354] {
+    width: 41.6666666667%;
+}
+.col.offset-pc-11[data-v-bd7354] {
+    width: 45.8333333333%;
+}
+.col.offset-pc-12[data-v-bd7354] {
+    width: 50%;
+}
+.col.offset-pc-13[data-v-bd7354] {
+    width: 54.1666666667%;
+}
+.col.offset-pc-14[data-v-bd7354] {
+    width: 58.3333333333%;
+}
+.col.offset-pc-15[data-v-bd7354] {
+    width: 62.5%;
+}
+.col.offset-pc-16[data-v-bd7354] {
+    width: 66.6666666667%;
+}
+.col.offset-pc-17[data-v-bd7354] {
+    width: 70.8333333333%;
+}
+.col.offset-pc-18[data-v-bd7354] {
+    width: 75%;
+}
+.col.offset-pc-19[data-v-bd7354] {
+    width: 79.1666666667%;
+}
+.col.offset-pc-20[data-v-bd7354] {
+    width: 83.3333333333%;
+}
+.col.offset-pc-21[data-v-bd7354] {
+    width: 87.5%;
+}
+.col.offset-pc-22[data-v-bd7354] {
+    width: 91.6666666667%;
+}
+.col.offset-pc-23[data-v-bd7354] {
+    width: 95.8333333333%;
+}
+.col.offset-pc-24[data-v-bd7354] {
     width: 100%;
 }
 }
@@ -497,5 +782,304 @@
 }
 .col.col-widePc-24[data-v-bd7354] {
     width: 100%;
+}
+.col.offset-widePc-1[data-v-bd7354] {
+    margin-left: 4.1666666667%;
+}
+.col.offset-widePc-2[data-v-bd7354] {
+    margin-left: 8.3333333333%;
+}
+.col.offset-widePc-3[data-v-bd7354] {
+    margin-left: 12.5%;
+}
+.col.offset-widePc-4[data-v-bd7354] {
+    margin-left: 16.6666666667%;
+}
+.col.offset-widePc-5[data-v-bd7354] {
+    margin-left: 20.8333333333%;
+}
+.col.offset-widePc-6[data-v-bd7354] {
+    margin-left: 25%;
+}
+.col.offset-widePc-7[data-v-bd7354] {
+    margin-left: 29.1666666667%;
+}
+.col.offset-widePc-8[data-v-bd7354] {
+    margin-left: 33.3333333333%;
+}
+.col.offset-widePc-9[data-v-bd7354] {
+    margin-left: 37.5%;
+}
+.col.offset-widePc-10[data-v-bd7354] {
+    margin-left: 41.6666666667%;
+}
+.col.offset-widePc-11[data-v-bd7354] {
+    margin-left: 45.8333333333%;
+}
+.col.offset-widePc-12[data-v-bd7354] {
+    margin-left: 50%;
+}
+.col.offset-widePc-13[data-v-bd7354] {
+    margin-left: 54.1666666667%;
+}
+.col.offset-widePc-14[data-v-bd7354] {
+    margin-left: 58.3333333333%;
+}
+.col.offset-widePc-15[data-v-bd7354] {
+    margin-left: 62.5%;
+}
+.col.offset-widePc-16[data-v-bd7354] {
+    margin-left: 66.6666666667%;
+}
+.col.offset-widePc-17[data-v-bd7354] {
+    margin-left: 70.8333333333%;
+}
+.col.offset-widePc-18[data-v-bd7354] {
+    margin-left: 75%;
+}
+.col.offset-widePc-19[data-v-bd7354] {
+    margin-left: 79.1666666667%;
+}
+.col.offset-widePc-20[data-v-bd7354] {
+    margin-left: 83.3333333333%;
+}
+.col.offset-widePc-21[data-v-bd7354] {
+    margin-left: 87.5%;
+}
+.col.offset-widePc-22[data-v-bd7354] {
+    margin-left: 91.6666666667%;
+}
+.col.offset-widePc-23[data-v-bd7354] {
+    margin-left: 95.8333333333%;
+}
+.col.offset-widePc-24[data-v-bd7354] {
+    margin-left: 100%;
+}
+}
+.offset[data-v-bd7354] {
+  /*narrowPc配适:最窄769px)*/
+  /*pc配适:最窄993px*/
+  /*widepc配适:最窄1201px*/
+}
+@media (min-margin-left: 769px) {
+.offset.offset-narrowPc1[data-v-bd7354] {
+    margin-left: 4.1666666667%;
+}
+.offset.offset-narrowPc2[data-v-bd7354] {
+    margin-left: 8.3333333333%;
+}
+.offset.offset-narrowPc3[data-v-bd7354] {
+    margin-left: 12.5%;
+}
+.offset.offset-narrowPc4[data-v-bd7354] {
+    margin-left: 16.6666666667%;
+}
+.offset.offset-narrowPc5[data-v-bd7354] {
+    margin-left: 20.8333333333%;
+}
+.offset.offset-narrowPc6[data-v-bd7354] {
+    margin-left: 25%;
+}
+.offset.offset-narrowPc7[data-v-bd7354] {
+    margin-left: 29.1666666667%;
+}
+.offset.offset-narrowPc8[data-v-bd7354] {
+    margin-left: 33.3333333333%;
+}
+.offset.offset-narrowPc9[data-v-bd7354] {
+    margin-left: 37.5%;
+}
+.offset.offset-narrowPc10[data-v-bd7354] {
+    margin-left: 41.6666666667%;
+}
+.offset.offset-narrowPc11[data-v-bd7354] {
+    margin-left: 45.8333333333%;
+}
+.offset.offset-narrowPc12[data-v-bd7354] {
+    margin-left: 50%;
+}
+.offset.offset-narrowPc13[data-v-bd7354] {
+    margin-left: 54.1666666667%;
+}
+.offset.offset-narrowPc14[data-v-bd7354] {
+    margin-left: 58.3333333333%;
+}
+.offset.offset-narrowPc15[data-v-bd7354] {
+    margin-left: 62.5%;
+}
+.offset.offset-narrowPc16[data-v-bd7354] {
+    margin-left: 66.6666666667%;
+}
+.offset.offset-narrowPc17[data-v-bd7354] {
+    margin-left: 70.8333333333%;
+}
+.offset.offset-narrowPc18[data-v-bd7354] {
+    margin-left: 75%;
+}
+.offset.offset-narrowPc19[data-v-bd7354] {
+    margin-left: 79.1666666667%;
+}
+.offset.offset-narrowPc20[data-v-bd7354] {
+    margin-left: 83.3333333333%;
+}
+.offset.offset-narrowPc21[data-v-bd7354] {
+    margin-left: 87.5%;
+}
+.offset.offset-narrowPc22[data-v-bd7354] {
+    margin-left: 91.6666666667%;
+}
+.offset.offset-narrowPc23[data-v-bd7354] {
+    margin-left: 95.8333333333%;
+}
+.offset.offset-narrowPc24[data-v-bd7354] {
+    margin-left: 100%;
+}
+}
+@media (min-margin-left: 993px) {
+.offset.offset-pc1[data-v-bd7354] {
+    margin-left: 4.1666666667%;
+}
+.offset.offset-pc2[data-v-bd7354] {
+    margin-left: 8.3333333333%;
+}
+.offset.offset-pc3[data-v-bd7354] {
+    margin-left: 12.5%;
+}
+.offset.offset-pc4[data-v-bd7354] {
+    margin-left: 16.6666666667%;
+}
+.offset.offset-pc5[data-v-bd7354] {
+    margin-left: 20.8333333333%;
+}
+.offset.offset-pc6[data-v-bd7354] {
+    margin-left: 25%;
+}
+.offset.offset-pc7[data-v-bd7354] {
+    margin-left: 29.1666666667%;
+}
+.offset.offset-pc8[data-v-bd7354] {
+    margin-left: 33.3333333333%;
+}
+.offset.offset-pc9[data-v-bd7354] {
+    margin-left: 37.5%;
+}
+.offset.offset-pc10[data-v-bd7354] {
+    margin-left: 41.6666666667%;
+}
+.offset.offset-pc11[data-v-bd7354] {
+    margin-left: 45.8333333333%;
+}
+.offset.offset-pc12[data-v-bd7354] {
+    margin-left: 50%;
+}
+.offset.offset-pc13[data-v-bd7354] {
+    margin-left: 54.1666666667%;
+}
+.offset.offset-pc14[data-v-bd7354] {
+    margin-left: 58.3333333333%;
+}
+.offset.offset-pc15[data-v-bd7354] {
+    margin-left: 62.5%;
+}
+.offset.offset-pc16[data-v-bd7354] {
+    margin-left: 66.6666666667%;
+}
+.offset.offset-pc17[data-v-bd7354] {
+    margin-left: 70.8333333333%;
+}
+.offset.offset-pc18[data-v-bd7354] {
+    margin-left: 75%;
+}
+.offset.offset-pc19[data-v-bd7354] {
+    margin-left: 79.1666666667%;
+}
+.offset.offset-pc20[data-v-bd7354] {
+    margin-left: 83.3333333333%;
+}
+.offset.offset-pc21[data-v-bd7354] {
+    margin-left: 87.5%;
+}
+.offset.offset-pc22[data-v-bd7354] {
+    margin-left: 91.6666666667%;
+}
+.offset.offset-pc23[data-v-bd7354] {
+    margin-left: 95.8333333333%;
+}
+.offset.offset-pc24[data-v-bd7354] {
+    margin-left: 100%;
+}
+}
+@media (min-margin-left: 1201px) {
+.offset.offset-widePc1[data-v-bd7354] {
+    margin-left: 4.1666666667%;
+}
+.offset.offset-widePc2[data-v-bd7354] {
+    margin-left: 8.3333333333%;
+}
+.offset.offset-widePc3[data-v-bd7354] {
+    margin-left: 12.5%;
+}
+.offset.offset-widePc4[data-v-bd7354] {
+    margin-left: 16.6666666667%;
+}
+.offset.offset-widePc5[data-v-bd7354] {
+    margin-left: 20.8333333333%;
+}
+.offset.offset-widePc6[data-v-bd7354] {
+    margin-left: 25%;
+}
+.offset.offset-widePc7[data-v-bd7354] {
+    margin-left: 29.1666666667%;
+}
+.offset.offset-widePc8[data-v-bd7354] {
+    margin-left: 33.3333333333%;
+}
+.offset.offset-widePc9[data-v-bd7354] {
+    margin-left: 37.5%;
+}
+.offset.offset-widePc10[data-v-bd7354] {
+    margin-left: 41.6666666667%;
+}
+.offset.offset-widePc11[data-v-bd7354] {
+    margin-left: 45.8333333333%;
+}
+.offset.offset-widePc12[data-v-bd7354] {
+    margin-left: 50%;
+}
+.offset.offset-widePc13[data-v-bd7354] {
+    margin-left: 54.1666666667%;
+}
+.offset.offset-widePc14[data-v-bd7354] {
+    margin-left: 58.3333333333%;
+}
+.offset.offset-widePc15[data-v-bd7354] {
+    margin-left: 62.5%;
+}
+.offset.offset-widePc16[data-v-bd7354] {
+    margin-left: 66.6666666667%;
+}
+.offset.offset-widePc17[data-v-bd7354] {
+    margin-left: 70.8333333333%;
+}
+.offset.offset-widePc18[data-v-bd7354] {
+    margin-left: 75%;
+}
+.offset.offset-widePc19[data-v-bd7354] {
+    margin-left: 79.1666666667%;
+}
+.offset.offset-widePc20[data-v-bd7354] {
+    margin-left: 83.3333333333%;
+}
+.offset.offset-widePc21[data-v-bd7354] {
+    margin-left: 87.5%;
+}
+.offset.offset-widePc22[data-v-bd7354] {
+    margin-left: 91.6666666667%;
+}
+.offset.offset-widePc23[data-v-bd7354] {
+    margin-left: 95.8333333333%;
+}
+.offset.offset-widePc24[data-v-bd7354] {
+    margin-left: 100%;
 }
 }

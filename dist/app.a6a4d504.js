@@ -13017,6 +13017,17 @@ var _default = {
       gutter: 0
     }; // 写在 data 里的 colStyle 是不会随 gutter 更新的（只在 created 读取一次），所以含有 gutter 的 colStyle 不能写在 data 里面
   },
+  methods: {
+    // 返回的array最多包含两个字符串
+    createClasses: function createClasses(obj) {
+      var str = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+      var array = [];
+      if (!obj) return [];
+      if (obj.span) array.push("col-".concat(str).concat(obj.span));
+      if (obj.offset) array.push("offset-".concat(str).concat(obj.offset));
+      return array;
+    }
+  },
   // colStyle 作为计算属性使用，以保证 colstyle 这个对象能随 gutter 更新而更新
   computed: {
     colStyle: function colStyle() {
@@ -13028,10 +13039,14 @@ var _default = {
     colClass: function colClass() {
       // class 数组写法
       var span = this.span,
+          offset = this.offset,
           iPad = this.iPad,
           narrowPc = this.narrowPc,
           widePc = this.widePc;
-      return [span && "col-".concat(span)].concat(_toConsumableArray(iPad ? ["col-iPad-".concat(iPad.span)] : []), _toConsumableArray(narrowPc ? ["col-narrowPc-".concat(narrowPc.span)] : []), _toConsumableArray(widePc ? ["col-widePc-".concat(widePc.span)] : []));
+      return [].concat(_toConsumableArray(this.createClasses({
+        span: span,
+        offset: offset
+      })), _toConsumableArray(this.createClasses(iPad, 'iPad-')), _toConsumableArray(this.createClasses(narrowPc, 'narrowPc-')), _toConsumableArray(this.createClasses(widePc, 'widePc-')));
     }
   },
   props: {
@@ -24403,7 +24418,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46515" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36265" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

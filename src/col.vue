@@ -25,6 +25,16 @@
 
             // 写在 data 里的 colStyle 是不会随 gutter 更新的（只在 created 读取一次），所以含有 gutter 的 colStyle 不能写在 data 里面
         },
+        methods:{
+            // 返回的array最多包含两个字符串
+            createClasses: (obj,str='')=>{
+                let array=[]
+                if(!obj) return []
+                if(obj.span) array.push(`col-${str}${obj.span}`)
+                if(obj.offset) array.push(`offset-${str}${obj.offset}`)
+                return array
+            }
+        },
 
         // colStyle 作为计算属性使用，以保证 colstyle 这个对象能随 gutter 更新而更新
         computed: {
@@ -36,12 +46,14 @@
             },
             colClass: function () {
                 // class 数组写法
-                let {span,iPad,narrowPc,widePc} = this
+                let {span,offset,iPad,narrowPc,widePc} = this
+
                 return [
-                    span && `col-${span}`,
-                    ...iPad?[`col-iPad-${iPad.span}`]:[],
-                    ...narrowPc?[`col-narrowPc-${narrowPc.span}`]:[],
-                    ...widePc?[`col-widePc-${widePc.span}`]:[]
+
+                    ...this.createClasses({span,offset}),
+                    ...this.createClasses(iPad,'iPad-'),
+                    ...this.createClasses(narrowPc,'narrowPc-'),
+                    ...this.createClasses(widePc,'widePc-'),
                 ]
             }
         },
@@ -64,9 +76,6 @@
 </script>
 <style scoped lang="scss">
     .col {
-        /*background: grey;*/
-        /*width: 50%;*/
-
         /*col-1 到 col-24,24种样式*/
         $class-prefix: col-;
         @for $n from 1 through 24 {
@@ -75,33 +84,52 @@
                 width: ($n / 24) * 100%;
             }
         }
+        $class-prefix: offset-;
+        @for $n from 1 through 24 {
 
-        /*设置不同样式最窄宽度可以保证当用户没有填写ipad.sapn时col样式与phone一致*/
-
+            &.#{$class-prefix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
+        }
         /*iPad配适:最窄577px*/
         @media (min-width: 577px) {
             $class-prefix: col-iPad-;
             @for $n from 1 through 24 {
-
                 &.#{$class-prefix}#{$n} {
                     width: ($n / 24) * 100%;
                 }
             }
+            $class-prefix: offset-iPad-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    margin-left: ($n / 24) * 100%;
+                }
+            }
         }
-
         /*narrowPc配适:最窄769px)*/
         @media (min-width: 769px) {
             $class-prefix: col-narrowPc-;
             @for $n from 1 through 24 {
-
                 &.#{$class-prefix}#{$n} {
                     width: ($n / 24) * 100%;
+                }
+            }
+            $class-prefix: offset-narrowPc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    margin-left: ($n / 24) * 100%;
                 }
             }
         }
         /*pc配适:最窄993px*/
         @media (min-width: 993px) {
             $class-prefix: col-pc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    width: ($n / 24) * 100%;
+                }
+            }
+            $class-prefix: offset-pc-;
             @for $n from 1 through 24 {
                 &.#{$class-prefix}#{$n} {
                     width: ($n / 24) * 100%;
@@ -116,7 +144,43 @@
                     width: ($n / 24) * 100%;
                 }
             }
+            $class-prefix: offset-widePc-;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    margin-left: ($n / 24) * 100%;
+                }
+            }
         }
+    }
 
+    .offset {
+        /*narrowPc配适:最窄769px)*/
+        @media (min-margin-left: 769px) {
+            $class-prefix: offset-narrowPc;
+            @for $n from 1 through 24 {
+
+                &.#{$class-prefix}#{$n} {
+                    margin-left: ($n / 24) * 100%;
+                }
+            }
+        }
+        /*pc配适:最窄993px*/
+        @media (min-margin-left: 993px) {
+            $class-prefix: offset-pc;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    margin-left: ($n / 24) * 100%;
+                }
+            }
+        }
+        /*widepc配适:最窄1201px*/
+        @media (min-margin-left: 1201px) {
+            $class-prefix: offset-widePc;
+            @for $n from 1 through 24 {
+                &.#{$class-prefix}#{$n} {
+                    margin-left: ($n / 24) * 100%;
+                }
+            }
+        }
     }
 </style>

@@ -66,7 +66,7 @@ console.assert(1===2)
 ```
 
 #### 单元测试
-* css 单元测试不方便
+* css 单元测试很不方便，一般不在单元测试中测
 * 在 button 的单元测试中，没有测试 g-button-group,因此不需要为了测试注册buttonGroup 
 * 要点：作用域隔离，断言
 * Mocha可以用来写测试用例

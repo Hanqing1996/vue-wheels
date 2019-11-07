@@ -51,11 +51,11 @@
 <div id="app">
 
     <!--span表示格子长度, offset表示格子间左空隙,gutter表示中央空隙(针对两个格子)-->
-    <!--要求span,offset和为24,gutter随意-->
+    <!--要求span,offset和为24(iPad对应sapn和offset和为24,narrowPc同理),gutter随意-->
     <!--需要根据gutter调整col.padding和row.margin-->
 
-    <g-row class="topbar">
-        <g-col class="demoBox" span="9">
+    <g-row>
+        <g-col span="9">
             <!-- g-col 统一靠左-->
             <g-row align="left">
                 <g-col>1</g-col>
@@ -65,7 +65,7 @@
             </g-row>
         </g-col>
         <!-- g-col 统一靠右-->
-        <g-col class="demoBox" span="15">
+        <g-col span="15">
             <g-row align="right">
                 <g-col>1</g-col>
                 <g-col>2</g-col>
@@ -77,17 +77,19 @@
             </g-row>
         </g-col>
     </g-row>
-    <g-row class="logo-and-search-and-qrcode">
-        <g-col class="demoBox" span="4">
-            <g-row class="logo-wrapper" align="center">
+
+
+    <g-row>
+        <g-col span="4">
+            <g-row align="center">
                 <g-col>
                     <img class="logo" src="https://img.alicdn.com/tfs/TB1_uT8a5ERMeJjSspiXXbZLFXa-143-59.png" alt="">
                 </g-col>
             </g-row>
 
         </g-col>
-        <g-col class="demoBox" span="14"></g-col>
-        <g-col class="demoBox" span="6"></g-col>
+        <g-col span="14"></g-col>
+        <g-col span="6"></g-col>
     </g-row>
     <g-row gutter="10">
         <g-col span="12">1</g-col>
@@ -98,10 +100,10 @@
         <g-col span="10" offset="2"></g-col>
     </g-row>
 
-    <g-row gutter="20">
+    <g-row>
         <g-col span="2"
-               :i-pad="{span:8}"
-               :narrow-pc="{span:4}"
+               :i-pad="{span:4,offset:4}"
+               :narrow-pc="{span:2,offset:2}"
                :pc="{span:2}"
                :wide-pc="{span:1}">
             1
@@ -114,9 +116,13 @@
             11
         </g-col>
     </g-row>
-
-
-
+    
+    <!--下面g-row满足:phone宽度范围内一个g-col占一行,iPad范围内两个g-col占一行,narrowPc范围内3个g-col占一行-->
+    <g-row>
+        <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
+        <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
+        <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
+    </g-row>
 
     <hr>
 
