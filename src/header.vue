@@ -1,17 +1,17 @@
 <template>
-    <div class="sider">
+    <div class="header">
         <slot></slot>
     </div>
 </template>
 
 <script>
     export default {
-        name: "WheelSider"
+        name: "WheelHeader"
     }
 </script>
 
 <style scoped lang="scss">
-    .sider{
+    .header{
 
     }
 </style>
