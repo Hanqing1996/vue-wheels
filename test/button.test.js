@@ -62,6 +62,8 @@ describe('Button', () => {
             vm.$destroy()
         })
         it('设置 iconPosition 可以改变 order', () => {
+
+
             const div = document.createElement('div')
             document.body.appendChild(div)
             vm = new Constructor({
@@ -70,6 +72,7 @@ describe('Button', () => {
                     iconPosition: 'right'
                 }
             }).$mount(div)
+
             const icon = vm.$el.querySelector('svg')
             expect(getComputedStyle(icon).order).to.eq('2')
             vm.$el.remove()

@@ -115,7 +115,6 @@ describe('Input', () => {
                     expect(callback).to.have.been.calledWith(event.target.value)
                 })
         })
-
     })
 })
 

@@ -50,7 +50,7 @@
 </style>
 <div id="app">
 
-    <!--span表示格子长度, offset表示格子间左空隙,gutter表示中央空隙(针对两个格子)-->
+    <!--span表示格子长度, offset表示格子间左空隙,gutter表示中央空隙(针对两个格子),align表示格子统一朝向-->
     <!--要求span,offset和为24(iPad对应sapn和offset和为24,narrowPc同理),gutter随意-->
     <!--需要根据gutter调整col.padding和row.margin-->
 
@@ -123,6 +123,11 @@
         <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
         <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
     </g-row>
+
+    <div id="rowTest">内容</div>
+
+
+
 
     <hr>
 

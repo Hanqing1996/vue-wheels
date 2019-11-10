@@ -66,8 +66,13 @@ console.assert(1===2)
 ```
 
 #### 单元测试
-* css 单元测试很不方便，一般不在单元测试中测
-* 在 button 的单元测试中，没有测试 g-button-group,因此不需要为了测试注册buttonGroup 
+* css 单元测试，必须把 vm 挂载到文档内的一个元素上
+```
+const div = document.createElement('div')
+document.body.appendChild(div)
+
+vm = new Constructor({}).$mount(div)
+```
 * 要点：作用域隔离，断言
 * Mocha可以用来写测试用例
 ``` 
@@ -97,8 +102,9 @@ expect(callback).to.have.been.called // 去问内存：callback 是否被调用�
     * 判断是否存在（存在=不为假值）：expect(Button).to.be.ok
     * 判断是否相等：expect(xxx).to.eq(yyy)
     * 判断对象/数组值是否相等：expect([1,2]).to.deep.equal([1,2])\
-    * 判断值是否为NaN：expect(NaN).to.be.NaN
-* 进行单元测试只需要确保组件都被（全局/局部）注册了（这样才能使用 Constructor）,new Vue{}不需要    
+    * 判断值是否为NaN：expect(NaN).to.be.NaN 
+* [done]()
+    * 如果不加 done it(){}里的代码将全部同步执行    
     
 #### CSS 知识点
 * css 兼容查询：www.canIuse.com
@@ -254,6 +260,7 @@ var vm = new Vue({
 
 
 #### 组件注册
+注册的目的只有一个，使得组件可以被调用
 * 全局注册
 全局注册的组件在各自内部也都可以相互使用。
 ```
@@ -355,6 +362,7 @@ temp
     * beforeMount：
     * mounted：
     * 每刷新一次页面，就重新 create 和 mount 一次
+    * css,innerHTML这些东西只有在实例被挂载之后才能看到，之前是undefined    
 3. update:当vue实例里面的data数据变化时，触发组件的重新渲染
     * beforeUpdate：
     * updated：
@@ -363,7 +371,7 @@ temp
     * destroyed：
 
 #### created 和 mounted 的区别
-* vreated 类似于
+* created 类似于
 ```
 var div=document.createElement('div')
 ```    
@@ -469,9 +477,39 @@ props: {
 -p对应P,即vue会把-后的第一个字母改为大写
    
    
-## 用户传入了phone,narrowPc的span,没有传入ipad.span,而页面宽度又处于ipad宽度，此时如何处理
+#### innerHTML 和 outerHTML
+```
+<div id="app">
+    <div class="child"></div> 
+</div>
+
+console.log(document.getElementById('app').innerHTML) // <div class="child"></div> 
+console.log(document.getElementById('app').outerHTML) // <div id="app"><div class="child"></div></div> 
+```
    
-     
+#### 打印出来的东西不一定是对的，因为可能在我们预想的变化发生之前，打印就执行了    
+
+
+#### vue 的渲染（created 与 mounted）过程
+* 普通 Dom 元素的渲染过程
+```
+const div=document.createElement('div')
+document.body.appendChild(div)
+```
+* Vue 实例的渲染过程 
+```
+const div=document.createElement('div')
+const child=document.createElement('div')
+div.appendChild(child)
+document.body.appendChild(div)
+
+console.log(child.outerHTML) // 打印出的是 child 没有 mounted 时的状态
+
+child.$mount() // 异步执行 
+div.$mount() // 异步执行
+
+```
+ 
      
     
     
