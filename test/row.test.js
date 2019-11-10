@@ -19,7 +19,7 @@ describe('Row and Col', () => {
     describe('props', () => {
 
 
-        it('接收 gutter 属性', (done) => {
+        it('row 和 col 接收 gutter 属性', (done) => {
             Vue.component('g-row',Row)
             Vue.component('g-col',Col)
             const div=document.createElement('div')
@@ -56,7 +56,7 @@ describe('Row and Col', () => {
 
         })
 
-        it('接收 align 属性', () => {
+        it('row 接收 align 属性', () => {
 
             const div=document.createElement('div')
             document.body.appendChild(div)
@@ -73,6 +73,46 @@ describe('Row and Col', () => {
             div.remove()
             vm.$destroy()
         })
+
+        it('col 接受 span,offset 属性',()=>{
+
+            const div=document.createElement('div')
+            document.body.appendChild(div)
+            const Constructor = Vue.extend(Col)
+            const vm = new Constructor({
+                propsData: {
+                    span: 1,
+                    offset:1
+                }
+            }).$mount(div)
+            const col=vm.$el
+            expect(col.classList.contains('col-1')).to.eq(true)
+            expect(col.classList.contains('offset-1')).to.eq(true)
+            div.remove()
+            vm.$destroy()
+        })
+
+        it('col 接受 pc 属性',()=>{
+
+            const div=document.createElement('div')
+            document.body.appendChild(div)
+            const Constructor = Vue.extend(Col)
+            const vm = new Constructor({
+                propsData: {
+                    pc:{span:1,offset:1}
+                }
+            }).$mount(div)
+            const col=vm.$el
+            console.log(col.classList);
+            expect(col.classList.contains('col-pc-1')).to.eq(true)
+            expect(col.classList.contains('offset-pc-1')).to.eq(true)
+            div.remove()
+            vm.$destroy()
+
+
+        })
+
+
     })
 })
 

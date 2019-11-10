@@ -101,9 +101,9 @@ expect(callback).to.have.been.called // 去问内存：callback 是否被调用�
 * [expex](https://www.chaijs.com/api/bdd/)
     * 判断是否存在（存在=不为假值）：expect(Button).to.be.ok
     * 判断是否相等：expect(xxx).to.eq(yyy)
-    * 判断对象/数组值是否相等：expect([1,2]).to.deep.equal([1,2])\
+    * 判断对象/数组值是否相等：expect([1,2]).to.deep.equal([1,2])
     * 判断值是否为NaN：expect(NaN).to.be.NaN 
-* [done]()
+* [done](https://github.com/Hanqing1996/vue-wheels/blob/master/src/row.vue)
     * 如果不加 done it(){}里的代码将全部同步执行    
     
 #### CSS 知识点

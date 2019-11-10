@@ -46,13 +46,17 @@
             },
             colClass: function () {
                 // class 数组写法
-                let {span,offset,iPad,narrowPc,widePc} = this
+                let {span,offset,iPad,narrowPc,pc,widePc} = this
+
+                console.log(pc);
+
 
                 return [
 
                     ...this.createClasses({span,offset}),
                     ...this.createClasses(iPad,'iPad-'),
                     ...this.createClasses(narrowPc,'narrowPc-'),
+                    ...this.createClasses(pc,'pc-'),
                     ...this.createClasses(widePc,'widePc-'),
                 ]
             }
