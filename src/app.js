@@ -40,6 +40,10 @@ new Vue({
     methods: {
         inputChange(e) {
             console.log(e.target.value)
+        },
+        eve2(e){
+            console.log(e);
         }
+
     }
 })

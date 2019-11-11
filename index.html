@@ -31,19 +31,164 @@
         border: 1px solid #666;
         min-height: 100px;
     }
+    .sider{
+        background: #666666;
+        width: 200px;
+    }
+    .header{
+        background: #999;
+        height: 100px;
+    }
+    .footer{
+        background: #ccc;
+        height: 50px;
+    }
+    .box {
+        margin: 20px;
+    }
 </style>
 
 <div id="app">
 
-<!--    如果发现 g-layout 包含子元素 g-sider,则为 g-layout 添加属性 layout-has-sider-->
+
+    <!--span表示格子长度, offset表示格子间左空隙,gutter表示中央空隙(针对两个格子)-->
+    <!--要求span,offset和为24(iPad对应sapn和offset和为24,narrowPc同理),gutter随意-->
+    <!--需要根据gutter调整col.padding和row.margin-->
+
+    <g-row>
+        <g-col span="9">
+            <!-- g-col 统一靠左-->
+            <g-row align="left">
+                <g-col>1</g-col>
+                <g-col>2</g-col>
+                <g-col>3</g-col>
+                <g-col>4</g-col>
+            </g-row>
+        </g-col>
+        <!-- g-col 统一靠右-->
+        <g-col span="15">
+            <g-row align="right">
+                <g-col>1</g-col>
+                <g-col>2</g-col>
+                <g-col>3</g-col>
+                <g-col>4</g-col>
+                <g-col>5</g-col>
+                <g-col>6</g-col>
+                <g-col>7</g-col>
+            </g-row>
+        </g-col>
+    </g-row>
+
+
+    <g-row>
+        <g-col span="4">
+            <g-row align="center">
+                <g-col>
+                    <img class="logo" src="https://img.alicdn.com/tfs/TB1_uT8a5ERMeJjSspiXXbZLFXa-143-59.png" alt="">
+                </g-col>
+            </g-row>
+
+        </g-col>
+        <g-col span="14"></g-col>
+        <g-col span="6"></g-col>
+    </g-row>
+    <g-row gutter="10">
+        <g-col span="12">1</g-col>
+        <g-col span="12">2</g-col>
+    </g-row>
+    <g-row>
+        <g-col span="10" offset="2"></g-col>
+        <g-col span="10" offset="2"></g-col>
+    </g-row>
+
+    <g-row>
+        <g-col span="2"
+               :i-pad="{span:4,offset:4}"
+               :narrow-pc="{span:2,offset:2}"
+               :pc="{span:2}"
+               :wide-pc="{span:1}">
+            1
+        </g-col>
+        <g-col span="22"
+               :i-pad="{span:16}"
+               :narrow-pc="{span:20}"
+               :pc="{span:22}"
+               :wide-pc="{span:23}">
+            11
+        </g-col>
+    </g-row>
+
+    <!--下面g-row满足:phone宽度范围内一个g-col占一行,iPad范围内两个g-col占一行,narrowPc范围内3个g-col占一行-->
+    <g-row>
+        <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
+        <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
+        <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
+    </g-row>
+
+    <hr>
+
+    <div class="box">
+        <!-- 不可操作的 button -->
+        <g-input value="张三" :disabled="true"></g-input>
+
+        <!--只可读的 button -->
+        <g-input value="李四" :readonly="true"></g-input>
+    </div>
+    <div class="box">
+        <!-- error="",则class 列表不存在 error类,否则class 列表含有 error类-->
+        <g-input value="王五" error="姓名不少于两个字"></g-input>
+    </div>
+    <div class="box">
+        <!-- error="",则class 列表不存在 error类,否则class 列表含有 error类-->
+        <g-input value="赵六" v-model="message"></g-input>
+    </div>
+    <div>{{message}}</div>
+
+    <div style="margin-top: 20px;margin-bottom: 20px">
+        <!--用户不传入 icon-position 的值，则默认 icon-position的值为 left-->
+        <!--用户不传入 loading 的值，则默认 loading 的值为 false-->
+        <!--loading 优先级高于 icon，用户既传入 loading，又传入 icon的情况下，只显示 loading，不显示 icon -->
+        <!--icon-position 对 icon 和 loading 都有效，谁在就对谁生效-->
+        <!--传入 loading，且传入 icon-->
+        <g-button icon="settings" icon-position="right" :loading="loadingStatus1"
+                  @click="loadingStatus1=!loadingStatus1">
+            icon在右边,且传入loading的button
+        </g-button>
+
+        <!--不传入 loading,只传入 icon-->
+        <g-button icon="settings">
+            icon在左边的button
+        </g-button>
+
+        <!--传入 loading，不传入 icon -->
+        <!--组件不会被点击，组件的内部元素才会被点击。所以这里的 touch 是被动触发的-->
+        <g-button :loading="loadingStatus2" icon-position="right" @touch="loadingStatus2=!loadingStatus2">
+            没有传入icon的button
+        </g-button>
+
+        <g-button-group>
+            <div>
+                <g-button icon="left">上一页</g-button>
+            </div>
+            <g-button>更多</g-button>
+            <g-button icon="right" icon-position="right">下一页</g-button>
+        </g-button-group>
+
+        <!--    <g-button  icon="settings" icon-position="up">-->
+        <!--        传入iconPosition为无效值的button-->
+        <!--    </g-button>-->
+    </div>
+
+
+    <!--    如果发现 g-layout 包含子元素 g-sider,则为 g-layout 添加属性 layout-has-sider-->
 
     <g-layout style="height: 100vh">
-        <g-header class="demo">header</g-header>
+        <g-sider class="demo">sider</g-sider>
         <g-layout>
-            <g-sider class="demo">sider</g-sider>
+            <g-header class="demo">header</g-header>
             <g-content class="demo">content</g-content>
+            <g-footer class="demo">footer</g-footer>
         </g-layout>
-        <g-footer class="demo">footer</g-footer>
     </g-layout>
 </div>
 <script src="./src/app.js"></script>
