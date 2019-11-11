@@ -14,6 +14,9 @@ import Header from './header'
 import Sider from './sider'
 import Content from './content'
 import Footer from './footer'
+// toast
+import Toast from './toast'
+import plugin from './plugin'
 
 // 这里的注册是为 index.html 服务
 Vue.component('g-button', Button)
@@ -27,6 +30,9 @@ Vue.component('g-header', Header)
 Vue.component('g-sider', Sider)
 Vue.component('g-content', Content)
 Vue.component('g-footer', Footer)
+Vue.component('g-toast', Toast)
+// 使用插件
+Vue.use(plugin)
 
 
 // new Vue 和组件注册没有任何关系
@@ -41,8 +47,8 @@ new Vue({
         inputChange(e) {
             console.log(e.target.value)
         },
-        eve2(e){
-            console.log(e);
+        showToast(){
+            this.$toast('I am toast')
         }
 
     }

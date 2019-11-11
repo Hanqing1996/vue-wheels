@@ -20,6 +20,8 @@ describe('Row and Col', () => {
 
 
         it('row 和 col 接收 gutter 属性', (done) => {
+
+
             Vue.component('g-row',Row)
             Vue.component('g-col',Col)
             const div=document.createElement('div')
@@ -33,6 +35,7 @@ describe('Row and Col', () => {
             const vm=new Vue({
                 el:div
             })
+
 
             /**
              * 由于 $mount 是异步执行的，所以我们要使用异步的 setTimeout 来查看 $mount() 后的 col 的 paddingLeft
@@ -103,7 +106,6 @@ describe('Row and Col', () => {
                 }
             }).$mount(div)
             const col=vm.$el
-            console.log(col.classList);
             expect(col.classList.contains('col-pc-1')).to.eq(true)
             expect(col.classList.contains('offset-pc-1')).to.eq(true)
             div.remove()

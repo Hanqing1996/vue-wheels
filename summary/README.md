@@ -64,6 +64,10 @@ console.assert(1===2)
     "vue" : "./node_modules/vue/dist/vue.common.js"
   }
 ```
+然后重新运行
+```
+npx parcel index.html
+```
 
 #### 单元测试
 * css 单元测试，必须把 vm 挂载到文档内的一个元素上
@@ -207,7 +211,16 @@ export default {
 }
 ```  
 1. 配合 vue.js.devtools(chrome插件) 使用
-2. 
+2. 判断A组件的子组件包不包含B
+```
+mounted() {
+    this.$children.forEach((vm) => {
+        if (vm.$options.name === 'WheelSider') {
+            this.hasSider = true
+        }
+    })
+}
+```
 * scoped
 为组件设置 css 作用域（本质是不同组件设置不同ID）
 * class绑定
@@ -507,8 +520,26 @@ console.log(child.outerHTML) // 打印出的是 child 没有 mounted 时的状�
 
 child.$mount() // 异步执行 
 div.$mount() // 异步执行
-
 ```
+
+#### [Toast 需求分析](https://xiedaimala.com/tasks/b59fb65d-2450-44c0-8078-51612dbbcc50)
+
+
+#### 工程问题
+* 直接改 Vue.prototype好不好?
+    * 不好,可能覆盖用户到方法（侵入性太强）
+* 在组件中写 import Vue from Vue 好不好
+    * 不好,不能确定用户需要引入的是 Vue,可能是Vue2    
+
+#### Vue 开发插件
+1. [install]()
+2. [use]()
+
+#### [vue 动态创建实例]()
+
+#### [slot 要放在 mount() 之前]()
+ 
+####
  
      
     

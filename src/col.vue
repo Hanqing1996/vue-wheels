@@ -48,8 +48,6 @@
                 // class 数组写法
                 let {span,offset,iPad,narrowPc,pc,widePc} = this
 
-                console.log(pc);
-
 
                 return [
 

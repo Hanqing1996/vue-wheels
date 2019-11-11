@@ -50,6 +50,8 @@
 
 <div id="app">
 
+    <div id="toastBlock" style="margin-bottom: 100px"></div>
+    <button @click="showToast" style="margin-bottom: 100px">showToast</button>
 
     <!--span表示格子长度, offset表示格子间左空隙,gutter表示中央空隙(针对两个格子)-->
     <!--要求span,offset和为24(iPad对应sapn和offset和为24,narrowPc同理),gutter随意-->
@@ -182,7 +184,7 @@
 
     <!--    如果发现 g-layout 包含子元素 g-sider,则为 g-layout 添加属性 layout-has-sider-->
 
-    <g-layout style="height: 100vh">
+    <g-layout style="height: 100vh;margin-bottom: 20px">
         <g-sider class="demo">sider</g-sider>
         <g-layout>
             <g-header class="demo">header</g-header>
@@ -190,6 +192,8 @@
             <g-footer class="demo">footer</g-footer>
         </g-layout>
     </g-layout>
+
+
 </div>
 <script src="./src/app.js"></script>
 </body>
