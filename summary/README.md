@@ -573,7 +573,73 @@ callback: (toast) => {
 this.closeButton.callback(this)
 ```
      
+#### 向组件的slot中插入HTML内容
+* 这是一种危险的行为
+* [实现方法]()
+```
+<div v-html="$slots.default[0]"></div>
+
+vm.$slots.default=['这是<strong style="color: blue">toast</strong>信息']
+```    
     
-    
+#### 怎么知道各个浏览器对 include 的兼容性
+1. MDN include
+2. 拉到最低下，就能看到浏览器兼容性情况
+
+
+#### 父组件向子组件传递数据
+```
+    <div id="father">
+        <child></child>
+    </div>
+
+Vue.component('child', {
+        data: function () {
+            return {
+                gutter:0
+            }
+        },
+        template: '<div>子组件的gutter:{{gutter}}</div>',
+    })
+
+    var vm = new Vue({
+        el: "#father",
+        data: {
+            gutter: 10
+        },
+        mounted() {
+            this.$children.forEach((vm2)=>{
+                vm2.gutter=this.gutter/2;
+            })
+        }
+    })
+```
+结果为
+```
+<div id="father">
+    <div>子组件的gutter:5</div>
+</div>
+```
+
+
+#### 各个组件总结(组成内容见[app.js](https://github.com/Hanqing1996/vue-wheels/blob/master/src/app.js))
+* button 
+    * 组件局部注册
+    * 属性检查器
+    * $emit
+    * v-if
+* input
+    * v-model
+* grid
+    * col 组件 class,style 绑定
+    * 把父组件 row 的 gutter 传递给子组件 col
+* default-layout
+    * 判断 layout 组件的子组件包不包含 sider
+* toast
+    * 插件开发与使用
+    * 动态创建 vue 实例
+    * 对象类型的 props 的 defalut 应该写成函数
+    * callbak 的回传组件信息功能
+    * 向组件的 slot 中插入 HTML 内容
 
     

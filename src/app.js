@@ -49,16 +49,19 @@ new Vue({
         },
         showToast() {
             // $toast()参数由用户自定义
-            this.$toast('toast message',
+            this.$toast('这是<strong style="color: blue">toast</strong>信息',
                 {
-                    autoCloseDelay: 10,
+                    // 用户选择开启“向slot中填入HTML"
+                    enableHTML:true,
+                    autoCloseDelay: 10000,
                     closeButton: {
                         text: '知道了',
                         callback: (toast) => {
                             console.log('用户说他知道了')
                             toast.log()
                         }
-                    }
+                    },
+                    position:'middle'
                 })
         }
     }

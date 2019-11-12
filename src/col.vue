@@ -1,7 +1,7 @@
 <template>
     <!--col-2,col-22-->
     <!--offset&& 用于避免 offset-undefined 的class出现-->
-    <div class="col" :class="colClass" :style="colStyle">
+    <div class="col" :class="colClasses" :style="colStyle">
         <div style="border: 1px solid green;height: 100px">
             <slot></slot>
         </div>
@@ -11,7 +11,7 @@
     let validator=(value)=>{
         let keys = Object.keys(value)
         let arr = ['span', 'offset']
-        let res = keys.filter(item => !arr.includes(item))
+        let res = keys.filter(item => arr.indexOf(item)<0)
 
         return res.length === 0
     }
@@ -44,7 +44,7 @@
                     paddingRight: this.gutter / 2 + 'px'
                 }
             },
-            colClass: function () {
+            colClasses: function () {
                 // class 数组写法
                 let {span,offset,iPad,narrowPc,pc,widePc} = this
 
