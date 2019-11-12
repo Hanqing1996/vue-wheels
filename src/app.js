@@ -31,7 +31,7 @@ Vue.component('g-sider', Sider)
 Vue.component('g-content', Content)
 Vue.component('g-footer', Footer)
 Vue.component('g-toast', Toast)
-// 使用插件
+// 用户使用插件
 Vue.use(plugin)
 
 
@@ -41,15 +41,25 @@ new Vue({
     data: {
         loadingStatus1: false,
         loadingStatus2: false,
-        message:'hi'
+        message: 'hi'
     },
     methods: {
         inputChange(e) {
             console.log(e.target.value)
         },
-        showToast(){
-            this.$toast('I am toast')
+        showToast() {
+            // $toast()参数由用户自定义
+            this.$toast('toast message',
+                {
+                    autoCloseDelay: 10,
+                    closeButton: {
+                        text: '知道了',
+                        callback: (toast) => {
+                            console.log('用户说他知道了')
+                            toast.log()
+                        }
+                    }
+                })
         }
-
     }
 })

@@ -532,15 +532,46 @@ div.$mount() // 异步执行
     * 不好,不能确定用户需要引入的是 Vue,可能是Vue2    
 
 #### Vue 开发插件
-1. [install]()
-2. [use]()
+1. [install(轮子开发者写的,用户不能写入内容)](https://github.com/Hanqing1996/vue-wheels/blob/master/src/plugin.js)
+2. [use(用户填入他自定义的参数)](https://github.com/Hanqing1996/vue-wheels/blob/master/src/app.js)
 
-#### [vue 动态创建实例]()
 
-#### [slot 要放在 mount() 之前]()
+#### [vue 动态创建实例](https://github.com/Hanqing1996/vue-wheels/blob/master/src/plugin.js)
+
+#### [slot 要放在 mount() 之前](https://github.com/Hanqing1996/vue-wheels/blob/master/src/plugin.js)
  
-####
+#### 组件的 props 的 type 如果是 Object(包括 Array)
+则该 props 的 default 必须 return 一个对象
+```
+closeButton:{
+    type:Object,
+    default:()=>{
+        return {
+            text:'关闭',
+            callback:()=>{}
+        }
+    }
+}
+```
  
+#### this.$destroy()不会把this.$el从文档中移除
+正确删除姿势
+```
+this.$el.remove()
+this.$destroy() 
+```
+#### callback的回传
+* 用户定义
+```
+callback: (toast) => {
+    console.log('用户说他知道了')
+    toast.log() // log 是组件的一个方法
+}
+```
+* 组件内调用
+```
+this.closeButton.callback(this)
+```
      
     
     
