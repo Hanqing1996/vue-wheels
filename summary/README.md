@@ -641,5 +641,10 @@ Vue.component('child', {
     * 对象类型的 props 的 defalut 应该写成函数
     * callbak 的回传组件信息功能
     * 向组件的 slot 中插入 HTML 内容
+    * $emit实现toast在被关闭前触发beforeClose执行callback
+    
+#### 顺序
+* $slot 要在　$mount() 前面
+* $emit() 要在　$destory()前面
 
     

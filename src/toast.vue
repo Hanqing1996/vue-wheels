@@ -64,6 +64,7 @@
             close() {
                 // this.$destroy()不会把this.$el从文档中移除
                 this.$el.remove()
+                this.$emit('beforeClose')
                 this.$destroy()
             },
             // autoCloseDelay秒内如果closeButton被点击，则执行callback函数
