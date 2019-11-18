@@ -17,12 +17,11 @@
         name: "wheelToast",
         props: {
             autoClose: {
-                type: Boolean,
-                default: true
-            },
-            autoCloseDelay: {
-                type: Number,
-                default: 1
+                type: [Boolean,Number],
+                default: true,
+                validator: function (value) {
+                    return (value === false || typeof value === 'number')
+                }
             },
             closeButton: {
                 type: Object,
@@ -51,12 +50,12 @@
             this.execAutoClose()
         },
         methods: {
-            // autoCloseDelay秒后自动关闭toast
+            // autoClose秒后自动关闭toast
             execAutoClose() {
                 if (this.autoClose) {
                     setTimeout(() => {
                         this.close()
-                    }, this.autoCloseDelay * 1000)
+                    }, this.autoClose * 1000)
                 }
             },
 
@@ -67,7 +66,7 @@
                 this.$emit('beforeClose')
                 this.$destroy()
             },
-            // autoCloseDelay秒内如果closeButton被点击，则执行callback函数
+            // autoClose秒内如果closeButton被点击，则执行callback函数
             onClickClose() {
                 this.close() //关闭toast
                 // 避免用户未传入closeButton及callback

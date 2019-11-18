@@ -169,6 +169,16 @@ validator(value){
     return value=='left'||value!='right'
 }
 ```
+autoClose
+```
+autoClose: {
+    type: [Boolean,Number],
+    default: true,
+    validator: function (value) {
+        return (value === false || typeof value === 'Number')
+    }
+}
+```
 * 每个Vue组件，都是一个可复用的vue实例。但根Vue实例只有一个
 * 组件的class会最终加到组件的根元素上 
 ```
@@ -755,5 +765,13 @@ console.log("remove后vm4.$el.parent",vm4.$el.parentNode) // null
 ```
 
 #### 简化 
-* autoClose设置为true后必须传入autoCloseDelay的数值
-autoCloseDelay
+* autoClose为true时必须传入autoCloseDelay的数值,为false时不需要传入autoCloseDelay
+```
+autoClose: {
+    type: [Boolean,Number],
+    default: true,
+    validator: function (value) {
+        return (value === false || typeof value === 'Number')
+    }
+},
+```
