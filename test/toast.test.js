@@ -6,6 +6,7 @@ const expect = chai.expect;
 Vue.config.productionTip = false
 Vue.config.devtools = false
 
+// toast.test.js里的代码和plugin.js是完全分离的，没有任何关系
 describe('Toast', () => {
 
     it('存在.', () => {
@@ -33,7 +34,7 @@ describe('Toast', () => {
 
         })
 
-        // 这个测试中,vm.$el不需要放入文档
+        // 这个测试中,vm.$el不需要放入文档(取元素是用vm.$el.querySelector)
         it('toast 接受 closeButton　属性', () => {
 
             const callback= sinon.fake()
@@ -59,10 +60,21 @@ describe('Toast', () => {
             expect(callback).to.have.been.called
         })
 
+        it('toast 接受 enableHTML　属性', () => {
 
+            const Constructor = Vue.extend(Toast)
+            const vm = new Constructor({
+                propsData: {
+                    enableHTML:true
+                }
+            })
+            vm.$slots.default=['这是<strong>测试<strong>信息']
+            vm.$mount()
 
+            // 能通过文本选择器选到标签,就说明测试成功
+            expect(vm.$el.hasChildNodes('strong')).to.equal(true)
 
-
+        })
     })
 })
 
