@@ -22,7 +22,7 @@
             },
             autoCloseDelay: {
                 type: Number,
-                default: 5
+                default: 1
             },
             closeButton: {
                 type: Object,

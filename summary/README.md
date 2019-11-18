@@ -647,4 +647,113 @@ Vue.component('child', {
 * $slot 要在　$mount() 前面
 * $emit() 要在　$destory()前面
 
-    
+#### Vue 实例
+```
+let vm=new Vue({
+    data: {
+    }
+})
+
+vm.$mount(document.getElementById('app'))　//　识别
+```
+等效于
+```
+let vm=new Vue({
+    el:'#app'
+    data: {
+    }
+})
+```
+
+
+#### extend　与　constructor
+```
+let Constructor=Vue.extend(Button)
+let vm3=new Constructor().$mount(document.getElementById("app4")) // 替换
+```
+等效于
+```
+let Constructor=Vue.extend(Button)
+document.getElementById("app4")
+```
+
+
+
+#### $mount()
+1. 用new创建vue实例
+```
+<div id="app">
+    <g-button></g-button>
+</div>
+```
+```
+let vm=new Vue({})
+vm.$mount(document.getElementById('app'))　//　识别app下的<g-button>
+```
+等价于
+```
+let vm=new Vue({
+    el:document.getElementById('app')
+})
+```
+2. 通过constructor动态添加vue实例(测试用例及插件常用)
+```
+<div id="app">
+    <div id="app2">
+    </div>
+</div>
+```
+```
+let Constructor=Vue.extend(Button)
+let vm4=new Constructor().$mount(document.getElementById("app2")) // 用组件内容替换app2
+```
+结果为
+```
+<div id="app">
+    <button data-v-d7f0df=""></button>
+</div>
+```
+而
+```
+let Constructor=Vue.extend(Button)
+let vm4=new Constructor().$mount()
+document.getElementById("app2").appendChild(vm4.$el) // vm4.$el成为app2的子元素
+```
+结果为
+```
+<div id="app">
+    <div id="app2">
+        <button data-v-d7f0df=""></button>
+    </div>
+</div>
+```
+
+#### 无法被销毁的$vm.el
+```
+let Constructor=Vue.extend(Button)
+let vm=new Constructor().$mount(document.getElementById("app"))
+
+vm.$el.remove()
+console.log(vm4.$el) // <button data-v-d7f0df=""></button>
+vm.$destroy()
+console.log(vm4.$el) // <button data-v-d7f0df=""></button>
+```
+
+#### vm.$el.remove()
+vm.$el.remove()是将vm.$el移出document.body
+```
+<div id="app">
+    <div id="app1"></div>
+</div>
+
+let Constructor2=Vue.extend(Button)
+let vm4=new Constructor2().$mount(document.getElementById("app"))
+
+console.log("remove前vm4.$el.parent",vm4.$el.parentNode) // <div id="app"><button data-v-d7f0df=""></button></div>
+vm4.$el.remove()
+console.log("remove后vm4.$el.parent",vm4.$el.parentNode) // null
+```
+
+#### 简化 
+* autoClose设置为true后必须传入autoCloseDelay的数值
+autoCloseDelay

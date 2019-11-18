@@ -25,7 +25,6 @@ describe('Button', () => {
 
         it('可以设置icon.', () => {
 
-
             // 通过Constructor生成一个vue实例
             vm = new Constructor({
                 propsData: {

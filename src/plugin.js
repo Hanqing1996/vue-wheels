@@ -9,7 +9,7 @@ function createToast(Vue, message, {propsData},callback) {
     })
     // slot 要放在 mount() 之前,toast 是一个　vue 实例
     toast.$slots.default = [message]
-    toast.$mount() // 这里$mount()无论填什么,都不改变vm.$el,所以索性啥都不填
+    toast.$mount()
     toast.$on('beforeClose',callback)　//设置监听事件,beforeClose被触发，则执行callback
     // 这里的document是index,html
     document.getElementById('toastBlock').appendChild(toast.$el)

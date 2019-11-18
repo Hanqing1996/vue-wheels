@@ -53,7 +53,7 @@ new Vue({
                 {
                     // 用户选择开启“向slot中填入HTML"
                     enableHTML:true,
-                    autoCloseDelay: 10000,
+                    autoCloseDelay: 1000,
                     closeButton: {
                         text: '知道了',
                         callback: (toast) => {
