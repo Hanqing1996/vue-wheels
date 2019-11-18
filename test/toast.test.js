@@ -26,18 +26,18 @@ describe('Toast', () => {
             }).$mount(div)
 
             // 确保在vm.execAutoClose执行后再去判断vm.$el是否被移出document.body
-            setTimeout(()=>{
+            setTimeout(() => {
                 // 判断vm.$el是否被移出document.body
                 expect(document.body.contains(vm.$el)).to.equal(false)
                 done()
-            },vm.autoClose*1000)
+            }, vm.autoClose * 1000)
 
         })
 
         // 这个测试中,vm.$el不需要放入文档(取元素是用vm.$el.querySelector)
         it('toast 接受 closeButton　属性', () => {
 
-            const callback= sinon.fake()
+            const callback = sinon.fake()
 
             const Constructor = Vue.extend(Toast)
             const vm = new Constructor({
@@ -49,8 +49,7 @@ describe('Toast', () => {
                 }
             }).$mount()
 
-            const closeButton=vm.$el.querySelector('.close')
-
+            const closeButton = vm.$el.querySelector('.close')
             expect(closeButton.textContent.trim()).to.equal('测试text')
 
             //触发 closeButton 的 click 事件,相当于closeButton.click()
@@ -65,16 +64,30 @@ describe('Toast', () => {
             const Constructor = Vue.extend(Toast)
             const vm = new Constructor({
                 propsData: {
-                    enableHTML:true
+                    enableHTML: true
                 }
             })
-            vm.$slots.default=['这是<strong>测试<strong>信息']
+            vm.$slots.default = ['这是<strong>测试<strong>信息']
             vm.$mount()
 
             // 能通过文本选择器选到标签,就说明测试成功
             expect(vm.$el.hasChildNodes('strong')).to.equal(true)
 
         })
+
+
+        it('toast 接受 position　属性', () => {
+            const Constructor = Vue.extend(Toast)
+            const vm = new Constructor({
+                propsData: {
+                    position: 'middle'
+                }
+            }).$mount()
+
+            // 测试classList包含position-middle即可
+            expect(vm.$el.classList.contains('position-middle')).to.equal(true)
+
+        })
+
     })
 })
-

@@ -779,3 +779,22 @@ autoClose: {
     }
 },
 ```
+
+#### vm.$el.querySelector 是取子元素
+```
+<template>
+    <div class="toast" :class="toastClasses">
+
+        <slot v-if="!enableHTML"></slot>
+        <div v-else="enableHTML" v-html="$slots.default[0]"></div>
+
+        <span class="line"></span>
+        <span class="close" v-if="closeButton" @click="onClickClose">
+            {{closeButton.text}}
+        </span>
+    </div>
+</template>
+
+console.log(vm.$el.querySelector('.toast')) // null
+console.log(vm.$el.querySelector('.close')) // <span>xxxx<span>
+```
