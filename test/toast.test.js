@@ -33,30 +33,31 @@ describe('Toast', () => {
 
         })
 
-        it('toast 接受 position　属性', () => {
-            const div = document.createElement('div')
-            document.body.appendChild(div)
+        // 这个测试中,vm.$el不需要放入文档
+        it('toast 接受 closeButton　属性', () => {
+
+            const callback= sinon.fake()
+
             const Constructor = Vue.extend(Toast)
             const vm = new Constructor({
                 propsData: {
-                    autoClose:1,
-                    position:'middle'
+                    closeButton: {
+                        text: '测试text',
+                        callback // sionon的callback,方便expect
+                    },
                 }
-            }).$mount(div)
+            }).$mount()
 
+            const closeButton=vm.$el.querySelector('.close')
 
-            console.log(getComputedStyle(vm.$el).top);
+            expect(closeButton.textContent.trim()).to.equal('测试text')
 
-            // setTimeout(()=>{
-            //     console.log(getComputedStyle(vm.$el).top);
-            //
-            //     done()
-            // },vm.autoClose*1000)
+            //触发 closeButton 的 click 事件,相当于closeButton.click()
+            let event = new Event('click');
+            closeButton.dispatchEvent(event)
 
-
+            expect(callback).to.have.been.called
         })
-
-
 
 
 

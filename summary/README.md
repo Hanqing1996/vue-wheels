@@ -173,9 +173,9 @@ autoClose
 ```
 autoClose: {
     type: [Boolean,Number],
-    default: true,
+    default: 5,
     validator: function (value) {
-        return (value === false || typeof value === 'Number')
+        return (value===false || typeof value === 'Number')
     }
 }
 ```
@@ -638,6 +638,8 @@ Vue.component('child', {
     * 属性检查器
     * $emit
     * v-if
+    * vm.$on():为组件实例设置监听事件
+    * 测试callback
 * input
     * v-model
 * grid
@@ -652,6 +654,8 @@ Vue.component('child', {
     * callbak 的回传组件信息功能
     * 向组件的 slot 中插入 HTML 内容
     * $emit实现toast在被关闭前触发beforeClose执行callback
+    * 测试callback
+    
     
 #### 顺序
 * $slot 要在　$mount() 前面
@@ -769,9 +773,9 @@ console.log("remove后vm4.$el.parent",vm4.$el.parentNode) // null
 ```
 autoClose: {
     type: [Boolean,Number],
-    default: true,
+    default: 5,
     validator: function (value) {
-        return (value === false || typeof value === 'Number')
+        return (value===false || typeof value === 'Number')
     }
 },
 ```

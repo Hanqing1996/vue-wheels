@@ -7,6 +7,7 @@ function createToast(Vue, message, {propsData},callback) {
     let toast = new Constructor({
         propsData
     })
+
     // slot 要放在 mount() 之前,toast 是一个　vue 实例
     toast.$slots.default = [message]
     toast.$mount()
@@ -31,7 +32,6 @@ export default {
     install(Vue, options) {
         // message作为组件的slot内容,toastOptions提供组件的props等参数
         Vue.prototype.$toast = function (message, toastOptions) {
-            console.log(currentToast);
 
             // 如果已经存在一个 toast,关闭它再创建一个新的 toast
             if(currentToast){

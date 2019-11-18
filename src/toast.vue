@@ -18,9 +18,9 @@
         props: {
             autoClose: {
                 type: [Boolean,Number],
-                default: true,
+                default: 5,
                 validator: function (value) {
-                    return (value === false || typeof value === 'number')
+                    return (value===false|| typeof value === 'number')
                 }
             },
             closeButton: {
@@ -71,7 +71,7 @@
                 this.close() //关闭toast
                 // 避免用户未传入closeButton及callback
                 if (this.closeButton && typeof this.closeButton.callback === 'function') {
-                    this.closeButton.callback(this) //执行plugin.js中的callback函数
+                    this.closeButton.callback(this) //执行closeButton的callback函数
                 }
             },
             log() {

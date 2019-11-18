@@ -96,14 +96,14 @@ describe('Button', () => {
             }).$mount()
 
             const callback = sinon.fake();
+            // 为组件实例设置监听事件
             vm.$on('click', callback)
 
-            //触发 button 的 click 事件.以下代码等效于 vm.$el.click()
+            //触发 vm.$el的button 的 click 事件
             let event = new Event('click');
             let buttonElement = vm.$el
             buttonElement.dispatchEvent(event)
 
-            // vm.$el.click()
             expect(callback).to.have.been.called
         })
     })
