@@ -842,8 +842,6 @@ vm.$el.querySelector('button').click()会触发
 
 
 #### eventBus
-1. 每个组件内部都要$on('update:selected',callback)
-2. 只有一个组件内部$emit('update:selected',name),
 
 
 
@@ -853,6 +851,14 @@ vm.$el.querySelector('button').click()会触发
 
 #### vue的事件系统($on(),$emit())是不冒泡的
 
+#### vue的props和data有什么区别?
+```
+function fn(prop1,prop2){
+    var data1,data2
+}
+```
+* props:需要用户(前端开发者)传值
+* data:不需要用户(前端开发者)传值
 
 
 

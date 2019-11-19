@@ -34,9 +34,10 @@
               eventBus:this.eventBus
           }
         },
-        created() {
-            // this.eventBus.$emit('update:selected','hihi')
+        mounted() {
+            this.eventBus.$emit('update:selected', this.selected)
         }
+
 
     }
 </script>

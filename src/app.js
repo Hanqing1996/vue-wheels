@@ -71,7 +71,6 @@ new Vue({
                         // 这里的toast是plugin.js里的createToast函数内的toast
                         callback: (toast) => {
                             console.log('用户说他知道了')
-                            console.log('toast是:',toast)
                             toast.log()
                         }
                     },

@@ -50,10 +50,10 @@
 
 <div id="app">
 
-    <div id="testEmit"></div>
 
-    <div id="tabsBlock">
-        <g-tabs :selected.sync="selectedTab" direction="horizontal">
+    <div id="tabsBlock"　style="margin-bottom:100px">
+<!--        selectedTab为默认selected,不更新-->
+        <g-tabs :selected="selectedTab" direction="horizontal">
             <g-tabs-head>
                 <template slot="actions">
                     <button>设置</button>
@@ -64,7 +64,7 @@
                 </g-tabs-item>
                 <g-tabs-item name="finance" disbaled>财经</g-tabs-item>
                 <g-tabs-item name="sports">体育</g-tabs-item>
-            </g-tabs-head>财经
+            </g-tabs-head>
             <g-tabs-body>
                 <g-tabs-pane name="military">军事新闻</g-tabs-pane>
                 <g-tabs-pane name="finance">财经新闻</g-tabs-pane>

@@ -19,9 +19,7 @@ function createToast(Vue, message, {propsData},callback) {
 
 // 销毁当前的　currentToast
 function callback(){
-    console.log('now:',currentToast);
     // 这里不能写currentToast.close(),因为$emit就写在close函数中
-
     currentToast=undefined
 }
 
