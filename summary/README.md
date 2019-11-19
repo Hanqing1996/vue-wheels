@@ -1,3 +1,15 @@
+#### 步骤
+1. 需求分析(参考业界)
+2. UI
+2.5 其他人怎么用
+3. 代码
+4. 测试
+
+
+
+
+
+
 #### 分类
 1. 工程知识：知道用法
     * webpack/parcel
@@ -460,7 +472,7 @@ $height: 32px;
 * error(可与上面状态叠加)
 * success(同上)
 
-#### grid 需求分析
+#### grid 怎么用
 * span 表示跨度,gutter 表示空隙长度
 ```
 <g-row gutter=6>
@@ -473,6 +485,36 @@ $height: 32px;
     <g-col span=8></g-col>
 </g-row>
 ```
+#### Tab 怎么用
+* element
+```
+<g-tabs>
+    <g-tab-item label="A">
+        A内容
+    </g-tab-item>
+    <g-tab-item label="B">
+        B内容
+    </g-tab-item>
+    <g-tab-item label="C">
+        C内容
+    </g-tab-item>
+</g-tabs>
+```
+ * 更好的一种
+ selected 表示被激活的 g-tabs-item g-tabs-pane
+```
+<g-tabs selected='tab1'>
+    <g-tabs-head>
+        <g-tabs-item name=“tab1”>A</g-tabs-item>
+        <g-tabs-item name=“tab2”>B</g-tabs-item>
+    </g-tabs-head>
+    <g-tabs-body>
+        <g-tabs-pane name=“tab1”>A内容</g-tabs-pane>
+        <g-tabs-pane name=“tab2”>B内容</g-tabs-pane>
+    </g-tabs-body>
+</g-tabs>
+```
+
 
 #### 响应式
 * 页面缩小时col的offset.span随之变化
@@ -631,32 +673,6 @@ Vue.component('child', {
 </div>
 ```
 
-
-#### 各个组件总结(组成内容见[app.js](https://github.com/Hanqing1996/vue-wheels/blob/master/src/app.js))
-* button 
-    * 组件局部注册
-    * 属性检查器
-    * $emit
-    * v-if
-    * vm.$on():为组件实例设置监听事件
-    * 测试callback
-* input
-    * v-model
-* grid
-    * col 组件 class,style 绑定
-    * 把父组件 row 的 gutter 传递给子组件 col
-* default-layout
-    * 判断 layout 组件的子组件包不包含 sider
-* toast
-    * 插件开发与使用
-    * 动态创建 vue 实例
-    * 对象类型的 props 的 defalut 应该写成函数
-    * callbak 的回传组件信息功能
-    * 向组件的 slot 中插入 HTML 内容
-    * $emit实现toast在被关闭前触发beforeClose执行callback
-    * 测试callback
-    
-    
 #### 顺序
 * $slot 要在　$mount() 前面
 * $emit() 要在　$destory()前面
@@ -798,3 +814,134 @@ autoClose: {
 console.log(vm.$el.querySelector('.toast')) // null
 console.log(vm.$el.querySelector('.close')) // <span>xxxx<span>
 ```
+
+#### [.sync修饰符](https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6)
+子组件的事件触发父组件更新selectedTab
+```
+<g-tabs :selected="selectedTab" @update="selectedTab=$event">
+```
+等价于
+```
+<g-tabs :selected.sync="selectedTab">
+```
+
+#### vm.$on() vm.$emit() 
+* vm.$on('click1',callback):为实例设置监听事件click1
+```
+vm.$on('click1',callback)
+等价于在index.html中这么写
+<g-button @click1="callback"><g-button/>
+```
+* vm.$emit('click1'):触发实例的click1事件
+```
+// 组件g-button内部
+<button @click="$emit('click1')"></button>
+则
+vm.$el.querySelector('button').click()会触发
+```
+
+
+#### eventBus
+1. 每个组件内部都要$on('update:selected',callback)
+2. 只有一个组件内部$emit('update:selected',name),
+
+
+
+#### 父子组件通信
+* 父组件会通过 props 向下传数据给子组件
+* 当子组件有事情要告诉父组件时会通过 $emit 事件告诉父组件
+
+#### vue的事件系统($on(),$emit())是不冒泡的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### 各个组件总结(组成内容见[app.js](https://github.com/Hanqing1996/vue-wheels/blob/master/src/app.js))
+* button 
+    * 组件局部注册
+    * 属性检查器
+    * $emit
+    * v-if
+    * vm.$on():为组件实例设置监听事件
+    * 测试callback
+    * "[Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "gutter""
+* input
+    * v-model
+* grid
+    * col 组件 class,style 绑定
+    * 把父组件 row 的 gutter 传递给子组件 col
+* default-layout
+    * 判断 layout 组件的子组件包不包含 sider
+* toast
+    * 插件开发与使用
+    * 动态创建 vue 实例
+    * 对象类型的 props 的 defalut 应该写成函数
+    * callbak 的回传组件信息功能
+    * 向组件的 slot 中插入 HTML 内容
+    * $emit实现toast在被关闭前触发beforeClose执行callback
+    * 测试callback
+* tabs
+    * .sync
+    * 具名插槽
+    * EventHub/EventBus(发布/订阅模式)

@@ -17,6 +17,12 @@ import Footer from './footer'
 // toast
 import Toast from './toast'
 import plugin from './plugin'
+// tabs
+import Tabs from './tabs'
+import TabsHead from './tabs-head'
+import TabsBody from './tabs-body'
+import TabsItem from './tabs-item'
+import TabsPane from './tabs-pane'
 
 // 这里的注册是为 index.html 服务
 Vue.component('g-button', Button)
@@ -34,6 +40,11 @@ Vue.component('g-toast', Toast)
 // 用户使用插件
 Vue.use(plugin)
 
+Vue.component('g-tabs', Tabs)
+Vue.component('g-tabs-head', TabsHead)
+Vue.component('g-tabs-body', TabsBody)
+Vue.component('g-tabs-item',TabsItem)
+Vue.component('g-tabs-pane', TabsPane)
 
 // new Vue 和组件注册没有任何关系
 new Vue({
@@ -41,7 +52,8 @@ new Vue({
     data: {
         loadingStatus1: false,
         loadingStatus2: false,
-        message: 'hi'
+        message: 'hi',
+        selectedTab:'sports'
     },
     methods: {
         inputChange(e) {

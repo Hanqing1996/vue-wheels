@@ -18,12 +18,15 @@
     export default {
         name: "WheelCol",
 
+        /**
+         * 因为[Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "gutter"
+         * 所以把gutter写在data里面(原先是写在props里面的，但是子组件col没有修改gutter啊明明)
+         */
+            　　
         data() {
             return {
                 gutter: 0,
             }
-
-            // 写在 data 里的 colStyle 是不会随 gutter 更新的（只在 created 读取一次），所以含有 gutter 的 colStyle 不能写在 data 里面
         },
         methods:{
             // 返回的array最多包含两个字符串

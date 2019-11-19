@@ -50,6 +50,30 @@
 
 <div id="app">
 
+    <div id="testEmit"></div>
+
+    <div id="tabsBlock">
+        <g-tabs :selected.sync="selectedTab" direction="horizontal">
+            <g-tabs-head>
+                <template slot="actions">
+                    <button>设置</button>
+                </template>
+                <g-tabs-item name="military">
+                    <g-icon name="settings"></g-icon>
+                    军事
+                </g-tabs-item>
+                <g-tabs-item name="finance" disbaled>财经</g-tabs-item>
+                <g-tabs-item name="sports">体育</g-tabs-item>
+            </g-tabs-head>财经
+            <g-tabs-body>
+                <g-tabs-pane name="military">军事新闻</g-tabs-pane>
+                <g-tabs-pane name="finance">财经新闻</g-tabs-pane>
+                <g-tabs-pane name="sports">体育新闻</g-tabs-pane>
+            </g-tabs-body>
+        </g-tabs>
+    </div>
+
+
     <div id="toastBlock" style=""></div>
     <button @click="showToast" style="margin-bottom: 100px">showToast</button>
 
@@ -145,7 +169,9 @@
         <g-input value="赵六" v-model="message"></g-input>
     </div>
     <div>{{message}}</div>
+        methods(){
 
+        }
     <div style="margin-top: 20px;margin-bottom: 20px">
         <!--用户不传入 icon-position 的值，则默认 icon-position的值为 left-->
         <!--用户不传入 loading 的值，则默认 loading 的值为 false-->
@@ -153,7 +179,7 @@
         <!--icon-position 对 icon 和 loading 都有效，谁在就对谁生效-->
         <!--传入 loading，且传入 icon-->
         <g-button icon="settings" icon-position="right" :loading="loadingStatus1"
-                  @click="loadingStatus1=!loadingStatus1">
+                  @click1="loadingStatus1=!loadingStatus1">
             icon在右边,且传入loading的button
         </g-button>
 
