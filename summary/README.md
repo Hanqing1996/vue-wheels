@@ -857,8 +857,21 @@ function fn(prop1,prop2){
     var data1,data2
 }
 ```
-* props:需要用户(前端开发者)传值
-* data:不需要用户(前端开发者)传值
+不允许的行为
+```
+function fn(prop1,prop2){
+    prop1++
+}
+```
+* props:需要用户(前端开发者)传值,props不允许组件自己修改(要修改,必须先$emit到父组件,再由父组件传入子组件)
+    * 事实上如果修改了,vue会给出警告
+* data:不需要用户(前端开发者)传值,data由组件自己修改更新(父组件少传一个参数,起到隔绝作用)
+    * sider.vue 的　visible
+    * tabs-item.vue 的　active
+    
+#### 框架的作用
+* 使团队中的傻逼也写不出垃圾代码
+    * 提高代码平均质量
 
 
 
