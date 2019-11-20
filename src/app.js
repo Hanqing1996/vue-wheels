@@ -77,5 +77,8 @@ new Vue({
                     position:'middle'
                 })
         }
+    },
+    updated(){
+        console.log(this.selectedTab)
     }
 })

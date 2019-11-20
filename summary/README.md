@@ -875,7 +875,18 @@ function fn(prop1,prop2){
 
 
 
-
+#### vm.$options.name 和　vm.name
+```
+export default {
+    name: "Wheelxxx", // vm.$options.name
+    props: {
+        name: { // vm.name
+            type: String,
+            required:true
+        }
+    }
+}
+```
 
 
 
@@ -964,3 +975,6 @@ function fn(prop1,prop2){
     * .sync
     * 具名插槽
     * EventHub/EventBus(发布/订阅模式)
+    * $emit传递多个参数
+    * getBoundingClientRect()
+    * $refs()
