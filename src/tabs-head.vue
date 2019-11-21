@@ -14,8 +14,10 @@
         inject:['eventBus'],
         mounted() {
             this.eventBus.$on('update:selected',(name,vm)=>{
+                this.x=true
                 let {width,height,top,left}=vm.$el.getBoundingClientRect()
-                this.$refs.line.style.left=left+'px'
+                this.$refs.line.style.width=`${width}px`
+                this.$refs.line.style.left=`${left}px`
             })
         }
     }
@@ -34,7 +36,8 @@
             position: absolute;
             bottom: 0;
             border-bottom: 3px solid $blue;
-            width: 60px;
+            /*控制line平滑移动*/
+            transition: all 1s;
         }
         > .actions-wrapper {
             margin-left: auto;

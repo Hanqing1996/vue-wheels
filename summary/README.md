@@ -889,6 +889,54 @@ export default {
 ```
 
 
+#### v-if　
+* 先执行js代码再执行[更新UI]任务
+```
+<div id="father">
+    <child v-if="show" id="block">hahaha</child>
+    <button @click="changeShow">点我</button>
+</div>
+
+Vue.component('child', {
+        data: function () {
+            return {
+            }
+        },
+        template: '<div>hahaha</div>',
+        mounted () {
+            // 此时[更新UI任务]已完成
+            console.log(`${Date.now()}拿到${document.getElementById('block').outerHTML}:`)
+        }
+    })
+
+    var vm = new Vue({
+        el: "#father",
+        data: {
+            show: false
+        },
+        methods: {
+            changeShow:function(){
+                this.show=true
+                // 发现this.show变为true,则新增一个[更新UI任务]到任务队列，执行完下面的js代码再更新UI
+                this.$next
+                console.log(`${Date.now()}拿到${document.getElementById('block').outerHTML}:`)
+            }
+        }
+    })
+```
+* $nextTick
+```
+methods: {
+    changeShow:function(){
+        this.show=true
+        // 把js代码放在[更新UI任务]后面
+        this.$nextTick(()=>{
+            console.log(`${Date.now()}拿到${document.getElementById('block').outerHTML}:`)
+        })
+    }
+}
+```
+
 
 
 
@@ -974,7 +1022,7 @@ export default {
 * tabs
     * .sync
     * 具名插槽
-    * EventHub/EventBus(发布/订阅模式)
+    * Eventus实现组件间通信
     * $emit传递多个参数
     * getBoundingClientRect()
     * $refs()
