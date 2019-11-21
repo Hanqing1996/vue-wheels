@@ -1007,7 +1007,7 @@ methods: {
 * input
     * v-model
 * grid
-    * col 组件 class,style 绑定
+    * col 组件绑定style
     * 把父组件 row 的 gutter 传递给子组件 col
 * default-layout
     * 判断 layout 组件的子组件包不包含 sider
@@ -1026,3 +1026,4 @@ methods: {
     * $emit传递多个参数
     * getBoundingClientRect()
     * $refs()
+    * tabs-item 绑定 class

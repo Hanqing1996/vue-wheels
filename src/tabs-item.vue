@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs-item"　@click="xxx" :class="{active}">
+    <div class="tabs-item"　@click="xxx" :class="itemClasses">
         <slot></slot>
     </div>
 </template>
@@ -30,7 +30,18 @@
         },
         methods:{
             xxx(){
+                if(this.disabled){
+                    return
+                }
                 this.eventBus.$emit('update:selected',this.name,this)
+            }
+        },
+        computed:{
+            itemClasses(){
+                return {
+                    active:this.active,
+                    disabled: this.disabled
+                }
             }
         }
     }
@@ -48,6 +59,9 @@
         &.active {
             color:$blue;
             font-weight: bold;
+        }
+        &.disabled{
+            color: #666666;
         }
     }
 </style>
