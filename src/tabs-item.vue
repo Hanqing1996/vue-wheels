@@ -49,6 +49,7 @@
 
 <style lang="scss" scoped>
     $blue:blue;
+    $disabled-text-color:grey;
     .tabs-item {
         flex-shrink: 0;
         padding: 0 1em;
@@ -60,8 +61,10 @@
             color:$blue;
             font-weight: bold;
         }
+        /*禁用样式*/
         &.disabled{
-            color: #666666;
+            color: $disabled-text-color;
+            cursor: not-allowed;
         }
     }
 </style>
