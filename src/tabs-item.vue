@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs-item"　@click="xxx" :class="itemClasses">
+    <div class="tabs-item"　@click="xxx" :class="itemClasses"　:data-name="name">
         <slot></slot>
     </div>
 </template>
@@ -9,7 +9,8 @@
         name: "WheelTabsItem",
         data(){
             return{
-                active:false
+                active:false,
+                age:10
             }
         },
         props:{
@@ -24,16 +25,20 @@
         },
         inject:['eventBus'],
         created() {
-            this.eventBus.$on('update:selected',(name)=>{
+            this.eventBus&& this.eventBus.$on('update:selected',(name)=>{
                 this.active=name === this.name
             })
         },
         methods:{
             xxx(){
+                // console.log('呀呀,xxx 被点击了 ');
                 if(this.disabled){
                     return
                 }
-                this.eventBus.$emit('update:selected',this.name,this)
+                this.eventBus&&this.eventBus.$emit('update:selected',this.name,this)
+
+                // 这个this.$emit('click')完全是为了测试而设置的
+                this.$emit('click')
             }
         },
         computed:{

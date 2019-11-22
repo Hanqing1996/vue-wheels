@@ -100,7 +100,7 @@ describe('Button', () => {
             // 为组件实例设置监听事件
             vm.$on('click1', callback)
 
-            //触发 vm.$el的button 的 click 事件
+            //触发 vm.$el的button 的 click 事件,等价于buttonElement.click()
             let event = new Event('click');
             let buttonElement = vm.$el
             buttonElement.dispatchEvent(event)

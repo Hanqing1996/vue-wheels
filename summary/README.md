@@ -840,11 +840,6 @@ vm.$on('click1',callback)
 vm.$el.querySelector('button').click()会触发
 ```
 
-
-#### eventBus
-
-
-
 #### 父子组件通信
 * 父组件会通过 props 向下传数据给子组件
 * 当子组件有事情要告诉父组件时会通过 $emit 事件告诉父组件
@@ -940,9 +935,45 @@ methods: {
 
 
 
+####
+```
+// 一般写法
+Vue.component('g-button', Button)
+let vm=new Vue({
+})
+vm.$mount(document.getElementById("app"))// vue实例挂载到app上，即识别app内容
 
 
 
+
+
+// 动态添加组件实例(多个)
+let div=document.getElementById("app2")
+div.innerHTML=`
+    <g-button>第一个slot内容</g-button>
+    <g-button>第二个slot内容</g-button>
+    `  
+const vm2=new Vue({
+    el:div // vue实例挂载到app2上，识别app2内容
+})
+
+
+
+// 创建组件实例(常用于测试用例中)
+let Constructor2=Vue.extend(Button)
+let vm4=new Constructor2({
+        propsData:xxx // 赋予组件props(模拟父组件给子组件传递props),注意Button的一切data,method　vm4都有
+    }).$mount(document.getElementById("app6")) // app6被替换
+```
+
+#### tabs-item.vue
+```
+<template>
+    <div class="tabs-item"　@click="xxx" :class="itemClasses"　:data-name="name">
+        <slot></slot>
+    </div>
+</template>
+```
 
 
 
@@ -1004,6 +1035,7 @@ methods: {
     * vm.$on():为组件实例设置监听事件
     * 测试callback
     * "[Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "gutter""
+    * button-group 检查当前组件实例的子元素是不是 button
 * input
     * v-model
 * grid

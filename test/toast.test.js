@@ -35,7 +35,7 @@ describe('Toast', () => {
         })
 
         // 这个测试中,vm.$el不需要放入文档(取元素是用vm.$el.querySelector)
-        it('toast 接受 closeButton　属性', () => {
+        it('toast 接受 closeButton', () => {
 
             const callback = sinon.fake()
 
@@ -59,7 +59,7 @@ describe('Toast', () => {
             expect(callback).to.have.been.called
         })
 
-        it('toast 接受 enableHTML　属性', () => {
+        it('toast 接受 enableHTML', () => {
 
             const Constructor = Vue.extend(Toast)
             const vm = new Constructor({
@@ -76,7 +76,7 @@ describe('Toast', () => {
         })
 
 
-        it('toast 接受 position　属性', () => {
+        it('toast 接受 position', () => {
             const Constructor = Vue.extend(Toast)
             const vm = new Constructor({
                 propsData: {

@@ -35,20 +35,21 @@
           }
         },
         mounted() {
+            if(this.$children.length==0) {
+                console&&console.warn&& console.warn('tabs的子组件应该是tabs-head和tabs-body,但你没有写组件')
+            }
+
             this.$children.forEach((vm)=>{
                 if(vm.$options.name==="WheelTabsHead"){
                     vm.$children.forEach((childVm)=>{
                         if(childVm.$options.name=="WheelTabsItem"&&childVm.name==this.selected){
-                            this.eventBus.$emit('update:selected', this.selected,childVm)
+                            this.eventBus&&this.eventBus.$emit('update:selected', this.selected,childVm)
                         }
                     })
                 }
 
             })
-
         }
-
-
     }
 </script>
 

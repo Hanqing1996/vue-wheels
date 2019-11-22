@@ -19,7 +19,7 @@ describe('Row and Col', () => {
     describe('props', () => {
 
 
-        it('row 和 col 接收 gutter 属性', (done) => {
+        it('row 和 col 接收 gutter', (done) => {
 
 
             Vue.component('g-row',Row)
@@ -59,7 +59,7 @@ describe('Row and Col', () => {
 
         })
 
-        it('row 接收 align 属性', () => {
+        it('row 接收 align', () => {
 
             const div=document.createElement('div')
             document.body.appendChild(div)
@@ -77,7 +77,7 @@ describe('Row and Col', () => {
             vm.$destroy()
         })
 
-        it('col 接受 span,offset 属性',()=>{
+        it('col 接受 span,offset',()=>{
 
             const div=document.createElement('div')
             document.body.appendChild(div)
@@ -95,7 +95,7 @@ describe('Row and Col', () => {
             vm.$destroy()
         })
 
-        it('col 接受 pc 属性',()=>{
+        it('col 接受 pc',()=>{
 
             const div=document.createElement('div')
             document.body.appendChild(div)
