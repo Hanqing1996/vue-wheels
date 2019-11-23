@@ -1044,7 +1044,7 @@ let vm4=new Constructor2({
 * default-layout
     * 判断 layout 组件的子组件包不包含 sider
 * toast
-    * 插件开发与使用
+    * 插件plugin.js开发与使用
     * 动态创建 vue 实例
     * 对象类型的 props 的 defalut 应该写成函数
     * callbak 的回传组件信息功能
@@ -1052,8 +1052,7 @@ let vm4=new Constructor2({
     * $emit实现toast在被关闭前触发beforeClose执行callback
     * 测试callback
 * tabs
-    * .sync
-    * 具名插槽
+    * tabs-head:多个slot
     * Eventus实现组件间通信
     * $emit传递多个参数
     * getBoundingClientRect()

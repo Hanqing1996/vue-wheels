@@ -51,6 +51,26 @@
 <div id="app">
 
 
+    <div id="popoverBlock" style="margin-bottom: 100px;padding-top: 100px;padding-left: 100px">
+        <g-popover>
+            <template slot="content">
+            <!--点击button后div会显示到button上面,再点击button,则div隐藏-->
+                <div>something</div>
+            </template>
+            <button>点我</button>
+        </g-popover>
+        <g-popover>
+            <template slot="content">
+                <div></div>
+            </template>
+            <button>点我</button>
+        </g-popover>
+    </div>
+
+
+
+
+
     <div id="tabsBlock"　style="margin-bottom:100px">
         <g-tabs :selected="selectedTab" direction="horizontal">
             <g-tabs-head>
