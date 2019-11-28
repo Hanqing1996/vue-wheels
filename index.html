@@ -58,13 +58,12 @@
     #buttonBlock {display: flex;}
     #popoverBlock {display: flex;flex-direction: row;justify-content: space-around;}
 </style>
-
 <div id="app"　style="padding-top:100px">
-    <div id="popoverBlock" style="overflow: hidden;">
+    <div id="popoverBlock" style="overflow: hidden;" @click="yyy">
         <g-popover>
             <template slot="content">
                 <!--点击button后div会显示到button上面,再点击button,则div隐藏-->
-                <div class="popoverText">something</div>
+                <div>something</div>
             </template>
             <button>点我</button>
         </g-popover>
@@ -75,7 +74,6 @@
             <button>点我</button>
         </g-popover>
     </div>
-
 
 
 

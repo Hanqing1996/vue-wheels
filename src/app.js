@@ -79,6 +79,9 @@ new Vue({
                     },
                     position:'middle'
                 })
+        },
+        yyy(){
+            console.log('popover内元素冒泡结束');
         }
     }
 })
