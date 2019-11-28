@@ -31,6 +31,7 @@
 
 <style scoped lang="scss">
     .sider{
+        /*浮动布局*/
         position: relative;
         > button{
             position: absolute;

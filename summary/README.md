@@ -1036,6 +1036,7 @@ let vm4=new Constructor2({
     * 测试callback
     * "[Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "gutter""
     * button-group 检查当前组件实例的子元素是不是 button
+    * svg
 * input
     * v-model
 * grid
@@ -1058,3 +1059,36 @@ let vm4=new Constructor2({
     * getBoundingClientRect()
     * $refs()
     * tabs-item 绑定 class
+* popover
+    * @click.stop阻止事件冒泡
+    
+    
+#### [popover的需求](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/26c0e669-f116-46c7-898a-d259707b30fe)
+1. 点击按钮后显示content-wrapper,然后点击其它位置(除了content-wrapper)隐藏content-wrapper;点击content-wrapper不隐藏content-wrapper(因为浏览网站者可能有复制文本内容的需求)
+
+    
+    
+    
+    
+    
+    
+#### 设计模式
+* 发布订阅模式
+* 单向数据流
+
+
+#### 前端路由
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

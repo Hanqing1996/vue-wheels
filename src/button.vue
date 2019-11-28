@@ -53,12 +53,11 @@
         border-radius: var(--border-radius); border: 1px solid var(--border-color);
         background: var(--button-bg);
         display: inline-flex; justify-content: center; align-items: center;
-        vertical-align: middle;
         &:hover { border-color: var(--border-color-hover); }
         &:active { background-color: var(--button-active-bg); }
         &:focus { outline: none; }
 
-        // 默认的 icon 与 content 排列：icon 左，content 右
+        /*默认的 icon 与 content 排列：icon 左，content 右*/
         > .content { order: 2; }
         > .icon { order: 1; margin-right: .1em; }
 
@@ -67,7 +66,7 @@
             > .icon { order: 2; margin-right: 0; margin-left: .1em;}
         }
 
-        // 让loading旋转
+        /*让loading旋转*/
         .loading{
             animation: spin 1s infinite linear;
         }

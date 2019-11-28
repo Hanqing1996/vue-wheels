@@ -31,8 +31,10 @@
     .layout {
         flex-grow: 1;
         display: flex;
+        /*默认纵向布局*/
         flex-direction: column;
 
+        /*有sider则横向布局*/
         &.layoutHasSider {
             flex-direction: row;
         }

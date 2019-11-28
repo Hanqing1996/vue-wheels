@@ -2,12 +2,15 @@
 <html lang="zh-Hans">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>wheels</title>
     <style>
         * {margin: 0; padding: 0; box-sizing: border-box;}
+
         img {max-width: 100%;}
+
         html {
             --button-height: 32px;
             --font-size: 14px;
@@ -18,8 +21,10 @@
             --border-color: #999;
             --border-color-hover: #666;
         }
+
         #app {
         }
+
         body {
             font-size: var(--font-size);
         }
@@ -31,37 +36,50 @@
         border: 1px solid #666;
         min-height: 100px;
     }
-    .sider{
+
+    .sider {
         background: #666666;
         width: 200px;
     }
-    .header{
+
+    .header {
         background: #999;
         height: 100px;
     }
-    .footer{
+
+    .footer {
         background: #ccc;
         height: 50px;
     }
+
     .box {
         margin: 20px;
     }
+    #buttonBlock {display: flex;}
+    #popoverBlock {display: flex;flex-direction: row}
 </style>
 
 <div id="app">
-
-
     <div id="popoverBlock" style="margin-bottom: 100px;padding-top: 100px;padding-left: 100px">
         <g-popover>
             <template slot="content">
-            <!--点击button后div会显示到button上面,再点击button,则div隐藏-->
-                <div>something</div>
+                <!--点击button后div会显示到button上面,再点击button,则div隐藏-->
+                <div class="popoverText">something</div>
             </template>
             <button>点我</button>
         </g-popover>
         <g-popover>
-            <template slot="content">
-                <div></div>
+            <template slot="content">                    if (this.visible === true) {
+                        let eventHandler = () => {
+                            console.log('document监听事件开始生效');
+                            this.visible = false
+                            document.removeEventListener('click', eventHandler)
+                            console.log('移除document监听器');
+                        }
+                        document.addEventListener('click', eventHandler)
+                        console.log('新增document监听器');
+                    }
+                <div>anything</div>
             </template>
             <button>点我</button>
         </g-popover>
@@ -71,7 +89,7 @@
 
 
 
-    <div id="tabsBlock"　style="margin-bottom:100px">
+    <div id="tabsBlock" 　style="margin-bottom:100px">
         <g-tabs :selected="selectedTab" direction="horizontal">
             <g-tabs-head>
                 <template slot="actions">
@@ -100,98 +118,100 @@
     <!--要求span,offset和为24(iPad对应sapn和offset和为24,narrowPc同理),gutter随意-->
     <!--需要根据gutter调整col.padding和row.margin-->
 
-    <g-row>
-        <g-col span="9">
-            <!-- g-col 统一靠左-->
-            <g-row align="left">
-                <g-col>1</g-col>
-                <g-col>2</g-col>
-                <g-col>3</g-col>
-                <g-col>4</g-col>
-            </g-row>
-        </g-col>
-        <!-- g-col 统一靠右-->
-        <g-col span="15">
-            <g-row align="right">
-                <g-col>1</g-col>
-                <g-col>2</g-col>
-                <g-col>3</g-col>
-                <g-col>4</g-col>
-                <g-col>5</g-col>
-                <g-col>6</g-col>
-                <g-col>7</g-col>
-            </g-row>
-        </g-col>
-    </g-row>
+    <div id="rowBlock">
+
+        <g-row>
+            <g-col span="9">
+                <!-- g-col 统一靠左-->
+                <g-row align="left">
+                    <g-col>1</g-col>
+                    <g-col>2</g-col>
+                    <g-col>3</g-col>
+                    <g-col>4</g-col>
+                </g-row>
+            </g-col>
+            <!-- g-col 统一靠右-->
+            <g-col span="15">
+                <g-row align="right">
+                    <g-col>1</g-col>
+                    <g-col>2</g-col>
+                    <g-col>3</g-col>
+                    <g-col>4</g-col>
+                    <g-col>5</g-col>
+                    <g-col>6</g-col>
+                    <g-col>7</g-col>
+                </g-row>
+            </g-col>
+        </g-row>
 
 
-    <g-row>
-        <g-col span="4">
-            <g-row align="center">
-                <g-col>
-                    <img class="logo" src="https://img.alicdn.com/tfs/TB1_uT8a5ERMeJjSspiXXbZLFXa-143-59.png" alt="">
-                </g-col>
-            </g-row>
+        <g-row>
+            <g-col span="4">
+                <g-row align="center">
+                    <g-col>
+                        <img class="logo" src="https://img.alicdn.com/tfs/TB1_uT8a5ERMeJjSspiXXbZLFXa-143-59.png"
+                             alt="">
+                    </g-col>
+                </g-row>
 
-        </g-col>
-        <g-col span="14"></g-col>
-        <g-col span="6"></g-col>
-    </g-row>
-    <g-row gutter="10">
-        <g-col span="12">1</g-col>
-        <g-col span="12">2</g-col>
-    </g-row>
-    <g-row>
-        <g-col span="10" offset="2"></g-col>
-        <g-col span="10" offset="2"></g-col>
-    </g-row>
+            </g-col>
+            <g-col span="14"></g-col>
+            <g-col span="6"></g-col>
+        </g-row>
+        <g-row gutter="10">
+            <g-col span="12">1</g-col>
+            <g-col span="12">2</g-col>
+        </g-row>
+        <g-row>
+            <g-col span="10" offset="2"></g-col>
+            <g-col span="10" offset="2"></g-col>
+        </g-row>
 
-    <g-row>
-        <g-col span="2"
-               :i-pad="{span:4,offset:4}"
-               :narrow-pc="{span:2,offset:2}"
-               :pc="{span:2}"
-               :wide-pc="{span:1}">
-            1
-        </g-col>
-        <g-col span="22"
-               :i-pad="{span:16}"
-               :narrow-pc="{span:20}"
-               :pc="{span:22}"
-               :wide-pc="{span:23}">
-            11
-        </g-col>
-    </g-row>
+        <g-row>
+            <g-col span="2"
+                   :i-pad="{span:4,offset:4}"
+                   :narrow-pc="{span:2,offset:2}"
+                   :pc="{span:2}"
+                   :wide-pc="{span:1}">
+                1
+            </g-col>
+            <g-col span="22"
+                   :i-pad="{span:16}"
+                   :narrow-pc="{span:20}"
+                   :pc="{span:22}"
+                   :wide-pc="{span:23}">
+                11
+            </g-col>
+        </g-row>
 
-    <!--下面g-row满足:phone宽度范围内一个g-col占一行,iPad范围内两个g-col占一行,narrowPc范围内3个g-col占一行-->
-    <g-row>
-        <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
-        <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
-        <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
-    </g-row>
-
-    <hr>
-
-    <div class="box">
-        <!-- 不可操作的 button -->
-        <g-input value="张三" :disabled="true"></g-input>
-
-        <!--只可读的 button -->
-        <g-input value="李四" :readonly="true"></g-input>
+        <!--下面g-row满足:phone宽度范围内一个g-col占一行,iPad范围内两个g-col占一行,narrowPc范围内3个g-col占一行-->
+        <g-row>
+            <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
+            <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
+            <g-col span="24" :i-Pad="{span:12}" :narrow-pc="{span:8}"></g-col>
+        </g-row>
     </div>
-    <div class="box">
-        <!-- error="",则class 列表不存在 error类,否则class 列表含有 error类-->
-        <g-input value="王五" error="姓名不少于两个字"></g-input>
-    </div>
-    <div class="box">
-        <!-- error="",则class 列表不存在 error类,否则class 列表含有 error类-->
-        <g-input value="赵六" v-model="message"></g-input>
-    </div>
-    <div>{{message}}</div>
-        methods(){
 
-        }
-    <div style="margin-top: 20px;margin-bottom: 20px">
+    <div id="inputBlock">
+        <div class="box">
+            <!-- 不可操作的 button -->
+            <g-input value="张三" :disabled="true"></g-input>
+
+            <!--只可读的 button -->
+            <g-input value="李四" :readonly="true"></g-input>
+        </div>
+        <div class="box">
+            <!-- error="",则class 列表不存在 error类,否则class 列表含有 error类-->
+            <g-input value="王五" error="姓名不少于两个字"></g-input>
+        </div>
+        <div class="box">
+            <!-- error="",则class 列表不存在 error类,否则class 列表含有 error类-->
+            <g-input value="赵六" v-model="message"></g-input>
+        </div>
+        <div>{{message}}</div>
+    </div>
+
+    <div id='buttonBlock' 　style="margin-top: 20px;margin-bottom: 20px">
         <!--用户不传入 icon-position 的值，则默认 icon-position的值为 left-->
         <!--用户不传入 loading 的值，则默认 loading 的值为 false-->
         <!--loading 优先级高于 icon，用户既传入 loading，又传入 icon的情况下，只显示 loading，不显示 icon -->
@@ -226,9 +246,7 @@
         <!--    </g-button>-->
     </div>
 
-
     <!--    如果发现 g-layout 包含子元素 g-sider,则为 g-layout 添加属性 layout-has-sider-->
-
     <g-layout style="height: 100vh;margin-bottom: 20px">
         <g-sider class="demo">sider</g-sider>
         <g-layout>
