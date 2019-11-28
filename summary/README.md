@@ -1065,7 +1065,7 @@ let vm4=new Constructor2({
     
 #### [popover的需求](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/26c0e669-f116-46c7-898a-d259707b30fe)
 1. 点击按钮后显示content-wrapper,然后点击其它位置(除了content-wrapper)隐藏content-wrapper;点击content-wrapper不隐藏content-wrapper(因为浏览网站者可能有复制文本内容的需求)
-
+2. 
     
     
     

@@ -56,11 +56,11 @@
         margin: 20px;
     }
     #buttonBlock {display: flex;}
-    #popoverBlock {display: flex;flex-direction: row}
+    #popoverBlock {display: flex;flex-direction: row;justify-content: space-around;}
 </style>
 
-<div id="app">
-    <div id="popoverBlock" style="margin-bottom: 100px;padding-top: 100px;padding-left: 100px">
+<div id="app"　style="padding-top:100px">
+    <div id="popoverBlock" style="overflow: hidden;">
         <g-popover>
             <template slot="content">
                 <!--点击button后div会显示到button上面,再点击button,则div隐藏-->
@@ -69,16 +69,7 @@
             <button>点我</button>
         </g-popover>
         <g-popover>
-            <template slot="content">                    if (this.visible === true) {
-                        let eventHandler = () => {
-                            console.log('document监听事件开始生效');
-                            this.visible = false
-                            document.removeEventListener('click', eventHandler)
-                            console.log('移除document监听器');
-                        }
-                        document.addEventListener('click', eventHandler)
-                        console.log('新增document监听器');
-                    }
+            <template slot="content">
                 <div>anything</div>
             </template>
             <button>点我</button>
