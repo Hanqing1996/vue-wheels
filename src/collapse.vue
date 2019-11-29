@@ -13,6 +13,10 @@
           single:{
               type:Boolean,
               default:false
+          },
+          selected:{
+              type:String,
+              default: "1"
           }
         },
         data(){
@@ -26,6 +30,14 @@
                     eventBus:this.eventBus
                 }
             }
+        },
+
+        mounted() {
+            this.$children.forEach((vm) => {
+                if (vm.name === this.selected) {
+                    vm.open=true
+                }
+            })
         }
     }
 </script>

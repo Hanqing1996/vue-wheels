@@ -14,15 +14,18 @@
             title:{
                 type:String,
                 required: true
+            },
+            name:{
+                type:String,
+                required: true
             }
-
         },
         data(){
             return {
                 open:false
             }
         },
-        inject:['eventbus'],
+        inject:['eventBus'],
         methods:{
             toggleContent(){
                 this.open=!this.open
@@ -33,6 +36,13 @@
             this.eventBus&& this.eventBus.$on('update:selected',(title)=>{
                 this.open=title === this.title
             })
+        },
+        mounted() {
+            // this.eventBus&&this.eventBus.$on('default:selected',(name,defaultName)=>{
+            //     this.open=defaultName === this.name
+            // })
+            // this.eventBus&&this.eventBus.$emit('default:selected',this.name,"1")
+            // console.log(this.name,this.open)
         }
     }
 </script>

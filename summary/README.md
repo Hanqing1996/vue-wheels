@@ -1095,3 +1095,59 @@ this.$refs.popover.addEventListener('click',this.onClick)　// this.$refs.popove
 const popOver=vm.$refs.a　// popOver是一个vue实例
 const button=popOver.$el.querySelector('button')
 ```
+
+
+
+
+
+
+#### 父组件与组件通信
+* 父组件给子组件传递props(常见的情况是用户在index.html的组件里添加属性)
+```
+<g-collapse :single="true">
+    <g-collapse-item title="标题1" name="1">内容1</g-collapse-item>
+    <g-collapse-item title="标题2" name="2">内容2</g-collapse-item>
+    <g-collapse-item title="标题3" name="3">内容3</g-collapse-item>
+</g-collapse>
+```
+* 父组件根据子组件情况修改父组件data
+```
+mounted() {
+    this.$children.forEach((vm) => {
+        if (vm.$options.name === 'WheelSider') {
+            this.hasSider = true
+        }
+    })
+}
+```
+* 父组件挑选符合条件的子组件,修改子组件data
+```
+mounted() {
+
+    // 把父组件的 gutter 传递给子组件
+    this.$children.forEach((vm) => {
+        vm.gutter = this.gutter
+    })
+}
+```
+* 父组件与符合条件的子组件通信
+```
+this.$children.forEach((vm)=>{
+    if(vm.$options.name==="WheelTabsHead"){
+        vm.$children.forEach((childVm)=>{
+            if(childVm.$options.name=="WheelTabsItem"&&childVm.name==this.selected){
+                this.eventBus&&this.eventBus.$emit('update:selected', this.selected,childVm)
+            }
+        })
+    }
+})
+```
+注意,由于父组件和子组件挂载顺序的原因,所以在父组件的mounted中进行父子通信是最合适的
+
+
+
+
+
+
+
+
