@@ -924,7 +924,7 @@ methods: {
 
 ####　添加组件实例的方法
 ```
-// 一般写法
+// 一般写法：vm是一个vue实例,不是Button的实例
 Vue.component('g-button', Button)
 let vm=new Vue({
 })
@@ -932,7 +932,7 @@ vm.$mount(document.getElementById("app"))// vue实例挂载到app上，即识别
 
 
 
-// 动态添加组件实例(多个)
+// 动态添加组件实例(多个)：vm2是一个vue实例,不是Button的实例
 let div=document.getElementById("app2")
 div.innerHTML=`
     <g-button>第一个slot内容</g-button>
@@ -944,7 +944,7 @@ const vm2=new Vue({
 
 
 
-// 创建组件实例(常用于测试用例中)
+// 创建组件实例(常用于测试用例中)：vm4是组件Button的实例
 let Constructor2=Vue.extend(Button)
 let vm4=new Constructor2({
         propsData:xxx // 赋予组件props(模拟父组件给子组件传递props),注意Button的一切data,method　vm4都有

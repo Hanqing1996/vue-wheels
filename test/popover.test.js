@@ -1,0 +1,41 @@
+import Vue from 'vue'
+import popOver from '../src/popover'
+
+const expect = chai.expect;
+
+Vue.config.productionTip = false
+Vue.config.devtools = false
+
+
+describe('popOver', () => {
+
+    it('存在.', () => {
+        expect(popOver).to.exist
+
+    })
+
+    describe('props', () => {
+
+        it('popover 可以设置 position', () => {
+
+            Vue.component('g-popover', popOver)
+            const div = document.createElement('div')
+            document.body.appendChild(div)
+            div.innerHTML = `
+            <g-popover position="bottom" ref="a">
+                <template slot="content">
+                弹出内容
+                </template>
+                <button>点我</button>
+            </g-popover>
+                    `
+            const vm = new Vue({
+                el: div
+            })
+            // vm是一个vue实例,vm.$refs.a才是组件popOver的实例
+            const {contentWrapper}=vm.$refs.a.$refs
+            expect(contentWrapper.classList.contains('position-bottom')).to.eq(true)
+        })
+    })
+})
+
