@@ -43,6 +43,8 @@
         },
         methods: {
             openContent(){
+                console.log('open')
+
                 this.visible=true// 打开content
                 //只有当触发事件为click,才才开启document对于其它位置的监听
                 if(this.trigger==='click'){

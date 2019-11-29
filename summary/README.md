@@ -1068,4 +1068,24 @@ methods: {
 
 ```  
     
-    
+####
+* 在组件内部注册DOM元素 
+```
+<template>
+    <div class="popover" ref="popover">
+</template>
+
+this.$refs.popover.addEventListener('click',this.onClick)　// this.$refs.popover是一个DOM元素
+```
+* 在父组件中注册子组件(测试用例)
+```
+<g-popover trigger="click" ref="a">
+    <template slot="content">
+    弹出内容
+    </template>
+    <button>点我</button>
+</g-popover>
+
+const popOver=vm.$refs.a　// popOver是一个vue实例
+const button=popOver.$el.querySelector('button')
+```
