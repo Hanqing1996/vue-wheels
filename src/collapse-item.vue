@@ -25,24 +25,12 @@
                 open:false
             }
         },
-        inject:['eventBus'],
+        inject: ['eventBus'],
         methods:{
             toggleContent(){
-                this.open=!this.open
-                this.eventBus&&this.eventBus.$emit('update:selected', this.title)
+                // 子组件发送状态更新请求给父组件(子组件不自己更新)
+                this.eventBus&&this.eventBus.$emit('change:Selected', this.name)
             }
-        },
-        created() {
-            this.eventBus&& this.eventBus.$on('update:selected',(title)=>{
-                this.open=title === this.title
-            })
-        },
-        mounted() {
-            // this.eventBus&&this.eventBus.$on('default:selected',(name,defaultName)=>{
-            //     this.open=defaultName === this.name
-            // })
-            // this.eventBus&&this.eventBus.$emit('default:selected',this.name,"1")
-            // console.log(this.name,this.open)
         }
     }
 </script>

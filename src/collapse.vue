@@ -31,13 +31,22 @@
                 }
             }
         },
-
-        mounted() {
-            this.$children.forEach((vm) => {
-                if (vm.name === this.selected) {
-                    vm.open=true
-                }
+        created(){
+            // 父组件更新子组件状态
+            this.eventBus&&this.eventBus.$on('update:Selected',(name)=>{
+                this.$children.forEach((vm) => {
+                    vm.open=vm.name === name
+                })
             })
+
+            // 订阅子组件的状态更新请求
+            this.eventBus&& this.eventBus.$on('change:Selected',(name)=>{
+                this.eventBus.$emit('update:Selected',name)
+            })
+        },
+        mounted() {
+            // 设置默认选中项
+            this.eventBus&&this.eventBus.$emit('update:Selected',this.selected)
         }
     }
 </script>

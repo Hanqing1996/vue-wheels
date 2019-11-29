@@ -1146,6 +1146,46 @@ this.$children.forEach((vm)=>{
 
 
 
+#### [正确的数据流总是单向的](https://xiedaimala.com/tasks/f81c1fde-03fd-4b23-8ae8-891f046e63e6/video_tutorials/9853353e-ef49-4fe6-bcb6-cdbb79c6f4cb)
+错误的数据流
+```
+methods:{
+    toggleContent(){
+        this.open=!this.open
+        console.log(`${this.title}发起了更新`);
+        this.eventBus&&this.eventBus.$emit('update:selected', this.title)
+    }
+},
+created() {
+    this.eventBus&& this.eventBus.$on('update:selected',(title)=>{
+        console.log(`${this.title}被更新了`);
+        this.open=title === this.title
+    })
+}
+```
+某个组件发起了更新又更新了自己,这会造成数据回流,是不合理的(一个组件不能更新自己)
+```
+标题3发起了更新
+collapse-item.vue:38 标题1被更新了
+collapse-item.vue:38 标题2被更新了
+collapse-item.vue:38 标题3被更新了
+```
+正确的数据流示范,见collapse组件
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
