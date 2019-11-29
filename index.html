@@ -60,6 +60,42 @@
 </style>
 <div id="app"　style="padding-top:100px">
 
+    <div id="collapseBlock">
+        <!--single为true,则点击一个标题,其它标题对应内容会自动关闭-->
+        <g-collapse>
+            <g-collapse-item title="标题1">内容1</g-collapse-item>
+            <g-collapse-item title="标题2">内容2</g-collapse-item>
+            <g-collapse-item title="标题3">内容3</g-collapse-item>
+        </g-collapse>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div id="popoverBlock" style="overflow: hidden;" @click="yyy">
         <!--position表示气泡框出现的位置-->
         <!--trigger为触发popover的事件名-->
@@ -81,9 +117,6 @@
         </g-popover>
     </div>
 
-
-
-
     <div id="tabsBlock" 　style="margin-bottom:100px">
         <g-tabs :selected="selectedTab" direction="horizontal">
             <g-tabs-head>
@@ -104,7 +137,6 @@
             </g-tabs-body>
         </g-tabs>
     </div>
-
 
     <div id="toastBlock" style=""></div>
     <g-button v-on:click.native="showToast" style="margin-bottom: 100px">showToast</g-button>

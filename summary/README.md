@@ -980,7 +980,7 @@ let vm4=new Constructor2({
     * 测试callback
 * tabs
     * tabs-head:多个slot
-    * Eventus实现组件间通信
+    * Eventbus实现组件间通信
     * $emit传递多个参数
     * getBoundingClientRect()
     * $refs()
@@ -1002,12 +1002,18 @@ let vm4=new Constructor2({
 ---
 2,3解决方法
     * [控制button事件不冒泡,但是这与1相悖](https://github.com/Hanqing1996/vue-wheels/blob/master/src/popover.vue)
-
     
     
     
 #### 设计模式
 * 发布订阅模式
+```
+this.eventBus&&this.eventBus.$emit() // 发布
+
+this.eventBus&& this.eventBus.$on() // 订阅
+
+this.eventBus.$off() // 取消订阅
+```
 * 单向数据流
 
 

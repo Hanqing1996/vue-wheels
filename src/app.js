@@ -25,6 +25,9 @@ import TabsItem from './tabs-item'
 import TabsPane from './tabs-pane'
 // popover
 import Popover from './popover'
+// collapse
+import Collapse from './collapse'
+import CollapseItem from './collapse-item'
 
 // 这里的注册是为 index.html 服务
 Vue.component('g-button', Button)
@@ -48,6 +51,8 @@ Vue.component('g-tabs-body', TabsBody)
 Vue.component('g-tabs-item',TabsItem)
 Vue.component('g-tabs-pane', TabsPane)
 Vue.component('g-popover', Popover)
+Vue.component('g-collapse',Collapse)
+Vue.component('g-collapse-item',CollapseItem)
 
 // new Vue 和组件注册没有任何关系
 new Vue({
