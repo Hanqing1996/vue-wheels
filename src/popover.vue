@@ -1,6 +1,6 @@
 <template>
     <div class="popover" @click="onClick">
-        <div ref="contentWrapper" class="content-wrapper" v-show="visible">
+        <div ref="contentWrapper" class="content-wrapper"　:class="contentWrapperClasses" v-show="visible">
             <slot name="content"></slot>
         </div>
         <span ref="triggerWrapper">
@@ -17,16 +17,21 @@
                 visible: false
             }
         },
+        props:{
+            position:{
+                type:String,
+                validator(value) {
+                    return ['top','bottom','left','right'].indexOf(value)>=0
+                }
+            }
+        },
         methods: {
             openContent(){
-                // 打开content
-                this.visible=true
-                // 开启document对于其它位置的监听
-                this.onClickDocument()
+                this.visible=true// 打开content
+                this.onClickDocument()// 开启document对于其它位置的监听
             },
             closeContent(){
-                // 关闭content
-                this.visible=false
+                this.visible=false// 关闭content
             },
             onClickDocument(){
                 // setTimeout让"设置document的监听事件"这个动作发生在冒泡结束之后，从而阻止了这次button的点击事件冒泡到document(只阻止了这一次)
@@ -38,9 +43,7 @@
                             document.removeEventListener('click', eventHandler)
                         }
                     }
-
-                    // 设置document的监听事件.这里实际是利用了事件冒泡机制,document内的一切元素的点击事件都会冒泡到document
-                    document.addEventListener('click', eventHandler)
+                    document.addEventListener('click', eventHandler)// 设置document的监听事件.这里实际是利用了事件冒泡机制,document内的一切元素的点击事件都会冒泡到document
                 },0)
             },
 
@@ -55,14 +58,19 @@
                     }
                 }
             }
-        }
+        },
+        computed: {
+            contentWrapperClasses: function () {
+                return [this.position && `position-${this.position}`]
+            }
+        },
     }
 </script>
 
-<style scoped>
+<style lang="scss"　scoped>
     .popover {
         position: relative;
-        margin-top: 40px;
+        margin:40px;
     }
 
     /*浮动布局*/
@@ -72,5 +80,17 @@
         top:-30px;
         border: 1px solid red;
         box-shadow: 0 0 3px rgb(0, 0, 0.5);
+        &.position-left{
+            left: -80px;
+            top:5px;
+         }
+        &.position-right{
+            left: 160px;
+            top:5px;
+         }
+        &.position-bottom{
+            left: 0px;
+            top:45px;
+         }
     }
 </style>

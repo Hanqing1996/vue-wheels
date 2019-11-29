@@ -26,7 +26,7 @@
                 }
             },
             rowClass: function () {
-                return [this.align && `align-${this.align}`, this.align && `align-${this.align}`]
+                return [this.align && `align-${this.align}`]
             }
         },
 

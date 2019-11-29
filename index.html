@@ -60,18 +60,18 @@
 </style>
 <div id="app"　style="padding-top:100px">
     <div id="popoverBlock" style="overflow: hidden;" @click="yyy">
-        <g-popover>
+        <g-popover position="right">
             <template slot="content">
                 <!--点击button后div会显示到button上面,再点击button,则div隐藏-->
                 <div>something</div>
             </template>
-            <button>点我</button>
+            <g-button>点我获得something</g-button>
         </g-popover>
         <g-popover>
             <template slot="content">
                 <div>anything</div>
             </template>
-            <button>点我</button>
+            <g-button>点我获得anything</g-button>
         </g-popover>
     </div>
 
@@ -101,7 +101,9 @@
 
 
     <div id="toastBlock" style=""></div>
-    <button @click="showToast" style="margin-bottom: 100px">showToast</button>
+    <div @click="showToast">
+        <g-button style="margin-bottom: 100px">showToast</g-button>
+    </div>
 
     <!--span表示格子长度, offset表示格子间左空隙,gutter表示中央空隙(针对两个格子)-->
     <!--要求span,offset和为24(iPad对应sapn和offset和为24,narrowPc同理),gutter随意-->

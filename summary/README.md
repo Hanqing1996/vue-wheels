@@ -1096,7 +1096,28 @@ let vm4=new Constructor2({
     
     
     
-    
+#### 组件不能加DOM事件
+1. 下面这种写法是不起效果的
+```
+<g-button @click="showToast">showToast</g-button>
+```    
+必须改成这样
+```
+<div @click="showToast">
+    <g-button>showToast</g-button>
+</div>
+```
+2. 有时我们会看见
+```
+<g-button @click1="xxx">
+```
+实际上@click1是g-button内部的元素点击事件通过emit触发的
+```
+<template>
+    <button @click="$emit('click1')">
+    </button>
+</template>
+```
     
     
     
