@@ -1063,12 +1063,15 @@ let vm4=new Constructor2({
     * [@click.stop阻止事件冒泡](https://github.com/Hanqing1996/vue-wheels/blob/master/src/popover.vue)
     * ref注册DOM元素或组件
     * setTimeout让"设置document的监听事件"这个动作发生在冒泡结束之后
+    * 动态绑定事件
     
     
 #### [popover的需求](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/26c0e669-f116-46c7-898a-d259707b30fe)
 1. 用户可能在popover的容器元素上添加click事件,然后希望点击button后能触发容器元素的click事件(利用事件冒泡机制),所以popover的内部元素的click不能用stop修饰符
 2. 点击按钮后显示content-wrapper,然后点击其它位置(除了content-wrapper)隐藏content-wrapper;
 3. 点击显示出来的content-wrapper不隐藏content-wrapper(因为浏览网站者可能有复制文本内容的需求)
+4. 显示出来的content-wrapper有一个关闭键,点击关闭content-wrapper
+5. button支持click,hover两种事件
 ---
 2,3解决方法
     * [控制button事件不冒泡,但是这与1相悖](https://github.com/Hanqing1996/vue-wheels/blob/master/src/popover.vue)
@@ -1118,8 +1121,9 @@ let vm4=new Constructor2({
     </button>
 </template>
 ```
+
+#### [表驱动编程](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/2838ce98-d198-4e81-8b93-793368c6439b)
     
-    
-    
+####     
     
     

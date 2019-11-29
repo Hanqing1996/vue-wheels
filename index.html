@@ -59,8 +59,10 @@
     #popoverBlock {display: flex;flex-direction: row;justify-content: space-around;}
 </style>
 <div id="app"　style="padding-top:100px">
+
     <div id="popoverBlock" style="overflow: hidden;" @click="yyy">
-        <g-popover position="right">
+        <!--position表示气泡框出现的位置-->
+        <g-popover position="right"　trigger="hover">
             <template slot="content">
                 <!--点击button后div会显示到button上面,再点击button,则div隐藏-->
                 <div>something</div>

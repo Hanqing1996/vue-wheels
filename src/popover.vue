@@ -1,5 +1,5 @@
 <template>
-    <div class="popover" @click="onClick">
+    <div class="popover" ref="popover">
         <div ref="contentWrapper" class="content-wrapper"　:class="contentWrapperClasses" v-show="visible">
             <slot name="content"></slot>
         </div>
@@ -12,23 +12,42 @@
 <script>
     export default {
         name: "WheelPopover",
-        data() {
-            return {
-                visible: false
-            }
-        },
         props:{
             position:{
                 type:String,
                 validator(value) {
                     return ['top','bottom','left','right'].indexOf(value)>=0
                 }
+            },
+            trigger: {
+                type: String,
+                default: 'click',
+                validator(value) {
+                    return ['click', 'hover'].indexOf(value) >= 0
+                }
+            }
+        },
+        data() {
+            return {
+                visible: false
+            }
+        },
+        // 根据trigger值动态为popover添加监听事件
+        mounted(){
+            if(this.trigger==='click'){
+                this.$refs.popover.addEventListener('click',this.onClick)
+            } else{
+                this.$refs.popover.addEventListener(this.openEvent,this.openContent)
+                this.$refs.popover.addEventListener(this.closeEvent,this.closeContent)
             }
         },
         methods: {
             openContent(){
                 this.visible=true// 打开content
-                this.onClickDocument()// 开启document对于其它位置的监听
+                //只有当触发事件为click,才才开启document对于其它位置的监听
+                if(this.trigger==='click'){
+                    this.onClickDocument()
+                }
             },
             closeContent(){
                 this.visible=false// 关闭content
@@ -60,6 +79,20 @@
             }
         },
         computed: {
+            openEvent(){
+                if(this.trigger==='click'){
+                    return 'click'
+                } else{
+                    return 'mouseenter'
+                }
+            },
+            closeEvent(){
+                if(this.trigger==='click'){
+                    return 'click'
+                } else{
+                    return 'mouseleave'
+                }
+            },
             contentWrapperClasses: function () {
                 return [this.position && `position-${this.position}`]
             }
@@ -85,7 +118,7 @@
             top:5px;
          }
         &.position-right{
-            left: 160px;
+            left: 180px;
             top:5px;
          }
         &.position-bottom{
