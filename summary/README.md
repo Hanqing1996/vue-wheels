@@ -587,10 +587,6 @@ div.$mount() // 异步执行
 1. [install(轮子开发者写的,用户不能写入内容)](https://github.com/Hanqing1996/vue-wheels/blob/master/src/plugin.js)
 2. [use(用户填入他自定义的参数)](https://github.com/Hanqing1996/vue-wheels/blob/master/src/app.js)
 
-
-#### [vue 动态创建实例](https://github.com/Hanqing1996/vue-wheels/blob/master/src/plugin.js)
-
-#### [slot 要放在 mount() 之前](https://github.com/Hanqing1996/vue-wheels/blob/master/src/plugin.js)
  
 #### 组件的 props 的 type 如果是 Object(包括 Array)
 则该 props 的 default 必须 return 一个对象
@@ -623,16 +619,7 @@ callback: (toast) => {
 * 组件内调用
 ```
 this.closeButton.callback(this)
-```
-     
-#### 向组件的slot中插入HTML内容
-* 这是一种危险的行为
-* [实现方法]()
-```
-<div v-html="$slots.default[0]"></div>
-
-vm.$slots.default=['这是<strong style="color: blue">toast</strong>信息']
-```    
+``` 
     
 #### 怎么知道各个浏览器对 include 的兼容性
 1. MDN include
@@ -935,15 +922,13 @@ methods: {
 
 
 
-####
+####　添加组件实例的方法
 ```
 // 一般写法
 Vue.component('g-button', Button)
 let vm=new Vue({
 })
 vm.$mount(document.getElementById("app"))// vue实例挂载到app上，即识别app内容
-
-
 
 
 
@@ -965,65 +950,6 @@ let vm4=new Constructor2({
         propsData:xxx // 赋予组件props(模拟父组件给子组件传递props),注意Button的一切data,method　vm4都有
     }).$mount(document.getElementById("app6")) // app6被替换
 ```
-
-#### tabs-item.vue
-```
-<template>
-    <div class="tabs-item"　@click="xxx" :class="itemClasses"　:data-name="name">
-        <slot></slot>
-    </div>
-</template>
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #### 各个组件总结(组成内容见[app.js](https://github.com/Hanqing1996/vue-wheels/blob/master/src/app.js))
@@ -1064,6 +990,7 @@ let vm4=new Constructor2({
     * ref注册DOM元素或组件
     * setTimeout让"设置document的监听事件"这个动作发生在冒泡结束之后
     * 动态绑定事件
+    * slot-scope
     
     
 #### [popover的需求](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/26c0e669-f116-46c7-898a-d259707b30fe)
@@ -1075,7 +1002,6 @@ let vm4=new Constructor2({
 ---
 2,3解决方法
     * [控制button事件不冒泡,但是这与1相悖](https://github.com/Hanqing1996/vue-wheels/blob/master/src/popover.vue)
-    * 
 
     
     
@@ -1093,37 +1019,53 @@ let vm4=new Constructor2({
 #### 造轮子原则
 1. 你不能要求组件容器的style不能有什么,必须有什么
 2. 组件内部的元素不能用@eventName.stop,因为可能用户需要利用事件冒泡,在点击组件内部的元素时触发添加在组件上的事件    
-3. 组件机器slot的DOM元素只能传递接口属性,不能加class,Id之类的
+3. 组件slot的DOM元素只能传递接口属性,不能加class,Id之类的
     
     
-    
-    
-    
-#### 组件不能加DOM事件
-1. 下面这种写法是不起效果的
+#### 在组件上加事件
+1. 在组件上加原生的DOM事件
 ```
-<g-button @click="showToast">showToast</g-button>
-```    
-必须改成这样
+<g-button  v-on:click.native="close">close</g-button></div>
 ```
-<div @click="showToast">
-    <g-button>showToast</g-button>
-</div>
+2. 通过$emit触发组件上的事件
 ```
-2. 有时我们会看见
+<g-button @beEmited="xxx">
 ```
-<g-button @click1="xxx">
-```
-实际上@click1是g-button内部的元素点击事件通过emit触发的
+beEmited事件是g-button内部的元素点击事件通过emit触发的
 ```
 <template>
-    <button @click="$emit('click1')">
-    </button>
+    <button @click="$emit('beEmited')"></button>
 </template>
 ```
 
 #### [表驱动编程](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/2838ce98-d198-4e81-8b93-793368c6439b)
     
-####     
+#### slot
+* [.$slots 要放在 $mount() 之前](https://github.com/Hanqing1996/vue-wheels/blob/master/src/plugin.js)     
+* 向组件的slot中插入HTML内容
+    * 这是一种危险的行为(阻止事件冒泡也是一种危险的行为)
+    * [实现方法](https://github.com/Hanqing1996/vue-wheels/blob/master/src/toast.vue)
+    ```
+    <div v-html="$slots.default[0]"></div>
+  
+    vm.$slots.default=['这是<strong style="color: blue">toast</strong>信息']
+    ```   
+* slot-scope
+```
+<template slot="content" slot-scope="{close}">
+    <div>give you anything　<g-button  v-on:click.native="close">close</g-button></div>
+</template>
+```
+```
+<slot name="content"　:close="closeContent"></slot>
+
+methods: {
+    closeContent(){
+        console.log('oh close');
+        this.visible=false// 关闭content
+    }
+}
+
+```  
     
     

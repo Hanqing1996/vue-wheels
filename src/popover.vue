@@ -1,7 +1,7 @@
 <template>
     <div class="popover" ref="popover">
         <div ref="contentWrapper" class="content-wrapper"　:class="contentWrapperClasses" v-show="visible">
-            <slot name="content"></slot>
+            <slot name="content"　:close="closeContent"></slot>
         </div>
         <span ref="triggerWrapper">
             <slot></slot>
@@ -12,6 +12,20 @@
 <script>
     export default {
         name: "WheelPopover",
+        data() {
+            return {
+                visible: false
+            }
+        },
+        // 根据trigger值动态为popover添加监听事件
+        mounted(){
+            if(this.trigger==='click'){
+                this.$refs.popover.addEventListener('click',this.onClick)
+            } else{
+                this.$refs.popover.addEventListener(this.openEvent,this.openContent)
+                this.$refs.popover.addEventListener(this.closeEvent,this.closeContent)
+            }
+        },
         props:{
             position:{
                 type:String,
@@ -25,20 +39,6 @@
                 validator(value) {
                     return ['click', 'hover'].indexOf(value) >= 0
                 }
-            }
-        },
-        data() {
-            return {
-                visible: false
-            }
-        },
-        // 根据trigger值动态为popover添加监听事件
-        mounted(){
-            if(this.trigger==='click'){
-                this.$refs.popover.addEventListener('click',this.onClick)
-            } else{
-                this.$refs.popover.addEventListener(this.openEvent,this.openContent)
-                this.$refs.popover.addEventListener(this.closeEvent,this.closeContent)
             }
         },
         methods: {
@@ -58,7 +58,7 @@
                     let eventHandler = (event) => {
                         // 只有点击其它位置,才会触发eventHandler("其它位置的定义"是event.target不是文本内容和button)
                         if(!this.$refs.contentWrapper.contains(event.target)&&!this.$refs.triggerWrapper.contains(event.target)){
-                            this.visible = false
+                            this.closeContent()
                             document.removeEventListener('click', eventHandler)
                         }
                     }
@@ -103,14 +103,14 @@
 <style lang="scss"　scoped>
     .popover {
         position: relative;
-        margin:40px;
+        margin:100px;
     }
 
     /*浮动布局*/
     .content-wrapper {
         position: absolute;
         left: 0px;
-        top:-30px;
+        top:-60px;
         border: 1px solid red;
         box-shadow: 0 0 3px rgb(0, 0, 0.5);
         &.position-left{
