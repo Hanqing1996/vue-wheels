@@ -1,9 +1,9 @@
 ---
 sidebarDepth: 2
 ---
-# button-按钮
+# toast-弹出层
 
 使用方法
 <ClientOnly>
-    <button-demos></button-demos>
+    <toast-demos></toast-demos>
 </ClientOnly>

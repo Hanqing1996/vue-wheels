@@ -33,6 +33,10 @@
     .sider{
         /*浮动布局*/
         position: relative;
+        background: #666666;
+        width: 200px;
+        height: 500px;
+
         > button{
             position: absolute;
             top:0;

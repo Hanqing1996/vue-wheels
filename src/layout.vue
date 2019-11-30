@@ -33,6 +33,7 @@
         display: flex;
         /*默认纵向布局*/
         flex-direction: column;
+        border: 1px solid black;
 
         /*有sider则横向布局*/
         &.layoutHasSider {

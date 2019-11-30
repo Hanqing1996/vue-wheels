@@ -1,9 +1,9 @@
 ---
 sidebarDepth: 2
 ---
-# button-按钮
+# tabs-标签
 
 使用方法
 <ClientOnly>
-    <button-demos></button-demos>
+    <tabs-demos></tabs-demos>
 </ClientOnly>

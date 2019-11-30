@@ -8,7 +8,7 @@ import Input from './input'
 // grid
 import Row from './row'
 import Col from './col'
-// default-layout
+// layout
 import Layout from './layout'
 import Header from './header'
 import Sider from './sider'

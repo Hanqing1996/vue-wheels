@@ -12,6 +12,7 @@
 
 <style scoped lang="scss">
     .header{
-
+        background: #999;
+        height: 100px;
     }
 </style>

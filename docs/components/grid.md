@@ -1,9 +1,9 @@
 ---
 sidebarDepth: 2
 ---
-# button-按钮
+# grid-网格
 
 使用方法
 <ClientOnly>
-    <button-demos></button-demos>
+    <grid-demos></grid-demos>
 </ClientOnly>

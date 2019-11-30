@@ -2,7 +2,6 @@
 <template>
     <!--通过icon-${iconPosition}来设置样式-->
     <button class="button" :class="{[`icon-${iconPosition}`]: true}" @click="$emit('click1')">
-        <div>hhhhhhhhh</div>
         <!--注意class的icon值为字符串，而v-if，v-bind绑定的icon值由用户传入-->
         <!--v-if="icon&&!loading"：没有loading的情况下，用户传入icon值，则渲染svg-->
         <!--:name="icon"：用户传入icon的值（svg的名字）-->

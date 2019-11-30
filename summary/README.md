@@ -978,6 +978,7 @@ let vm4=new Constructor2({
     * 向组件的 slot 中插入 HTML 内容
     * $emit实现toast在被关闭前触发beforeClose执行callback
     * 测试callback
+    * v-on:click.native
 * tabs
     * tabs-head:多个slot
     * Eventbus实现组件间通信
