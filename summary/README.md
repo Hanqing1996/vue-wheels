@@ -1185,6 +1185,7 @@ collapse-item.vue:38 标题3被更新了
 * [创建官网](https://xiedaimala.com/tasks/4e1ae548-5f27-45b0-bbf0-1dddcc304be9/video_tutorials/7f6b22f7-086f-4c9c-827e-7dcf951106cd)
 * [部署到github pages](https://xiedaimala.com/tasks/4e1ae548-5f27-45b0-bbf0-1dddcc304be9/video_tutorials/e958d50f-9b7f-49a0-ba69-1b82365b447c)
     * [如何解决bug](https://xiedaimala.com/tasks/4e1ae548-5f27-45b0-bbf0-1dddcc304be9/video_tutorials/e958d50f-9b7f-49a0-ba69-1b82365b447c)
+    * bug=>时间
 * 更新内容并发布
 1. 更新config.js
 2. 发布更新
@@ -1192,7 +1193,8 @@ collapse-item.vue:38 标题3被更新了
 npm run update
 ```
 
-
+1. 预览文档标题
+2, 遇到bug,先google
 
 
 
