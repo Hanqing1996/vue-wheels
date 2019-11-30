@@ -1,4 +1,5 @@
 module.exports = {
+    base:'/vue-wheels/',
     title: 'Wheels',
     description: 'Just playing around',
     themeConfig: {

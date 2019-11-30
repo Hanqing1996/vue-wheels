@@ -8,7 +8,8 @@
     "dev-test": "npx parcel watch test/* --no-cache & npx karma start",
     "test": "npx parcel build test/* --no-cache --no-minify && npx karma start --single-run",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "update": "./deploy.sh"
   },
   "repository": {
     "type": "git",
