@@ -1193,8 +1193,31 @@ collapse-item.vue:38 标题3被更新了
 npm run update
 ```
 
+#### 学习　vuepress
 1. 预览文档标题
 2, 遇到bug,先google
+
+
+#### cascader 需求分析
+![](./images/1.jpg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

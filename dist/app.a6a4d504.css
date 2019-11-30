@@ -72,7 +72,7 @@
   z-index: 1;
 }
 .wrapper[data-v-21edda] {
-  font-size: 12px;
+  font-size: 14px;
   display: inline-flex;
   align-items: center;
 }
@@ -1091,15 +1091,23 @@
   display: flex;
   /*默认纵向布局*/
   flex-direction: column;
+  border: 1px solid black;
   /*有sider则横向布局*/
 }
 .layout.layoutHasSider[data-v-9b5f92] {
   flex-direction: row;
 }
+.header[data-v-072506] {
+  background: #999;
+  height: 100px;
+}
 @charset "UTF-8";
 .sider[data-v-540916] {
   /*浮动布局*/
   position: relative;
+  background: #666666;
+  width: 200px;
+  height: 500px;
 }
 .sider > button[data-v-540916] {
   position: absolute;
@@ -1118,6 +1126,10 @@
 }
 .content[data-v-6b0dbd] {
   flex-grow: 1;
+}
+.footer[data-v-338e79] {
+  background: #ccc;
+  height: 50px;
 }
 .toast[data-v-e42de6] {
   font-size: 14px;
@@ -1157,7 +1169,7 @@
   height: 40px;
   justify-content: flex-start;
   position: relative;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #999;
 }
 .tabs-head > .line[data-v-1e6dac] {
   position: absolute;
