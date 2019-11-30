@@ -28,6 +28,8 @@ import Popover from './popover'
 // collapse
 import Collapse from './collapse'
 import CollapseItem from './collapse-item'
+// cascader
+import Cascader from './cascader'
 
 // 这里的注册是为 index.html 服务
 Vue.component('g-button', Button)
@@ -44,15 +46,15 @@ Vue.component('g-footer', Footer)
 Vue.component('g-toast', Toast)
 // 用户使用插件
 Vue.use(plugin)
-
 Vue.component('g-tabs', Tabs)
 Vue.component('g-tabs-head', TabsHead)
 Vue.component('g-tabs-body', TabsBody)
-Vue.component('g-tabs-item',TabsItem)
+Vue.component('g-tabs-item', TabsItem)
 Vue.component('g-tabs-pane', TabsPane)
 Vue.component('g-popover', Popover)
-Vue.component('g-collapse',Collapse)
-Vue.component('g-collapse-item',CollapseItem)
+Vue.component('g-collapse', Collapse)
+Vue.component('g-collapse-item', CollapseItem)
+Vue.component('g-cascader', Cascader)
 
 // new Vue 和组件注册没有任何关系
 new Vue({
@@ -61,7 +63,53 @@ new Vue({
         loadingStatus1: false,
         loadingStatus2: false,
         message: 'hi',
-        selectedTab:'sports',
+        selectedTab: 'sports',
+        source: [
+            {
+                name: '浙江',
+                children: [
+                    {
+                        name: '杭州',
+                        children: [
+                            {name: '上城'},
+                            {name: '下城'},
+                            {name: '江干'},
+                        ]
+                    },
+                    {
+                        name: '嘉兴',
+                        children: [
+                            {name: '南湖'},
+                            {name: '秀洲'},
+                            {name: '嘉善'},
+                        ]
+                    },
+                ]
+            },
+            {
+                name: '福建',
+                children: [
+                    {
+                        name: '福州',
+                        children: [
+                            {name: '鼓楼'},
+                            {name: '台江'},
+                            {name: '仓山'},
+                        ]
+                    },
+                ]
+            },
+            {
+                name: '安徽',
+                children: [{
+                    name: '合肥',
+                    children: [{
+                        name: '瑶海'
+                    }, {
+                        name: '庐阳'
+                    }]
+                }]
+            }]
     },
     methods: {
         inputChange(e) {
@@ -72,7 +120,7 @@ new Vue({
             this.$toast('这是<strong style="color: blue">toast</strong>信息',
                 {
                     // 用户选择开启“向slot中填入HTML"
-                    enableHTML:true,
+                    enableHTML: true,
                     autoClose: 1000,// 1000秒，方便测试
                     closeButton: {
                         text: '知道了',
@@ -82,10 +130,10 @@ new Vue({
                             toast.log()
                         }
                     },
-                    position:'middle'
+                    position: 'middle'
                 })
         },
-        yyy(){
+        yyy() {
             console.log('popover内元素冒泡结束');
         }
     }

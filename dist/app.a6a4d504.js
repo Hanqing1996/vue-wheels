@@ -14604,6 +14604,94 @@ render._withStripped = true
       
       }
     })();
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/cascader.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  name: "WheelCascader"
+};
+exports.default = _default;
+        var $1dc6f3 = exports.default || module.exports;
+      
+      if (typeof $1dc6f3 === 'function') {
+        $1dc6f3 = $1dc6f3.options;
+      }
+    
+        /* template */
+        Object.assign($1dc6f3, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "cascader" }, [
+    _c("div", { staticClass: "trigger" }, [_vm._t("default")], 2),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "popover" }, [
+      _c("div", { staticClass: "level-1" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "level-2" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "level-3" })
+    ])
+  }
+]
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: "data-v-1dc6f3",
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$1dc6f3', $1dc6f3);
+          } else {
+            api.reload('$1dc6f3', $1dc6f3);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
 },{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/app.js":[function(require,module,exports) {
 "use strict";
 
@@ -14651,6 +14739,8 @@ var _collapse = _interopRequireDefault(require("./collapse"));
 
 var _collapseItem = _interopRequireDefault(require("./collapse-item"));
 
+var _cascader = _interopRequireDefault(require("./cascader"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // button
@@ -14661,6 +14751,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // tabs
 // popover
 // collapse
+// cascader
 // 这里的注册是为 index.html 服务
 _vue.default.component('g-button', _button.default);
 
@@ -14703,7 +14794,9 @@ _vue.default.component('g-popover', _popover.default);
 
 _vue.default.component('g-collapse', _collapse.default);
 
-_vue.default.component('g-collapse-item', _collapseItem.default); // new Vue 和组件注册没有任何关系
+_vue.default.component('g-collapse-item', _collapseItem.default);
+
+_vue.default.component('g-cascader', _cascader.default); // new Vue 和组件注册没有任何关系
 
 
 new _vue.default({
@@ -14712,7 +14805,51 @@ new _vue.default({
     loadingStatus1: false,
     loadingStatus2: false,
     message: 'hi',
-    selectedTab: 'sports'
+    selectedTab: 'sports',
+    source: [{
+      name: '浙江',
+      children: [{
+        name: '杭州',
+        children: [{
+          name: '上城'
+        }, {
+          name: '下城'
+        }, {
+          name: '江干'
+        }]
+      }, {
+        name: '嘉兴',
+        children: [{
+          name: '南湖'
+        }, {
+          name: '秀洲'
+        }, {
+          name: '嘉善'
+        }]
+      }]
+    }, {
+      name: '福建',
+      children: [{
+        name: '福州',
+        children: [{
+          name: '鼓楼'
+        }, {
+          name: '台江'
+        }, {
+          name: '仓山'
+        }]
+      }]
+    }, {
+      name: '安徽',
+      children: [{
+        name: '合肥',
+        children: [{
+          name: '瑶海'
+        }, {
+          name: '庐阳'
+        }]
+      }]
+    }]
   },
   methods: {
     inputChange: function inputChange(e) {
@@ -14741,7 +14878,7 @@ new _vue.default({
     }
   }
 });
-},{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./button-group":"src/button-group.vue","./input":"src/input.vue","./row":"src/row.vue","./col":"src/col.vue","./layout":"src/layout.vue","./header":"src/header.vue","./sider":"src/sider.vue","./content":"src/content.vue","./footer":"src/footer.vue","./toast":"src/toast.vue","./plugin":"src/plugin.js","./tabs":"src/tabs.vue","./tabs-head":"src/tabs-head.vue","./tabs-body":"src/tabs-body.vue","./tabs-item":"src/tabs-item.vue","./tabs-pane":"src/tabs-pane.vue","./popover":"src/popover.vue","./collapse":"src/collapse.vue","./collapse-item":"src/collapse-item.vue"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./button-group":"src/button-group.vue","./input":"src/input.vue","./row":"src/row.vue","./col":"src/col.vue","./layout":"src/layout.vue","./header":"src/header.vue","./sider":"src/sider.vue","./content":"src/content.vue","./footer":"src/footer.vue","./toast":"src/toast.vue","./plugin":"src/plugin.js","./tabs":"src/tabs.vue","./tabs-head":"src/tabs-head.vue","./tabs-body":"src/tabs-body.vue","./tabs-item":"src/tabs-item.vue","./tabs-pane":"src/tabs-pane.vue","./popover":"src/popover.vue","./collapse":"src/collapse.vue","./collapse-item":"src/collapse-item.vue","./cascader":"src/cascader.vue"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
