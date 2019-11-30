@@ -991,6 +991,7 @@ let vm4=new Constructor2({
     * setTimeout让"设置document的监听事件"这个动作发生在冒泡结束之后
     * 动态绑定事件
     * slot-scope
+    * 单向数据流(设计模式)
     
     
 #### [popover的需求](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/26c0e669-f116-46c7-898a-d259707b30fe)
@@ -1015,6 +1016,11 @@ this.eventBus&& this.eventBus.$on() // 订阅
 this.eventBus.$off() // 取消订阅
 ```
 * 单向数据流
+1. A发起更新,A更新自己:不可以
+2. A可以更新B,B可以更新B:不可以
+总之一点，两个相邻节点(组件)不能形成闭环
+* 正交
+一个组件的props必须正交
 
 
 #### 前端路由
@@ -1174,7 +1180,7 @@ collapse-item.vue:38 标题3被更新了
 
 
 
-
+#### vuepress
 
 
 
