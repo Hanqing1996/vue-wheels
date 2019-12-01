@@ -14604,7 +14604,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/cascader.vue":[function(require,module,exports) {
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/cascader-items.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14622,10 +14622,120 @@ exports.default = void 0;
 //
 //
 //
+var component = {
+  name: "CascaderedItems",
+  components: {
+    CascaderedItems: component
+  },
+  props: {
+    sourceItem: {
+      type: Object
+    }
+  }
+};
+var _default = component;
+exports.default = _default;
+        var $76a89c = exports.default || module.exports;
+      
+      if (typeof $76a89c === 'function') {
+        $76a89c = $76a89c.options;
+      }
+    
+        /* template */
+        Object.assign($76a89c, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._v("\n    " + _vm._s(_vm.sourceItem.name) + "\n    "),
+    _vm.sourceItem.children
+      ? _c(
+          "div",
+          _vm._l(_vm.sourceItem.children, function(item) {
+            return _c(
+              "div",
+              [_c("CascaderedItems", { attrs: { sourceItem: item } })],
+              1
+            )
+          }),
+          0
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: "data-v-76a89c",
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$76a89c', $76a89c);
+          } else {
+            api.reload('$76a89c', $76a89c);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/cascader.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _cascaderItems = _interopRequireDefault(require("./cascader-items"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 var _default = {
-  name: "WheelCascader"
+  name: "WheelCascader",
+  components: {
+    CascaderItems: _cascaderItems.default
+  },
+  props: {
+    source: {
+      type: Array
+    }
+  }
 };
 exports.default = _default;
         var $1dc6f3 = exports.default || module.exports;
@@ -14643,23 +14753,21 @@ exports.default = _default;
   return _c("div", { staticClass: "cascader" }, [
     _c("div", { staticClass: "trigger" }, [_vm._t("default")], 2),
     _vm._v(" "),
-    _vm._m(0)
+    _c(
+      "div",
+      { staticClass: "popover" },
+      _vm._l(_vm.source, function(item) {
+        return _c(
+          "div",
+          [_c("CascaderItems", { attrs: { sourceItem: item } })],
+          1
+        )
+      }),
+      0
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "popover" }, [
-      _c("div", { staticClass: "level-1" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "level-2" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "level-3" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
           return {
@@ -14692,7 +14800,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/app.js":[function(require,module,exports) {
+},{"./cascader-items":"src/cascader-items.vue","_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/app.js":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
@@ -14906,7 +15014,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33455" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44965" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

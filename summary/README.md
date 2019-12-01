@@ -160,7 +160,8 @@ expect(callback).to.have.been.calledWith(event)
 props:{
     icon:{},
     iconPosition:{
-        type:String,                validator(value){
+        type:String,                
+        validator(value){
                     return value=='left'||value!='right'
                 }
         default:'left'
@@ -235,6 +236,21 @@ mounted() {
         }
     })
 }
+```
+3. 对于递归组件,组件name必须与注册时的组件名一致
+```
+    const component = {
+        name: "CascaderedItems",
+        components:{
+            CascaderedItems: component
+        },
+        props: {
+            sourceItem: {
+                type: Object
+            }
+        }
+    }
+    export default component
 ```
 * scoped
 为组件设置 css 作用域（本质是不同组件设置不同ID）
@@ -986,6 +1002,11 @@ let vm4=new Constructor2({
     * 动态绑定事件
     * slot-scope
     * 单向数据流(设计模式)
+---
+* cascader
+    * v-for
+    * cascader-x:递归组件    
+    
     
     
 #### [popover的需求](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/26c0e669-f116-46c7-898a-d259707b30fe)
@@ -1194,28 +1215,7 @@ npm run update
 #### cascader 需求分析
 ![](./images/1.jpg)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#### 组件的　props 不能以 data-　开头
 
 
 
