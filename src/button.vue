@@ -21,7 +21,6 @@
     export default {
         name:"WheelButton",
 
-        //局部注册
         components:{Icon},
         props: {
             icon: {},
