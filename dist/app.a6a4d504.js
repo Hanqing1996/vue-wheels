@@ -12557,7 +12557,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // 引入Icon组件
 var _default = {
   name: "WheelButton",
-  //局部注册
   components: {
     Icon: _icon.default
   },
