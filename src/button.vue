@@ -15,7 +15,7 @@
     </button>
 </template>
 <script>
-
+    // 引入Icon组件
     import Icon from './icon'
 
     export default {
