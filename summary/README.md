@@ -237,20 +237,14 @@ mounted() {
     })
 }
 ```
-3. 对于递归组件,组件name必须与注册时的组件名一致
+3. 对于递归组件,组件名必须与name一致
 ```
-    const component = {
-        name: "CascaderedItems",
-        components:{
-            CascaderedItems: component
-        },
-        props: {
-            sourceItem: {
-                type: Object
-            }
-        }
-    }
-    export default component
+<cascader-items :items="rightItems"></cascader-items>
+
+// 递归调用
+export default {
+    name: "CascaderItems",// 在HTML中会变为cascader-items
+}
 ```
 * scoped
 为组件设置 css 作用域（本质是不同组件设置不同ID）
@@ -1005,7 +999,30 @@ let vm4=new Constructor2({
 ---
 * cascader
     * v-for
-    * cascader-x:递归组件    
+    * cascader-items:递归组件    
+    * 正确使用computed
+        * level2Items随selectedLevel1改变而更新,那level2Items为计算属性
+        * selectedLevel1放在data而不是computed里面,是因为selectedLevel1是用户点击选择从而更新的,不是随其它数据更新而更新的
+        ```
+          <div class="label" v-for="item in items">
+              <div @click="selectedLevel2=item">{{item.name}}</div>
+          </div>
+      
+          data() {
+              return {
+                  selectedLevel2:null
+              }
+          },
+          
+          computed: {
+              level3Items: function () {
+                  // 注意selectedLevel2可能是用户选择的,一开始为null，所以要加以判断
+                  if (this.selectedLevel2) {
+                      return this.selectedLevel2.children
+                  } else return [];
+              }
+          }
+        ```
     
     
     

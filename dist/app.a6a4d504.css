@@ -1256,26 +1256,15 @@
   padding: 0 8px;
   background-color: red;
 }
+.popover[data-v-76a89c] {
+  display: flex;
+}
+.popover > .label[data-v-76a89c] {
+  width: 80px;
+  border: 1px solid blue;
+}
 .cascader > .trigger[data-v-1dc6f3] {
   width: 100px;
   height: 32px;
   border: 1px solid red;
-}
-.cascader > .popover[data-v-1dc6f3] {
-  display: flex;
-}
-.cascader > .popover > .level1[data-v-1dc6f3] {
-  width: 80px;
-  height: 280px;
-  border: 1px solid blue;
-}
-.cascader > .popover > .level2[data-v-1dc6f3] {
-  width: 80px;
-  height: 140px;
-  border: 1px solid red;
-}
-.cascader > .popover > .level3[data-v-1dc6f3] {
-  width: 80px;
-  height: 70px;
-  border: 1px solid black;
 }

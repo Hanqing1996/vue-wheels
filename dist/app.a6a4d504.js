@@ -14622,19 +14622,33 @@ exports.default = void 0;
 //
 //
 //
+//
+//
 // 递归调用
-var component = {
-  name: "CascaderedItems",
-  components: {
-    CascaderedItems: component
-  },
+var _default = {
+  name: "CascaderItems",
   props: {
-    sourceItem: {
-      type: Object
+    items: {
+      type: Array
+    }
+  },
+  data: function data() {
+    return {
+      leftSelected: null
+    };
+  },
+  computed: {
+    rightItems: function rightItems() {
+      // leftSelected被选中且有children，才显示右边
+      if (this.leftSelected && this.leftSelected.children) {
+        console.log('rightItems产生');
+        return this.leftSelected.children;
+      } else {
+        return null;
+      }
     }
   }
 };
-var _default = component;
 exports.default = _default;
         var $76a89c = exports.default || module.exports;
       
@@ -14648,19 +14662,34 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._v("\n    " + _vm._s(_vm.sourceItem.name) + "\n    "),
-    _vm.sourceItem.children
+  return _c("div", { staticClass: "cascaderItems popover" }, [
+    _c(
+      "div",
+      { staticClass: "label left" },
+      _vm._l(_vm.items, function(item) {
+        return _c("div", { staticClass: "left" }, [
+          _c(
+            "div",
+            {
+              on: {
+                click: function($event) {
+                  _vm.leftSelected = item
+                }
+              }
+            },
+            [_vm._v(_vm._s(item.name))]
+          )
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _vm.rightItems
       ? _c(
           "div",
-          _vm._l(_vm.sourceItem.children, function(item) {
-            return _c(
-              "div",
-              [_c("CascaderedItems", { attrs: { sourceItem: item } })],
-              1
-            )
-          }),
-          0
+          { staticClass: "right" },
+          [_c("cascader-items", { attrs: { items: _vm.rightItems } })],
+          1
         )
       : _vm._e()
   ])
@@ -14721,27 +14750,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default = {
   name: "WheelCascader",
   components: {
@@ -14754,22 +14762,8 @@ var _default = {
   },
   data: function data() {
     return {
-      popoverVisible: false,
-      selectedLevel1: null,
-      selectedLevel2: null
+      popoverVisible: false
     };
-  },
-  computed: {
-    level2Items: function level2Items() {
-      if (this.selectedLevel1) {
-        return this.selectedLevel1.children;
-      } else return [];
-    },
-    level3Items: function level3Items() {
-      if (this.selectedLevel2) {
-        return this.selectedLevel2.children;
-      } else return [];
-    }
   }
 };
 exports.default = _default;
@@ -14801,62 +14795,12 @@ exports.default = _default;
     ),
     _vm._v(" "),
     _vm.popoverVisible
-      ? _c("div", { staticClass: "popover" }, [
-          _c(
-            "div",
-            { staticClass: "level1" },
-            _vm._l(_vm.source, function(item) {
-              return _c("div", [
-                _c(
-                  "div",
-                  {
-                    on: {
-                      click: function($event) {
-                        _vm.selectedLevel1 = item
-                      }
-                    }
-                  },
-                  [_vm._v(_vm._s(item.name))]
-                )
-              ])
-            }),
-            0
-          ),
-          _vm._v(" "),
-          _vm.selectedLevel1
-            ? _c(
-                "div",
-                { staticClass: "level2" },
-                _vm._l(_vm.level2Items, function(item) {
-                  return _c("div", [
-                    _c(
-                      "div",
-                      {
-                        on: {
-                          click: function($event) {
-                            _vm.selectedLevel2 = item
-                          }
-                        }
-                      },
-                      [_vm._v(_vm._s(item.name))]
-                    )
-                  ])
-                }),
-                0
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.selectedLevel2
-            ? _c(
-                "div",
-                { staticClass: "level3" },
-                _vm._l(_vm.level3Items, function(item) {
-                  return _c("div", [_c("div", [_vm._v(_vm._s(item.name))])])
-                }),
-                0
-              )
-            : _vm._e()
-        ])
+      ? _c(
+          "div",
+          { staticClass: "popover" },
+          [_c("CascaderItems", { attrs: { items: _vm.source } })],
+          1
+        )
       : _vm._e()
   ])
 }
