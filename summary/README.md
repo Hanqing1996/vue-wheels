@@ -808,12 +808,15 @@ console.log(vm.$el.querySelector('.close')) // <span>xxxx<span>
 #### [.sync修饰符](https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6)
 子组件的事件触发父组件更新selectedTab
 ```
-<g-tabs :selected="selectedTab" @update="selectedTab=$event">
+<g-tabs :selected="selectedTab" @update:xxx="selectedTab=$event">
 ```
 等价于
 ```
 <g-tabs :selected.sync="selectedTab">
 ```
+只有在demo.vue,index.html里可以用sync
+
+
 
 #### vm.$on() vm.$emit() 
 * vm.$on('click1',callback):为实例设置监听事件click1

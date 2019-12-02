@@ -1,22 +1,19 @@
 <template>
     <div class="cascaderItems popover">
-<!--        <div>-->
-<!--            selected:{{selected}}-->
-<!--            level:{{level}}-->
-<!--        </div>-->
-<!--        {{selected}}-->
         <div class="label">
-            <div class="left" v-for="item in items">
-                <div  class="item" @click=onClickItem(item)>{{item.name}} <span class="symbol" v-if="item.children" >></span> </div>
+            <div class="left hh" v-for="item in items">
+                <div  class="item" @click=onClickItem(item)>{{item.name}} <span class="symbol" v-if="ajax(item.id).length>0" >></span> </div>
             </div>
         </div>
         <div class="right" v-if="rightItems">
-            <cascader-items :items="rightItems" :level="level+1"　:selected="selected" @update:selectedRight="onUpdateSelected($event)"></cascader-items>
+            <cascader-items :items="rightItems" :level="level+1"　:selected="selected" @update:selected="onUpdateSelected($event)"></cascader-items>
         </div>
     </div>
 </template>
 
 <script>
+    import db from './db'
+
     // 递归调用
     export default {
         name: "CascaderItems",
@@ -36,9 +33,9 @@
         computed: {
             rightItems: function () {
 
-                // leftSelected被选中且有children，才显示右边
-                if (this.selected[this.level] && this.selected[this.level].children) {
-                    return this.selected[this.level].children
+                // 被选中且有children，才显示右边
+                if (this.selected[this.level]&&this.ajax(this.selected[this.level].id).length>0){
+                    return this.ajax(this.selected[this.level].id)
                 } else {
                     // 不能是[],否则递归会栈溢出
                     return null
@@ -53,15 +50,14 @@
                 // 假如level=1,则重置selected[1]后,将selected[2],selected[3]都清除
                 copy.splice(this.level+1,len-this.level-1)
 
-                //　触发cascader.vue的update:selectedRight
                 this.$emit('update:selected',copy)
-                // 触发递归父组件的update:selectedRight
-                this.$emit('update:selectedRight',copy)
 
             },
             onUpdateSelected(newSelected){
-                //　触发cascader.vue的update:selectedRight
                 this.$emit('update:selected',newSelected)
+            },
+            ajax(parentId=0){
+                return db.filter(item=>item.parent_id===parentId)
             }
         }
     }
@@ -70,15 +66,15 @@
     @import "var";
     .popover {
         display: flex;
-        height: 100px;
+        height: 200px;
         position: absolute;
         background-color: white;
         @extend .box-shadow;
 
         > .label {
-            width: 55px;
-            /*border: 1px solid blue;*/
+            width: 100px;
             height: 100%;
+            overflow: auto;
             >.left {
                 display: flex;
                 flex-direction: column;
@@ -87,8 +83,9 @@
                     display: inline-flex;
                     flex-direction: row;
                     align-items: center;
-
                 }
+            }
+            >.right{
             }
         }
     }
