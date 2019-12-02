@@ -1264,3 +1264,6 @@ Get started
 
 
 #### [解决：Error: ENOSPC: System limit for number of file watchers reached](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers)
+
+
+#### [vue中数组的变动不是响应式的](https://cn.vuejs.org/v2/guide/list.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)

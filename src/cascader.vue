@@ -4,7 +4,7 @@
             <slot></slot>
         </div>
         <div v-if="popoverVisible">
-            <CascaderItems :items="source"></CascaderItems>
+            <CascaderItems :items="source" :selected="selected"　@update:selected="onUpdate($event)"></CascaderItems>
         </div>
     </div>
 </template>
@@ -18,11 +18,20 @@
         props: {
             source: {
                 type: Array
+            },
+            selected:{
+                type:Array,
+                default:()=>[]
             }
         },
         data() {
             return {
                 popoverVisible: false,
+            }
+        },
+        methods:{
+            onUpdate(newSelected){
+                this.$emit('update:selected',newSelected)
             }
         }
     }
