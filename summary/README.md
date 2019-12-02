@@ -1254,3 +1254,13 @@ methods:{
 ```
 
 
+版本以0.开头：超级不稳定
+
+
+Get started
+
+
+#### 装yarn后,package.lock.json不能留
+
+
+#### [解决：Error: ENOSPC: System limit for number of file watchers reached](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers)

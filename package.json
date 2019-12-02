@@ -1,54 +1,29 @@
 {
   "name": "wheel-10.14",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "UI框架",
-  "main": "dist/index.js",
+  "private": true,
   "scripts": {
-    "start": "npx parcel index.html",
-    "dev-test": "npx parcel watch test/* --no-cache & npx karma start",
-    "test": "npx parcel build test/* --no-cache --no-minify && npx karma start --single-run",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
-    "update": "./deploy.sh"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Hanqing1996/vue-wheels.git"
-  },
-  "keywords": [
-    "vue",
-    "ui"
-  ],
-  "author": "zhq",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Hanqing1996/vue-wheels/issues"
-  },
-  "homepage": "https://github.com/Hanqing1996/vue-wheels#readme",
   "dependencies": {
-    "vue": "^2.6.10",
-    "vue-hot-reload-api": "^2.3.4"
+    "core-js": "^3.4.3",
+    "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/component-compiler-utils": "^3.0.0",
-    "chai": "^4.2.0",
-    "chai-spies": "^1.0.0",
-    "karma": "^4.3.0",
-    "karma-chai": "^0.1.0",
-    "karma-chai-spies": "^0.1.4",
-    "karma-chrome-launcher": "^3.1.0",
-    "karma-mocha": "^1.3.0",
-    "karma-sinon-chai": "^2.0.2",
-    "mocha": "^6.2.1",
-    "parcel-bundler": "^1.12.4",
-    "sass": "^1.23.0",
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-unit-mocha": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "chai": "^4.1.2",
+    "sass": "^1.23.7",
     "sass-loader": "^8.0.0",
-    "sinon": "^7.5.0",
-    "sinon-chai": "^3.3.0",
-    "vue-template-compiler": "^2.6.10",
-    "vuepress": "^1.2.0"
+    "vue-template-compiler": "^2.6.10"
   },
-  "alias": {
-    "vue": "./node_modules/vue/dist/vue.common.js"
-  }
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
 }
