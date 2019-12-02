@@ -3,6 +3,9 @@
   height: 1em;
 }
 @charset "UTF-8";
+.box-shadow[data-v-86a64d] {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
 @keyframes spin-data-v-86a64d {
 0% {
     transform: rotate(0deg);
@@ -70,6 +73,9 @@
 .button-group > .button[data-v-75c33b]:hover {
   position: relative;
   z-index: 1;
+}
+.box-shadow[data-v-21edda] {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 .wrapper[data-v-21edda] {
   font-size: 14px;
@@ -1131,6 +1137,9 @@
   background: #ccc;
   height: 50px;
 }
+.box-shadow[data-v-e42de6] {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
 .toast[data-v-e42de6] {
   font-size: 14px;
   height: 40px;
@@ -1164,6 +1173,9 @@
   border-left: 1px solid #666;
 }
 @charset "UTF-8";
+.box-shadow[data-v-1e6dac] {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
 .tabs-head[data-v-1e6dac] {
   display: flex;
   height: 40px;
@@ -1186,6 +1198,9 @@
   padding: 0 1em;
 }
 @charset "UTF-8";
+.box-shadow[data-v-a2f6ad] {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
 .tabs-item[data-v-a2f6ad] {
   flex-shrink: 0;
   padding: 0 1em;
@@ -1229,10 +1244,16 @@
   left: 0px;
   top: 45px;
 }
+.box-shadow[data-v-f0e426] {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
 .collapse[data-v-f0e426] {
   margin: 5px;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+.box-shadow[data-v-1ba2a0] {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 .collapse-item > .title[data-v-1ba2a0] {
   border: 1px solid #ddd;
@@ -1256,12 +1277,39 @@
   padding: 0 8px;
   background-color: red;
 }
+.box-shadow[data-v-76a89c], .popover[data-v-76a89c] {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
 .popover[data-v-76a89c] {
   display: flex;
+  height: 100px;
+  position: absolute;
+  background-color: white;
 }
 .popover > .label[data-v-76a89c] {
-  width: 80px;
-  border: 1px solid blue;
+  width: 55px;
+  /*border: 1px solid blue;*/
+  height: 100%;
+}
+.popover > .label > .left[data-v-76a89c] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.popover > .label > .left > .item[data-v-76a89c] {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+}
+.symbol[data-v-76a89c] {
+  font-size: 0.5em;
+  margin-left: 0.3em;
+}
+.box-shadow[data-v-1dc6f3] {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+.cascader[data-v-1dc6f3] {
+  position: relative;
 }
 .cascader > .trigger[data-v-1dc6f3] {
   width: 100px;

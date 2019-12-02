@@ -14641,9 +14641,9 @@ var _default = {
     rightItems: function rightItems() {
       // leftSelected被选中且有children，才显示右边
       if (this.leftSelected && this.leftSelected.children) {
-        console.log('rightItems产生');
         return this.leftSelected.children;
       } else {
+        // 不能是[],否则递归会栈溢出
         return null;
       }
     }
@@ -14665,19 +14665,25 @@ exports.default = _default;
   return _c("div", { staticClass: "cascaderItems popover" }, [
     _c(
       "div",
-      { staticClass: "label left" },
+      { staticClass: "label" },
       _vm._l(_vm.items, function(item) {
         return _c("div", { staticClass: "left" }, [
           _c(
             "div",
             {
+              staticClass: "item",
               on: {
                 click: function($event) {
                   _vm.leftSelected = item
                 }
               }
             },
-            [_vm._v(_vm._s(item.name))]
+            [
+              _vm._v(_vm._s(item.name) + " "),
+              item.children
+                ? _c("span", { staticClass: "symbol" }, [_vm._v(">")])
+                : _vm._e()
+            ]
           )
         ])
       }),
@@ -14795,12 +14801,7 @@ exports.default = _default;
     ),
     _vm._v(" "),
     _vm.popoverVisible
-      ? _c(
-          "div",
-          { staticClass: "popover" },
-          [_c("CascaderItems", { attrs: { items: _vm.source } })],
-          1
-        )
+      ? _c("div", [_c("CascaderItems", { attrs: { items: _vm.source } })], 1)
       : _vm._e()
   ])
 }

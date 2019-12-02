@@ -3,7 +3,7 @@
         <div class="trigger" @click="popoverVisible=!popoverVisible">
             <slot></slot>
         </div>
-        <div class="popover" v-if="popoverVisible">
+        <div v-if="popoverVisible">
             <CascaderItems :items="source"></CascaderItems>
         </div>
     </div>
@@ -31,6 +31,7 @@
 <style lang="scss" scoped>
     @import "var";
     .cascader {
+        position: relative;
         > .trigger {
             width: 100px;
             height: 32px;
