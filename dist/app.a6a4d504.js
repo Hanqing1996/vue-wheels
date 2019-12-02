@@ -14727,6 +14727,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   name: "WheelCascader",
   components: {
@@ -14735,6 +14750,25 @@ var _default = {
   props: {
     source: {
       type: Array
+    }
+  },
+  data: function data() {
+    return {
+      popoverVisible: false,
+      selectedLevel1: null,
+      selectedLevel2: null
+    };
+  },
+  computed: {
+    level2Items: function level2Items() {
+      if (this.selectedLevel1) {
+        return this.selectedLevel1.children;
+      } else return [];
+    },
+    level3Items: function level3Items() {
+      if (this.selectedLevel2) {
+        return this.selectedLevel2.children;
+      } else return [];
     }
   }
 };
@@ -14752,20 +14786,78 @@ exports.default = _default;
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "cascader" }, [
-    _c("div", { staticClass: "trigger" }, [_vm._t("default")], 2),
-    _vm._v(" "),
     _c(
       "div",
-      { staticClass: "popover" },
-      _vm._l(_vm.source, function(item) {
-        return _c(
-          "div",
-          [_c("CascaderItems", { attrs: { sourceItem: item } })],
-          1
-        )
-      }),
-      0
-    )
+      {
+        staticClass: "trigger",
+        on: {
+          click: function($event) {
+            _vm.popoverVisible = !_vm.popoverVisible
+          }
+        }
+      },
+      [_vm._t("default")],
+      2
+    ),
+    _vm._v(" "),
+    _vm.popoverVisible
+      ? _c("div", { staticClass: "popover" }, [
+          _c(
+            "div",
+            { staticClass: "level1" },
+            _vm._l(_vm.source, function(item) {
+              return _c("div", [
+                _c(
+                  "div",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.selectedLevel1 = item
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(item.name))]
+                )
+              ])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _vm.selectedLevel1
+            ? _c(
+                "div",
+                { staticClass: "level2" },
+                _vm._l(_vm.level2Items, function(item) {
+                  return _c("div", [
+                    _c(
+                      "div",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.selectedLevel2 = item
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(item.name))]
+                    )
+                  ])
+                }),
+                0
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.selectedLevel2
+            ? _c(
+                "div",
+                { staticClass: "level3" },
+                _vm._l(_vm.level3Items, function(item) {
+                  return _c("div", [_c("div", [_vm._v(_vm._s(item.name))])])
+                }),
+                0
+              )
+            : _vm._e()
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

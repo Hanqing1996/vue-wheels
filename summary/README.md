@@ -1218,8 +1218,22 @@ npm run update
 #### 组件的　props 不能以 data-　开头
 
 
+#### 如何解决bug
+1. 产生bug的原因肯定是过去某段时间内某个错误举动
+2. 使用新工具产生的bug,可能需要查阅文档解决,所以在使用工具前应该浏览一遍文档的title
+3. error提示可以告诉我们项目在进行到那一步的时候出错了
 
+#### @click可以带参数
+```
+<div v-for="item in source">
+    <div @click="setLevel2Source(item)">{{item.name}}</div>
+</div>
 
-
+methods:{
+    setLevel2Source(item){
+        this.level2Source=item.children
+    }
+}
+```
 
 
