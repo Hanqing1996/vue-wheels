@@ -1,18 +1,17 @@
 <template>
     <div class="cascaderItems popover">
         <div class="label">
-            <div class="left hh" v-for="item in items">
-                <div  class="item" @click=onClickItem(item)>{{item.name}} <span class="symbol" v-if="ajax(item.id).length>0" >></span> </div>
+            <div class="left" v-for="item in items">
+                <div  class="item" @click=onClickItem(item)>{{item.name}} <span class="symbol"  v-if="clickedWithChildId===item.id" >></span> </div>
             </div>
         </div>
         <div class="right" v-if="rightItems">
-            <cascader-items :items="rightItems" :level="level+1"　:selected="selected" @update:selected="onUpdateSelected($event)"></cascader-items>
+            <cascader-items :items="rightItems" :level="level+1"　:selected="selected" @update:selected2="onUpdateSelected($event)"></cascader-items>
         </div>
     </div>
 </template>
 
 <script>
-    import db from './db'
 
     // 递归调用
     export default {
@@ -34,30 +33,39 @@
             rightItems: function () {
 
                 // 被选中且有children，才显示右边
-                if (this.selected[this.level]&&this.ajax(this.selected[this.level].id).length>0){
-                    return this.ajax(this.selected[this.level].id)
+                if (this.selected[this.level]&&this.selected[this.level].children){
+
+                    return this.selected[this.level].children
                 } else {
                     // 不能是[],否则递归会栈溢出
                     return null
+                }
+            },
+            // 这个计算属性的思路和rightItems一样，只有被点击且有children的选项才会显示symbol
+            clickedWithChildId:function () {
+                if(this.selected[this.level]&&this.selected[this.level].children){
+                    return this.selected[this.level].id
+                } else{
+                    return -1
                 }
             }
         },
         methods:{
             onClickItem(item){
+
                 let len=this.selected.length
                 let copy=JSON.parse(JSON.stringify(this.selected))
+
                 copy[this.level]=item
-                // 假如level=1,则重置selected[1]后,将selected[2],selected[3]都清除
+
                 copy.splice(this.level+1,len-this.level-1)
 
-                this.$emit('update:selected',copy)
+                // console.log(copy[this.level])
 
+                this.$emit('update:selected2',copy)
             },
             onUpdateSelected(newSelected){
-                this.$emit('update:selected',newSelected)
-            },
-            ajax(parentId=0){
-                return db.filter(item=>item.parent_id===parentId)
+                this.$emit('update:selected2',newSelected)
             }
         }
     }
@@ -84,8 +92,6 @@
                     flex-direction: row;
                     align-items: center;
                 }
-            }
-            >.right{
             }
         }
     }
