@@ -4,7 +4,7 @@
             {{popoverContent}}
         </div>
         <div v-if="popoverVisible">
-            <CascaderItems :items="source" :selected="selected"　@update:selected2="onUpdate($event)"></CascaderItems>
+            <CascaderItems :items="source" :selected="selected"　@update:selected="onUpdate($event)"></CascaderItems>
         </div>
     </div>
 </template>

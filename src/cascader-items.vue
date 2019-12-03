@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="right" v-if="rightItems">
-            <cascader-items :items="rightItems" :level="level+1"　:selected="selected" @update:selected2="onUpdateSelected($event)"></cascader-items>
+            <cascader-items :items="rightItems" :level="level+1"　:selected="selected" @update:selected="onUpdateSelected($event)"></cascader-items>
         </div>
     </div>
 </template>
@@ -56,16 +56,14 @@
                 let len=this.selected.length
                 let copy=JSON.parse(JSON.stringify(this.selected))
 
-                copy[this.level]=item
+                copy[this.level]=JSON.parse(JSON.stringify(item))
 
                 copy.splice(this.level+1,len-this.level-1)
 
-                // console.log(copy[this.level])
-
-                this.$emit('update:selected2',copy)
+                this.$emit('update:selected',copy)
             },
             onUpdateSelected(newSelected){
-                this.$emit('update:selected2',newSelected)
+                this.$emit('update:selected',newSelected)
             }
         }
     }
