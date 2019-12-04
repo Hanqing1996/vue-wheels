@@ -1,5 +1,5 @@
 <template>
-    <div class="cascader" ref="cascader">
+    <div class="cascader" ref="cascader" v-click-outside="closePopover">
         <div class="trigger" @click="onclickTrigger" ref="triggerWrapper">
             {{popoverContent}}
         </div>
@@ -11,6 +11,7 @@
 
 <script>
     import CascaderItems from './cascader-items'
+    import clickOutside from './clickOutside'
 
     export default {
         name: "WheelCascader",
@@ -38,7 +39,7 @@
             openPopover(){
                 this.popoverVisible=true
                 // popover开启后,设置对其它位置的监听,且不允许监听事件对trigger的触发作出反应
-                this.onClickDocument()
+                // this.onClickDocument()
             },
             onclickTrigger(){
 
@@ -47,25 +48,25 @@
                 }else{
                     this.closePopover()
                 }
-
             },
-            onClickDocument(){
-                // 之所以要设置setTimeout,是因为不允许监听事件对trigger的触发作出反应,所以必须阻止一次事件冒泡
-                setTimeout(()=>{
-                    let eventHandler = (event) => {
-                        // 只有点击其它位置,才会触发eventHandler
-                        if(!this.$refs.cascader.contains(event.target)){
-                            this.closePopover()
-                            document.removeEventListener('click', eventHandler)
-                        }
-                    }
-                    document.addEventListener('click', eventHandler)
-                })
-            },
+            // onClickDocument(){
+            //     // 之所以要设置setTimeout,是因为不允许监听事件对trigger的触发作出反应,所以必须阻止一次事件冒泡
+            //     setTimeout(()=>{
+            //         let eventHandler = (event) => {
+            //             // 只有点击其它位置,才会触发eventHandler
+            //             if(!this.$refs.cascader.contains(event.target)){
+            //                 this.closePopover()
+            //                 document.removeEventListener('click', eventHandler)
+            //             }
+            //         }
+            //         document.addEventListener('click', eventHandler)
+            //     })
+            // },
             onUpdate(newSelected){
                 this.$emit('update:selected',newSelected)
             }
         },
+        directives:{clickOutside},
         computed:{
             popoverContent:function () {
                 return this.selected.map((item)=>item.name).join('-')
@@ -76,6 +77,7 @@
 
 <style lang="scss" scoped>
     @import "var";
+
     .cascader {
         position: relative;
         > .trigger {

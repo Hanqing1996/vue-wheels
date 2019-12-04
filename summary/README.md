@@ -1270,3 +1270,22 @@ Get started
 
 
 #### [vue中数组的变动不是响应式的](https://cn.vuejs.org/v2/guide/list.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+
+
+#### 指令(用于封装DOM操作)
+````
+<div　ref="cascader" @clickOutside="close"></div>
+````
+点击除cascader外的其它位置,则关闭popover,并自动移除对其它位置的监听
+
+
+
+// 原先:触发onclickTrigger后,设置对其它位置的监听
+// 使用指令:一开始就设置对其它位置的监听(就算不用指令,这种思路也是正确的)
+
+
+
+####　在HTML中,等号左边不支持大小写,右边支持
+```
+<div :load-data="loadData"></div> 
+```
