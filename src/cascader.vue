@@ -1,5 +1,5 @@
 <template>
-    <div class="cascader">
+    <div class="cascader" ref="cascader">
         <div class="trigger" @click="onclickTrigger" ref="triggerWrapper">
             {{popoverContent}}
         </div>
@@ -53,9 +53,8 @@
                 // 之所以要设置setTimeout,是因为不允许监听事件对trigger的触发作出反应,所以必须阻止一次事件冒泡
                 setTimeout(()=>{
                     let eventHandler = (event) => {
-                        console.log('clickdocument生效');
                         // 只有点击其它位置,才会触发eventHandler
-                        if(!this.$refs.contentWrapper.contains(event.target)&&!this.$refs.triggerWrapper.contains(event.target)){
+                        if(!this.$refs.cascader.contains(event.target)){
                             this.closePopover()
                             document.removeEventListener('click', eventHandler)
                         }
