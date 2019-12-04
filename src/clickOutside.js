@@ -1,13 +1,19 @@
-export default {
+document.addEventListener('click',(e)=>{
+    let {target}=e
 
-    bind: function (el,binding) {
-
-        let eventHandler = (event) => {
-
-            if (!el.contains(event.target)) {
-                binding.value()
-            }
+    callbacks.forEach(item=>{
+        if(target===item.el||item.el.contains(target)){
+            return;
+        } else{
+            item.callback()
         }
-        document.addEventListener('click', eventHandler)
+    })
+
+})
+
+let callbacks=[]
+export default {
+    bind: function (el,binding) {
+        callbacks.push({el,callback:binding.value})
     }
 }
