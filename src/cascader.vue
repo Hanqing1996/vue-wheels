@@ -22,7 +22,7 @@
             selected:{
                 type:Array,
                 default:()=>[]
-            },
+            }
         },
         data() {
             return {
