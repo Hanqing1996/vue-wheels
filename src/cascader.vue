@@ -1,9 +1,9 @@
 <template>
     <div class="cascader">
-        <div class="trigger" @click="popoverVisible=!popoverVisible">
+        <div class="trigger" @click="onclickTrigger" ref="triggerWrapper">
             {{popoverContent}}
         </div>
-        <div v-if="popoverVisible">
+        <div v-show="popoverVisible" ref="contentWrapper">
             <CascaderItems :items="source" :selected="selected"　@update:selected="onUpdate($event)"></CascaderItems>
         </div>
     </div>
@@ -30,6 +30,39 @@
             }
         },
         methods:{
+            closePopover(){
+                this.popoverVisible=false
+                // popover关闭后,应该清空selected
+                this.$emit('update:closeSelected')
+            },
+            openPopover(){
+                this.popoverVisible=true
+                // popover开启后,设置对其它位置的监听,且不允许监听事件对trigger的触发作出反应
+                this.onClickDocument()
+            },
+            onclickTrigger(){
+
+                if(this.popoverVisible==false){
+                    this.openPopover()
+                }else{
+                    this.closePopover()
+                }
+
+            },
+            onClickDocument(){
+                // 之所以要设置setTimeout,是因为不允许监听事件对trigger的触发作出反应,所以必须阻止一次事件冒泡
+                setTimeout(()=>{
+                    let eventHandler = (event) => {
+                        console.log('clickdocument生效');
+                        // 只有点击其它位置,才会触发eventHandler
+                        if(!this.$refs.contentWrapper.contains(event.target)&&!this.$refs.triggerWrapper.contains(event.target)){
+                            this.closePopover()
+                            document.removeEventListener('click', eventHandler)
+                        }
+                    }
+                    document.addEventListener('click', eventHandler)
+                })
+            },
             onUpdate(newSelected){
                 this.$emit('update:selected',newSelected)
             }

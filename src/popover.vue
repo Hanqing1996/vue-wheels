@@ -45,13 +45,15 @@
             openContent(){
 
                 this.visible=true// 打开content
-                //只有当触发事件为click,才才开启document对于其它位置的监听
+                //只有当触发事件为click,才开启document对于其它位置的监听
                 if(this.trigger==='click'){
                     this.onClickDocument()
                 }
             },
             closeContent(){
                 this.visible=false// 关闭content
+
+
             },
             onClickDocument(){
                 // setTimeout让"设置document的监听事件"这个动作发生在冒泡结束之后，从而阻止了这次button的点击事件冒泡到document(只阻止了这一次)

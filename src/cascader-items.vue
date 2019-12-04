@@ -52,7 +52,7 @@
         methods:{
             onClickItem(item){
 
-                // 如果this.selected[this.level].children已存在,则重新在db中查找并替换(浙江->江苏)
+                // 如果this.selected[this.level].children已存在,则重新在db中查找并替换(浙江.children=['杭州','绍兴']->江苏.children=['南京','苏州'])
                 // 如果this.selected[this.level].children不存在,则在db中查找后添加children
                 // 总之就是一定会根据所点击item的id在db中查找对应children然后重置children
 
