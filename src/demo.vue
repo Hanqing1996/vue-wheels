@@ -1,16 +1,9 @@
 <template>
     <div>
         <g-button>hi</g-button>
-        <div style="margin-bottom: 250px">
             <g-cascader :source="source" :selected="selected" 　@update:selected="xxx($event)"
                         　@update:closeSelected="selected=[]">
             </g-cascader>
-        </div>
-        <div>
-            <g-cascader :source="source" :selected="selected" 　@update:selected="xxx($event)"
-                        　@update:closeSelected="selected=[]">
-            </g-cascader>
-        </div>
     </div>
 </template>
 
