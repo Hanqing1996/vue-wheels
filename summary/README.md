@@ -131,6 +131,10 @@ g.button{
 #### Karma
 * 具体配置写在 karma.conf,js 中
 * 用于呼起浏览器，加载测试脚本，然后运行测试用例
+* JSDOM是在 Node 虚拟浏览器环境运行测试。也就是说它不呼起浏览器。而根据JSDOM官方文档，他们没有测试css的打算
+```
+Layout: the ability to calculate where elements will be visually laid out as a result of CSS, which impacts methods like getBoundingClientRects() or properties like offsetTop.
+```
 
 #### Mocha
 describe,it 语法
@@ -1393,6 +1397,8 @@ git push -u origin master -f
 ```
 ---
 * 单元测试:[Invalid Chai property: called. Did you mean “all”?](https://stackoverflow.com/questions/51019151/invalid-chai-property-called-did-you-mean-all)
+---
+* 单元测试:[Using @vue/cli test:unit with require('jsdom-global')() produces "Module not found: 'canvas'"](https://github.com/vuejs/vue-test-utils/issues/1288)
 ---
 
 #### 约定和配置
