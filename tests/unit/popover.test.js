@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import popOver from '../src/popover'
+import popOver from '../../src/components/popover/popover'
 
 const expect = chai.expect;
 

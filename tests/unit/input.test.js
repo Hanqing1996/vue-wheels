@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Input from '../src/input'
+import Input from '../../src/components/input/input'
 
 const expect = chai.expect;
 

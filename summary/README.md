@@ -1,8 +1,3 @@
-
-
-
-
-
 #### 分类
 1. 工程知识：知道用法
     * webpack/parcel
@@ -10,12 +5,12 @@
 2. 语言特性：深入掌握
     * promise
     * vue
-3. 抽象的东西：逐渐迭代 
+3. 抽象的东西：逐渐迭代
 
 #### 工程知识
 * [LICENSE选择](http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html)
     * 最开放：MIT
-* [选择不要上传的文件（第一次就不要push）](https://github.com/Hanqing1996/blog/blob/master/github%E7%9B%B8%E5%85%B3/README.md)  
+* [选择不要上传的文件（第一次就不要push）](https://github.com/Hanqing1996/blog/blob/master/github%E7%9B%B8%E5%85%B3/README.md)
     * .idea
     * node_modules
     * .cache
@@ -35,11 +30,14 @@ Test Driven Development（测试驱动开发）
 * assert（断言）
 ```
 console.assert(1===2)
-``` 
+```
 * 打包：parcel build test/* --no-cache --no-minify
     * 把 test 目录下的文件打包到 dist 目录下
 
 #### [parcel](https://parceljs.org/)
+1.parcel 的核心是入口文件。如果我们在入口文件 index.html 中引入 vue,sass,ts 等语法，在我们手动安装这些包后 yarn dev,那么 parcel 就会自动编译打包这些文件
+2.一旦依赖关系形成，之后我们加其他文件（比如 src），只要保证依赖关系不变即可。
+···
 非全局安装（报错：未找到命令）注意加 npx
 * parcel的作用是打包
     * parcel的服务对象是浏览器
@@ -48,7 +46,7 @@ console.assert(1===2)
     * 打包是"顺藤摸瓜"的打包，比如parcel index.html，实际会将g-button.vue,g-icon.vue等都进行打包，因为index.html中出现了这些
 * parcel index.html
 打包 index.html,并打开浏览器
-* paecel build index.html     
+* paecel build index.html
 打包一次，之后改动代码不重新打包，不打开浏览器
 * parcel watch index.html
 第一次打包后，一旦改动代码，立即重新打包，不打开浏览器。注意执行这条命令后就算输入别的命令（比如执行单元测试），在别的命令执行前也会自动先打包文件，这正是"watch"的意义所在
@@ -56,8 +54,8 @@ console.assert(1===2)
     * 只打包一次+执行测试一次（这意味着每改变一次代码就必须再输入一次命令）:parcel build test/* --no-cache --no-minify && karma start --single-run
     * 自动打包+自动执行测试用例（这意味着只要输入一次命令，从此再不必输入，代码自己打包，自己测试，随时看到最新的结果）：parcel watch test/* --no-cache & karma start
         * 注意如果只有karma start的话，那么代码的变化就无法被karma检测到，测试有效性就不好。也就是说 karma 必须有人告诉他要测试的代码变了，它只会自动测试，不会自动打包
-* 发布 npm 包后，发现 node 不认识 含有 import 的index.js，因此需要先用 parcel build index.js,再在package.json中将 main 选项改为 dist/index.js 
-* 之后更新 npm 包，也要 parcel build       
+* 发布 npm 包后，发现 node 不认识 含有 import 的index.js，因此需要先用 parcel build index.js,再在package.json中将 main 选项改为 dist/index.js
+* 之后更新 npm 包，也要 parcel build
 
 
 * [运行 parcel 时，出现 No entries found 报错怎么办？](https://blog.csdn.net/weixin_42971942/article/details/88345351)
@@ -84,12 +82,12 @@ vm = new Constructor({}).$mount(div)
 ```
 * 要点：作用域隔离，断言
 * Mocha可以用来写测试用例
-``` 
+```
 describe '人类'
     it has a hed
     it has two eyes
     it can run
-```  
+```
 * 为什么测试‘点击 button 触发 touch 事件’不能用以下方式
 ```
 vm.$on('touch', function(){
@@ -106,15 +104,15 @@ const callback = sinon.fake(); // 一但 callback 被调用，会再内存中留
 vm.$on('touch', callback)
 vm.$el.click() // 注意如果测试正确，这里 callback 已经被调用了
 expect(callback).to.have.been.called // 去问内存：callback 是否被调用了？
-``` 
+```
 * [expex](https://www.chaijs.com/api/bdd/)
     * 判断是否存在（存在=不为假值）：expect(Button).to.be.ok
     * 判断是否相等：expect(xxx).to.eq(yyy)
     * 判断对象/数组值是否相等：expect([1,2]).to.deep.equal([1,2])
-    * 判断值是否为NaN：expect(NaN).to.be.NaN 
+    * 判断值是否为NaN：expect(NaN).to.be.NaN
 * [done](https://github.com/Hanqing1996/vue-wheels/blob/master/src/row.vue)
-    * 如果不加 done it(){}里的代码将全部同步执行    
-    
+    * 如果不加 done it(){}里的代码将全部同步执行
+
 #### CSS 知识点
 * css 兼容查询：www.canIuse.com
 * 字体不要设置固定 font-size ,应该用变量
@@ -123,7 +121,7 @@ expect(callback).to.have.been.called // 去问内存：callback 是否被调用�
 g.button{
     vertical-align: middle;
 }
-```     
+```
 
 #### TravisCI持续集成测试
 * 添加.travis.yml
@@ -160,7 +158,7 @@ expect(callback).to.have.been.calledWith(event)
 props:{
     icon:{},
     iconPosition:{
-        type:String,                
+        type:String,
         validator(value){
                     return value=='left'||value!='right'
                 }
@@ -186,13 +184,13 @@ autoClose: {
 }
 ```
 * 每个Vue组件，都是一个可复用的vue实例。但根Vue实例只有一个
-* 组件的class会最终加到组件的根元素上 
+* 组件的class会最终加到组件的根元素上
 ```
 <g-icon class="icon">
 </g-icon>
 ......
 <template>
-    <svg class="g-icon"></svg> 
+    <svg class="g-icon"></svg>
 </template>
 ```
 最终渲染结果为
@@ -225,7 +223,7 @@ g-button.$mount(div)
 export default {
     name: "WheelInput"
 }
-```  
+```
 1. 配合 vue.js.devtools(chrome插件) 使用
 2. 判断A组件的子组件包不包含B
 ```
@@ -279,7 +277,7 @@ var vm = new Vue({
 ```
 结果为 <div class="2">123</div>,因为class1为undefined,假值,class2为'2'',皆为真值;所以返回数组为[false,true],如果为true,则class名有效
 
-    
+
 #### 发布 wheel 包（需FQ）
 1. 更新 package.json
 2. 在 package.json 里将版本号改为 0.0.1，等我们做完了再改成 1.0.0
@@ -400,7 +398,7 @@ temp
     * beforeMount：
     * mounted：
     * 每刷新一次页面，就重新 create 和 mount 一次
-    * css,innerHTML这些东西只有在实例被挂载之后才能看到，之前是undefined    
+    * css,innerHTML这些东西只有在实例被挂载之后才能看到，之前是undefined
 3. update:当vue实例里面的data数据变化时，触发组件的重新渲染
     * beforeUpdate：
     * updated：
@@ -412,11 +410,11 @@ temp
 * created 类似于
 ```
 var div=document.createElement('div')
-```    
+```
 * mounted 类似于
 ```
 document.body.appendChild(div)
-```    
+```
 * 父子 created 和 mounted 顺序
 ```
 father.created
@@ -439,13 +437,13 @@ a {
 ```
 a{
   font-weight: bold;
-  text-decoration: none; 
+  text-decoration: none;
   }
 a:hover {
-  text-decoration: underline; 
+  text-decoration: underline;
 }
 body.firefox a {
-  font-weight: normal; 
+  font-weight: normal;
 }
 ```
 * 声明变量
@@ -458,16 +456,16 @@ $height: 32px;
     }
 }
 ```
-    
-   
+
+
 #### input 需求分析
 * 输入
-    * 提示 
+    * 提示
     * 报错
 * 复制/粘贴
 * 键盘 Tab 空位
 * 敲击回车
-* 不可输入   
+* 不可输入
 * hovered
 * focused
 * disabled
@@ -521,12 +519,12 @@ $height: 32px;
 
 #### 响应式
 * 页面缩小时col的offset.span随之变化
-   
+
 #### 重构
 * 重复两次及以上的代码
 * 一眼看不懂的代码
-    * 排版复杂  
-* 提取变量法    
+    * 排版复杂
+* 提取变量法
 
 
 #### 命名规范
@@ -543,19 +541,19 @@ props: {
 }
 ```
 -p对应P,即vue会把-后的第一个字母改为大写
-   
-   
+
+
 #### innerHTML 和 outerHTML
 ```
 <div id="app">
-    <div class="child"></div> 
+    <div class="child"></div>
 </div>
 
-console.log(document.getElementById('app').innerHTML) // <div class="child"></div> 
-console.log(document.getElementById('app').outerHTML) // <div id="app"><div class="child"></div></div> 
+console.log(document.getElementById('app').innerHTML) // <div class="child"></div>
+console.log(document.getElementById('app').outerHTML) // <div id="app"><div class="child"></div></div>
 ```
-   
-#### 打印出来的东西不一定是对的，因为可能在我们预想的变化发生之前，打印就执行了    
+
+#### 打印出来的东西不一定是对的，因为可能在我们预想的变化发生之前，打印就执行了
 
 
 #### vue 的渲染（created 与 mounted）过程
@@ -564,7 +562,7 @@ console.log(document.getElementById('app').outerHTML) // <div id="app"><div clas
 const div=document.createElement('div')
 document.body.appendChild(div)
 ```
-* Vue 实例的渲染过程 
+* Vue 实例的渲染过程
 ```
 const div=document.createElement('div')
 const child=document.createElement('div')
@@ -573,7 +571,7 @@ document.body.appendChild(div)
 
 console.log(child.outerHTML) // 打印出的是 child 没有 mounted 时的状态
 
-child.$mount() // 异步执行 
+child.$mount() // 异步执行
 div.$mount() // 异步执行
 ```
 
@@ -584,13 +582,13 @@ div.$mount() // 异步执行
 * 直接改 Vue.prototype好不好?
     * 不好,可能覆盖用户到方法（侵入性太强）
 * 在组件中写 import Vue from Vue 好不好
-    * 不好,不能确定用户需要引入的是 Vue,可能是Vue2    
+    * 不好,不能确定用户需要引入的是 Vue,可能是Vue2
 
 #### Vue 开发插件
 1. [install(轮子开发者写的,用户不能写入内容)](https://github.com/Hanqing1996/vue-wheels/blob/master/src/plugin.js)
 2. [use(用户填入他自定义的参数)](https://github.com/Hanqing1996/vue-wheels/blob/master/src/app.js)
 
- 
+
 #### 组件的 props 的 type 如果是 Object(包括 Array)
 则该 props 的 default 必须 return 一个对象
 ```
@@ -604,12 +602,12 @@ closeButton:{
     }
 }
 ```
- 
+
 #### this.$destroy()不会把this.$el从文档中移除
 正确删除姿势
 ```
 this.$el.remove()
-this.$destroy() 
+this.$destroy()
 ```
 #### callback的回传
 * 用户定义
@@ -622,8 +620,8 @@ callback: (toast) => {
 * 组件内调用
 ```
 this.closeButton.callback(this)
-``` 
-    
+```
+
 #### 怎么知道各个浏览器对 include 的兼容性
 1. MDN include
 2. 拉到最低下，就能看到浏览器兼容性情况
@@ -774,7 +772,7 @@ vm4.$el.remove()
 console.log("remove后vm4.$el.parent",vm4.$el.parentNode) // null
 ```
 
-#### 简化 
+#### 简化
 * autoClose为true时必须传入autoCloseDelay的数值,为false时不需要传入autoCloseDelay
 ```
 autoClose: {
@@ -818,7 +816,7 @@ console.log(vm.$el.querySelector('.close')) // <span>xxxx<span>
 
 
 
-#### vm.$on() vm.$emit() 
+#### vm.$on() vm.$emit()
 * vm.$on('click1',callback):为实例设置监听事件click1
 ```
 vm.$on('click1',callback)
@@ -856,7 +854,7 @@ function fn(prop1,prop2){
 * data:不需要用户(前端开发者)传值,data由组件自己修改更新(父组件少传一个参数,起到隔绝作用)
     * sider.vue 的　visible
     * tabs-item.vue 的　active
-    
+
 #### 框架的作用
 * 使团队中的傻逼也写不出垃圾代码
     * 提高代码平均质量
@@ -943,7 +941,7 @@ let div=document.getElementById("app2")
 div.innerHTML=`
     <g-button>第一个slot内容</g-button>
     <g-button>第二个slot内容</g-button>
-    `  
+    `
 const vm2=new Vue({
     el:div // vue实例挂载到app2上，识别app2内容
 })
@@ -957,9 +955,8 @@ let vm4=new Constructor2({
     }).$mount(document.getElementById("app6")) // app6被替换
 ```
 
-
 #### 各个组件总结(组成内容见[app.js](https://github.com/Hanqing1996/vue-wheels/blob/master/src/app.js))
-* button 
+* button
     * 组件局部注册
     * 属性检查器
     * $emit
@@ -969,13 +966,17 @@ let vm4=new Constructor2({
     * "[Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "gutter""
     * button-group 检查当前组件实例的子元素是不是 button
     * svg
+---
 * input
     * v-model
+---
 * grid
     * col 组件绑定style
     * 把父组件 row 的 gutter 传递给子组件 col
+---
 * default-layout
     * 判断 layout 组件的子组件包不包含 sider
+---
 * toast
     * 插件plugin.js开发与使用
     * 动态创建 vue 实例
@@ -985,6 +986,7 @@ let vm4=new Constructor2({
     * $emit实现toast在被关闭前触发beforeClose执行callback
     * 测试callback
     * v-on:click.native
+---
 * tabs
     * tabs-head:多个slot
     * Eventbus实现组件间通信
@@ -992,6 +994,7 @@ let vm4=new Constructor2({
     * getBoundingClientRect()
     * $refs()
     * tabs-item 绑定 class
+---
 * popover
     * [@click.stop阻止事件冒泡](https://github.com/Hanqing1996/vue-wheels/blob/master/src/popover.vue)
     * ref注册DOM元素或组件
@@ -1002,7 +1005,7 @@ let vm4=new Constructor2({
 ---
 * cascader
     * v-for
-    * cascader-items:递归组件    
+    * cascader-items:递归组件
     * 正确使用computed
         * level2Items随selectedLevel1改变而更新,那level2Items为计算属性
         * selectedLevel1放在data而不是computed里面,是因为selectedLevel1是用户点击选择从而更新的,不是随其它数据更新而更新的
@@ -1010,13 +1013,13 @@ let vm4=new Constructor2({
           <div class="label" v-for="item in items">
               <div @click="selectedLevel2=item">{{item.name}}</div>
           </div>
-      
+
           data() {
               return {
                   selectedLevel2:null
               }
           },
-          
+
           computed: {
               level3Items: function () {
                   // 注意selectedLevel2可能是用户选择的,一开始为null，所以要加以判断
@@ -1026,9 +1029,10 @@ let vm4=new Constructor2({
               }
           }
         ```
-    
-    
-    
+---
+
+
+
 #### [popover的需求](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/26c0e669-f116-46c7-898a-d259707b30fe)
 1. 用户可能在popover的容器元素上添加click事件,然后希望点击button后能触发容器元素的click事件(利用事件冒泡机制),所以popover的内部元素的click不能用stop修饰符
 2. 点击按钮后显示content-wrapper,然后点击其它位置(除了content-wrapper)隐藏content-wrapper;
@@ -1038,9 +1042,9 @@ let vm4=new Constructor2({
 ---
 2,3解决方法
     * [控制button事件不冒泡,但是这与1相悖](https://github.com/Hanqing1996/vue-wheels/blob/master/src/popover.vue)
-    
-    
-    
+
+
+
 #### 设计模式
 * 发布订阅模式
 ```
@@ -1050,25 +1054,33 @@ this.eventBus&& this.eventBus.$on() // 订阅
 
 this.eventBus.$off() // 取消订阅
 ```
-* 单向数据流
+#### 单向数据流
+* 定义
 1. A发起更新,A更新自己:不可以
 2. A可以更新B,B可以更新B:不可以
+3. 节点间数据传递通过"节点.$emit('update'),事件中心eventBus.$on('update'),vue数据响应"实现
 总之一点，两个相邻节点(组件)不能形成闭环
-* 正交
+![](./images/3.jpg)
+* 单向数据流的问题
+有几个地方用到n,就要传几次n(重复,浪费)
+![](./images/4.jpg)
+* 仿造eventBus事件中心的模式,可以将store设置为数据存储中心,解决数据冗余传递的问题
+
+#### store
+
+
+
+
+
+#### 正交
 一个组件的props必须正交
 
-
-#### 前端路由
-
-
-
-    
 #### 造轮子原则
 1. 你不能要求组件容器的style不能有什么,必须有什么
-2. 组件内部的元素不能用@eventName.stop,因为可能用户需要利用事件冒泡,在点击组件内部的元素时触发添加在组件上的事件    
+2. 组件内部的元素不能用@eventName.stop,因为可能用户需要利用事件冒泡,在点击组件内部的元素时触发添加在组件上的事件
 3. 组件slot的DOM元素只能传递接口属性,不能加class,Id之类的
-    
-    
+
+
 #### 在组件上加事件
 1. 在组件上加原生的DOM事件
 ```
@@ -1086,17 +1098,17 @@ beEmited事件是g-button内部的元素点击事件通过emit触发的
 ```
 
 #### [表驱动编程](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/2838ce98-d198-4e81-8b93-793368c6439b)
-    
+
 #### slot
-* [.$slots 要放在 $mount() 之前](https://github.com/Hanqing1996/vue-wheels/blob/master/src/plugin.js)     
+* [.$slots 要放在 $mount() 之前](https://github.com/Hanqing1996/vue-wheels/blob/master/src/plugin.js)
 * 向组件的slot中插入HTML内容
     * 这是一种危险的行为(阻止事件冒泡也是一种危险的行为)
     * [实现方法](https://github.com/Hanqing1996/vue-wheels/blob/master/src/toast.vue)
     ```
     <div v-html="$slots.default[0]"></div>
-  
+
     vm.$slots.default=['这是<strong style="color: blue">toast</strong>信息']
-    ```   
+    ```
 * slot-scope
 ```
 <template slot="content" slot-scope="{close}">
@@ -1113,10 +1125,10 @@ methods: {
     }
 }
 
-```  
-    
+```
+
 ####
-* 在组件内部注册DOM元素 
+* 在组件内部注册DOM元素
 ```
 <template>
     <div class="popover" ref="popover">
@@ -1136,12 +1148,6 @@ this.$refs.popover.addEventListener('click',this.onClick)　// this.$refs.popove
 const popOver=vm.$refs.a　// popOver是一个vue实例
 const button=popOver.$el.querySelector('button')
 ```
-
-
-
-
-
-
 #### 父组件与组件通信
 * 父组件给子组件传递props(常见的情况是用户在index.html的组件里添加属性)
 ```
@@ -1260,9 +1266,6 @@ methods:{
 版本以0.开头：超级不稳定
 
 
-Get started
-
-
 #### 装yarn后,package.lock.json不能留
 
 
@@ -1278,14 +1281,121 @@ Get started
 ````
 点击除cascader外的其它位置,则关闭popover,并自动移除对其它位置的监听
 
-
-
 // 原先:触发onclickTrigger后,设置对其它位置的监听
 // 使用指令:一开始就设置对其它位置的监听(就算不用指令,这种思路也是正确的)
 
 
-
 ####　在HTML中,等号左边不支持大小写,右边支持
 ```
-<div :load-data="loadData"></div> 
+<div :load-data="loadData"></div>
 ```
+
+#### @welcome='xxx'的含义
+表示事件订阅,等价于
+```
+this.$on('welcome',xxx)// xxx为一个回调函数
+```
+
+#### vue的原型链类图
+![](./images/2.jpg)
+
+#### 状态管理
+* [$on(),$emit(),eventbus的由来](https://xiedaimala.com/tasks/2f5d184a-0f2b-4b20-9317-40ad22af784d/video_tutorials/468647fd-5ec8-433d-be52-2eb0c081e36d)
+
+* 什么是状态(面试)
+![](./images/1.jpg)
+* 状态分类(是否存入数据库)
+1. UI状态
+2. 用户状态
+
+#### 同名死循环
+count.vue组件
+```
+export default {
+    name: "count"
+}
+```
+在其他组件中注册count组件
+```
+import count from './src/components/count'
+```
+那么控制台会报错
+```
+Maximum call stack size exceeded
+```
+
+#### app.js的作用
+1. app.js(main.js/index.js)中定义了一个挂载在index.html中的div#app上的vue实例，它被认为是所有组件的父组件
+2. 在app.js中注册count.vue，就可以在index.html中的div#app中使用<count></count>。这个道理和在A组件中注册B.vue，就可以在A的template中使用<B></B>是一个道理
+
+
+
+####
+* dashboard：后台管理界面
+* 调用接口：前端发请求，后端给json
+
+#### 单页（SPA）和多页的区别
+![](./images/5.jpg)
+1. 单页面用前端路由实现，多页面用后端路由实现
+2. 如果想宣传网站（SEO，即google搜索引擎能搜到这个页面）,就用多页面，否则用单页面（比如后台管理页面，不需要也不允许让google搜索到）
+
+#### [RESETful API](https://xiedaimala.com/tasks/755642eb-c302-4bee-86de-3b6876ab9e76/video_tutorials/d7fcb8ab-4a32-476f-b6d8-ec144d19321d):用于解决URL起名字的问题
+![](./images/6.jpg)
+
+#### 角色和权限是
+* 如果没有“权限”，只依据“角色”划分功能。那么每个功能都需要做7层if else
+![](./images/7.jpg)
+* 权限常用二进制表示
+![](./images/8.jpg)
+* 禁用权限
+某位1变为0
+* 权限在前端界面的设计
+![](./images/9.jpg)
+* 多页面：什么角色能看，不能看什么页面，是由后端设计的，不是前端的锅
+* 单页面：让他访问，如果返回40x，就说明没有权限
+
+
+
+#### vue-cli
+1. src/main.js 为 entry file
+2.
+
+
+
+# bug
+* [Global sass mixins/vars are undefined on test mode #3706]()
+> The only valid workaround I know of is using node-sass instead of dart-sass (with the disadvantages it comes with).
+
+>对于已经建立起来的项目，我是这么解决问题的：
+1. 新建一个vue-cli项目，在初始配置时选择node-sass而非dart-sass
+2. 比较新建项目的配置文件与已有项目的不同
+---
+* npm 骗我设置代理，结果速度反而变慢了
+[解决方法:取消代理](https://blog.csdn.net/yanzi1225627/article/details/80247758)
+```
+npm config delete proxy
+```
+---
+* vue-cli 执行 test:unit 报错
+```
+Error: Missing binding E:\localrepo\vue-wheels\node_modules\node-sass\vendor\win32-x64-72\binding.node
+Node Sass could not find a binding for your current environment: Windows 64-bit with Node.js 12.x
+```
+解决方法
+```
+rm -rf node_modules
+yarn install
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
