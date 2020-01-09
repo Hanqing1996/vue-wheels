@@ -135,6 +135,7 @@ g.button{
 ```
 Layout: the ability to calculate where elements will be visually laid out as a result of CSS, which impacts methods like getBoundingClientRects() or properties like offsetTop.
 ```
+* Mocha,chai,Sinon 这些只是语法;而 Karma 的作用不是提供语法，而是唤起浏览器以测试html,css
 
 #### Mocha
 describe,it 语法
@@ -1419,7 +1420,8 @@ test:{
 > 结果便是 veu-cli 
 
 
-
+#### 
+[VueCli配合Karma和Chrome一起使用](https://xiedaimala.com/tasks/05c21465-b85f-4a52-9c5f-88a614c730b2/video_tutorials/753d5890-f5bc-4513-9a99-8efeea9a7bde)
 
 
 
