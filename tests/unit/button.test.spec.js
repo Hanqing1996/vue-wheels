@@ -46,37 +46,31 @@ describe('Button', () => {
         })
 
         it('icon 默认的 order 是 1', () => {
-            const div = document.createElement('div')
-            document.body.appendChild(div)
-            vm = new Constructor({
+            const wrapper = mount(Button, {
+                attachToDocument:true,
                 propsData: {
                     icon: 'settings',
                 }
-            }).$mount(div)
-            const icon = vm.$el.querySelector('svg')
+            })
+            const icon = wrapper.find('svg').vm.$el
             expect(getComputedStyle(icon).order).to.eq('1')
-            vm.$el.remove()
-            vm.$destroy()
         })
 
         it('设置 iconPosition 可以改变 order', () => {
-            const div = document.createElement('div')
-            document.body.appendChild(div)
-            vm = new Constructor({
+            const wrapper = mount(Button, {
+                attachToDocument:true,
                 propsData: {
                     icon: 'settings',
                     iconPosition: 'right'
                 }
-            }).$mount(div)
-            const icon = vm.$el.querySelector('svg')
+            })
+
+            const icon = wrapper.find('svg').vm.$el
             expect(getComputedStyle(icon).order).to.eq('2')
-            vm.$el.remove()
-            vm.$destroy()
         })
     })
 
     describe('事件', () => {
-
 
         it('点击 button 触发 touch 事件', () => {
 
