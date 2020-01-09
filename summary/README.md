@@ -1386,10 +1386,31 @@ Node Sass could not find a binding for your current environment: Windows 64-bit 
 rm -rf node_modules
 yarn install
 ```
+* git: git push 时报错“Updates were rejected because the tip of your current branch is behind”
+勾选强制覆盖已有的分支（可能会丢失改动），再点击上传，上传成功。
+```
+git push -u origin master -f 
+```
+---
+* 单元测试:[Invalid Chai property: called. Did you mean “all”?](https://stackoverflow.com/questions/51019151/invalid-chai-property-called-did-you-mean-all)
+---
 
+#### 约定和配置
+* 约定
+"测试文件应该约定好,都放在 test/unit 目录下
+* 配置
+"测试文件现在放在哪呀"-"在test/temp目录下"-"就放那里吧,我改下配置文件"
+```
+test:{
+    position:'test/temp'
+}
+```
 
+#### 测试环境的变化
+注意！！！
+> 原先 parcel 配置下的单元测试是运行在浏览器环境下的。但是 veu-cli 的单元测试是运行在 node.js环境下的
 
-
+> 结果便是 veu-cli 
 
 
 
