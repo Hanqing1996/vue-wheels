@@ -4,7 +4,8 @@ import {mount} from '@vue/test-utils'
 
 const {expect} = chai;
 import Vue from 'vue'
-import Button from '../../src/button'
+
+import Button from '../../src/components/button/button'
 
 Vue.config.productionTip = false
 Vue.config.devtools = false
@@ -16,12 +17,6 @@ describe('Button', () => {
         expect(Button).to.exist // 不是假值，就不报错
     })
     describe('props', () => {
-
-        const Constructor = Vue.extend(Button)
-        let vm = new Constructor({})
-        afterEach(() => {
-            vm.$destroy()
-        })
 
         it('可以设置icon.', () => {
             // 现在挂载组件，你便得到了这个包裹器
@@ -47,7 +42,7 @@ describe('Button', () => {
 
         it('icon 默认的 order 是 1', () => {
             const wrapper = mount(Button, {
-                attachToDocument:true,
+                attachToDocument: true,
                 propsData: {
                     icon: 'settings',
                 }
@@ -58,13 +53,12 @@ describe('Button', () => {
 
         it('设置 iconPosition 可以改变 order', () => {
             const wrapper = mount(Button, {
-                attachToDocument:true,
+                attachToDocument: true,
                 propsData: {
                     icon: 'settings',
                     iconPosition: 'right'
                 }
             })
-
             const icon = wrapper.find('svg').vm.$el
             expect(getComputedStyle(icon).order).to.eq('2')
         })
@@ -73,13 +67,11 @@ describe('Button', () => {
     describe('事件', () => {
 
         it('点击 button 触发 touch 事件', () => {
-
             const wrapper = mount(Button, {
                 propsData: {
                     icon: 'settings'
                 }
             })
-
             const button = wrapper.find('button')
             const callback = sinon.fake();
             // 为组件实例设置监听事件

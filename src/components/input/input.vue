@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import Icon from './icon'
+    import Icon from '../button/icon'
 
     export default {
         name: "WheelInput",
@@ -42,7 +42,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "var";
+    @import "src/var";
     .wrapper {
         font-size: $font-size;
         display: inline-flex;

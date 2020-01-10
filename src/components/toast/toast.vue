@@ -87,7 +87,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "var";
+    @import "src/var";
     .toast {
         font-size: $font-size;
         height: $toast-height;

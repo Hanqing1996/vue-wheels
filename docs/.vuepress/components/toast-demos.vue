@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import Button from '../../../src/button'
+    import Button from '../../../src/components/button/button'
     import plugin from '../../../src/plugin'
     import Vue from 'vue'
 

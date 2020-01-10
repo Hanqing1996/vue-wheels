@@ -1,35 +1,35 @@
 import Vue from 'vue'
 // button
-import Button from './button'
-import Icon from './icon'
-import ButtonGroup from './button-group'
+import Button from './components/button/button'
+import Icon from './components/button/icon'
+import ButtonGroup from './components/button/button-group'
 // input
-import Input from './input'
+import Input from './components/input/input'
 // grid
-import Row from './row'
-import Col from './col'
+import Row from './components/grid/row'
+import Col from './components/grid/col'
 // layout
-import Layout from './layout'
-import Header from './header'
-import Sider from './sider'
-import Content from './content'
-import Footer from './footer'
+import Layout from './components/layout/layout'
+import Header from './components/layout/header'
+import Sider from './components/layout/sider'
+import Content from './components/layout/content'
+import Footer from './components/layout/footer'
 // toast
-import Toast from './toast'
+import Toast from './components/toast/toast'
 import plugin from './plugin'
 // tabs
-import Tabs from './tabs'
-import TabsHead from './tabs-head'
-import TabsBody from './tabs-body'
-import TabsItem from './tabs-item'
-import TabsPane from './tabs-pane'
+import Tabs from './components/tabs/tabs'
+import TabsHead from './components/tabs/tabs-head'
+import TabsBody from './components/tabs/tabs-body'
+import TabsItem from './components/tabs/tabs-item'
+import TabsPane from './components/tabs/tabs-pane'
 // popover
-import Popover from './popover'
+import Popover from './components/popover/popover'
 // collapse
-import Collapse from './collapse'
-import CollapseItem from './collapse-item'
+import Collapse from './components/collapse/collapse'
+import CollapseItem from './components/collapse/collapse-item'
 // cascader
-import Cascader from './cascader'
+import Cascader from './components/cascader/cascader'
 
 // 这里的注册是为 index.html 服务
 Vue.component('g-button', Button)

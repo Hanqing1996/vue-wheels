@@ -24,7 +24,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "var";
+    @import "src/var";
     .tabs-head {
         display: flex;
         height: $tab-height;

@@ -9,8 +9,8 @@
 
 <script>
 
-    import Button from "./button";
-    import Cascader from "./cascader";
+    import Button from "./components/button/button";
+    import Cascader from "./components/cascader/cascader";
     import db from './db'
 
 

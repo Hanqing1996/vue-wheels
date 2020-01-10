@@ -1420,8 +1420,25 @@ test:{
 > 结果便是 veu-cli 
 
 
-#### 
-[VueCli配合Karma和Chrome一起使用](https://xiedaimala.com/tasks/05c21465-b85f-4a52-9c5f-88a614c730b2/video_tutorials/753d5890-f5bc-4513-9a99-8efeea9a7bde)
+#### [Vue-Cli 配合 Karma 进行单元测试](https://xiedaimala.com/tasks/05c21465-b85f-4a52-9c5f-88a614c730b2/video_tutorials/753d5890-f5bc-4513-9a99-8efeea9a7bde)
+> 问题：Vue-Cli 默认使用的浏览器环境是 JSDOM ,不支持css检测
+
+思路：
+1. 让 karma 从 vue-cli 的 webpack 配置中知道测试用例放在哪里
+2. 唤起浏览器进行测试
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

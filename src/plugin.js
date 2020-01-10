@@ -1,4 +1,4 @@
-import Toast from './toast'
+import Toast from './components/toast/toast'
 
 // 以下是轮子开发者写的插件内容,用户不能写入内容
 function createToast(Vue, message, {propsData},callback) {

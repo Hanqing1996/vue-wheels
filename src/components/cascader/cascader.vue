@@ -11,7 +11,7 @@
 
 <script>
     import CascaderItems from './cascader-items'
-    import clickOutside from './clickOutside'
+    import clickOutside from '../../clickOutside'
 
     export default {
         name: "WheelCascader",
@@ -61,7 +61,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "var";
+    @import "src/var";
 
     .cascader {
         position: relative;

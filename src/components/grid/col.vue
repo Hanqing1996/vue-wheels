@@ -42,6 +42,7 @@
         // colStyle 作为计算属性使用，以保证 colstyle 这个对象能随 gutter 更新而更新
         computed: {
             colStyle() {
+                console.log('compute:',this.gutter);
                 return {
                     paddingLeft: this.gutter / 2 + 'px',
                     paddingRight: this.gutter / 2 + 'px'

@@ -24,8 +24,8 @@
 </template>
 
 <script>
-    import Row from '../../../src/row'
-    import Col from '../../../src/col'
+    import Row from '../../../src/components/grid/row'
+    import Col from '../../../src/components/grid/col'
 
     export default {
         name: "grid-demos",
