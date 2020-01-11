@@ -35,7 +35,6 @@
             // 把父组件的 gutter 传递给子组件
             this.$children.forEach((vm) => {
                 vm.gutter = this.gutter
-                console.log('mounted:',vm.gutter);
             })
         }
     }

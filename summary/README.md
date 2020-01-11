@@ -127,6 +127,7 @@ g.button{
 * 添加.travis.yml
 * 把项目 push 到 github
 * 在[travis-ci](https://www.travis-ci.org/)添加项目
+* 由于travis-ci默认执行 npm run test
 
 #### Karma
 * 具体配置写在 karma.conf,js 中

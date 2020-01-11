@@ -53,7 +53,7 @@
 </script>
 
 <style lang="scss" scoped>
-　　　@import "src/var";
+    @import "src/var";
     .tabs-item {
         flex-shrink: 0;
         padding: 0 1em;
@@ -62,12 +62,12 @@
         display: flex;
         align-items: center;
         &.active {
-            color:$blue;
+            color:blue;
             font-weight: bold;
         }
         /*禁用样式*/
         &.disabled{
-            color: $disabled-text-color;
+            color: red;
             cursor: not-allowed;
         }
     }

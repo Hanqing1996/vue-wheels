@@ -1,4 +1,3 @@
-import sinon from "sinon";
 import chai from 'chai'
 import {mount} from '@vue/test-utils'
 
