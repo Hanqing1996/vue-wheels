@@ -1,4 +1,3 @@
-import sinon from "sinon";
 import chai from 'chai'
 import {mount,createLocalVue} from '@vue/test-utils'
 const {expect} = chai;

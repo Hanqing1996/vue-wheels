@@ -111,7 +111,6 @@
         &.position-middle{
             top: 50%;
         }
-
     }
 
     .close {
