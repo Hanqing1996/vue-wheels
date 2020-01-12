@@ -1402,6 +1402,7 @@ git push -u origin master -f
 ---
 * 单元测试:[Using @vue/cli test:unit with require('jsdom-global')() produces "Module not found: 'canvas'"](https://github.com/vuejs/vue-test-utils/issues/1288)
 ---
+* 单元测试:[Module build failed: Error: Cannot find module 'babel-preset-env' - Did you mean "@babel/env"?](https://github.com/babel/babel/issues/10085)
 
 #### 约定和配置
 * 约定
@@ -1422,6 +1423,8 @@ test:{
 
 
 #### [Vue-Cli 配合 Karma 进行单元测试](https://xiedaimala.com/tasks/05c21465-b85f-4a52-9c5f-88a614c730b2/video_tutorials/753d5890-f5bc-4513-9a99-8efeea9a7bde)
+* [用 Karma 测试单文件组件](https://vue-test-utils.vuejs.org/zh/guides/testing-single-file-components-with-karma.html)
+
 > 问题：Vue-Cli 默认使用的浏览器环境是 JSDOM ,不支持css检测
 
 思路：
