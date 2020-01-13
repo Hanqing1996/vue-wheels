@@ -1132,6 +1132,15 @@ methods: {
 }
 
 ```
+* slots外部一般用一个标签包裹起来
+```
+<template>
+    ...
+    <div class="wrapper">
+        <slots><slots>
+    </div>
+</template>
+```
 
 ####
 * 在组件内部注册DOM元素
@@ -1431,21 +1440,16 @@ test:{
 1. 让 karma 从 vue-cli 的 webpack 配置中知道测试用例放在哪里
 2. 唤起浏览器进行测试
 
-
-
-Branches:分支测试（是否）
-
-
-
-
-
-
-
-
-
-
-
-
+#### 轮播需求分析
+* 有缝轮播
+![](./images/10.jpg)
+```
+<g-slides>
+    <div></div>
+    <div></div>
+    <div></div>
+</g-slides>    
+```
 
 
 

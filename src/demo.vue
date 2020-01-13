@@ -4,21 +4,29 @@
             <g-cascader :source="source" :selected="selected" 　@update:selected="xxx($event)"
                         　@update:closeSelected="selected=[]">
             </g-cascader>
+            <g-slides>
+                <div class="box">1</div>
+                <div class="box">2</div>
+                <div class="box">3</div>
+            </g-slides>
     </div>
 </template>
 
 <script>
 
     import Button from "./components/button/button";
+
     import Cascader from "./components/cascader/cascader";
     import db from './db'
 
+    import Slides from "./components/slides/slides"
 
     export default {
         name: "demo",
         components: {
             'g-button': Button,
-            'g-cascader': Cascader
+            'g-cascader': Cascader,
+            'g-slides':Slides
         },
         data() {
             return {
@@ -61,4 +69,9 @@
 
 <style scoped>
 
+.box{
+    height: 100px;
+    width: 100px;
+    border: 1px solid red;
+}
 </style>
