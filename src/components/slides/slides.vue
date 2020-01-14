@@ -24,6 +24,7 @@
             updateChildren() {
                 // 与其修改props的默认值，不如修改参数的默认值
                 let selected = this.selected || this.$children[0].name
+                this.$emit('update:selected',selected)
                 this.$children.forEach((item) => {
                     item.selected = this.selected
                 })
