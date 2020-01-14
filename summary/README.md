@@ -810,6 +810,21 @@ console.log(vm.$el.querySelector('.close')) // <span>xxxx<span>
 ```
 
 #### [.sync修饰符](https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6)
+对于
+```
+this.$emit('update:title', newTitle)
+```
+下面两种写法等价
+```
+<text-document :title="doc.title" @update:title="doc.title = $event"></text-document>
+```
+```
+<text-document :title.sync="doc.title"></text-document>
+```
+也就是说sync的作用是让 title="doc.title" 异步执行多次（响应式）
+
+
+
 子组件的事件触发父组件更新selectedTab
 ```
 <g-tabs :selected="selectedTab" @update:xxx="selectedTab=$event">

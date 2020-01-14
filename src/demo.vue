@@ -5,8 +5,7 @@
                         　@update:closeSelected="selected=[]">
             </g-cascader>
 
-
-            <g-slides :selected="sliderSelected" :autoPlay="autoPlaySliders" @play="playSliders($event)">
+            <g-slides :selected.sync="sliderSelected" :autoPlay="autoPlaySliders">
                 <g-slides-item name="1">
                     <div class="box">1</div>
                 </g-slides-item >
@@ -42,7 +41,7 @@
             return {
                 selected: [],
                 source: [],
-                sliderSelected:"1",
+                sliderSelected:"",
                 autoPlaySliders:true,
             }
         },
@@ -68,16 +67,6 @@
                     }
                     this.selected = JSON.parse(JSON.stringify(event))
                 })
-            },
-            playSliders(num){
-                let n=1
-                setInterval(()=>{
-                    console.log(n);
-                    this.sliderSelected=n.toString()
-                    n=(n+1)%(num+1)
-                    if(n==0)
-                        n=1
-                },3000)
             }
         },
         created() {

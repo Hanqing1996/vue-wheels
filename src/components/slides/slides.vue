@@ -15,9 +15,9 @@
             selected: {
                 type: String
             },
-            autoPlay:{
+            autoPlay: {
                 type: Boolean,
-                default:true
+                default: true
             }
         },
         methods: {
@@ -27,11 +27,20 @@
                 this.$children.forEach((item) => {
                     item.selected = this.selected
                 })
+            },
+            playAutomatically(){
+                const names=this.$children.map(item=>item.name)
+                const num=names.length
+                let index=names.indexOf(this.selected)||0
+                setInterval(()=>{
+                    index=(index+1)%num
+                    this.$emit('update:selected',names[index])
+                },3000)
             }
         },
         mounted() {
-            let childrenNum=this.autoPlay? this.$children.length:0
-            this.$emit('play', childrenNum)
+            this.updateChildren()
+            this.playAutomatically()
         },
         //mounted只执行一次，所以update的操作不应该在mounted里面执行
         updated() {
