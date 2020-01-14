@@ -88,7 +88,7 @@
 
 .box{
     height: 200px;
-    width: 300px;
-    border: 1px solid red;
+    width: 350px;
+    background: #ddd;
 }
 </style>

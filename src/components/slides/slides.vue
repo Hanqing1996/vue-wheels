@@ -53,13 +53,12 @@
             },
             playAutomatically(){
                 const num=this.childrenNames.length
-                let index=this.selectedIndex
                 let run=()=>{
-                    this.select(index)
-                    index=(index+1)%num
+                    let index=this.selectedIndex
+                    this.select((index+1)%num)
                     setTimeout(run,3000)
                     }
-                // run()
+                run()
 
             }
         },
@@ -89,7 +88,6 @@
 
 <style lang="scss" scoped>
     .g-slides {
-        border: 1px solid black;
         display: inline-block;
     }
 
