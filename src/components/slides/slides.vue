@@ -1,7 +1,7 @@
 <template>
     <div class="g-slides">
-        <div class="window">
-            <div  ref="container" class="g-slides-inner" style="width: 100px">
+        <div class="g-slides-window">
+            <div ref="container" class="g-slides-wrapper">
                 <slot></slot>
             </div>
         </div>
@@ -11,28 +11,47 @@
 <script>
     export default {
         name: "WheelSlides",
+        props: {
+            selected: {
+                type: String
+            },
+            autoPlay:{
+                type: Boolean,
+                default:true
+            }
+        },
+        methods: {
+            updateChildren() {
+                // 与其修改props的默认值，不如修改参数的默认值
+                let selected = this.selected || this.$children[0].name
+                this.$children.forEach((item) => {
+                    item.selected = this.selected
+                })
+            }
+        },
         mounted() {
-            setTimeout(()=>{
-                this.$refs.container.style.transform='translateX(-200px)';
-            },3000)
+            let childrenNum=this.autoPlay? this.$children.length:0
+            this.$emit('play', childrenNum)
+        },
+        //mounted只执行一次，所以update的操作不应该在mounted里面执行
+        updated() {
+            this.updateChildren()
         }
     }
 </script>
 
 
 <style lang="scss" scoped>
+    .g-slides {
+        border: 1px solid black;
+        display: inline-block;
+    }
+
     .g-slides-inner {
         display: flex;
-        transition: all 1s;
     }
-    .g-slides-inner >*{
-        width: 100%;
-        flex-shrink: 0;
-    }
-    .g-slides .window{
-        overflow: hidden;
-    }
-    .g-slides{
-        display: inline-block;
+
+    .g-slides-wrapper {
+        position: relative;
     }
 </style>

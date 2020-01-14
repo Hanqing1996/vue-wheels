@@ -857,9 +857,11 @@ function fn(prop1,prop2){
 ```
 * props:需要用户(前端开发者)传值,props不允许组件自己修改(要修改,必须先$emit到父组件,再由父组件传入子组件)
     * 事实上如果修改了,vue会给出警告
-* data:不需要用户(前端开发者)传值,data由组件自己修改更新(父组件少传一个参数,起到隔绝作用)
+    * 有的值（比如col.gutter,slides-item.visible）属于props,但我们无法直接，在父组件的mounted里进行传值会收到警告,于是我们不得不用data
+* data:不需要用户(前端开发者)传值,data由组件自己修改更新(父组件少传一个参数,起到减少耦合的作用)
     * sider.vue 的　visible
     * tabs-item.vue 的　active
+* 但是有的时候传不了 props 只能用 data,比如slide-item的visible    
 
 #### 框架的作用
 * 使团队中的傻逼也写不出垃圾代码
@@ -1036,7 +1038,50 @@ let vm4=new Constructor2({
           }
         ```
 ---
-
+* slides
+    * 用操作组件代替操作DOM元素（努力享受vue的红利）
+    ```
+    <g-slides>
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+    </g-slides>
+    
+    // 操作DOM元素
+    this.vm.$el.children...
+    ```
+    改为
+    ```
+      <g-slides>
+          <g-slides-item>
+              <div class="box">1</div>
+          </g-slides-item>
+          <g-slides-item>
+              <div class="box">2</div>
+          </g-slides-item>
+          <g-slides-item>
+              <div class="box">3</div>
+          </g-slides-item>
+      </g-slides>
+  
+    // 操作子组件
+    this.vm.$children...
+    ```
+    * 用 enter-active,enter,leave-to 代替 update,computed 进行样式切换
+    * update()
+    * 处理props默认参数（即"父组件不传入参数,而props的default又不是静态的"这种情况）
+    ```
+      updateChildren() {
+          // 与其修改props的默认值，不如在知道props的用处后修改对应变量的默认值
+          let selected = this.selected || this.$children[0].name
+          this.$children.forEach((item) => {
+              item.selected = this.selected
+          })
+      }
+    ```    
+  
+#### vue的意义
+操作DOM=>操作组件！！！
 
 
 #### [popover的需求](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/26c0e669-f116-46c7-898a-d259707b30fe)
@@ -1441,6 +1486,7 @@ test:{
 2. 唤起浏览器进行测试
 
 #### 轮播需求分析
+不用DOM的API
 * 有缝轮播
 ![](./images/10.jpg)
 ```
@@ -1451,6 +1497,19 @@ test:{
 </g-slides>    
 ```
 
+#### mounted()和updated()
+```
+change(this.data)
 
+mounted() {
+    console.log('data changed');// 不会执行
+}
+updated(){
+    console.log('data changed');// 会执行
+}
+```
+> mounted:只在组件被挂载到DOM元素上时执行一次，data/props的改变不会触发它
 
+> updated:由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。
 
+>然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，通常最好使用计算属性或 watcher 取而代之。

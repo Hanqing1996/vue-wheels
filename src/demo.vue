@@ -4,10 +4,18 @@
             <g-cascader :source="source" :selected="selected" 　@update:selected="xxx($event)"
                         　@update:closeSelected="selected=[]">
             </g-cascader>
-            <g-slides>
-                <div class="box">1</div>
-                <div class="box">2</div>
-                <div class="box">3</div>
+
+
+            <g-slides :selected="sliderSelected" :autoPlay="autoPlaySliders" @play="playSliders($event)">
+                <g-slides-item name="1">
+                    <div class="box">1</div>
+                </g-slides-item >
+                <g-slides-item name="2">
+                    <div class="box">2</div>
+                </g-slides-item>
+                <g-slides-item name="3">
+                    <div class="box">3</div>
+                </g-slides-item>
             </g-slides>
     </div>
 </template>
@@ -20,18 +28,22 @@
     import db from './db'
 
     import Slides from "./components/slides/slides"
+    import SlidesItem from "./components/slides/slides-item"
 
     export default {
         name: "demo",
         components: {
             'g-button': Button,
             'g-cascader': Cascader,
-            'g-slides':Slides
+            'g-slides':Slides,
+            'g-slides-item':SlidesItem,
         },
         data() {
             return {
                 selected: [],
                 source: [],
+                sliderSelected:"1",
+                autoPlaySliders:true,
             }
         },
         methods: {
@@ -57,6 +69,16 @@
                     this.selected = JSON.parse(JSON.stringify(event))
                 })
             },
+            playSliders(num){
+                let n=1
+                setInterval(()=>{
+                    console.log(n);
+                    this.sliderSelected=n.toString()
+                    n=(n+1)%(num+1)
+                    if(n==0)
+                        n=1
+                },3000)
+            }
         },
         created() {
             // 动态获取source
