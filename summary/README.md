@@ -1519,7 +1519,8 @@ test:{
 </g-slides>    
 ```
 * 支持点击dot切换slide-item
-* 支持mouseenter
+* 支持 mouseenter 暂停动画；mouseouter 继续播放
+* 支持自动播放
 
 
 #### mounted()和updated()
