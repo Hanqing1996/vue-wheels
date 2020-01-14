@@ -1507,9 +1507,9 @@ test:{
 1. 让 karma 从 vue-cli 的 webpack 配置中知道测试用例放在哪里
 2. 唤起浏览器进行测试
 
-#### 轮播需求分析
+#### 轮播slides需求分析
 不用DOM的API
-* 有缝轮播
+* 有缝轮播（无法直接从3到1，不好）
 ![](./images/10.jpg)
 ```
 <g-slides>
@@ -1518,6 +1518,9 @@ test:{
     <div></div>
 </g-slides>    
 ```
+* 支持点击dot切换slide-item
+* 支持mouseenter
+
 
 #### mounted()和updated()
 ```

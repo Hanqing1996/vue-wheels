@@ -1,6 +1,6 @@
 <template>
     <transition name="slide">
-        <div class="slides-item" v-if="visible">
+        <div class="slides-item" v-if="visible" :class="{reverse}">
             <slot></slot>
         </div>
     </transition>
@@ -17,14 +17,15 @@
         },
         data() {
             return {
-                selected:undefined
+                selected:undefined,
+                reverse:false
             }
         },
         computed: {
             visible(){
                 return this.name===this.selected
             }
-        }
+        },
     }
 </script>
 
@@ -36,16 +37,28 @@
     }
 
     /*要出现的时候，切换为绝对定位*/
-    .slide-enter {
-        transform: translateX(100%);
+    .slide-enter{
+        transform: translateX(100%) scale(0.5);
+        position: absolute;
+        top:0;
+        left:0
+    }
+    .slide-enter.reverse{
+        transform: translateX(-100%) scale(0.5);
         position: absolute;
         top:0;
         left:0
     }
 
     /*要消失的时候，切换为绝对定位*/
-    .slide-leave-to {
-        transform: translateX(-100%);
+    .slide-leave-to{
+        transform: translateX(-100%) scale(0.5);
+        position: absolute;
+        top:0;
+        left:0
+    }
+    .slide-leave-to.reverse{
+        transform: translateX(100%) scale(0.5);
         position: absolute;
         top:0;
         left:0

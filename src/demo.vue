@@ -15,6 +15,12 @@
                 <g-slides-item name="3">
                     <div class="box">3</div>
                 </g-slides-item>
+                <g-slides-item name="4">
+                    <div class="box">4</div>
+                </g-slides-item>
+                <g-slides-item name="5">
+                    <div class="box">5</div>
+                </g-slides-item>
             </g-slides>
     </div>
 </template>
@@ -81,8 +87,8 @@
 <style scoped>
 
 .box{
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 300px;
     border: 1px solid red;
 }
 </style>
