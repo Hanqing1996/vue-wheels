@@ -823,6 +823,12 @@ this.$emit('update:title', newTitle)
 ```
 也就是说sync的作用是让 title="doc.title" 异步执行多次（响应式）
 
+#### selected
+* 使用tabs组件，在index.html中使用了:selected.sync=selectedTab
+* 使用slides组件，在demo.vue中使用了:selected.sync=sliderSelected
+> 也就是说,demo里的sliderSelected不仅表示默认选项，还表示当前选中的选项
+
+> 我们要注意sliderSelected为"",也就是没有默认选项的情况
 
 
 子组件的事件触发父组件更新selectedTab
@@ -1094,6 +1100,7 @@ let vm4=new Constructor2({
           })
       }
     ```    
+    * slidesSelected不仅表示默认选项，还表示当前选中的选项
   
 #### vue的意义
 操作DOM=>操作组件！！！

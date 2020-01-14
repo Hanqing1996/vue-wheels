@@ -33,10 +33,14 @@
                 const names=this.$children.map(item=>item.name)
                 const num=names.length
                 let index=names.indexOf(this.selected)||0
-                setInterval(()=>{
-                    index=(index+1)%num
-                    this.$emit('update:selected',names[index])
-                },3000)
+                let run=()=>{
+                    setTimeout(()=>{
+                        index=(index+1)%num
+                        this.$emit('update:selected',names[index])
+                        setTimeout(run,3000)
+                    },)
+                }
+                run()
             }
         },
         mounted() {
