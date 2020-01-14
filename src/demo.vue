@@ -1,14 +1,14 @@
 <template>
     <div>
         <g-button>hi</g-button>
-            <g-cascader :source="source" :selected="selected" 　@update:selected="xxx($event)"
-                        　@update:closeSelected="selected=[]">
-            </g-cascader>
-
+        <g-cascader :source="source" :selected="selected" 　@update:selected="xxx($event)"
+                    　@update:closeSelected="selected=[]">
+        </g-cascader>
+        <div class="slidesClass">
             <g-slides :selected.sync="sliderSelected" :autoPlay="autoPlaySliders">
                 <g-slides-item name="1">
                     <div class="box">1</div>
-                </g-slides-item >
+                </g-slides-item>
                 <g-slides-item name="2">
                     <div class="box">2</div>
                 </g-slides-item>
@@ -22,6 +22,7 @@
                     <div class="box">5</div>
                 </g-slides-item>
             </g-slides>
+        </div>
     </div>
 </template>
 
@@ -40,15 +41,15 @@
         components: {
             'g-button': Button,
             'g-cascader': Cascader,
-            'g-slides':Slides,
-            'g-slides-item':SlidesItem,
+            'g-slides': Slides,
+            'g-slides-item': SlidesItem,
         },
         data() {
             return {
                 selected: [],
                 source: [],
-                sliderSelected:"",
-                autoPlaySliders:true,
+                sliderSelected: "",
+                autoPlaySliders: true,
             }
         },
         methods: {
@@ -85,10 +86,15 @@
 </script>
 
 <style scoped>
+    .slidesClass {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
 
-.box{
-    height: 200px;
-    width: 350px;
-    background: #ddd;
-}
+    .box {
+        height: 200px;
+        width: 350px;
+        background: #ddd;
+    }
 </style>

@@ -7,7 +7,7 @@
         </div>
         <div class="g-slides-dots">
             <span v-for="(child,index) in $children" :class="{active:selectedIndex===index}" @click="select(index)">
-                {{index}}
+                {{index+1}}
             </span>
         </div>
     </div>
@@ -105,7 +105,24 @@
         position: relative;
     }
 
-    .active {
-        background-color: red;
+    .g-slides-dots{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 10px;
+        > span{
+            display: inline-block;
+            text-align: center;
+            width: 1.2em;
+            height: 1.2em;
+            line-height: 1.2em;
+            padding:auto 0;
+            margin: 0.3em;
+            border-radius: 50%;
+            background: #4abf8a;
+            &.active{
+                background-color: red;
+            }
+        }
     }
 </style>
