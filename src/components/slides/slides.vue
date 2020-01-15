@@ -12,7 +12,7 @@
             <span class="next" @click="select(selectedIndex-1)">
                 <Icon name="left"></Icon>
             </span>
-            <span v-for="(child,index) in $children" :class="{active:selectedIndex===index}" @click="select(index)">
+            <span v-for="(child,index) in $children.filter(item=>item.$options.name==='WheelSlidesItem')" :class="{active:selectedIndex===index}" @click="select(index)">
                 {{index+1}}
             </span>
             <span class="last" @click="select(selectedIndex+1)">
@@ -81,6 +81,10 @@
             },
             // 0=>2: this.lastIndex=0   childrenNames.indexOf(this.selected)=2
             select(index) {
+                if(index===this.childrenNames.length)
+                    index=0
+                if(index===-1)
+                    index=this.childrenNames.length-1
                 this.lastSelectedIndex = this.selectedIndex// 更新lastSelectedIndex
                 this.$emit('update:selected', this.childrenNames[index])
             },
@@ -120,9 +124,7 @@
             }
         },
         mounted() {
-
             this.childrenNames = this.$children.filter(item=>item.$options.name==='WheelSlidesItem').map(item => item.name)
-            console.log(this.childrenNames);
             this.updateChildren()
             if (this.autoPlay)
                 this.playAutomatically()
