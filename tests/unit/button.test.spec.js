@@ -7,6 +7,9 @@ import Vue from 'vue'
 
 import Button from '../../src/components/button/button'
 
+import sinonChai from 'sinon-chai'
+chai.use(sinonChai)
+
 Vue.config.productionTip = false
 Vue.config.devtools = false
 

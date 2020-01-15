@@ -9,6 +9,9 @@ import TabsBody from '../../src/components/tabs/tabs-body'
 import TabsItem from '../../src/components/tabs/tabs-item'
 import TabsPane from '../../src/components/tabs/tabs-pane'
 
+import sinonChai from 'sinon-chai'
+chai.use(sinonChai)
+
 Vue.config.productionTip = false
 Vue.config.devtools = false
 

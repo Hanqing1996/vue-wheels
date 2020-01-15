@@ -6,6 +6,9 @@ import Vue from 'vue'
 import Row from '../../src/components/grid/row'
 import Col from '../../src/components/grid/col'
 
+import sinonChai from 'sinon-chai'
+chai.use(sinonChai)
+
 Vue.config.productionTip = false
 Vue.config.devtools = false
 

@@ -4,6 +4,9 @@ import {mount} from '@vue/test-utils'
 const {expect} = chai;
 import Vue from 'vue'
 
+import sinonChai from 'sinon-chai'
+chai.use(sinonChai)
+
 import Toast from '../../src/components/toast/toast'
 
 Vue.config.productionTip = false

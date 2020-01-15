@@ -6,6 +6,9 @@ import Vue from 'vue'
 
 import popOver from '../../src/components/popover/popover'
 
+import sinonChai from 'sinon-chai'
+chai.use(sinonChai)
+
 Vue.config.productionTip = false
 Vue.config.devtools = false
 

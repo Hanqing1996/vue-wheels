@@ -4,6 +4,9 @@ import {mount} from '@vue/test-utils'
 const {expect} = chai;
 import Vue from 'vue'
 
+import sinonChai from 'sinon-chai'
+chai.use(sinonChai)
+
 import Input from '../../src/components/input/input'
 
 Vue.config.productionTip = false
