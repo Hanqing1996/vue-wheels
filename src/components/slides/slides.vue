@@ -1,29 +1,39 @@
 <template>
 
 
-    <div class="g-slides" @mouseenter="pause" @mouseleave="playAutomatically" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+    <div class="g-slides" @mouseenter="pause" @mouseleave="playAutomatically" @touchstart="onTouchStart"
+         @touchmove="onTouchMove" @touchend="onTouchEnd">
         <div class="g-slides-window">
             <div ref="container" class="g-slides-wrapper">
                 <slot></slot>
             </div>
         </div>
         <div class="g-slides-dots">
+            <span class="next" @click="select(selectedIndex-1)">
+                <Icon name="left"></Icon>
+            </span>
             <span v-for="(child,index) in $children" :class="{active:selectedIndex===index}" @click="select(index)">
                 {{index+1}}
+            </span>
+            <span class="last" @click="select(selectedIndex+1)">
+                <Icon name="right"></Icon>
             </span>
         </div>
     </div>
 </template>
 
 <script>
+    import Icon from "../button/icon";
+
     export default {
         name: "WheelSlides",
+        components: {Icon},
         data() {
             return {
                 childrenNames: [],
                 lastSelectedIndex: -1,
                 timerId: undefined,
-                startTouch:undefined,
+                startTouch: undefined,
             }
         },
         props: {
@@ -36,15 +46,17 @@
             }
         },
         methods: {
-            onTouchStart(e){
+            onTouchStart(e) {
                 this.pause()
                 // 多点touch（两个手指滑动，不予反应）
-                if (e.touches.length > 1) {return}
+                if (e.touches.length > 1) {
+                    return
+                }
                 this.startTouch = e.touches[0]
             },
-            onTouchMove(){
+            onTouchMove() {
             },
-            onTouchEnd(e){
+            onTouchEnd(e) {
                 let endTouch = e.changedTouches[0]
                 let {clientX: x1, clientY: y1} = this.startTouch
                 let {clientX: x2, clientY: y2} = endTouch
@@ -77,7 +89,7 @@
                 let selected = this.selected || this.$children[0].name
                 // 必须通过demo.vue来更新selected
                 this.$emit('update:selected', selected)
-                this.$children.forEach((item) => {
+                this.$children.filter(item=>item.$options.name==='WheelSlidesItem').forEach((item) => {
                     item.reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
                     this.$nextTick(() => {
                         item.selected = selected
@@ -109,7 +121,8 @@
         },
         mounted() {
 
-            this.childrenNames = this.$children.map(item => item.name)
+            this.childrenNames = this.$children.filter(item=>item.$options.name==='WheelSlidesItem').map(item => item.name)
+            console.log(this.childrenNames);
             this.updateChildren()
             if (this.autoPlay)
                 this.playAutomatically()
@@ -135,23 +148,31 @@
         position: relative;
     }
 
-    .g-slides-dots{
+    .g-slides-dots {
         display: flex;
         flex-direction: row;
         justify-content: center;
         padding: 10px;
-        > span{
+
+        > span {
             display: inline-block;
             text-align: center;
             width: 1.2em;
             height: 1.2em;
             line-height: 1.2em;
-            padding:auto 0;
+            padding: auto 0;
             margin: 0.3em;
             border-radius: 50%;
             background: #4abf8a;
-            &.active{
+
+            &.active {
                 background-color: red;
+            }
+            &.next,&.last{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
             }
         }
     }
