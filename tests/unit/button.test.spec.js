@@ -65,17 +65,18 @@ describe('Button', () => {
     })
 
     describe('事件', () => {
-
+        const callback = sinon.fake();
         it('点击 button 触发 touch 事件', () => {
             const wrapper = mount(Button, {
                 propsData: {
                     icon: 'settings'
+                },
+                //为组件实例设置监听事件
+                listeners:{
+                    'click':callback
                 }
             })
             const button = wrapper.find('button')
-            const callback = sinon.fake();
-            // 为组件实例设置监听事件
-            button.vm.$on('click1', callback)
             //触发click 事件
             button.trigger('click')
             expect(callback.calledOnce);

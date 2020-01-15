@@ -34,12 +34,13 @@ describe('TabsItem', () => {
                 attachToDocument:true,
                 propsData: {
                     disabled:true
+                },
+                listeners:{
+                    'click':callback
                 }
             })
             // 测试　disabled 的　class
             expect(wrapper.classes().includes('disabled')).to.equal(true)
-            // 测试　disabeld 的item 无法被点击
-            wrapper.vm.$on('click',callback)
             wrapper.trigger('click')
             expect(callback.notCalled);
         })

@@ -77,10 +77,12 @@ describe('Input', () => {
         it('支持 change/input/focus/blur 事件', () => {
             ['change', 'input', 'focus', 'blur']
                 .forEach((eventName) => {
-
-                    const wrapper = mount(Input,{})
                     const callback = sinon.fake();
-                    wrapper.vm.$on(eventName, callback)
+                    const wrapper = mount(Input,{
+                        listeners:{
+                            eventName:callback
+                        }
+                    })
                     let event = new Event(eventName);
                     Object.defineProperty(
                         event, 'target', {

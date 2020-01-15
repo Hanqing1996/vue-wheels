@@ -1,6 +1,4 @@
 <template>
-
-
     <div class="g-slides" @mouseenter="pause" @mouseleave="playAutomatically" @touchstart="onTouchStart"
          @touchmove="onTouchMove" @touchend="onTouchEnd">
         <div class="g-slides-window">
@@ -9,13 +7,13 @@
             </div>
         </div>
         <div class="g-slides-dots">
-            <span class="next" @click="select(selectedIndex-1)">
+            <span data-action="next" class="next" @click="select(selectedIndex-1)">
                 <Icon name="left"></Icon>
             </span>
-            <span v-for="(child,index) in $children.filter(item=>item.$options.name==='WheelSlidesItem')" :class="{active:selectedIndex===index}" @click="select(index)">
+            <span v-for="(child,index) in $children.filter(item=>item.$options.name==='WheelSlidesItem')" :class="{active:selectedIndex===index}" @click="select(index)" class="slidesIndex" :data-index="index+1">
                 {{index+1}}
             </span>
-            <span class="last" @click="select(selectedIndex+1)">
+            <span data-action="last" class="last" @click="select(selectedIndex+1)">
                 <Icon name="right"></Icon>
             </span>
         </div>
@@ -43,6 +41,10 @@
             autoPlay: {
                 type: Boolean,
                 default: true
+            },
+            autoPlayDelay:{
+                type:Number,
+                default: 3000
             }
         },
         methods: {
@@ -108,9 +110,9 @@
                 let run = () => {
                     let index = this.selectedIndex
                     this.select((index + 1) % num)
-                    this.timerId = setTimeout(run, 3000)
+                    this.timerId = setTimeout(run, this.autoPlayDelay)
                 }
-                this.timerId = setTimeout(run, 3000)
+                this.timerId = setTimeout(run, this.autoPlayDelay)
             }
         },
         computed: {
@@ -168,7 +170,8 @@
             background: #4abf8a;
 
             &.active {
-                background-color: red;
+                background-color: black;
+                color: white;
             }
             &.next,&.last{
                 display: flex;

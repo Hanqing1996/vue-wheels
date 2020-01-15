@@ -20,7 +20,7 @@ describe('popOver', () => {
     describe('props', () => {
 
         // 这里是测试传入的position能否改变popover内部solt的位置
-        it('popover 可以设置 position', () => {
+        it('popover 可以设置 position', (done) => {
             const wrapper = mount(popOver, {
                 propsData: {
                     position: 'bottom'
@@ -32,11 +32,14 @@ describe('popOver', () => {
             })
             // 这里用button触发click，因为在popover的onClick事件中有过滤措施，只有当触发元素为button时才改变visible
             wrapper.find('button').trigger('click')
-            expect(wrapper.find('.content-wrapper').classes('position-bottom')).to.eq(true)
+            setTimeout(()=>{
+                expect(wrapper.find('.content-wrapper').classes('position-bottom')).to.eq(true)
+                done()
+            })
         })
 
         // 测试 trigger
-        it('popover 可以设置 trigger', () => {
+        it('popover 可以设置 trigger', (done) => {
 
             const wrapper = mount(popOver, {
                 propsData: {
@@ -50,7 +53,10 @@ describe('popOver', () => {
             expect(wrapper.find('.content-wrapper').element).to.not.exist
             // 这里用.popover触发mouseenter
             wrapper.trigger('mouseenter')
-            expect(wrapper.find('.content-wrapper').element).to.exist
+            setTimeout(()=>{
+                expect(wrapper.find('.content-wrapper').element).to.exist
+                done()
+            })
         })
     })
 })

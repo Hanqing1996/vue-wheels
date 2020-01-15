@@ -862,8 +862,6 @@ vm.$el.querySelector('button').click()会触发
 * 父组件会通过 props 向下传数据给子组件
 * 当子组件有事情要告诉父组件时会通过 $emit 事件告诉父组件
 
-#### vue的事件系统($on(),$emit())是不冒泡的
-
 #### vue的props和data有什么区别?
 ```
 function fn(prop1,prop2){

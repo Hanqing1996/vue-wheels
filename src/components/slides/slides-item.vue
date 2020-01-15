@@ -55,12 +55,14 @@
         transform: translateX(-100%) scale(0.5);
         position: absolute;
         top:0;
-        left:0
+        left:0;
+        opacity: 0;
     }
     .slide-leave-to.reverse{
         transform: translateX(100%) scale(0.5);
         position: absolute;
         top:0;
-        left:0
+        left:0;
+        opacity: 0;
     }
 </style>
