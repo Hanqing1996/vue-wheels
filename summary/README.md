@@ -1101,6 +1101,7 @@ let vm4=new Constructor2({
       }
     ```    
     * slidesSelected不仅表示默认选项，还表示当前选中的选项
+    * 移动端touch事件
   
 #### vue的意义
 操作DOM=>操作组件！！！
@@ -1521,6 +1522,7 @@ test:{
 * 支持点击dot切换slide-item
 * 支持 mouseenter 暂停动画；mouseouter 继续播放
 * 支持自动播放
+* 支持移动端（touch事件）
 
 
 #### mounted()和updated()
