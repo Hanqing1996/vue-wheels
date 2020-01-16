@@ -31,7 +31,7 @@
     import Button from "./components/button/button";
 
     import Cascader from "./components/cascader/cascader";
-    import db from './db'
+    import db from '../tests/fixture/db'
 
     import Slides from "./components/slides/slides"
     import SlidesItem from "./components/slides/slides-item"

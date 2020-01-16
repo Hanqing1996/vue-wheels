@@ -52,7 +52,7 @@
 </script>
 
 <style lang="scss"　scoped>
-    @import "src/var";
+    /*@import "src/var";*/
     .collapse{
         margin: 5px;
         border: 1px solid $grey;

@@ -73,6 +73,7 @@ npx parcel index.html
 ```
 
 #### 单元测试
+* 一般将测试数据放在 test/fixture 中
 * css 单元测试，必须把 vm 挂载到文档内的一个元素上
 ```
 const div = document.createElement('div')
@@ -1479,6 +1480,10 @@ git push -u origin master -f
 ---
 * 单元测试:[Module build failed: Error: Cannot find module 'babel-preset-env' - Did you mean "@babel/env"?](https://github.com/babel/babel/issues/10085)
 
+#### 路径bug怎么解决
+加/减一个目录
+
+
 #### 约定和配置
 * 约定
 "测试文件应该约定好,都放在 test/unit 目录下
@@ -1539,3 +1544,7 @@ updated(){
 > updated:由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。
 
 >然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，通常最好使用计算属性或 watcher 取而代之。
+
+
+
+#### webpack 配置 var.scss 路径
