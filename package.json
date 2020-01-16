@@ -6,9 +6,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:cov": "cross-env BABEL_ENV=test karma start --watch",
-    "test": "karma start --single-run",
-    "test:unit": "karma start",
+    "test:unit": "cross-env BABEL_ENV=test karma start --watch",
     "test:unit-old": "vue-cli-service test:unit"
   },
   "dependencies": {
@@ -16,9 +14,9 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.0",
+    "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-unit-mocha": "^3.0.0",
-    "@vue/cli-service": "^3.0.0",
+    "@vue/cli-service": "^4.1.0",
     "@vue/test-utils": "^1.0.0-beta.24",
     "babel-plugin-istanbul": "^5.1.0",
     "chai": "^4.1.2",
@@ -31,11 +29,11 @@
     "karma-spec-reporter": "^0.0.32",
     "karma-webpack": "^3.0.0",
     "mocha": "^5.2.0",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.1",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.2",
     "sinon": "^6.1.5",
     "sinon-chai": "^3.2.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.6.10"
   },
   "browserslist": [
     "> 1%",

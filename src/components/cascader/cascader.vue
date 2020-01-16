@@ -61,8 +61,6 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "src/var";
-
     .cascader {
         position: relative;
         > .trigger {
