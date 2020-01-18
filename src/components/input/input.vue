@@ -42,7 +42,7 @@
 </script>
 
 <style lang="scss" scoped>
-    /*@import "src/var";*/
+    @import "src/var";
     .wrapper {
         font-size: $font-size;
         display: inline-flex;

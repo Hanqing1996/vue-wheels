@@ -36,7 +36,7 @@
 </script>
 
 <style scoped lang="scss">
-    /*@import "src/var";*/
+    @import "src/var";
     .collapse-item{
         >.title{
             border: 1px solid $grey;

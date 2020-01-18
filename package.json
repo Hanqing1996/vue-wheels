@@ -7,33 +7,45 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "cross-env BABEL_ENV=test karma start --watch",
-    "test:unit-old": "vue-cli-service test:unit"
+    "test:unit-old": "vue-cli-service test:unit",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "dependencies": {
     "core-js": "^3.4.3",
-    "vue": "^2.6.10"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-babel": "^3.0.0",
     "@vue/cli-plugin-unit-mocha": "^3.0.0",
-    "@vue/cli-service": "^4.1.0",
-    "@vue/test-utils": "^1.0.0-beta.24",
-    "babel-plugin-istanbul": "^5.1.0",
-    "chai": "^4.1.2",
+    "@vue/cli-service": "^3.0.0",
+    "@vue/component-compiler-utils": "^2.6.0",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-plugin-istanbul": "^5.1.4",
+    "chai": "^4.2.0",
+    "chai-spies": "^1.0.0",
     "cross-env": "^5.2.0",
     "karma": "^3.0.0",
+    "karma-chai": "^0.1.0",
+    "karma-chai-spies": "^0.1.4",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.2",
     "karma-mocha": "^1.3.0",
+    "karma-sinon-chai": "^2.0.2",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "^0.0.32",
     "karma-webpack": "^3.0.0",
     "mocha": "^5.2.0",
-    "node-sass": "^4.13.0",
-    "sass-loader": "^8.0.2",
-    "sinon": "^6.1.5",
-    "sinon-chai": "^3.2.0",
-    "vue-template-compiler": "^2.6.10"
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "sinon": "^7.3.2",
+    "sinon-chai": "^3.3.0",
+    "vue-server-renderer": "2.6.11",
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.0.0-alpha.17"
+  },
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
   },
   "browserslist": [
     "> 1%",

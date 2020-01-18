@@ -72,7 +72,7 @@
     }
 </script>
 <style scoped lang="scss">
-    /*@import "src/var";*/
+    @import "src/var";
     .popover {
         display: flex;
         height: 200px;

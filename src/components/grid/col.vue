@@ -80,6 +80,7 @@
     }
 </script>
 <style scoped lang="scss">
+
     .col {
         /*col-1 到 col-24,24种样式*/
         $class-prefix: col-;

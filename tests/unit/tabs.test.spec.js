@@ -1,5 +1,6 @@
 import chai from 'chai'
-import {mount,createLocalVue} from '@vue/test-utils'
+import {mount, createLocalVue} from '@vue/test-utils'
+
 const {expect} = chai;
 import Vue from 'vue'
 
@@ -10,12 +11,13 @@ import TabsItem from '../../src/components/tabs/tabs-item'
 import TabsPane from '../../src/components/tabs/tabs-pane'
 
 import sinonChai from 'sinon-chai'
+
 chai.use(sinonChai)
 
 Vue.config.productionTip = false
 Vue.config.devtools = false
 
-Vue.component('g-tabs',Tabs)
+Vue.component('g-tabs', Tabs)
 
 describe('Tabs', () => {
 
@@ -25,16 +27,16 @@ describe('Tabs', () => {
 
     describe('props', () => {
 
-        it('接收 selected ',  ()=>{
+        it('接收 selected ', (done) => {
             const localVue = createLocalVue()
-            localVue.component('g-tabs-head',TabsHead)
-            localVue.component('g-tabs-head',TabsHead)
-            localVue.component('g-tabs-body',TabsBody)
-            localVue.component('g-tabs-item',TabsItem)
-            localVue.component('g-tabs-pane',TabsPane)
+            localVue.component('g-tabs-head', TabsHead)
+            localVue.component('g-tabs-head', TabsHead)
+            localVue.component('g-tabs-body', TabsBody)
+            localVue.component('g-tabs-item', TabsItem)
+            localVue.component('g-tabs-pane', TabsPane)
 
             const wrapper = mount(Tabs, {
-                attachToDocument:true,
+                attachToDocument: true,
                 propsData: {
                     selected: 'military'
                 },
@@ -53,10 +55,12 @@ describe('Tabs', () => {
                 },
                 localVue
             })
-            expect(wrapper.element.querySelectorAll('.tabs-item')[0].textContent).to.equal('军事');
+            setTimeout(() => {
+                expect(wrapper.element.querySelectorAll('.tabs-item')[0].textContent).to.equal('军事');
+                done()
+            })
         });
     })
-
 
 
 })
