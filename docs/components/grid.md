@@ -1,9 +1,11 @@
 ---
 sidebarDepth: 2
 ---
-# grid-网格
+# Grid-网格
 
-使用方法
+&nbsp;
 <ClientOnly>
     <grid-demo></grid-demo>
+    <row-attributes></row-attributes>
+    <col-attributes></col-attributes>
 </ClientOnly>

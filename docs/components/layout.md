@@ -1,9 +1,9 @@
 ---
 sidebarDepth: 2
 ---
-# layout-布局
+# Layout-布局
 
-使用方法
+&nbsp;
 <ClientOnly>
-    <layout-demos></layout-demos>
+    <layout-demo></layout-demo>
 </ClientOnly>

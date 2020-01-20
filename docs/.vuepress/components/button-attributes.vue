@@ -1,12 +1,7 @@
 <template>
   <div class="base">
     <section>
-      <h2>📌 Attributes</h2>
-      <p class="des">
-        组件将被渲染为
-        <span class="code">button</span>标签，因此你可以使用所有的
-        <span class="code">button</span>原生属性。
-      </p>
+      <h2>Attributes</h2>
       <div class="attr">
         <table>
           <thead>
@@ -21,23 +16,30 @@
           <tbody>
             <tr>
               <td>icon</td>
-              <td class="des">icon 图标名</td>
-              <td class="type">String</td>
-              <td>——</td>
-              <td>——</td>
+              <td class="des">图标类名</td>
+              <td class="type">string</td>
+              <td>—</td>
+              <td>—</td>
             </tr>
             <tr>
               <td>position</td>
-              <td class="des">icon 位置</td>
-              <td class="type">String</td>
+              <td class="des">图标位置</td>
+              <td class="type">string</td>
               <td>left , right</td>
               <td>left</td>
             </tr>
             <tr>
               <td>loading</td>
-              <td class="des">带 loading 效果的按钮，当按钮被点击时会出现 loading 效果，再次点击 loading 效果消失</td>
-              <td class="type">Boolean</td>
-              <td>——</td>
+              <td class="des">是否加载中状态</td>
+              <td class="type">boolean</td>
+              <td>—</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td class="des">是否禁用状态</td>
+              <td class="type">boolean</td>
+              <td>true , false</td>
               <td>false</td>
             </tr>
           </tbody>
@@ -48,11 +50,4 @@
 </template>
 
 <style>
-.code {
-  background-color: rgba(27, 31, 35, 0.05);
-  border-radius: 3px;
-  font-size: 85%;
-  margin: 0;
-  padding: 0.2em 0.4em;
-}
 </style>

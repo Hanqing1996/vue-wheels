@@ -1,9 +1,11 @@
 ---
 sidebarDepth: 2
 ---
-# input-输入框
+# Input-输入框
 
-使用方法
+&nbsp;
 <ClientOnly>
-    <input-demos></input-demos>
+    <input-demo></input-demo>
+    <input-attributes></input-attributes>
+    <input-events></input-events>
 </ClientOnly>

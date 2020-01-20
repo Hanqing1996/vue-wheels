@@ -1,100 +1,31 @@
 <template>
     <div>
-        <g-button>hi</g-button>
-        <g-cascader :source="source" :selected="selected" 　@update:selected="xxx($event)"
-                    　@update:closeSelected="selected=[]">
-        </g-cascader>
-        <div class="slidesClass">
-            <g-slides :selected.sync="sliderSelected" :autoPlay="autoPlaySliders">
-                <g-slides-item name="1">
-                    <div class="box">1</div>
-                </g-slides-item>
-                <g-slides-item name="2">
-                    <div class="box">2</div>
-                </g-slides-item>
-                <g-slides-item name="3">
-                    <div class="box">3</div>
-                </g-slides-item>
-                <g-slides-item name="4">
-                    <div class="box">4</div>
-                </g-slides-item>
-                <g-slides-item name="5">
-                    <div class="box">5</div>
-                </g-slides-item>
-            </g-slides>
-        </div>
+        <g-nav :selected.sync=selected multiline="false">
+            <g-nav-item name="introduction">平台介绍</g-nav-item>
+            <g-nav-item name="interface">数据接口</g-nav-item>
+            <g-nav-item name="linkStyle">联系方式</g-nav-item>
+        </g-nav>
     </div>
 </template>
 
 <script>
-
-    import Button from "./components/button/button";
-
-    import Cascader from "./components/cascader/cascader";
-    import db from '../tests/fixture/db'
-
-    import Slides from "./components/slides/slides"
-    import SlidesItem from "./components/slides/slides-item"
+    import GNav from "./components/nav/nav";
+    import GNavItem from "./components/nav/nav-item";
+    import GSubNav from "./components/nav/sub-nav";
 
     export default {
         name: "demo",
-        components: {
-            'g-button': Button,
-            'g-cascader': Cascader,
-            'g-slides': Slides,
-            'g-slides-item': SlidesItem,
-        },
+        components: {GNav, GNavItem, GSubNav},
+        selected: '',
         data() {
             return {
-                selected: [],
-                source: [],
-                sliderSelected: "",
-                autoPlaySliders: true,
+                selected: ['home']
             }
         },
-        methods: {
-            ajax(parentId = 0) {
-                return new Promise((resolve, reject) => {
-                    let timeId = setTimeout(() => {
-                        let result = db.filter(item => item.parent_id === parentId)
-                        resolve(result)
-                    }, 1000)
-                })
-            },
-            xxx(event) {
-
-                let len = event.length
-                let level = len - 1
-
-                this.ajax(event[level].id).then(result => {
-
-                    // 找得到children,才赋予children属性,也就是说"上城区"这些item是不会有children的
-                    if (result.length > 0) {
-                        event[level].children = JSON.parse(JSON.stringify(result))
-                    }
-                    this.selected = JSON.parse(JSON.stringify(event))
-                })
-            }
-        },
-        created() {
-            // 动态获取source
-            this.ajax(0).then(result => {
-                this.source = JSON.parse(JSON.stringify(result))
-            })
-        }
+        methods: {}
     }
 </script>
 
 <style scoped>
-    .slidesClass {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
 
-    .box {
-        height: 200px;
-        width: 350px;
-        background: #ddd;
-    }
 </style>

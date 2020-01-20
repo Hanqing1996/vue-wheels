@@ -19,7 +19,11 @@ module.exports = {
                     '/components/grid',
                     '/components/layout',
                     '/components/toast',
-                    '/components/tabs'
+                    '/components/tabs',
+                    '/components/cascader',
+                    '/components/collapse',
+                    '/components/popover',
+                    '/components/slides',
                 ]
             }
         ]

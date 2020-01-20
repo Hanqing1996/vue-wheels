@@ -1,9 +1,10 @@
 ---
 sidebarDepth: 2
 ---
-# toast-弹出层
+# Toast-提示
 
-使用方法
+&nbsp;
 <ClientOnly>
-    <toast-demos></toast-demos>
+    <toast-demo></toast-demo>
+    <toast-attributes></toast-attributes>
 </ClientOnly>

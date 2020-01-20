@@ -1,7 +1,7 @@
 <template>
     <div class="collapse-item">
         <div class="title" @click="toggleContent">{{title}}</div>
-        <div class="content" v-if="open">
+        <div class="content" v-if="open" style="height: 100px">
             <slot></slot>
         </div>
     </div>
@@ -18,6 +18,10 @@
             name:{
                 type:String,
                 required: true
+            },
+            single:{
+                type:Boolean,
+                default:false
             }
         },
         data(){
@@ -28,8 +32,12 @@
         inject: ['eventBus'],
         methods:{
             toggleContent(){
-                // 子组件发送状态更新请求给父组件(子组件不自己更新)
-                this.eventBus&&this.eventBus.$emit('change:Selected', this.name)
+                if(this.single){
+                    // 子组件发送状态更新请求给父组件(子组件不自己更新)
+                    this.eventBus&&this.eventBus.$emit('change:Selected', this.name)
+                } else{
+                    this.open=!this.open
+                }
             }
         }
     }

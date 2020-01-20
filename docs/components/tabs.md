@@ -1,9 +1,12 @@
 ---
 sidebarDepth: 2
 ---
-# tabs-标签
+# Tabs-标签
 
-使用方法
+&nbsp;
 <ClientOnly>
-    <tabs-demos></tabs-demos>
+    <tabs-demo></tabs-demo>
+    <tabs-attributes></tabs-attributes>
+    <tabs-pane-attributes></tabs-pane-attributes>
+    <tabs-item-attributes></tabs-item-attributes>    
 </ClientOnly>

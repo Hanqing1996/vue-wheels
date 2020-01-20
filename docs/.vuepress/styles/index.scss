@@ -1,6 +1,9 @@
 .component-wrapper{
   width: 60%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items:stretch;
+  > *{
+    margin-right: 10px;
+  }
 }

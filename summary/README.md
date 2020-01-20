@@ -1302,21 +1302,13 @@ collapse-item.vue:38 标题3被更新了
 正确的数据流示范,见collapse组件
 
 
+#### 部署到github
+先生成静态文件，再部署到github
+```
+yarn run docs:build
+yarn run deplosh
+```
 
-#### 创建展示组件网站
-* [创建官网](https://xiedaimala.com/tasks/4e1ae548-5f27-45b0-bbf0-1dddcc304be9/video_tutorials/7f6b22f7-086f-4c9c-827e-7dcf951106cd)
-```
-yaen add vuepress -D
-```
-然后在docs目录中进行操作
-* [部署到github pages](https://xiedaimala.com/tasks/4e1ae548-5f27-45b0-bbf0-1dddcc304be9/video_tutorials/e958d50f-9b7f-49a0-ba69-1b82365b447c)
-看deploy配置
-* 更新内容并发布
-1. 更新config.js
-2. 发布更新
-```
-npm run update
-```
 
 #### 学习　vuepress
 1. 预览文档标题
@@ -1548,6 +1540,109 @@ updated(){
 
 >然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，通常最好使用计算属性或 watcher 取而代之。
 
+#### navs需求分析
+navs 默认单选，所以
+```
+// 其中multiline的default值为false
+<g-nav :selected="selected" multiline>
+    <g-nav-item name="introduction">平台介绍</g-nav-item>
+    <g-nav-item>数据接口</g-nav-item>
+    <g-nav-item>联系方式</g-nav-item>
+</g-nav>
+```
+比
+```
+// 其中single的default值为true
+<g-nav :selected="selected" single="false">
+    <g-nav-item name="introduction">平台介绍</g-nav-item>
+    <g-nav-item>数据接口</g-nav-item>
+    <g-nav-item>联系方式</g-nav-item>
+</g-nav>
+```
+要好
 
 
-#### webpack 配置 var.scss 路径
+#### :class="{selected}"
+```
+<div :class="{selected}">
+    <slot></slot>
+</div>
+
+data(){
+    return {
+        selected:false
+    }
+},
+
+&.selected{
+    background-color: red;
+ }
+```
+
+#### $emit 和 $on
+1. $emit和$on必须作用在同一实例上
+> 父组件 A 通过 props 的方式向子组件 B 传递，B to A 通过在 B 组件中 $emit, A 组件中 v-on 的方式实现。
+```
+// A.vue
+<template>
+    <div>
+        <B @travel="callback"></B>
+        ......
+    </div>
+</template>
+
+
+// B.vue
+<template>
+    <div @click="emit">
+    ......
+    </div>
+</template>
+
+methods:{
+    emit(){
+        this.$emit('travel')
+    }
+}
+
+// 注意到$on,$emit
+```
+2. $emit是不冒泡的
+> 我验证过了，确实如此
+
+
+
+#### Nav 实现思路
+1. demo.vue 中，往往通过sync更新currentSelected,保证其内容为当前所选项
+```
+<g-nav :selected.sync=currentSelected multiline>
+    <g-nav-item name="introduction">平台介绍</g-nav-item>
+    <g-nav-item name="interface">数据接口</g-nav-item>
+    <g-nav-item name="linkStyle">联系方式</g-nav-item>
+</g-nav>
+```
+2. 由于nav组件中nav-item组件包含在slot中，所以不能直接写 <nav-item @add:selected=updateSelected></nav> 是做不到的，必须在nav中迂回地这么写
+```
+mounted() {
+    this.items.forEach(vm => {
+        vm.$on('add:selected', (name)=>{this.updateSelected(name)})
+        vm.selected = this.selected.indexOf(vm.name) >= 0 
+    })
+},
+``` 
+3. 在nav-item中，selected用于判断item是否visible
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -52,15 +52,20 @@
             },
             closeContent(){
                 this.visible=false// 关闭content
-
-
             },
             onClickDocument(){
                 // setTimeout让"设置document的监听事件"这个动作发生在冒泡结束之后，从而阻止了这次button的点击事件冒泡到document(只阻止了这一次)
                 setTimeout(()=>{
                     let eventHandler = (event) => {
+
+                        //由于setTimeout的存在,在点击close按钮及trigger按钮后closeContent会先于eventHandler被触发，则this.$refs.contentWrapper为undefined
+                        if(!this.$refs.contentWrapper)
+                            return
+
+
                         // 只有点击其它位置,才会触发eventHandler("其它位置的定义"是event.target不是文本内容和button)
                         if(!this.$refs.contentWrapper.contains(event.target)&&!this.$refs.triggerWrapper.contains(event.target)){
+
                             this.closeContent()
                             document.removeEventListener('click', eventHandler)
                         }
@@ -71,7 +76,7 @@
 
             // onClick不是被点击触发的,而是因为popover内部元素被点击,冒泡给popover触发的
             onClick(event) {
-                // 判断冒泡给popover的是哪个元素,若是button触发的,则做进一步操作
+                // 判断冒泡给popover的是哪个元素,若是trigger按钮触发的,则做进一步操作
                 if (this.$refs.triggerWrapper.contains(event.target)) {
                     if(this.visible===true){
                         this.closeContent()
@@ -106,7 +111,8 @@
 <style lang="scss"　scoped>
     .popover {
         position: relative;
-        margin:100px;
+        margin-left:100px;
+        margin-right: 100px;
     }
 
     /*浮动布局*/

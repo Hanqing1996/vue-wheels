@@ -1,6 +1,6 @@
 <template>
     <div class="demo">
-        <h2>简单用法</h2>
+        <h2>基本用法</h2>
         <p>
             <strong>预览</strong>
         </p>
@@ -11,6 +11,9 @@
                 <g-button :loading="true">加载按钮</g-button>
                 <g-button disabled>禁用按钮</g-button>
             </div>
+            <p>
+                <strong>代码</strong>
+            </p>
             <div>
                 <div>
                     <pre><code>{{codeStr}}</code></pre>
@@ -37,6 +40,9 @@
                 </g-button-group>
             </div>
             <div>
+                <p>
+                    <strong>代码</strong>
+                </p>
                 <div>
                     <pre><code class="html">{{codeStr2}}</code></pre>
                 </div>
@@ -77,7 +83,7 @@
     下一页
     </g-button>
 </g-button-group>
-          `.replace(/^ {8}/gm, '').trim()
+          `
             }
         }
     }

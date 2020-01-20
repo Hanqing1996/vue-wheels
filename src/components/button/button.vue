@@ -6,7 +6,6 @@
         <!--v-if="icon&&!loading"：没有loading的情况下，用户传入icon值，则渲染svg-->
         <!--:name="icon"：用户传入icon的值（svg的名字）-->
         <Icon v-if="icon&&!loading" class="icon" :name=icon></Icon>
-
         <!--这里的loading是字符串，不是变量名，所以用name而不是:name-->
         <Icon v-if="loading" class="loading icon" name="loading"></Icon>
         <div class="content">

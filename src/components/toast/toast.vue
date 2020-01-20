@@ -75,7 +75,7 @@
                 }
             },
             log() {
-                console.log('测试callbak的回传功能');
+                // console.log('测试callbak的回传功能');
             }
         },
         computed: {
@@ -106,7 +106,7 @@
             bottom: 0;
         }
         &.position-top{
-            top: 0;
+            top: 7%;
         }
         &.position-middle{
             top: 50%;

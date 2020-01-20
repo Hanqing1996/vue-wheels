@@ -1,23 +1,31 @@
 <template>
 
     <transition name="slide">
-        <div class="sider":class="siderClass" v-if="visible">
+        <div class="sider":class="siderClass" v-show="visible">
             <!--这个click不需要在index.html中设置相应事件哦-->
-            <button @click="visible=false">hide</button>
+            <div class="hideButton" @click="hideSider">
+                <g-button>hide</g-button>
+            </div>
             <slot></slot>
         </div>
     </transition>
 </template>
 
 <script>
+    import GButton from '../button/button'
+
     export default {
         name: "WheelSider",
+        components:{GButton},
         data(){
           return {
               visible:true
           }
         },
         methods:{
+            hideSider(){
+                this.visible=false
+            }
         },
         computed: {
             siderClass: function () {
@@ -28,7 +36,6 @@
 
     }
 </script>
-
 <style scoped lang="scss">
     .sider{
         /*浮动布局*/
@@ -37,7 +44,7 @@
         width: 200px;
         height: 500px;
 
-        > button{
+        > .hideButton{
             position: absolute;
             top:0;
             right:0;
@@ -46,11 +53,11 @@
 
     /*时长*/
     .slide-enter-active,.slide-leave-active {
-        transition: all .5s
+        transition: all 3s
     }
 
     /*结束状态*/
-    .slide-enter,.slide-leave-to /* .slide-leave-active below version 2.1.8 */ {
+    .slide-leave-to {
         margin-left: -200px;
     }
 </style>
