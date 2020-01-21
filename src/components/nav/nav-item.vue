@@ -20,9 +20,12 @@
             }
         },
         methods: {
+            // 注意"数据接口"不是nav-item
             onClick() {
+                // 清空namePath,由于x的递归调用，保证了最后一级导航栏的item被点击后，总是能生成一条完整且正确的namePath
+                this.root.namePath=[]
+                this.$parent.updateNamePath&&this.$parent.updateNamePath()
                 this.$emit('add:selected', this.name)
-                this.$parent.x()
             }
         },
         created() {

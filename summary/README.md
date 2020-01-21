@@ -1103,6 +1103,19 @@ let vm4=new Constructor2({
     * 移动端touch事件
 * nav
     * 通过依赖注入（root）实现跨级调用    
+    * 使用指令clickOutside
+    ```
+    // 点击除.g-sub-nav外的其他位置，则触发closePopover
+    <div class="g-sub-nav" v-click-outside="closePopover"></div>
+      import clickOutside from '../../clickOutside'
+  
+      export default {
+          directives:{clickOutside},
+          methods:{
+              closePopover(){
+              }
+          }
+    ```
   
 #### vue的意义
 操作DOM=>操作组件！！！

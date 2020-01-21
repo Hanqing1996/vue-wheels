@@ -1,5 +1,5 @@
 <template>
-    <div class="g-sub-nav">
+    <div class="g-sub-nav" :class="{active}" v-click-outside="closePopover">
         <span @click="onClick">
             <slot name="title"></slot>
         </span>
@@ -10,8 +10,12 @@
 </template>
 
 <script>
+    import clickOutside from '../../clickOutside'
+
     export default {
         name: "WheelsSubNav",
+        inject:['root'],
+        directives:{clickOutside},
         props:{
             name:{
                 type:String,
@@ -20,15 +24,25 @@
         },
         data() {
             return {
-                open: false
+                open: false,
+                active:false
             }
         },
         methods: {
+            closePopover(){
+                this.active=false
+                this.open=false
+            },
             onClick() {
                 this.open = !this.open
             },
-            x(){
-                console.log('x');
+            updateNamePath(){
+                // 记录sub-nav路径
+                this.active=true
+                this.root.namePath.unshift(this.name)
+                if(this.$parent.updateNamePath){
+                    this.$parent.updateNamePath()
+                }
             }
         }
     }
@@ -39,6 +53,16 @@
 
     .g-sub-nav {
         position: relative;
+        &.active {
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                border-bottom: 1px solid $blue;
+                width: 100%;
+            }
+        }
 
         > span {
             padding: 10px 20px;
