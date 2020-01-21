@@ -64,6 +64,6 @@
     .g-nav {
         display: flex;
         flex-direction: row;
-        border: 1px solid red;
+        border-bottom: 1px solid red;
     }
 </style>

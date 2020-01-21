@@ -22,6 +22,7 @@
         methods: {
             onClick() {
                 this.$emit('add:selected', this.name)
+                this.$parent.x()
             }
         },
         created() {
@@ -33,9 +34,16 @@
 <style lang="scss" scoped>
     .g-nav-item {
         padding: 10px 20px;
-
+        position: relative;
         &.selected {
-            background-color: red;
+            &::after{
+                content:'';
+                position:absolute;
+                left:0;
+                bottom: 0px;
+                border-bottom:1px solid blue;
+                width:100%;
+            }
         }
     }
 </style>

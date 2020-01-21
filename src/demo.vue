@@ -2,11 +2,17 @@
     <div>
         <g-nav :selected.sync=selected multiline="false">
             <g-nav-item name="introduction">平台介绍</g-nav-item>
-            <g-sub-nav>
+            <g-sub-nav name="data">
                 <template slot="title" class="g-nav-item">数据接口</template>
                 <g-nav-item name="news">资讯数据</g-nav-item>
                 <g-nav-item name="industry">行业数据</g-nav-item>
                 <g-nav-item name="society">社会数据</g-nav-item>
+                <g-sub-nav name="monetary">
+                    <template slot="title" class="g-nav-item">金融数据</template>
+                    <g-nav-item name="stock">股票数据</g-nav-item>
+                    <g-nav-item name="futures">期货数据</g-nav-item>
+                    <g-nav-item name="bond">债券数据</g-nav-item>
+                </g-sub-nav>
             </g-sub-nav>
             <g-nav-item name="linkStyle">联系方式</g-nav-item>
         </g-nav>

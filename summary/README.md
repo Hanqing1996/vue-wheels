@@ -1543,7 +1543,7 @@ updated(){
 >然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，通常最好使用计算属性或 watcher 取而代之。
 
 #### navs需求分析
-navs 默认单选，所以
+1. navs 默认单选，所以
 ```
 // 其中multiline的default值为false
 <g-nav :selected="selected" multiline>
@@ -1562,6 +1562,9 @@ navs 默认单选，所以
 </g-nav>
 ```
 要好
+2. nav如何获取popover里面的nav-item=>通过依赖注入（root）实现跨级调用
+3. "数据接口"要知道自己后代中的"期货数据"被选中了，这样才能在子级导航栏关闭后"数据接口"呈现被选中的样子
+4. 由于多级导航栏的存在，"选中"和"打开"是两个概念。可能选中不打开（因为没有子级导航栏），也可能打开不选中（刚打开子级导航栏）
 
 
 #### :class="{selected}"
@@ -1637,12 +1640,9 @@ mounted() {
 
 
 
-
-
-
-
-
-
+#### v-if和v-show
+> 在nav组件中，由于一开始popover的显示与否由v-if控制。所以一开始nav.items不包含popover的item,造成了bug。
+![](./images/11.jpg)
 
 
 
