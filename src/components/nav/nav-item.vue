@@ -1,13 +1,16 @@
 <template>
-    <div class="g-nav-item" :class="{selected}" @click="onClick">
+    <div class="g-nav-item" :class="{selected}" @click="onClick" v-click-outside="unselect">
         <slot></slot>
     </div>
 </template>
 
 <script>
+    import clickOutside from '../../clickOutside'
+
     export default {
         name: "WheelsNavItem",
         inject:['root'],
+        directives:{clickOutside},
         props: {
             name: {
                 type: String,
@@ -20,6 +23,9 @@
             }
         },
         methods: {
+            unselect(){
+                this.selected=false
+            },
             // 注意"数据接口"不是nav-item
             onClick() {
                 // 清空namePath,由于x的递归调用，保证了最后一级导航栏的item被点击后，总是能生成一条完整且正确的namePath

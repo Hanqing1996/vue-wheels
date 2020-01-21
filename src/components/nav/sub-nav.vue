@@ -2,6 +2,8 @@
     <div class="g-sub-nav" :class="{active}" v-click-outside="closePopover">
         <span @click="onClick">
             <slot name="title"></slot>
+            <span v-if="open">+</span>
+            <span v-else>-</span>
         </span>
         <div class="g-sub-nav-popover" v-show="open">
             <slot></slot>
