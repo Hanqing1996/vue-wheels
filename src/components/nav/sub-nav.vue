@@ -1,9 +1,13 @@
 <template>
     <div class="g-sub-nav" :class="{active}" v-click-outside="closePopover">
-        <span @click="onClick">
-            <slot name="title"></slot>
-            <span v-if="open">+</span>
-            <span v-else>-</span>
+        <span @click="onClick" class="g-sub-nav-label">
+            <span class="title">
+                <slot name="title"></slot>
+            </span>
+            <span v-if="this.$parent.$options.name==='WheelsSubNav'" class="g-sub-nav-icon">
+                <Icon v-if="open" name="left"></Icon>
+                <Icon v-else name="right"></Icon>
+            </span>
         </span>
         <div class="g-sub-nav-popover" v-show="open">
             <slot></slot>
@@ -13,36 +17,38 @@
 
 <script>
     import clickOutside from '../../clickOutside'
+    import Icon from '../button/icon'
 
     export default {
         name: "WheelsSubNav",
-        inject:['root'],
-        directives:{clickOutside},
-        props:{
-            name:{
-                type:String,
-                required:true
+        inject: ['root'],
+        components: {Icon},
+        directives: {clickOutside},
+        props: {
+            name: {
+                type: String,
+                required: true
             }
         },
         data() {
             return {
                 open: false,
-                active:false
+                active: false
             }
         },
         methods: {
-            closePopover(){
-                this.active=false
-                this.open=false
+            closePopover() {
+                this.active = false
+                this.open = false
             },
             onClick() {
                 this.open = !this.open
             },
-            updateNamePath(){
+            updateNamePath() {
                 // 记录sub-nav路径
-                this.active=true
+                this.active = true
                 this.root.namePath.unshift(this.name)
-                if(this.$parent.updateNamePath){
+                if (this.$parent.updateNamePath) {
                     this.$parent.updateNamePath()
                 }
             }
@@ -55,6 +61,7 @@
 
     .g-sub-nav {
         position: relative;
+
         &.active {
             &::after {
                 content: '';
@@ -105,6 +112,24 @@
                     margin-left: 8px;
                     min-width: 6em;
                 }
+            }
+        }
+    }
+
+    .title{
+        display: inline-block;
+        min-width: 4em;
+    }
+
+    .g-sub-nav-label{
+        position: relative;
+        >.g-sub-nav-icon{
+            position: absolute;
+            top:30%;
+            right:1%;
+            > svg{
+                width: 16px;
+                height: 16px;
             }
         }
     }
