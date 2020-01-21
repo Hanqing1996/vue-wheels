@@ -1101,6 +1101,8 @@ let vm4=new Constructor2({
     ```    
     * slidesSelected不仅表示默认选项，还表示当前选中的选项
     * 移动端touch事件
+* nav
+    * 通过依赖注入（root）实现跨级调用    
   
 #### vue的意义
 操作DOM=>操作组件！！！

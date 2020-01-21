@@ -2,7 +2,12 @@
     <div>
         <g-nav :selected.sync=selected multiline="false">
             <g-nav-item name="introduction">平台介绍</g-nav-item>
-            <g-nav-item name="interface">数据接口</g-nav-item>
+            <g-sub-nav>
+                <template slot="title" class="g-nav-item">数据接口</template>
+                <g-nav-item name="news">资讯数据</g-nav-item>
+                <g-nav-item name="industry">行业数据</g-nav-item>
+                <g-nav-item name="society">社会数据</g-nav-item>
+            </g-sub-nav>
             <g-nav-item name="linkStyle">联系方式</g-nav-item>
         </g-nav>
     </div>
@@ -26,6 +31,5 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
 </style>

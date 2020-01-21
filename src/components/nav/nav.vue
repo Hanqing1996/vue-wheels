@@ -9,6 +9,16 @@
 
     export default {
         name: "WheelsNav",
+        provide() {
+            return {
+                root: this
+            }
+        },
+        data(){
+          return {
+              items:[]
+          }
+        },
         props: {
             selected: {
                 type: Array,
@@ -20,18 +30,21 @@
             }
         },
         methods: {
+            addItem(vm) {
+                this.items.push(vm)
+            },
             updateSelected(name) {
                 let copy = []
-                if(this.multiple){
+                if (this.multiple) {
                     copy = this.selected
                     copy.push(name)
-                } else{
+                } else {
                     copy.push(name)
                 }
                 this.$emit('update:selected', copy)
 
                 // 保证nav.selected更新后才更新各个item的selected
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.items.forEach(vm => {
                         vm.selected = this.selected.indexOf(vm.name) >= 0
                     })
@@ -40,19 +53,14 @@
         },
         mounted() {
             this.items.forEach(vm => {
-                vm.$on('add:selected', (name)=>{this.updateSelected(name)})
+                vm.$on('add:selected', (name) => {this.updateSelected(name)})
                 vm.selected = this.selected.indexOf(vm.name) >= 0
             })
-        },
-        computed: {
-            items() {
-                return this.$children.filter(vm => vm.$options.name === 'WheelsNavItem')
-            }
         }
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .g-nav {
         display: flex;
         flex-direction: row;

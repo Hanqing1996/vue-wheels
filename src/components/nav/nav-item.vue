@@ -1,27 +1,31 @@
 <template>
     <div class="g-nav-item" :class="{selected}" @click="onClick">
-    <slot></slot>
-</div>
+        <slot></slot>
+    </div>
 </template>
 
 <script>
     export default {
         name: "WheelsNavItem",
-        props:{
-            name:{
-                type:String,
-                required:true
+        inject:['root'],
+        props: {
+            name: {
+                type: String,
+                required: true
             }
         },
-        data(){
+        data() {
             return {
-                selected:false
+                selected: false
             }
         },
-        methods:{
-            onClick(){
-                this.$emit('add:selected',this.name)
+        methods: {
+            onClick() {
+                this.$emit('add:selected', this.name)
             }
+        },
+        created() {
+            this.root.addItem(this)
         }
     }
 </script>
@@ -29,8 +33,9 @@
 <style lang="scss" scoped>
     .g-nav-item {
         padding: 10px 20px;
-        &.selected{
+
+        &.selected {
             background-color: red;
-         }
+        }
     }
 </style>
