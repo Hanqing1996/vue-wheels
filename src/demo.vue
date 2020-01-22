@@ -1,6 +1,6 @@
 <template>
     <div>
-        <g-nav :selected.sync=selected vertical style="width:200px">
+        <g-nav :selected.sync=selected >
             <g-nav-item name="introduction"><a href="https://baidu.com">平台介绍</a></g-nav-item>
             <g-sub-nav name="data">
                 <template slot="title" class="g-nav-item">数据接口</template>

@@ -21,8 +21,7 @@
         },
         props: {
             selected: {
-                type: Array,
-                default: () => []
+                type: String
             },
             vertical:{
                 type:Boolean,
@@ -34,14 +33,13 @@
                 this.items.push(vm)
             },
             updateSelected(name) {
-                let copy = []
-                copy.push(name)
+                let copy=name
                 this.$emit('update:selected', copy)
 
                 // 保证nav.selected更新后才更新各个item的selected
                 setTimeout(() => {
                     this.items.forEach(vm => {
-                        vm.selected = this.selected.indexOf(vm.name) >= 0
+                        vm.selected = this.selected===vm.name
                     })
                 })
             }
@@ -51,7 +49,7 @@
                 vm.$on('add:selected', (name) => {
                     this.updateSelected(name)
                 })
-                vm.selected = this.selected.indexOf(vm.name) >= 0
+                vm.selected = this.selected===vm.name
             })
         }
     }

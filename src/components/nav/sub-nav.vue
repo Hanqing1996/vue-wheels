@@ -105,9 +105,7 @@
                     &::after {
                         display: none;
                     }
-
                     background-color: $grey;
-
                 }
             }
 
