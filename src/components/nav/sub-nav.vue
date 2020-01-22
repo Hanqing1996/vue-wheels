@@ -2,11 +2,10 @@
     <div class="g-sub-nav" :class="{active}" v-click-outside="closePopover">
         <span @click="onClick" class="g-sub-nav-label">
             <span class="title">
-                <slot name="title"></slot>
+                <slot name="title" ></slot>
             </span>
-            <span v-if="this.$parent.$options.name==='WheelsSubNav'" class="g-sub-nav-icon">
-                <Icon v-if="open" name="left"></Icon>
-                <Icon v-else name="right"></Icon>
+            <span v-if="this.$parent.$options.name==='WheelsSubNav'" class="g-sub-nav-icon" :class="{open}">
+                <Icon name="right"></Icon>
             </span>
         </span>
         <div class="g-sub-nav-popover" v-show="open">
@@ -14,7 +13,6 @@
         </div>
     </div>
 </template>
-
 <script>
     import clickOutside from '../../clickOutside'
     import Icon from '../button/icon'
@@ -100,13 +98,14 @@
                     background-color: $grey;
                 }
             }
-        }
-    }
 
-    .g-sub-nav {
-        > .g-sub-nav-popover {
             > .g-sub-nav {
-                .g-sub-nav-popover {
+                &.active {
+                    &::after {
+                        display: none;
+                    }
+                }
+                >.g-sub-nav-popover {
                     top: 0%;
                     left: 100%;
                     margin-left: 8px;
@@ -115,7 +114,6 @@
             }
         }
     }
-
     .title{
         display: inline-block;
         min-width: 4em;
@@ -124,9 +122,14 @@
     .g-sub-nav-label{
         position: relative;
         >.g-sub-nav-icon{
+            transition: transform 250ms;
             position: absolute;
             top:30%;
             right:1%;
+            &.open {
+                transform: rotate(180deg);
+                top:23%;
+            }
             > svg{
                 width: 16px;
                 height: 16px;
