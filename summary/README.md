@@ -1557,28 +1557,20 @@ updated(){
 
 #### navs需求分析
 1. navs 默认单选，所以
+nav默认横向排列，在设计direction时
 ```
-// 其中multiline的default值为false
-<g-nav :selected="selected" multiline>
+// 其中vertical的default值为false
+<g-nav :selected="selected" vertical>
     <g-nav-item name="introduction">平台介绍</g-nav-item>
     <g-nav-item>数据接口</g-nav-item>
     <g-nav-item>联系方式</g-nav-item>
 </g-nav>
 ```
-比
-```
-// 其中single的default值为true
-<g-nav :selected="selected" single="false">
-    <g-nav-item name="introduction">平台介绍</g-nav-item>
-    <g-nav-item>数据接口</g-nav-item>
-    <g-nav-item>联系方式</g-nav-item>
-</g-nav>
-```
-要好
 2. nav如何获取popover里面的nav-item=>通过依赖注入（root）实现跨级调用
 3. "数据接口"要知道自己后代中的"期货数据"被选中了，这样才能在子级导航栏关闭后"数据接口"呈现被选中的样子
 4. 由于多级导航栏的存在，"选中"和"打开"是两个概念。可能选中不打开（因为没有子级导航栏），也可能打开不选中（刚打开子级导航栏）
 5. sub-nav的title是不能被选中的，只能被打开
+6. 点击 sub-nav,nav-item 以外的其他位置，关闭 sub-nav,nav-item（用clickOutside指令实现）
 
 #### :class="{selected}"
 ```

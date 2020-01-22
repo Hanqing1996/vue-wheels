@@ -1,14 +1,15 @@
 <template>
-    <div class="g-sub-nav" :class="{active}" v-click-outside="closePopover">
+    <div class="g-sub-nav" :class="{active,vertical}" v-click-outside="closePopover">
         <span @click="onClick" class="g-sub-nav-label">
             <span class="title">
-                <slot name="title" ></slot>
+                <slot name="title"></slot>
             </span>
             <span v-if="this.$parent.$options.name==='WheelsSubNav'" class="g-sub-nav-icon" :class="{open}">
-                <Icon name="right"></Icon>
+                <Icon name="down" v-if="vertical"></Icon>
+                <Icon name="right" v-else></Icon>
             </span>
         </span>
-        <div class="g-sub-nav-popover" v-show="open">
+        <div class="g-sub-nav-popover" :class="{vertical}" v-show="open">
             <slot></slot>
         </div>
     </div>
@@ -31,7 +32,8 @@
         data() {
             return {
                 open: false,
-                active: false
+                active: false,
+                vertical: false
             }
         },
         methods: {
@@ -50,6 +52,9 @@
                     this.$parent.updateNamePath()
                 }
             }
+        },
+        mounted() {
+            this.vertical = this.root.vertical
         }
     }
 </script>
@@ -68,6 +73,12 @@
                 left: 0;
                 border-bottom: 1px solid $blue;
                 width: 100%;
+            }
+        }
+
+        &.vertical {
+            &::after {
+                display: none;
             }
         }
 
@@ -96,6 +107,19 @@
                     }
 
                     background-color: $grey;
+
+                }
+            }
+
+            &.vertical {
+                position: static;
+                border: none;
+                box-shadow: none;
+
+                > .g-nav-item {
+                    &.selected {
+                        background-color: white;
+                    }
                 }
             }
 
@@ -105,7 +129,8 @@
                         display: none;
                     }
                 }
-                >.g-sub-nav-popover {
+
+                > .g-sub-nav-popover {
                     top: 0%;
                     left: 100%;
                     margin-left: 8px;
@@ -114,26 +139,31 @@
             }
         }
     }
-    .title{
+
+    .title {
         display: inline-block;
         min-width: 4em;
     }
 
-    .g-sub-nav-label{
+    .g-sub-nav-label {
         position: relative;
-        >.g-sub-nav-icon{
+
+        > .g-sub-nav-icon {
             transition: transform 250ms;
             position: absolute;
-            top:30%;
-            right:1%;
+            top: 30%;
+            right: 1%;
+
             &.open {
                 transform: rotate(180deg);
-                top:23%;
+                top: 23%;
             }
-            > svg{
+
+            > svg {
                 width: 16px;
                 height: 16px;
             }
         }
     }
+
 </style>

@@ -1,11 +1,10 @@
 <template>
-    <div class="g-nav">
+    <div class="g-nav" :class="{vertical}">
         <slot></slot>
     </div>
 </template>
 
 <script>
-    import Vue from "vue";
 
     export default {
         name: "WheelsNav",
@@ -14,20 +13,20 @@
                 root: this
             }
         },
-        data(){
-          return {
-              items:[],
-              namePath:[]
-          }
+        data() {
+            return {
+                items: [],
+                namePath: []
+            }
         },
         props: {
             selected: {
                 type: Array,
                 default: () => []
             },
-            multiple: {
-                type: Boolean,
-                default: false
+            vertical:{
+                type:Boolean,
+                default:false
             }
         },
         methods: {
@@ -36,12 +35,7 @@
             },
             updateSelected(name) {
                 let copy = []
-                if (this.multiple) {
-                    copy = this.selected
-                    copy.push(name)
-                } else {
-                    copy.push(name)
-                }
+                copy.push(name)
                 this.$emit('update:selected', copy)
 
                 // 保证nav.selected更新后才更新各个item的selected
@@ -54,7 +48,9 @@
         },
         mounted() {
             this.items.forEach(vm => {
-                vm.$on('add:selected', (name) => {this.updateSelected(name)})
+                vm.$on('add:selected', (name) => {
+                    this.updateSelected(name)
+                })
                 vm.selected = this.selected.indexOf(vm.name) >= 0
             })
         }
@@ -67,5 +63,9 @@
         flex-direction: row;
         border-bottom: 1px solid red;
         user-select: none;
+        &.vertical{
+            flex-direction: column;
+            border: 1px solid red;
+        }
     }
 </style>

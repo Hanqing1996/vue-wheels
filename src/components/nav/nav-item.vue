@@ -1,5 +1,5 @@
 <template>
-    <div class="g-nav-item" :class="{selected}" @click="onClick" v-click-outside="unselect">
+    <div class="g-nav-item" :class="{selected,vertical}" @click="onClick" v-click-outside="unselect">
         <slot></slot>
     </div>
 </template>
@@ -15,6 +15,10 @@
             name: {
                 type: String,
                 required: true
+            },
+            vertical:{
+                type:Boolean,
+                default:false
             }
         },
         data() {
@@ -36,6 +40,9 @@
         },
         created() {
             this.root.addItem(this)
+        },
+        mounted() {
+            this.vertical=this.root.vertical
         }
     }
 </script>
@@ -53,6 +60,17 @@
                 border-bottom:1px solid blue;
                 width:100%;
             }
+            &.vertical{
+                color: blue;
+                &::after{
+                    display: none;
+                }
+            }
         }
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
     }
 </style>

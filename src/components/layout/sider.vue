@@ -1,7 +1,7 @@
 <template>
 
     <transition name="slide">
-        <div class="sider":class="siderClass" v-show="visible">
+        <div class="sider" :class="siderClass" v-show="visible">
             <!--这个click不需要在index.html中设置相应事件哦-->
             <div class="hideButton" @click="hideSider">
                 <g-button>hide</g-button>
@@ -53,9 +53,8 @@
 
     /*时长*/
     .slide-enter-active,.slide-leave-active {
-        transition: all 3s
+        transition: all 10s
     }
-
     /*结束状态*/
     .slide-leave-to {
         margin-left: -200px;
