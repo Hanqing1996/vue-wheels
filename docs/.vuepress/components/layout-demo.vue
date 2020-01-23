@@ -6,7 +6,7 @@
         </p>
         <div>
             <div>
-                <g-layout>
+                <g-layout style="overflow:hidden;">
                     <g-sider class="demo">sider</g-sider>
                     <g-layout>
                         <g-header class="demo">header</g-header>

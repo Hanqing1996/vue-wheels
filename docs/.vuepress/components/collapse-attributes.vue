@@ -1,7 +1,7 @@
 <template>
     <div class="base">
         <section>
-            <h2>Tabs-Attributes</h2>
+            <h2>Collapse-Attributes</h2>
             <div class="attr">
                 <table>
                     <thead>

@@ -63,7 +63,6 @@
         user-select: none;
         &.vertical{
             flex-direction: column;
-            border: 1px solid red;
         }
     }
 </style>

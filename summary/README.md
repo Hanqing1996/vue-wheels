@@ -106,7 +106,68 @@ vm.$on('touch', callback)
 vm.$el.click() // 注意如果测试正确，这里 callback 已经被调用了
 expect(callback).to.have.been.called // 去问内存：callback 是否被调用了？
 ```
-* [expex](https://www.chaijs.com/api/bdd/)
+* :data-name="home"
+```
+// nav-item.vue
+<template>
+    <div :data-name="name" :class="{selected}">
+        <slot></slot>
+    </div>
+</template>
+
+  it('支持 selected 属性', (done) => {
+    Vue.component('g-nav-item', NavItem)
+    Vue.component('g-sub-nav', SubNav)
+    const wrapper = mount(Nav, {
+      propsData: {
+        selected: 'home'
+      },
+      slots: {
+        default: `
+          <g-nav-item name="home">首页</g-nav-item>
+          <g-sub-nav name="about">
+            <template slot="title">关于</template>
+            <g-nav-item name="culture">企业文化</g-nav-item>
+          </g-sub-nav>
+        `
+      }
+    })
+    setTimeout(() => {
+      expect(wrapper.find('[data-name="home"].selected').exists()).to.be.true
+      done()
+    })
+  })
+```
+* listeners:添加在实例上，用于设置组件的update/add:selected之类事件的回调函数
+```
+it('会触发 update:selected 事件', (done) => {
+    Vue.component('g-nav-item', NavItem)
+    Vue.component('g-sub-nav', SubNav)
+    const callback = sinon.fake();
+    const wrapper = mount(Nav, {
+        propsData: {
+            selected: 'home'
+        },
+        slots: {
+            default: `
+  <g-nav-item name="home">首页</g-nav-item>
+  <g-sub-nav name="about">
+    <template slot="title">关于</template>
+    <g-nav-item name="culture">企业文化</g-nav-item>
+    <g-nav-item name="developers">开发团队</g-nav-item>
+  </g-sub-nav>
+`
+        },
+        listeners: {
+            'update:selected': callback
+        }
+    })
+    wrapper.find('[data-name="developers"]').trigger('click')
+    expect(callback).to.have.been.calledWith('developers')
+    done()
+})
+```
+* [expect](https://www.chaijs.com/api/bdd/)
     * 判断是否存在（存在=不为假值）：expect(Button).to.be.ok
     * 判断是否相等：expect(xxx).to.eq(yyy)
     * 判断对象/数组值是否相等：expect([1,2]).to.deep.equal([1,2])
@@ -463,22 +524,6 @@ $height: 32px;
     }
 }
 ```
-
-
-#### input 需求分析
-* 输入
-    * 提示
-    * 报错
-* 复制/粘贴
-* 键盘 Tab 空位
-* 敲击回车
-* 不可输入
-* hovered
-* focused
-* disabled
-* readonly
-* error(可与上面状态叠加)
-* success(同上)
 
 #### grid 怎么用
 * span 表示跨度,gutter 表示空隙长度
@@ -1120,19 +1165,6 @@ let vm4=new Constructor2({
 #### vue的意义
 操作DOM=>操作组件！！！
 
-
-#### [popover的需求](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/26c0e669-f116-46c7-898a-d259707b30fe)
-1. 用户可能在popover的容器元素上添加click事件,然后希望点击button后能触发容器元素的click事件(利用事件冒泡机制),所以popover的内部元素的click不能用stop修饰符
-2. 点击按钮后显示content-wrapper,然后点击其它位置(除了content-wrapper)隐藏content-wrapper;
-3. 点击显示出来的content-wrapper不隐藏content-wrapper(因为浏览网站者可能有复制文本内容的需求)
-4. 显示出来的content-wrapper有一个关闭键,点击关闭content-wrapper
-5. button支持click,hover两种事件
----
-2,3解决方法
-    * [控制button事件不冒泡,但是这与1相悖](https://github.com/Hanqing1996/vue-wheels/blob/master/src/popover.vue)
-
-
-
 #### 设计模式
 * 发布订阅模式
 ```
@@ -1521,23 +1553,6 @@ test:{
 1. 让 karma 从 vue-cli 的 webpack 配置中知道测试用例放在哪里
 2. 唤起浏览器进行测试
 
-#### 轮播slides需求分析
-不用DOM的API
-* 有缝轮播（无法直接从3到1，不好）
-![](./images/10.jpg)
-```
-<g-slides>
-    <div></div>
-    <div></div>
-    <div></div>
-</g-slides>    
-```
-* 支持点击dot切换slide-item
-* 支持 mouseenter 暂停动画；mouseouter 继续播放
-* 支持自动播放
-* 支持移动端（touch事件）
-
-
 #### mounted()和updated()
 ```
 change(this.data)
@@ -1554,23 +1569,6 @@ updated(){
 > updated:由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。
 
 >然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，通常最好使用计算属性或 watcher 取而代之。
-
-#### navs需求分析
-1. navs 默认单选，所以
-nav默认横向排列，在设计direction时
-```
-// 其中vertical的default值为false
-<g-nav :selected="selected" vertical>
-    <g-nav-item name="introduction">平台介绍</g-nav-item>
-    <g-nav-item>数据接口</g-nav-item>
-    <g-nav-item>联系方式</g-nav-item>
-</g-nav>
-```
-2. nav如何获取popover里面的nav-item=>通过依赖注入（root）实现跨级调用
-3. "数据接口"要知道自己后代中的"期货数据"被选中了，这样才能在子级导航栏关闭后"数据接口"呈现被选中的样子
-4. 由于多级导航栏的存在，"选中"和"打开"是两个概念。可能选中不打开（因为没有子级导航栏），也可能打开不选中（刚打开子级导航栏）
-5. sub-nav的title是不能被选中的，只能被打开
-6. 点击 sub-nav,nav-item 以外的其他位置，关闭 sub-nav,nav-item（用clickOutside指令实现）
 
 #### :class="{selected}"
 ```
@@ -1641,8 +1639,6 @@ mounted() {
 },
 ``` 
 3. 在nav-item中，selected用于判断item是否visible
-
-
 
 
 #### v-if和v-show

@@ -1,5 +1,5 @@
 <template>
-    <div class="g-nav-item" :class="{selected,vertical}" @click="onClick" v-click-outside="unselect">
+    <div :data-name="name" class="g-nav-item" :class="{selected,vertical}" @click="onClick" v-click-outside="unselect">
         <slot></slot>
     </div>
 </template>

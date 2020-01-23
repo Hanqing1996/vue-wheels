@@ -24,7 +24,13 @@ module.exports = {
                     '/components/collapse',
                     '/components/popover',
                     '/components/slides',
+                    '/components/nav',
                 ]
+            },
+            {
+                title: '总结',
+                collapsable: false,
+                children:['/组件需求分析/','/API设计原则/']
             }
         ]
     },

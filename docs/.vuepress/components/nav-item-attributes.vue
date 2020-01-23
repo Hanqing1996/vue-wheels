@@ -1,7 +1,7 @@
 <template>
     <div class="base">
         <section>
-            <h2>Slides-Attributes</h2>
+            <h2>Nav-Item-Attributes</h2>
             <div class="attr">
                 <table>
                     <thead>
@@ -15,25 +15,11 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>selected</td>
-                        <td class="des">当前播放项</td>
+                        <td>name</td>
+                        <td class="des">nav-item的name,用于唯一标识nav-item</td>
                         <td class="type">string</td>
                         <td>—</td>
                         <td>—</td>
-                    </tr>
-                    <tr>
-                        <td>autoPlay</td>
-                        <td class="des">是否自动播放</td>
-                        <td class="type">Boolean</td>
-                        <td>—</td>
-                        <td>true</td>
-                    </tr>
-                    <tr>
-                        <td>autoPlayDelay</td>
-                        <td class="des">每幅海报展示时间,以毫秒为单位</td>
-                        <td class="type">number</td>
-                        <td>—</td>
-                        <td>3000</td>
                     </tr>
                     </tbody>
                 </table>
@@ -44,9 +30,8 @@
 
 <script>
     export default {
-        name: "slides-attributes"
+        name: "nav-item-attributes"
     }
 </script>
-
 <style>
 </style>

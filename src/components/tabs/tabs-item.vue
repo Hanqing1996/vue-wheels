@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs-item"　@click="xxx" :class="itemClasses"　:data-name="name">
+    <div class="tabs-item" 　@click="xxx" :class="{active,disabled}"　:data-name="name">
         <slot></slot>
     </div>
 </template>
@@ -39,14 +39,6 @@
 
                 // 这个this.$emit('click')完全是为了测试而设置的
                 this.$emit('click')
-            }
-        },
-        computed:{
-            itemClasses(){
-                return {
-                    active:this.active,
-                    disabled: this.disabled
-                }
             }
         }
     }

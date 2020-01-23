@@ -56,7 +56,7 @@ describe('Tabs', () => {
                 localVue
             })
             setTimeout(() => {
-                expect(wrapper.element.querySelectorAll('.tabs-item')[0].textContent).to.equal('军事');
+                expect(wrapper.find('[data-name="military"].active').exists()).to.be.true
                 done()
             })
         });

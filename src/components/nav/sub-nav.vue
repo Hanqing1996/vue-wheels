@@ -89,6 +89,7 @@
         }
 
         > .g-sub-nav-popover {
+            background: white;
             margin-top: 1px;
             position: absolute;
             top: 100%;
