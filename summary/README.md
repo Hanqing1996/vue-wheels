@@ -1645,7 +1645,11 @@ mounted() {
 > 在nav组件中，由于一开始popover的显示与否由v-if控制。所以一开始nav.items不包含popover的item,造成了bug。
 ![](./images/11.jpg)
 
-
-
+#### v-for
+```
+<span v-for="page in pages" class="pager-item" :class="{active:page===currentPage,separator:page==='...'}">
+     {{page}}
+</span>
+```
 
 
