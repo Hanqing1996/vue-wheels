@@ -25,6 +25,7 @@ module.exports = {
                     '/components/popover',
                     '/components/slides',
                     '/components/nav',
+                    '/components/pager',
                 ]
             },
             {

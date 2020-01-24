@@ -5,7 +5,7 @@
         </span>
         <template v-for="page in pages">
             <template v-if="page===currentPage">
-                <span class="pager-item" :class="{selected:page===currentPage}">{{page}}</span>
+                <span class="pager-item" :class="{selected:page===currentPage}" :data-page=page>{{page}}</span>
             </template>
             <template v-else-if="page==='...'">
                 <span class="pager-item" :class="{separator:page==='...'}">
@@ -13,7 +13,7 @@
                 </span>
             </template>
             <template v-else>
-                <span class="pager-item" @click="onClickPage(page)">{{page}}</span>
+                <span class="pager-item" @click="onClickPage(page)" :data-page=page>{{page}}</span>
             </template>
         </template>
         <span class="pager-item direction" @click="turnNext">
@@ -103,7 +103,7 @@
         > .pager-item {
             border: 1px solid $grey;
             border-radius: $border-radius;
-            min-width: 20px;
+            min-width: 24px;
             text-align: center;
             margin: 5px;
             display: flex;

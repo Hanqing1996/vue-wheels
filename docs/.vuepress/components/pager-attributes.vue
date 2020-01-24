@@ -1,7 +1,7 @@
 <template>
     <div class="base">
         <section>
-            <h2>Tabs-Attributes</h2>
+            <h2>Popover-Attributes</h2>
             <div class="attr">
                 <table>
                     <thead>
@@ -15,9 +15,16 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>selected , 使用 sync 绑定</td>
-                        <td class="des">当前选中项的name</td>
-                        <td class="type">string</td>
+                        <td>totalPage</td>
+                        <td class="des">总页数</td>
+                        <td class="type">number</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>currentPage , 使用 sync 绑定</td>
+                        <td class="des">当前页</td>
+                        <td class="type">number</td>
                         <td>—</td>
                         <td>—</td>
                     </tr>
@@ -30,7 +37,7 @@
 
 <script>
     export default {
-        name: "tabs-attributes"
+        name: "pager-attributes"
     }
 </script>
 

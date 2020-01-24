@@ -8,16 +8,13 @@ import Vue from 'vue'
 import Pager from '../../src/components/pager/pager'
 
 import sinonChai from 'sinon-chai'
-import NavItem from "../../src/components/nav/nav-item";
-import SubNav from "../../src/components/nav/sub-nav";
-import Nav from "../../src/components/nav/nav";
 
 chai.use(sinonChai)
 
 Vue.config.productionTip = false
 Vue.config.devtools = false
 
-describe('Slides', () => {
+describe('Pager', () => {
     it('存在.', () => {
         expect(Pager).to.exist
     })
@@ -25,18 +22,34 @@ describe('Slides', () => {
     describe('props', () => {
 
         it('支持 currentPage 属性', (done) => {
-            Vue.component('g-nav-item', NavItem)
-            Vue.component('g-sub-nav', SubNav)
-            const wrapper = mount(Nav, {
+            const wrapper = mount(Pager, {
                 propsData: {
                     totalPage: 20,
                     currentPage:5
                 },
             })
             setTimeout(() => {
-                expect(wrapper.find('[data-index="5"].selected').exists()).to.be.true
+                expect(wrapper.find('[data-page="5"].selected').exists()).to.be.true
                 done()
             })
+        })
+    })
+
+    describe('事件', () => {
+        it('会触发 update:currentPage 事件', (done) => {
+            const callback = sinon.fake();
+            const wrapper = mount(Pager, {
+                propsData: {
+                    totalPage: 20,
+                    currentPage:5
+                },
+                listeners: {
+                    'update:currentPage': callback
+                }
+            })
+            wrapper.find('[data-page="6"]').trigger('click')
+            expect(callback).to.have.been.calledWith(6)
+            done()
         })
     })
 })

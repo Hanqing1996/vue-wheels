@@ -16,7 +16,7 @@
                     <tbody>
                     <tr>
                         <td>selected</td>
-                        <td class="des">当前播放项</td>
+                        <td class="des">当前播放项 , 使用 sync 绑定</td>
                         <td class="type">string</td>
                         <td>—</td>
                         <td>—</td>
