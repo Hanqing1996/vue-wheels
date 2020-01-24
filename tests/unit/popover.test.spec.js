@@ -23,7 +23,7 @@ describe('popOver', () => {
     describe('props', () => {
 
         // 这里是测试传入的position能否改变popover内部solt的位置
-        it('popover 可以设置 position', (done) => {
+        it('接受 position', (done) => {
             const wrapper = mount(popOver, {
                 propsData: {
                     position: 'bottom'
@@ -42,7 +42,7 @@ describe('popOver', () => {
         })
 
         // 测试 trigger
-        it('popover 可以设置 trigger', (done) => {
+        it('接受 trigger', (done) => {
 
             const wrapper = mount(popOver, {
                 propsData: {

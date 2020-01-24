@@ -41,7 +41,7 @@ describe('Slides', () => {
             })
         })
 
-        it('接收 selected', () => {
+        it('接受 selected', () => {
             const localVue = createLocalVue()
             localVue.component('g-slides-item',SlidesItem)
 

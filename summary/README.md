@@ -1652,4 +1652,39 @@ mounted() {
 </span>
 ```
 
+#### 修改 selected/currentPage 等属性
+错误做法:
+```
+// defaultPage 从未被修改
+<pager :defaultPage="defaultPage"></pager>
+
+props:{
+    defaultPage: {
+        type: Number,
+        required: true
+    }
+}
+data(){
+    return {
+        currentPage:this.defaultPage
+    }
+}
+```
+正确做法：使用sync和$emit
+```
+// currentPage 会在 updateCurrentPage 被触发后被修改
+<pager :currentPage.sync="currentPage"></pager>
+
+props: {
+    currentPage: {
+        type: Number,
+        required: true
+    }
+}
+
+updateCurrentPage(currentPage){
+    this.$emit('update:currentPage',currentPage)
+}
+```
+
 

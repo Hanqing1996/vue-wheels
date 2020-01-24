@@ -21,7 +21,7 @@ describe('Button', () => {
     })
     describe('props', () => {
 
-        it('可以设置icon.', () => {
+        it('接受 icon.', () => {
             // 现在挂载组件，你便得到了这个包裹器
             const wrapper = mount(Button, {
                 propsData: {
@@ -32,7 +32,7 @@ describe('Button', () => {
             expect(useElement.attributes('href')).to.equal('#i-settings')
         })
 
-        it('可以设置loading.', () => {
+        it('接受 loading.', () => {
             const wrapper = mount(Button, {
                 propsData: {
                     icon: 'settings',
@@ -54,7 +54,7 @@ describe('Button', () => {
             expect(getComputedStyle(icon).order).to.eq('1')
         })
 
-        it('设置 iconPosition 可以改变 order', () => {
+        it('接受 iconPosition', () => {
             const wrapper = mount(Button, {
                 attachToDocument: true,
                 propsData: {

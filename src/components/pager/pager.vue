@@ -5,7 +5,7 @@
         </span>
         <template v-for="page in pages">
             <template v-if="page===currentPage">
-                <span class="pager-item" :class="{active:page===currentPage}">{{page}}</span>
+                <span class="pager-item" :class="{selected:page===currentPage}">{{page}}</span>
             </template>
             <template v-else-if="page==='...'">
                 <span class="pager-item" :class="{separator:page==='...'}">
@@ -13,7 +13,7 @@
                 </span>
             </template>
             <template v-else>
-                <span class="pager-item">{{page}}</span>
+                <span class="pager-item" @click="onClickPage(page)">{{page}}</span>
             </template>
         </template>
         <span class="pager-item direction" @click="turnNext">
@@ -33,33 +33,23 @@
                 type: Number,
                 required: true
             },
-            defaultCurrentPage: {
+            currentPage: {
                 type: Number,
                 required: true
-            },
-            hideIfOnePage: {
-                type: Boolean,
-                default: true
-            }
-        },
-        data(){
-            return{
-                currentPage:this.defaultCurrentPage
             }
         },
         computed: {
             pages() {
-                let pages = [1,this.totalPage,this.currentPage]
-                if(this.currentPage>1)
+                let pages = [1, this.totalPage, this.currentPage]
+                if (this.currentPage > 1)
                     pages.push(this.currentPage - 1)
-                if(this.currentPage>2)
+                if (this.currentPage > 2)
                     pages.push(this.currentPage - 1)
-                if(this.currentPage<this.totalPage)
+                if (this.currentPage < this.totalPage)
                     pages.push(this.currentPage + 1)
-                if(this.currentPage<this.totalPage-1)
+                if (this.currentPage < this.totalPage - 1)
                     pages.push(this.currentPage + 2)
 
-                console.log(pages);
                 let u = unique(pages.sort((a, b) => a - b))
                 let u2 = u.reduce((pre, current, index) => {
                     pre.push(current)
@@ -72,15 +62,24 @@
             }
         },
         methods: {
+            onClickPage(page){
+                this.updateCurrentPage(page)
+            },
             turnNext() {
-                if(this.currentPage<this.totalPage)
-                    this.currentPage += 1
+                if (this.currentPage < this.totalPage) {
+                    this.updateCurrentPage(this.currentPage+1)
+                }
+
+
             },
             turnLast() {
-                if(this.currentPage>1)
-                    this.currentPage -= 1
+                if (this.currentPage > 1) {
+                    this.updateCurrentPage(this.currentPage-1)
+                }
             },
-
+            updateCurrentPage(currentPage) {
+                this.$emit('update:currentPage', currentPage)
+            }
         }
     }
 
@@ -113,11 +112,11 @@
             align-items: center;
             user-select: none;
 
-            &.active, &:hover {
+            &.selected, &:hover {
                 border-color: $blue;
             }
 
-            &.active, .separator {
+            &.selected, .separator {
                 cursor: default;
             }
 
