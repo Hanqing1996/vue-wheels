@@ -1,35 +1,56 @@
-export default function validate(data,rules) {
-    let errors={}
+export default function validate(data, rules) {
+    let errors = {}
     // 用rule遍历data
-    rules.forEach(rule=>{
-        let value=data[rule.key]
-        if(rule.required){
-            if(!value&&value!==0){
-                ensureObject(errors,rule.key)
-                errors[rule.key]['required']='必填'
-                return errors
+    rules.forEach(rule => {
+        let value = data[rule.key]
+        if (rule.required) {
+            let err = validate.required(value)
+            if (err) {
+                ensureObject(errors, rule.key)
+                errors[rule.key]['required'] = err
+                return;
             }
         }
-        if(rule.pattern){
-            rule.pattern=/^.+@.+$/
-            if(!rule.pattern.test(value)){
+        if (rule.pattern) {
+            let err = validate.pattern(value,rule.pattern)
+            if (err) {
                 // 发现错误，才让 errors[rule.key]={},否则errors[rule.key]=undefined
-                ensureObject(errors,rule.key)
-                errors[rule.key]['pattern']='格式不正确'
+                ensureObject(errors, rule.key)
+                errors[rule.key]['pattern'] = err
             }
         }
-        if(rule.minLength){
-            if(value.length<rule.minLength){
-                ensureObject(errors,rule.key)
-                errors[rule.key]['minLength']='太短'
+        if (rule.minLength) {
+            let err = validate.minLength(value,rule.minLength)
+            if(err){
+                ensureObject(errors, rule.key)
+                errors[rule.key]['minLength'] = err
             }
         }
     })
     return errors
 }
 
-function ensureObject(obj,key) {
-    if(typeof obj[key] !=='object'){
-        obj[key]={}
+validate.required = function (value) {
+    if (!value && value !== 0) {
+        return '必填'
+    }
+}
+
+validate.pattern = function (value, pattern) {
+    pattern = /^.+@.+$/
+    if (!pattern.test(value)) {
+        return '格式不正确'
+    }
+}
+
+validate.minLength = function (value, minLength) {
+    if (value.length < minLength) {
+        return '太短'
+    }
+}
+
+function ensureObject(obj, key) {
+    if (typeof obj[key] !== 'object') {
+        obj[key] = {}
     }
 }
