@@ -14,6 +14,7 @@ Vue.config.devtools = false
 
 describe('validate', () => {
     it('存在.', () => {
+        validator.fn();
         expect(validator).to.exist
     })
 
@@ -117,14 +118,22 @@ describe('validate', () => {
             {key: 'email', hasNumber: true}
         ]
 
-        valid.hasNumber = (value) => {
+        valid.add('hasNumber',(value)=>{
             if (!/\d/.test(value)) {
                 return '必须含有数字'
             }
-        }
+        })
+
+        // valid.hasNumber = (value) => {
+        //     if (!/\d/.test(value)) {
+        //         return '必须含有数字'
+        //     }
+        // }
 
         let errors = valid.validate(data, rules)
         expect(errors.email.hasNumber).to.eq('必须含有数字');
 
     })
+    
+    
 })

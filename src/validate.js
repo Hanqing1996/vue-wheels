@@ -1,4 +1,10 @@
 export default class Validator {
+
+    // 添加公共方法
+    add(newType,fn){
+        Validator.prototype[newType]=fn
+    }
+
     required(value) {
         if (!value && value !== 0) {
             return '必填'
