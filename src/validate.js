@@ -11,21 +11,16 @@ export default function validate(data, rules) {
                 return;
             }
         }
-        if (rule.pattern) {
-            let err = validate.pattern(value,rule.pattern)
-            if (err) {
-                // 发现错误，才让 errors[rule.key]={},否则errors[rule.key]=undefined
-                ensureObject(errors, rule.key)
-                errors[rule.key]['pattern'] = err
+
+        let ruleTypes = Object.keys(rule).filter(item => item !== 'required'&&item !== 'key')
+        ruleTypes.forEach(type => {
+                let err = validate[type](value, rule[type])
+                if (err) {
+                    ensureObject(errors, rule.key)
+                    errors[rule.key][type] = err
+                }
             }
-        }
-        if (rule.minLength) {
-            let err = validate.minLength(value,rule.minLength)
-            if(err){
-                ensureObject(errors, rule.key)
-                errors[rule.key]['minLength'] = err
-            }
-        }
+        )
     })
     return errors
 }
