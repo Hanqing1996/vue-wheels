@@ -6467,6 +6467,11 @@ md5.js@^1.3.4:
     inherits "^2.0.1"
     safe-buffer "^5.1.2"
 
+mddir@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npm.taobao.org/mddir/download/mddir-1.1.1.tgz#fa7ddd26b92558e6eb9f890d02d25a3f7cda056b"
+  integrity sha1-+n3dJrklWObrn4kNAtJaP3zaBWs=
+
 mdn-data@~1.1.0:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-1.1.4.tgz#50b5d4ffc4575276573c4eedb8780812a8419f01"

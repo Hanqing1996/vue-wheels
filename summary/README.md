@@ -21,16 +21,6 @@ npx ......
 * [使用 icon-font 挑选/修改图标](https://xiedaimala.com/tasks/feb587c8-7139-4b1e-95f3-ac429247747a/video_tutorials/88747efd-1306-4752-a8c0-e1b8e63f1862)
     * 左图标->右图标
     * 获取代码：symbol->在线链接
-* BDD
-Behavior Driven Development（行为驱动开发）
-* TDD
-Test Driven Development（测试驱动开发）
-    * 手动添加vue实例监听事件及回调函数，手动触发元素事件，观察回调函数是否执行
-    * 测试是针对组件的，与index.html无关
-* assert（断言）
-```
-console.assert(1===2)
-```
 * 打包：parcel build test/* --no-cache --no-minify
     * 把 test 目录下的文件打包到 dist 目录下
 
@@ -72,109 +62,6 @@ console.assert(1===2)
 npx parcel index.html
 ```
 
-#### 单元测试
-* 一般将测试数据放在 test/fixture 中
-* css 单元测试，必须把 vm 挂载到文档内的一个元素上
-```
-const div = document.createElement('div')
-document.body.appendChild(div)
-
-vm = new Constructor({}).$mount(div)
-```
-* 要点：作用域隔离，断言
-* Mocha可以用来写测试用例
-```
-describe '人类'
-    it has a hed
-    it has two eyes
-    it can run
-```
-* 为什么测试‘点击 button 触发 touch 事件’不能用以下方式
-```
-vm.$on('touch', function(){
-    // console.log('touch')
-    // expect(1).to.eq(1)
-})
-vm.$el.click()
-```
-    * 因为我们要用 expect 实现“监听touch事件”，不能用 console.log
-    * 但是 expect(1).to.eq(1) 这种写法不能让我们知道回调函数是否执行
-所以我们需要的是：用 expect 描述‘回调函数被执行’这件事情
-```
-const callback = sinon.fake(); // 一但 callback 被调用，会再内存中留下标记
-vm.$on('touch', callback)
-vm.$el.click() // 注意如果测试正确，这里 callback 已经被调用了
-expect(callback).to.have.been.called // 去问内存：callback 是否被调用了？
-```
-* :data-name="home"
-```
-// nav-item.vue
-<template>
-    <div :data-name="name" :class="{selected}">
-        <slot></slot>
-    </div>
-</template>
-
-  it('支持 selected 属性', (done) => {
-    Vue.component('g-nav-item', NavItem)
-    Vue.component('g-sub-nav', SubNav)
-    const wrapper = mount(Nav, {
-      propsData: {
-        selected: 'home'
-      },
-      slots: {
-        default: `
-          <g-nav-item name="home">首页</g-nav-item>
-          <g-sub-nav name="about">
-            <template slot="title">关于</template>
-            <g-nav-item name="culture">企业文化</g-nav-item>
-          </g-sub-nav>
-        `
-      }
-    })
-    setTimeout(() => {
-      expect(wrapper.find('[data-name="home"].selected').exists()).to.be.true
-      done()
-    })
-  })
-```
-* listeners:添加在实例上，用于设置组件的update/add:selected之类事件的回调函数
-```
-it('会触发 update:selected 事件', (done) => {
-    Vue.component('g-nav-item', NavItem)
-    Vue.component('g-sub-nav', SubNav)
-    const callback = sinon.fake();
-    const wrapper = mount(Nav, {
-        propsData: {
-            selected: 'home'
-        },
-        slots: {
-            default: `
-  <g-nav-item name="home">首页</g-nav-item>
-  <g-sub-nav name="about">
-    <template slot="title">关于</template>
-    <g-nav-item name="culture">企业文化</g-nav-item>
-    <g-nav-item name="developers">开发团队</g-nav-item>
-  </g-sub-nav>
-`
-        },
-        listeners: {
-            'update:selected': callback
-        }
-    })
-    wrapper.find('[data-name="developers"]').trigger('click')
-    expect(callback).to.have.been.calledWith('developers')
-    done()
-})
-```
-* [expect](https://www.chaijs.com/api/bdd/)
-    * 判断是否存在（存在=不为假值）：expect(Button).to.be.ok
-    * 判断是否相等：expect(xxx).to.eq(yyy)
-    * 判断对象/数组值是否相等：expect([1,2]).to.deep.equal([1,2])
-    * 判断值是否为NaN：expect(NaN).to.be.NaN
-* [done](https://github.com/Hanqing1996/vue-wheels/blob/master/src/row.vue)
-    * 如果不加 done it(){}里的代码将全部同步执行
-
 #### CSS 知识点
 * css 兼容查询：www.canIuse.com
 * 字体不要设置固定 font-size ,应该用变量
@@ -190,34 +77,6 @@ g.button{
 * 把项目 push 到 github
 * 在[travis-ci](https://www.travis-ci.org/)添加项目
 * 由于travis-ci默认执行 npm run test
-
-#### Karma
-* 具体配置写在 karma.conf,js 中
-* 用于呼起浏览器，加载测试脚本，然后运行测试用例
-* JSDOM是在 Node 虚拟浏览器环境运行测试。也就是说它不呼起浏览器。而根据JSDOM官方文档，他们没有测试css的打算
-```
-Layout: the ability to calculate where elements will be visually laid out as a result of CSS, which impacts methods like getBoundingClientRects() or properties like offsetTop.
-```
-* Mocha,chai,Sinon 这些只是语法;而 Karma 的作用不是提供语法，而是唤起浏览器以测试html,css
-
-#### Mocha
-describe,it 语法
-
-#### chai
-expect 语法
-
-#### Sinon
-为组件的事件测试设置回调函数 callback
-```
-const callback = sinon.fake();
-vm.$on('click', callback)
-```
-
-#### Sinon-Chai
-检测vue实例调用的回调函数的参数 calledWith
-```
-expect(callback).to.have.been.calledWith(event)
-```
 
 #### vue 知识点
 * 单文件组件的好处是集成 js,html,style 。让我们能一目了然地知道一个组件的样式，功能，内容。
@@ -1543,16 +1402,6 @@ test:{
 
 > 结果便是 veu-cli 
 
-
-#### [Vue-Cli 配合 Karma 进行单元测试](https://xiedaimala.com/tasks/05c21465-b85f-4a52-9c5f-88a614c730b2/video_tutorials/753d5890-f5bc-4513-9a99-8efeea9a7bde)
-* [用 Karma 测试单文件组件](https://vue-test-utils.vuejs.org/zh/guides/testing-single-file-components-with-karma.html)
-
-> 问题：Vue-Cli 默认使用的浏览器环境是 JSDOM ,不支持css检测
-
-思路：
-1. 让 karma 从 vue-cli 的 webpack 配置中知道测试用例放在哪里
-2. 唤起浏览器进行测试
-
 #### mounted()和updated()
 ```
 change(this.data)
@@ -1687,4 +1536,22 @@ updateCurrentPage(currentPage){
 }
 ```
 
+#### 在 md 文件中生成目录结构
+1. 安装 mddir
+```
+yarn add mddir -D
+``` 
+2. 生成当前目录的目录结构 
+```
+npx mddir
+```
+3. 你会发现当前目录下多了一个 directoryList.md 文件
+```
+|-- tests
+    |-- fixture
+    |   |-- db.js
+    |-- unit
+        |-- button.test.spec.js
+```
+4. 将其放入代码块中，就是想要的目录结构了
 

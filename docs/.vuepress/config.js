@@ -31,7 +31,7 @@ module.exports = {
             {
                 title: '总结',
                 collapsable: false,
-                children:['/组件需求分析/','/API设计原则/']
+                children:['/组件需求分析/','/API设计原则/','/单元测试总结/']
             }
         ]
     },
