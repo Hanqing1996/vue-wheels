@@ -5,7 +5,7 @@ import {mount} from '@vue/test-utils'
 const {expect} = chai;
 import Vue from 'vue'
 
-import validate from '../../src/validate'
+import validator from '../../src/validate'
 
 import sinonChai from 'sinon-chai'
 
@@ -14,9 +14,10 @@ Vue.config.devtools = false
 
 describe('validate', () => {
     it('存在.', () => {
-        expect(validate).to.exist
+        expect(validator).to.exist
     })
 
+    let valid=new validator()
     it('required true 报错', () => {
         let data = {
             email: ''
@@ -24,7 +25,8 @@ describe('validate', () => {
         let rules = [
             {key: 'email', required: true}
         ]
-        let errors = validate(data, rules)
+
+        let errors = valid.validate(data, rules)
         expect(errors.email.required).to.eq('必填')
     })
 
@@ -36,7 +38,7 @@ describe('validate', () => {
         let rules = [
             {key: 'email', required: true}
         ]
-        let errors = validate(data, rules)
+        let errors = valid.validate(data, rules)
         expect(errors.email).to.not.exist
     })
 
@@ -49,7 +51,7 @@ describe('validate', () => {
             // 要求@前后有东西
             {key: 'email', pattern: 'email'}
         ]
-        let errors = validate(data, rules)
+        let errors = valid.validate(data, rules)
         expect(errors.email.pattern).to.eq('格式不正确')
     })
 
@@ -61,7 +63,7 @@ describe('validate', () => {
             // 要求@前后有东西
             {key: 'email', pattern: 'email'}
         ]
-        let errors = validate(data, rules)
+        let errors = valid.validate(data, rules)
         expect(errors.email).to.not.exist
     })
 
@@ -73,7 +75,7 @@ describe('validate', () => {
         let rules = [
             {key: 'email', pattern: 'email', required: true}
         ]
-        let errors = validate(data, rules)
+        let errors = valid.validate(data, rules)
         expect(errors.email.required).to.eq('必填')
         expect(errors.email.pattern).to.not.exist
     })
@@ -86,7 +88,7 @@ describe('validate', () => {
         let rules = [
             {key: 'email', pattern: 'email', required: true, minLength: 6}
         ]
-        let errors = validate(data, rules)
+        let errors = valid.validate(data, rules)
         expect(errors.email.pattern).to.eq('格式不正确')
         expect(errors.email.minLength).to.eq('太短')
     })
@@ -100,7 +102,7 @@ describe('validate', () => {
             {key: 'email', hasNumber: true}
         ]
         let xx=()=>{
-            validate(data, rules)
+            valid.validate(data, rules)
         }
         expect(xx).to.throw('不存在的校验器:hasNumber');
 
@@ -115,12 +117,13 @@ describe('validate', () => {
             {key: 'email', hasNumber: true}
         ]
 
-        validate.hasNumber = (value) => {
+        valid.hasNumber = (value) => {
             if (!/\d/.test(value)) {
                 return '必须含有数字'
             }
         }
-        let errors = validate(data, rules)
+
+        let errors = valid.validate(data, rules)
         expect(errors.email.hasNumber).to.eq('必须含有数字');
 
     })
