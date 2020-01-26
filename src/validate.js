@@ -12,8 +12,13 @@ export default function validate(data, rules) {
             }
         }
 
-        let ruleTypes = Object.keys(rule).filter(item => item !== 'required'&&item !== 'key')
+        let ruleTypes = Object.keys(rule).filter(item => item !== 'required' && item !== 'key')
         ruleTypes.forEach(type => {
+                if (!validate[type]) {
+                    throw `不存在的校验器:${type}`
+                }
+
+
                 let err = validate[type](value, rule[type])
                 if (err) {
                     ensureObject(errors, rule.key)

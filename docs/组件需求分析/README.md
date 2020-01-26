@@ -51,5 +51,7 @@ sidebarDepth: 2
 5. 如果 pattern 正确，那么 errors['email']['pattern']应该是 undefiend(即不存在)，而不应该是{}   
 6. 如果 email 正确，那么 errors['email']应该是 undefiend，而不应该是{} 
 6. 没有任何错误的情况下，errors 应该为{}  
+7. 不存在的规则,报错
+8. 用户可以自定义规则
     
       

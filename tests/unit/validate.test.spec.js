@@ -90,4 +90,38 @@ describe('validate', () => {
         expect(errors.email.pattern).to.eq('格式不正确')
         expect(errors.email.minLength).to.eq('太短')
     })
+
+    // 不存在的规则,报错
+    it('hasNumber', () => {
+        let data = {
+            email: '12'
+        }
+        let rules = [
+            {key: 'email', hasNumber: true}
+        ]
+        let xx=()=>{
+            validate(data, rules)
+        }
+        expect(xx).to.throw('不存在的校验器:hasNumber');
+
+    })
+
+    // 用户可以自己添加规则
+    it('hasNumber', () => {
+        let data = {
+            email: 'abcd'
+        }
+        let rules = [
+            {key: 'email', hasNumber: true}
+        ]
+
+        validate.hasNumber = (value) => {
+            if (!/\d/.test(value)) {
+                return '必须含有数字'
+            }
+        }
+        let errors = validate(data, rules)
+        expect(errors.email.hasNumber).to.eq('必须含有数字');
+
+    })
 })
