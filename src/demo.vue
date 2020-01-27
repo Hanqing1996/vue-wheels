@@ -1,7 +1,8 @@
 <template>
     <div>
+        <div>{{selectedItems}}</div>
         <div>
-            <g-table :columns="columns" :dataSource="dataSource"></g-table>
+            <g-table :selectedItems.sync="selectedItems" :columns="columns" :dataSource="dataSource" @changeItem="xxx($event)"></g-table>
         </div>
     </div>
 </template>
@@ -14,6 +15,7 @@
         components: {GTable},
         data() {
             return {
+                selectedItems:[],
                 columns: [
                     {text: '姓名', field: 'name'},
                     {text: '分数', field: 'score'},
@@ -38,10 +40,15 @@
                     id: 9, name: '莉莎莉莎', score: 73
                 },{
                     id: 10, name: '丝吉Q', score: 83
-                }]
+                }],
+
             }
         },
-        methods: {}
+        methods: {
+            xxx(obj){
+                console.log(obj);
+            }
+        }
     }
 </script>
 

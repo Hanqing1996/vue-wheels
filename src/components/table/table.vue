@@ -3,7 +3,7 @@
         <table class="g-table" :class="{bordered,compacted,noStripe:!striped}">
             <thead>
             <tr>
-                <th><input type="checkbox"></th>
+                <th><input type="checkbox" @change="onChangeAll"></th>
                 <th v-if="numberVisible">#</th>
                 <template v-for="column in columns">
                     <th>{{column.text}}</th>
@@ -13,7 +13,8 @@
             <tbody>
             <template v-for="item,index in dataSource">
                 <tr>
-                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox" @change="onChangeItem(item,$event)" :checked="selectedItems.filter(i=>i.id===item.id).length>0">
+                    </td>
                     <td v-if="numberVisible">{{index+1}}</td>
                     <template v-for="key in Object.keys(item).filter(k=>k!=='id')">
                         <td>{{item[key]}}</td>
@@ -29,6 +30,10 @@
     export default {
         name: "WheelsTable",
         props: {
+            selectedItems: {
+                type: Array,
+                required: true
+            },
             columns: {
                 type: Array,
                 required: true
@@ -54,6 +59,31 @@
                 default: true
             }
         },
+        methods: {
+            onChangeAll(e) {
+                let copy = []
+                if (e.target.checked) {
+                    this.dataSource.forEach(item => {
+                        copy.push(item)
+                    })
+                }
+                this.$emit('update:selectedItems', copy)
+            },
+            onChangeItem(item,e) {
+
+                let copy = JSON.parse(JSON.stringify(this.selectedItems))
+
+                if(e.target.checked){
+                    copy.push(item)
+                }
+                else{
+                    console.log('删除');
+                    copy.splice(copy.indexOf(item),1)
+                }
+
+                this.$emit('update:selectedItems', copy)
+            }
+        }
 
     }
 </script>
@@ -105,7 +135,7 @@
         }
 
         &.noStripe {
-            >tbody{
+            > tbody {
                 > tr {
                     background-color: $white;
                 }

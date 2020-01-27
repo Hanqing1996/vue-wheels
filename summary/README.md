@@ -1,3 +1,8 @@
+#### 用vue三件事
+1. 不要操作DOM元素，要操作组件
+2. 组件自己不能修改自己
+
+
 #### 分类
 1. 工程知识：知道用法
     * webpack/parcel
@@ -1034,7 +1039,7 @@ this.eventBus&& this.eventBus.$on() // 订阅
 this.eventBus.$off() // 取消订阅
 ```
 #### 单向数据流
-* 定义
+* 定义（关键就一句话：组件不可以自己修改自己）
 1. A发起更新,A更新自己:不可以
 2. A可以更新B,B可以更新B:不可以
 3. 节点间数据传递通过"节点.$emit('update'),事件中心eventBus.$on('update'),vue数据响应"实现
@@ -1249,7 +1254,24 @@ methods:{
     }
 }
 ```
+```
+* 如果参数有且只有event，$event可以省略
+```
+<input type="checkbox" @change="onChangeItem>
 
+onChangeItem(e){
+    console.log(e.target.checked);
+}
+```
+* 如果参数不只有event，$event不可以省略
+```
+<input type="checkbox" @change="onChangeItem(item,$event)>
+
+onChangeItem(item,e){
+    console.log(item);
+    console.log(e.target.checked);
+}
+```
 
 版本以0.开头：超级不稳定
 
@@ -1539,6 +1561,12 @@ props: {
 updateCurrentPage(currentPage){
     this.$emit('update:currentPage',currentPage)
 }
+```
+注意有时 selected 是数组，那么我们要先进行深拷贝
+```
+let copy=JSON.parse(JSON.stringIfy(this.selected))
+copy.push(newItem) // 对 copy 进行一些操作
+this.emit('update:selected',copy) // 单向数据流，让父组件来修改传入的 selected
 ```
 
 #### 在 md 文件中生成目录结构
