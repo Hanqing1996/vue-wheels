@@ -7,12 +7,34 @@ sidebarDepth: 2
 1. 支持 input,focus,blur,change 事件
 2. 存在 error,disabled,readOnly 等状态
 
+## toast
+1. 点击按钮弹出 toast，一定时间后自动关闭，也可手动关闭
+2. 手动关闭 toast 触发回调
+3. 页面不允许同时有两个 toast（如果在第一个 toast 自动关闭前再次点击按钮，则关闭之前的,再创建一个新的 toast）
+4. 用户使用 toast 组件的方式不同于其它组件。我们仅仅提供一个$toast接口，用户在其中填入各项参数（Element 的 MessageBox 也是这样设计的），为此我们需要使用插件
+```
+// 使用 toast
+<g-button @click.native="showToast">弹出toast</g-button>
+
+showToast() {
+    this.$toast(...)
+}
+```
+
 ## popover
 1. 用户可能在 popover 的容器元素上添加 click事件,然后希望点击 button 后能触发容器元素的 click 事件(利用事件冒泡机制),所以 popover 的内部元素的 click 不能用 stop 修饰符
 2. 点击按钮后显示 content-wrapper,然后点击其它位置隐藏 content-wrapper;
 3. 点击显示出来的 content-wrapper 不隐藏 content-wrapper (因为浏览网站者可能有复制文本内容的需求)
 4. 显示出来的 content-wrapper 有一个关闭键,点击关闭 content-wrapper
 5. button 支持 click,hover 两种事件
+6. popover 与 toast 的共同点在于:都可通过点击按钮弹出，都可手动关闭
+7. popover 与 toast 的区别在于:
+    * 如果弹出 toast 后再次点击按钮，那么将关闭旧的 toast 并创建一个新的 toast
+    * 如果弹出 popover 后再次点击按钮，那么仅关闭当前的 popover
+    * 手动关闭 toast 会触发 callback
+    * 手动关闭 popover 不会触发 callback
+    * toast 没有设置"点击 toast 以外其他位置关闭 toast"
+    * toast 不会自动关闭
 
 ## slides
 1. 不采用有缝轮播（无法直接从3到1，不好）
@@ -55,4 +77,6 @@ sidebarDepth: 2
 8. 用户可以自定义规则
 9. 提供向validator添加公共方法的接口
     
-      
+## table
+1. 
+2.       
