@@ -1,7 +1,7 @@
 <template>
     <div class="base">
         <section>
-            <h2>Input-Attributes</h2>
+            <h2>Toast-Attributes</h2>
             <div class="attr">
                 <table>
                     <thead>
@@ -15,37 +15,37 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>value / v-model</td>
-                        <td class="des">绑定值</td>
-                        <td class="type">string / number</td>
+                        <td>key</td>
+                        <td class="des">字段名</td>
+                        <td class="type">string</td>
                         <td>—</td>
                         <td>—</td>
                     </tr>
                     <tr>
-                        <td>disabled</td>
-                        <td class="des">禁用</td>
+                        <td>required</td>
+                        <td class="des">是否必填</td>
                         <td class="type">boolean</td>
                         <td>true , false</td>
-                        <td>false</td>
+                        <td>true</td>
                     </tr>
                     <tr>
-                        <td>readonly</td>
-                        <td class="des">是否只读</td>
-                        <td class="type">boolean</td>
-                        <td>true , false</td>
-                        <td>false</td>
+                        <td>pattern</td>
+                        <td class="des">格式</td>
+                        <td class="type">string</td>
+                        <td>—</td>
+                        <td>—</td>
                     </tr>
                     <tr>
-                        <td>error</td>
+                        <td>minLength</td>
+                        <td class="des">最短长度</td>
+                        <td class="type">number</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>errors</td>
                         <td class="des">错误信息</td>
-                        <td class="type">string</td>
-                        <td>—</td>
-                        <td>—</td>
-                    </tr>
-                    <tr>
-                        <td>placeholder</td>
-                        <td class="des">预设信息</td>
-                        <td class="type">string</td>
+                        <td class="type">Object</td>
                         <td>—</td>
                         <td>—</td>
                     </tr>
@@ -58,7 +58,7 @@
 
 <script>
     export default {
-        name: "input-attributes"
+        name: "validator-attributes"
     }
 </script>
 

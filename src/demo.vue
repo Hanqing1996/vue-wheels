@@ -1,23 +1,67 @@
 <template>
     <div>
-        <g-pager :total-page="20" :current-page.sync="currentPage"></g-pager>
+        <div class="validateClass">
+<!--            <div class="rules">-->
+<!--                <div>1. 邮箱地址必填</div>-->
+<!--                <div>2. 邮箱地址长度不得少于6位</div>-->
+<!--                <div>3. 邮箱地址中@前后必须有字符</div>-->
+<!--            </div>-->
+            <g-input v-model="emailValue" placeholder="请输入邮箱地址" value="" class="email"></g-input>
+            <div v-if="errors.email" style="color: red">邮箱{{errorType}}</div>
+                <g-button @click.native="onClick" class="submit">提交</g-button>
+        </div>
     </div>
 </template>
 
 <script>
-    import GPager from "./components/pager/pager";
+    import GInput from "./components/input/input";
+    import GButton from "./components/button/button";
+    import Validator from "./components/validator/validator";
 
     export default {
         name: "demo",
-        components: {GPager},
+        components: {GInput, GButton},
         data() {
+            let validator = new Validator()
+            let rules = [
+                {key: 'email', required: true,pattern:'email',minLength:6}
+            ]
             return {
-                currentPage:5
+                emailValue: '',
+                validator,
+                rules,
+                errors:{},
             }
         },
-        methods: {}
+        computed: {
+            InputData() {
+                return {'email': this.emailValue}
+            },
+            errorType(){
+                let type=Object.keys(this.errors)[0];
+                let e2=this.errors[type]
+                let t2=Object.keys(e2)[0];
+                return e2[t2]
+            }
+        },
+        methods: {
+            onClick() {
+                this.errors=this.validator.validate(this.InputData, this.rules);
+            }
+        }
     }
 </script>
 
 <style lang="scss" scoped>
+    .validateClass{
+        border: 1px solid black;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .email,.submit{
+            margin: 5px;
+        }
+    }
+
 </style>

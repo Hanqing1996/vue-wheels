@@ -1061,7 +1061,12 @@ this.eventBus.$off() // 取消订阅
 
 
 #### 在组件上加事件
-1. 在组件上加原生的DOM事件
+* [原生的事件是无法直接添加到组件上的](https://cn.vuejs.org/v2/guide/components-custom-events.html#%E5%B0%86%E5%8E%9F%E7%94%9F%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E5%88%B0%E7%BB%84%E4%BB%B6)
+```
+<g-button @click="onClick"></g-button>
+```
+是没用的
+1. 想要在组件上加原生的DOM事件，必须使用native修饰符
 ```
 <g-button  v-on:click.native="close">close</g-button></div>
 ```

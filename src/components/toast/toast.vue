@@ -1,6 +1,5 @@
 <template>
     <div class="toast" :class="toastClasses">
-
         <slot v-if="!enableHTML"></slot>
         <div v-else="enableHTML" v-html="$slots.default[0]"></div>
 

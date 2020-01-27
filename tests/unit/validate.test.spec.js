@@ -5,7 +5,7 @@ import {mount} from '@vue/test-utils'
 const {expect} = chai;
 import Vue from 'vue'
 
-import validator from '../../src/validate'
+import validator from '../../src/components/validator/validator'
 
 import sinonChai from 'sinon-chai'
 
@@ -14,7 +14,6 @@ Vue.config.devtools = false
 
 describe('validate', () => {
     it('存在.', () => {
-        validator.fn();
         expect(validator).to.exist
     })
 
@@ -124,16 +123,8 @@ describe('validate', () => {
             }
         })
 
-        // valid.hasNumber = (value) => {
-        //     if (!/\d/.test(value)) {
-        //         return '必须含有数字'
-        //     }
-        // }
-
         let errors = valid.validate(data, rules)
         expect(errors.email.hasNumber).to.eq('必须含有数字');
 
     })
-    
-    
 })
