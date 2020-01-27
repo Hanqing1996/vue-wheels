@@ -8,4 +8,5 @@ sidebarDepth: 2
     <validator-demo></validator-demo>
     <validator-demo2></validator-demo2>
     <validator-attributes></validator-attributes>
+    <validator-events></validator-events>
 </ClientOnly>

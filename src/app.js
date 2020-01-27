@@ -16,7 +16,7 @@ import Content from './components/layout/content'
 import Footer from './components/layout/footer'
 // toast
 import Toast from './components/toast/toast'
-import plugin from './plugin'
+import plugin from './toastPlugin'
 // tabs
 import Tabs from './components/tabs/tabs'
 import TabsHead from './components/tabs/tabs-head'

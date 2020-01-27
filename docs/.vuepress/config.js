@@ -8,7 +8,7 @@ module.exports = {
             {
                 title:'入门',
                 collapsable: false,
-                children:['/install/','get-started/']
+                children:['/install/','/get-started/']
             },
             {
                 title: '组件',
@@ -28,6 +28,16 @@ module.exports = {
                     '/components/pager',
                     '/components/validator',
                 ]
+            },
+            {
+                title: '相关插件',
+                collapsable: false,
+                children:['/toastPlugin/','/validatorPlugin/']
+            },
+            {
+                title: '相关指令',
+                collapsable: false,
+                children:['/clickOutside/']
             },
             {
                 title: '总结',

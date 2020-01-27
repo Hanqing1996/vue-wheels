@@ -2,15 +2,15 @@
     <div class="demo">
         <h2>自定义规则</h2>
         <div class="rules">
-            <div>邮箱地址中必须含数字</div>
+            <div>邮箱地址中必须含有数字</div>
         </div>
         <p>
             <strong>预览</strong>
         </p>
         <div>
             <div class="validateClass">
-                <g-input v-model="emailValue" placeholder="请输入邮箱地址" value="" class="email"></g-input>
-                <div v-if="errors.email" style="color: red">邮箱{{errorType}}</div>
+                <g-input v-model="emailValue" placeholder="请输入邮箱地址" class="email"></g-input>
+                <div v-if="errors.email" style="color: red">邮箱{{errorInformation}}</div>
                 <g-button @click.native="onClick" class="submit">提交</g-button>
             </div>
             <div>
@@ -28,45 +28,56 @@
 <script>
     import GInput from "../../../src/components/input/input";
     import GButton from "../../../src/components/button/button";
-    import Validator from "../../../src/components/validator/validator";
+
+    import plugin from '../../../src/validatorPlugin'
+    import Vue from 'vue'
+
+    Vue.use(plugin)
 
     export default {
         name: "demo",
         components: {GInput, GButton},
         data() {
-            let validator = new Validator()
-            let rules = [
-                {key: 'email', required: true, pattern: 'email', minLength: 6, hasNumber: true}
-            ]
             return {
                 emailValue: '',
-                validator,
-                rules,
+                rules: [
+                    {key: 'email', hasNumber: true}
+                ],
                 errors: {},
-                codeStr: `
+                codeStr:`
 <div class="validateClass">
-    <g-input v-model="emailValue" placeholder="请输入邮箱地址" value="" class="email"></g-input>
-    <div v-if="errors.email" style="color: red">邮箱{{errorType}}</div>
+    <g-input v-model="emailValue" placeholder="请输入邮箱地址" class="email"></g-input>
+    <div v-if="errors.email" style="color: red">邮箱{{errorInformation}}</div>
     <g-button @click.native="onClick" class="submit">提交</g-button>
 </div>
 
-let rules = [
-    {key: 'email', required: true, pattern: 'email', minLength: 6, hasNumber: true}
-]
+rules: [
+    {key: 'email', hasNumber: true}
+],
 
-methods: {
-    onClick() {
-        this.errors = this.validator.validate(this.InputData, this.rules);
+hasNumber(value) {
+    if (!/\\d/.test(value)) {
+        return '必须含有数字'
     }
+},
+
+onClick() {
+    this.errors = this.$validate({
+        data: this.InputData, rules: this.rules
+    })
 }
-`,
+
+mounted() {
+    this.$addRule('hasNumber', this.hasNumber)
+}
+                `
             }
         },
         computed: {
             InputData() {
                 return {'email': this.emailValue}
             },
-            errorType() {
+            errorInformation() {
                 let type = Object.keys(this.errors)[0];
                 let e2 = this.errors[type]
                 let t2 = Object.keys(e2)[0];
@@ -80,11 +91,13 @@ methods: {
                 }
             },
             onClick() {
-                this.errors = this.validator.validate(this.InputData, this.rules);
+                this.errors = this.$validate({
+                    data: this.InputData, rules: this.rules
+                })
             }
         },
         mounted() {
-            this.validator.add('hasNumber', this.hasNumber)
+            this.$addRule('hasNumber', this.hasNumber)
         }
     }
 </script>
@@ -100,5 +113,4 @@ methods: {
             margin: 5px;
         }
     }
-
 </style>

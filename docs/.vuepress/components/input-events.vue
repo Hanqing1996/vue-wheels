@@ -41,7 +41,7 @@
 
 <script>
     export default {
-        name: "input-attributes"
+        name: "input-events"
     }
 </script>
 

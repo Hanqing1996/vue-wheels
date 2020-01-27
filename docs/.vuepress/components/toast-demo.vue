@@ -22,7 +22,7 @@
 </template>
 <script>
     import GButton from '../../../src/components/button/button'
-    import plugin from '../../../src/plugin'
+    import plugin from '../../../src/toastPlugin'
     import Vue from 'vue'
 
     Vue.use(plugin)

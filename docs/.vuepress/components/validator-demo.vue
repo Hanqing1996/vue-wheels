@@ -14,8 +14,8 @@
         </p>
         <div>
             <div class="validateClass">
-                <g-input v-model="emailValue" placeholder="请输入邮箱地址" value="" class="email"></g-input>
-                <div v-if="errors.email" style="color: red">邮箱{{errorType}}</div>
+                <g-input v-model="emailValue" placeholder="请输入邮箱地址" class="email"></g-input>
+                <div v-if="errors.email" style="color: red">邮箱{{errorInformation}}</div>
                 <g-button @click.native="onClick" class="submit">提交</g-button>
             </div>
             <div>
@@ -33,45 +33,46 @@
 <script>
     import GInput from "../../../src/components/input/input";
     import GButton from "../../../src/components/button/button";
-    import Validator from "../../../src/components/validator/validator";
+
+    import plugin from '../../../src/validatorPlugin'
+    import Vue from 'vue'
+
+    Vue.use(plugin)
 
     export default {
         name: "demo",
         components: {GInput, GButton},
         data() {
-            let validator = new Validator()
-            let rules = [
-                {key: 'email', required: true, pattern: 'email', minLength: 6}
-            ]
             return {
                 emailValue: '',
-                validator,
-                rules,
+                rules: [
+                    {key: 'email', pattern: 'email', required: true, minLength: 6}
+                ],
                 errors: {},
-                codeStr: `
+                codeStr:`
 <div class="validateClass">
-    <g-input v-model="emailValue" placeholder="请输入邮箱地址" value="" class="email"></g-input>
-    <div v-if="errors.email" style="color: red">邮箱{{errorType}}</div>
+    <g-input v-model="emailValue" placeholder="请输入邮箱地址" class="email"></g-input>
+    <div v-if="errors.email" style="color: red">邮箱{{errorInformation}}</div>
     <g-button @click.native="onClick" class="submit">提交</g-button>
 </div>
 
-let rules = [
-    {key: 'email', required: true, pattern: 'email', minLength: 6}
-]
+rules: [
+    {key: 'email', pattern: 'email', required: true, minLength: 6}
+],
 
-methods: {
-    onClick() {
-        this.errors = this.validator.validate(this.InputData, this.rules);
-    }
+onClick() {
+    this.errors = this.$validate({
+        data: this.InputData, rules: this.rules
+    })
 }
-`,
+                `
             }
         },
         computed: {
             InputData() {
                 return {'email': this.emailValue}
             },
-            errorType() {
+            errorInformation() {
                 let type = Object.keys(this.errors)[0];
                 let e2 = this.errors[type]
                 let t2 = Object.keys(e2)[0];
@@ -80,7 +81,9 @@ methods: {
         },
         methods: {
             onClick() {
-                this.errors = this.validator.validate(this.InputData, this.rules);
+                this.errors = this.$validate({
+                    data: this.InputData, rules: this.rules
+                })
             }
         }
     }
