@@ -1,67 +1,49 @@
 <template>
     <div>
-        <div class="validateClass">
-<!--            <div class="rules">-->
-<!--                <div>1. 邮箱地址必填</div>-->
-<!--                <div>2. 邮箱地址长度不得少于6位</div>-->
-<!--                <div>3. 邮箱地址中@前后必须有字符</div>-->
-<!--            </div>-->
-            <g-input v-model="emailValue" placeholder="请输入邮箱地址" value="" class="email"></g-input>
-            <div v-if="errors.email" style="color: red">邮箱{{errorType}}</div>
-                <g-button @click.native="onClick" class="submit">提交</g-button>
+        <div>
+            <g-table :columns="columns" :dataSource="dataSource"></g-table>
         </div>
     </div>
 </template>
 
 <script>
-    import GInput from "./components/input/input";
-    import GButton from "./components/button/button";
-    import Validator from "./components/validator/validator";
+    import GTable from "./components/table/table";
 
     export default {
         name: "demo",
-        components: {GInput, GButton},
+        components: {GTable},
         data() {
-            let validator = new Validator()
-            let rules = [
-                {key: 'email', required: true,pattern:'email',minLength:6}
-            ]
             return {
-                emailValue: '',
-                validator,
-                rules,
-                errors:{},
+                columns: [
+                    {text: '姓名', field: 'name'},
+                    {text: '分数', field: 'score'},
+                ],
+                dataSource: [{
+                    id: 1, name: '乔斯达', score: 100
+                }, {
+                    id: 2, name: '承太郎', score: 99
+                },{
+                    id: 3, name: '东方仗助', score: 89
+                },{
+                    id: 4, name: '花京院', score: 79
+                },{
+                    id: 5, name: '承太郎', score: 99
+                },{
+                    id: 6, name: '迪奥', score: 93
+                },{
+                    id: 7, name: '乔纳森', score: 91
+                },{
+                    id: 8, name: '西撒', score: 69
+                },{
+                    id: 9, name: '莉莎莉莎', score: 73
+                },{
+                    id: 10, name: '丝吉Q', score: 83
+                }]
             }
         },
-        computed: {
-            InputData() {
-                return {'email': this.emailValue}
-            },
-            errorType(){
-                let type=Object.keys(this.errors)[0];
-                let e2=this.errors[type]
-                let t2=Object.keys(e2)[0];
-                return e2[t2]
-            }
-        },
-        methods: {
-            onClick() {
-                this.errors=this.validator.validate(this.InputData, this.rules);
-            }
-        }
+        methods: {}
     }
 </script>
 
 <style lang="scss" scoped>
-    .validateClass{
-        border: 1px solid black;
-        display:flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        .email,.submit{
-            margin: 5px;
-        }
-    }
-
 </style>

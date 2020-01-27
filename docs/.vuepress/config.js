@@ -30,19 +30,9 @@ module.exports = {
                 ]
             },
             {
-                title: '相关插件',
-                collapsable: false,
-                children:['/toastPlugin/','/validatorPlugin/']
-            },
-            {
-                title: '相关指令',
-                collapsable: false,
-                children:['/clickOutside/']
-            },
-            {
                 title: '总结',
                 collapsable: false,
-                children:['/组件需求分析/','/API设计原则/','/单元测试总结/']
+                children:['/组件需求分析/','/API设计原则/','/单元测试总结/','/相关插件/','/相关指令/']
             }
         ]
     },
