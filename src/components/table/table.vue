@@ -3,16 +3,16 @@
         <table class="g-table" :class="{bordered,compacted,noStripe:!striped}">
             <thead>
             <tr>
-                <th><input type="checkbox" @change="onChangeAll"></th>
+                <th><input type="checkbox" @change="onChangeAll" ref="yyy"></th>
                 <th v-if="numberVisible">#</th>
                 <template v-for="column in columns">
-                    <th>{{column.text}}</th>
+                    <th :key="column.field">{{column.text}}</th>
                 </template>
             </tr>
             </thead>
             <tbody>
             <template v-for="item,index in dataSource">
-                <tr>
+                <tr :key="item.id">
                     <td><input type="checkbox" @change="onChangeItem(item,$event)" :checked="xxx(item.id)">
                     </td>
                     <td v-if="numberVisible">{{index+1}}</td>
@@ -76,7 +76,6 @@
                 this.$emit('update:selectedItems', copy)
             },
             onChangeItem(item, e) {
-                console.log(item);
                 let copy = JSON.parse(JSON.stringify(this.selectedItems))
 
                 if (e.target.checked) {
@@ -84,12 +83,19 @@
                 } else {
                     copy.splice(this.selectedItems.indexOf(item), 1)
                 }
-                console.log(copy);
 
                 this.$emit('update:selectedItems', copy)
             }
+        },
+        updated() {
+            let selectedLength=this.selectedItems.length
+            let dataLength=this.dataSource.length
+            if(selectedLength&&selectedLength<dataLength&&selectedLength){
+                this.$refs.yyy.indeterminate=true
+            } else{
+                this.$refs.yyy.indeterminate=false
+            }
         }
-
     }
 </script>
 

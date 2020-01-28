@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div>{{selectedItems}}</div>
         <div>
             <g-table :selectedItems.sync="selectedItems" :columns="columns" :dataSource="dataSource" @changeItem="xxx($event)"></g-table>
         </div>

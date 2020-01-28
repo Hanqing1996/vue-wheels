@@ -1028,6 +1028,8 @@ let vm4=new Constructor2({
               }
           }
     ```
+* table
+    * watch  
   
 #### vue的意义
 操作DOM=>操作组件！！！
@@ -1590,4 +1592,56 @@ npx mddir
         |-- button.test.spec.js
 ```
 4. 将其放入代码块中，就是想要的目录结构了
+
+#### watch 就是定向版的 updated
+selectedItems可以是data，也可以是props(由父组件传回)
+```
+watch:{
+    selectedItems(){
+        if(selectedItems.length<10){
+            console.log(长度小于10)
+        }
+    }
+}
+```
+等价于
+```
+updated(){
+    if(this.selectedItems.length<10){
+        console.log(长度小于10)
+    }
+}
+```
+
+#### v-for一定要搭配key=id
+* [为什么想删除第一项，结果确实第三项被删除了](https://jsbin.com/gacokit/8/edit?html,js,output)
+> 可以认为在不加 key 的情况下 vue 是按照索引来判断要删除哪些元素的。
+原先的索引
+```
+0 1 2
+```
+删除第一项，重新生成索引后
+```
+0 1
+```
+vue发现少了最后一项，于是把最后一项删除了，导致了bug
+* 一般用 item.id 作为 key（不能:key=index，原因见上）
+```
+<li v-for="(item,index) in items" :key=item.id>
+    <child>
+    </child>
+    <button @click="remove(index)">删除</button>
+</li>
+```
+* 如果是 template 的话,key 要加在实际的DOM元素上
+```
+<template v-for="item,index in dataSource">
+    <tr :key="item.id">
+    </tr>
+</template>
+```
+
+#### vue 和 react 对比
+> vue 是一个容易的框架（舒服）
+> react 是一个简单的框架（自由）
 

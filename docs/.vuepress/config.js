@@ -27,6 +27,7 @@ module.exports = {
                     '/components/nav',
                     '/components/pager',
                     '/components/validator',
+                    '/components/table',
                 ]
             },
             {
