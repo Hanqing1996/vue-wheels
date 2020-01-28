@@ -13,7 +13,7 @@
             <tbody>
             <template v-for="item,index in dataSource">
                 <tr>
-                    <td><input type="checkbox" @change="onChangeItem(item,$event)" :checked="selectedItems.filter(i=>i.id===item.id).length>0">
+                    <td><input type="checkbox" @change="onChangeItem(item,$event)" :checked="xxx(item.id)">
                     </td>
                     <td v-if="numberVisible">{{index+1}}</td>
                     <template v-for="key in Object.keys(item).filter(k=>k!=='id')">
@@ -40,7 +40,10 @@
             },
             dataSource: {
                 type: Array,
-                required: true
+                required: true,
+                validator(array) {
+                    return !array.filter(item => item.id == undefined).length > 0
+                }
             },
             numberVisible: {
                 type: Boolean,
@@ -60,6 +63,9 @@
             }
         },
         methods: {
+            xxx(id) {
+                return this.selectedItems.filter(i => i.id === id).length > 0
+            },
             onChangeAll(e) {
                 let copy = []
                 if (e.target.checked) {
@@ -69,17 +75,16 @@
                 }
                 this.$emit('update:selectedItems', copy)
             },
-            onChangeItem(item,e) {
-
+            onChangeItem(item, e) {
+                console.log(item);
                 let copy = JSON.parse(JSON.stringify(this.selectedItems))
 
-                if(e.target.checked){
+                if (e.target.checked) {
                     copy.push(item)
+                } else {
+                    copy.splice(this.selectedItems.indexOf(item), 1)
                 }
-                else{
-                    console.log('删除');
-                    copy.splice(copy.indexOf(item),1)
-                }
+                console.log(copy);
 
                 this.$emit('update:selectedItems', copy)
             }

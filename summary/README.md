@@ -1,5 +1,8 @@
 #### 用vue三件事
 1. 不要操作DOM元素，要操作组件
+```
+<td><input type="checkbox" @change="onChangeItem(item,$event)" :checked="selectedItems.filter(i=>i.id===item.id).length>0">
+```
 2. 组件自己不能修改自己
 
 
