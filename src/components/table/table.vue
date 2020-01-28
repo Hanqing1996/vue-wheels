@@ -3,7 +3,7 @@
         <table class="g-table" :class="{bordered,compacted,noStripe:!striped}">
             <thead>
             <tr>
-                <th><input type="checkbox" @change="onChangeAll" ref="yyy"></th>
+                <th><input type="checkbox" @change="onChangeAll" ref="yyy" :checked="allChecked"></th>
                 <th v-if="numberVisible">#</th>
                 <template v-for="column in columns">
                     <th :key="column.field">{{column.text}}</th>
@@ -11,13 +11,14 @@
             </tr>
             </thead>
             <tbody>
+
             <template v-for="item,index in dataSource">
                 <tr :key="item.id">
                     <td><input type="checkbox" @change="onChangeItem(item,$event)" :checked="xxx(item.id)">
                     </td>
                     <td v-if="numberVisible">{{index+1}}</td>
                     <template v-for="key in Object.keys(item).filter(k=>k!=='id')">
-                        <td>{{item[key]}}</td>
+                        <td :key="key">{{item[key]}}</td>
                     </template>
                 </tr>
             </template>
@@ -62,6 +63,22 @@
                 default: true
             }
         },
+        computed: {
+            allChecked() {
+                let dataIds = this.dataSource.map(item => item.id).sort()
+                let selectedIds = this.selectedItems.map(item => item.id).sort()
+                if (dataIds.length === selectedIds.length) {
+                    let notEqual = false
+                    for (let i = 0; i < dataIds.length; i++) {
+                        if (dataIds[i] !== selectedIds[i])
+                            notEqual = true
+                    }
+                    return !notEqual
+                } else {
+                    return false
+                }
+            }
+        },
         methods: {
             xxx(id) {
                 return this.selectedItems.filter(i => i.id === id).length > 0
@@ -76,25 +93,23 @@
                 this.$emit('update:selectedItems', copy)
             },
             onChangeItem(item, e) {
+                let targetId = item.id
                 let copy = JSON.parse(JSON.stringify(this.selectedItems))
-
                 if (e.target.checked) {
                     copy.push(item)
                 } else {
-                    copy.splice(this.selectedItems.indexOf(item), 1)
+                    copy = copy.filter(item => item.id !== targetId)
                 }
-
                 this.$emit('update:selectedItems', copy)
             }
         },
         updated() {
-            let selectedLength=this.selectedItems.length
-            let dataLength=this.dataSource.length
-            if(selectedLength&&selectedLength<dataLength&&selectedLength){
-                this.$refs.yyy.indeterminate=true
-            } else{
-                this.$refs.yyy.indeterminate=false
-            }
+            let selectedLength = this.selectedItems.length
+            let dataLength = this.dataSource.length
+            if (selectedLength && selectedLength < dataLength && selectedLength) {
+                this.$refs.yyy.indeterminate = true
+            } else
+                this.$refs.yyy.indeterminate = false
         }
     }
 </script>

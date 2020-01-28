@@ -82,7 +82,10 @@ showToast() {
 > 前端永远拿不到所有数据，否则浏览器会炸掉
 1. 展示数据（带边框，紧/松，单双）
 2. 选中数据（单选/全选/半选）
+    * 判断用户是否选中所有数据不能用 return this.dataSource.length === this.selectedItems.length
+    * 应该去判断两个数组的元素id是否完全一致
 3. 展示排序
 4. 固定表头/列
 5. 行可展开
+
       
