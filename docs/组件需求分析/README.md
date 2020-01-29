@@ -85,6 +85,13 @@ showToast() {
     * 判断用户是否选中所有数据不能用 return this.dataSource.length === this.selectedItems.length
     * 应该去判断两个数组的元素id是否完全一致
 3. 展示排序
+    * height 不排序，name 升序，score 由用户选择排序方式
+    ```
+    orderBy:{
+      name:'asc', 
+      score:true
+    },
+   ```
 4. 固定表头/列
 5. 行可展开
 

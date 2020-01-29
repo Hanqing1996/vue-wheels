@@ -1645,3 +1645,40 @@ vue发现少了最后一项，于是把最后一项删除了，导致了bug
 > vue 是一个容易的框架（舒服）
 > react 是一个简单的框架（自由）
 
+#### Iconfont 如何由 left 图标得到 right 图标
+1. left编辑图标
+2. 选择保存为副本（什么也不要做，否则会Error）
+3. 编辑 left-copy,修改位置，名字，选择仅保存 得到right
+
+#### vue 无法用一个属性来检查令一个属性的合法性
+```
+// demo.vue
+columns: [
+    {text: '姓名', field: 'name'},
+    {text: '分数', field: 'score'},
+],
+orderBy:{
+  name:'asc', score:'desc'
+},
+```
+```
+// table.vue
+orderBy:{
+    type:Object,
+    default:()=>({}),
+    validator(obj) {
+        if(this.columns) // this 是 undefined ，不是vm
+            ...
+    }
+},
+columns: {
+    type: Array,
+    required: true
+},
+```
+
+#### 命名
+* inselectedItemsIds
+> 根据 Id 查找 item 是否在 selectedItems 中，返回值为 boolean 类型
+* 
+

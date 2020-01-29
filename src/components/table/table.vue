@@ -6,7 +6,17 @@
                 <th><input type="checkbox" @change="onChangeAll" ref="yyy" :checked="allChecked"></th>
                 <th v-if="numberVisible">#</th>
                 <template v-for="column in columns">
-                    <th :key="column.field">{{column.text}}</th>
+                    <th :key="column.field">
+                        <div class="wrapper">
+                            {{column.text}}
+                            <span class="iconWrapper" v-if="column.field in orderBy" @click="changeSortRule(column.field)">
+                            <icon name="up"
+                                  :class="{active:orderBy[column.field]&&orderBy[column.field]==='asc'}"></icon>
+                            <icon name="down"
+                                  :class="{active:orderBy[column.field]&&orderBy[column.field]==='desc'}"></icon>
+                        </span>
+                        </div>
+                    </th>
                 </template>
             </tr>
             </thead>
@@ -14,7 +24,7 @@
 
             <template v-for="item,index in dataSource">
                 <tr :key="item.id">
-                    <td><input type="checkbox" @change="onChangeItem(item,$event)" :checked="xxx(item.id)">
+                    <td><input type="checkbox" @change="onChangeItem(item,$event)" :checked="inselectedItemsIds(item.id)">
                     </td>
                     <td v-if="numberVisible">{{index+1}}</td>
                     <template v-for="key in Object.keys(item).filter(k=>k!=='id')">
@@ -28,9 +38,16 @@
 </template>
 
 <script>
+    import Icon from '../button/icon'
+
     export default {
         name: "WheelsTable",
+        components: {Icon},
         props: {
+            orderBy: {
+                type: Object,
+                default: () => ({})
+            },
             selectedItems: {
                 type: Array,
                 required: true
@@ -80,7 +97,21 @@
             }
         },
         methods: {
-            xxx(id) {
+            changeSortRule(key){
+                let copy=this.orderBy
+                // 上->下
+                if(copy[key]==='asc'){
+                    copy[key]='desc'
+                // 下->空
+                } else if(copy[key]==='desc'){
+                    copy[key]=true
+                // 空->上
+                }else{
+                    copy[key]='asc'
+                }
+                this.$emit("update:orderBy",copy)
+            },
+            inselectedItemsIds (id) {
                 return this.selectedItems.filter(i => i.id === id).length > 0
             },
             onChangeAll(e) {
@@ -167,5 +198,30 @@
                 }
             }
         }
+    }
+
+    .wrapper {
+        user-select: none;
+        display: flex;
+        align-items: center;
+
+        .iconWrapper {
+            margin-left: 5px;
+            display: flex;
+            flex-direction: column;
+
+            svg {
+                fill: $grey;
+                width: 8px;
+                height: 8px;
+                cursor: pointer;
+            }
+
+            > .active {
+                fill: black;
+                cursor:default;
+            }
+        }
+
     }
 </style>

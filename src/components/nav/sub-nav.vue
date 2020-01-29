@@ -17,7 +17,6 @@
 <script>
     import clickOutside from '../../clickOutside'
     import Icon from '../button/icon'
-
     export default {
         name: "WheelsSubNav",
         inject: ['root'],
@@ -61,10 +60,8 @@
 
 <style lang="scss" scoped>
     @import "src/var";
-
     .g-sub-nav {
         position: relative;
-
         &.active {
             &::after {
                 content: '';
@@ -75,19 +72,16 @@
                 width: 100%;
             }
         }
-
         &.vertical {
             &::after {
                 display: none;
             }
         }
-
         > span {
             padding: 10px 20px;
             display: inline-block;
             vertical-align: top;
         }
-
         > .g-sub-nav-popover {
             background: white;
             margin-top: 1px;
@@ -100,7 +94,6 @@
             border-radius: $border-radius;
             font-size: $font-size;
             min-width: 6em;
-
             > .g-nav-item {
                 &.selected {
                     &::after {
@@ -109,26 +102,22 @@
                     background-color: $grey;
                 }
             }
-
             &.vertical {
                 position: static;
                 border: none;
                 box-shadow: none;
-
                 > .g-nav-item {
                     &.selected {
                         background-color: white;
                     }
                 }
             }
-
             > .g-sub-nav {
                 &.active {
                     &::after {
                         display: none;
                     }
                 }
-
                 > .g-sub-nav-popover {
                     top: 0%;
                     left: 100%;
@@ -138,31 +127,25 @@
             }
         }
     }
-
     .title {
         display: inline-block;
         min-width: 4em;
     }
-
     .g-sub-nav-label {
         position: relative;
-
         > .g-sub-nav-icon {
             transition: transform 250ms;
             position: absolute;
             top: 30%;
             right: 1%;
-
             &.open {
                 transform: rotate(180deg);
                 top: 23%;
             }
-
             > svg {
                 width: 16px;
                 height: 16px;
             }
         }
     }
-
 </style>
