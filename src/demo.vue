@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div>{{selectedItems}}</div>
         <div>
             <g-table :selectedItems.sync="selectedItems"
                      :columns="columns"
                      :dataSource="dataSource"
                      :orderBy.sync="orderBy"
+                     :loading.sync="loading"
                      @update:orderBy="xxx">
             </g-table>
         </div>
@@ -21,6 +21,7 @@
         data() {
             return {
                 selectedItems:[],
+                loading:false,
                 columns: [
                     {text: '姓名', field: 'name'},
                     {text: '分数', field: 'score'},
@@ -63,7 +64,6 @@
                     this.dataSource=res.dataSource
                 })
                */
-                this.dataSource.sort((a,b)=>a.score-b.score)
             }
         }
     }

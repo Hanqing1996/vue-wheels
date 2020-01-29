@@ -3,13 +3,14 @@
         <table class="g-table" :class="{bordered,compacted,noStripe:!striped}">
             <thead>
             <tr>
-                <th><input type="checkbox" @change="onChangeAll" ref="yyy" :checked="allChecked"></th>
+                <th><input type="checkbox" @change="onChangeAll" ref="allCheck" :checked="allChecked"></th>
                 <th v-if="numberVisible">#</th>
                 <template v-for="column in columns">
                     <th :key="column.field">
                         <div class="wrapper">
                             {{column.text}}
-                            <span class="iconWrapper" v-if="column.field in orderBy" @click="changeSortRule(column.field)">
+                            <span class="iconWrapper" v-if="column.field in orderBy"
+                                  @click="changeSortRule(column.field)">
                             <icon name="up"
                                   :class="{active:orderBy[column.field]&&orderBy[column.field]==='asc'}"></icon>
                             <icon name="down"
@@ -24,7 +25,8 @@
 
             <template v-for="item,index in dataSource">
                 <tr :key="item.id">
-                    <td><input type="checkbox" @change="onChangeItem(item,$event)" :checked="inselectedItemsIds(item.id)">
+                    <td><input type="checkbox" @change="onChangeItem(item,$event)"
+                               :checked="inselectedItemsIds(item.id)">
                     </td>
                     <td v-if="numberVisible">{{index+1}}</td>
                     <template v-for="key in Object.keys(item).filter(k=>k!=='id')">
@@ -34,6 +36,9 @@
             </template>
             </tbody>
         </table>
+        <div :class="{loading}" v-if="loading">
+            <icon name="loading"></icon>
+        </div>
     </div>
 </template>
 
@@ -44,6 +49,10 @@
         name: "WheelsTable",
         components: {Icon},
         props: {
+            loading: {
+                type: Boolean,
+                default: false
+            },
             orderBy: {
                 type: Object,
                 default: () => ({})
@@ -96,22 +105,32 @@
                 }
             }
         },
-        methods: {
-            changeSortRule(key){
-                let copy=this.orderBy
-                // 上->下
-                if(copy[key]==='asc'){
-                    copy[key]='desc'
-                // 下->空
-                } else if(copy[key]==='desc'){
-                    copy[key]=true
-                // 空->上
-                }else{
-                    copy[key]='asc'
+        watch:{
+            loading(){
+                if(this.loading){
+                    setTimeout(()=>{
+                        this.$emit("update:loading", false)
+                    },3000)
                 }
-                this.$emit("update:orderBy",copy)
+            }
+        },
+        methods: {
+            changeSortRule(key) {
+                let copy = this.orderBy
+                // 上->下
+                if (copy[key] === 'asc') {
+                    copy[key] = 'desc'
+                    // 下->空
+                } else if (copy[key] === 'desc') {
+                    copy[key] = true
+                    // 空->上
+                } else {
+                    copy[key] = 'asc'
+                }
+                this.$emit("update:orderBy", copy)
+                this.$emit("update:loading", true)
             },
-            inselectedItemsIds (id) {
+            inselectedItemsIds(id) {
                 return this.selectedItems.filter(i => i.id === id).length > 0
             },
             onChangeAll(e) {
@@ -138,9 +157,9 @@
             let selectedLength = this.selectedItems.length
             let dataLength = this.dataSource.length
             if (selectedLength && selectedLength < dataLength && selectedLength) {
-                this.$refs.yyy.indeterminate = true
+                this.$refs.allCheck.indeterminate = true
             } else
-                this.$refs.yyy.indeterminate = false
+                this.$refs.allCheck.indeterminate = false
         }
     }
 </script>
@@ -149,6 +168,10 @@
     @import "src/var";
 
     $grey: darken($grey, 10%); /*加深10%*/
+
+    .tableWrapper {
+        position: relative;
+    }
 
     .g-table {
         width: 100%;
@@ -219,9 +242,27 @@
 
             > .active {
                 fill: black;
-                cursor:default;
+                cursor: default;
             }
         }
-
     }
+
+    .loading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.8);
+
+        > svg {
+            width: 30px;
+            height: 30px;
+            @include spin;
+        }
+    }
+
 </style>
