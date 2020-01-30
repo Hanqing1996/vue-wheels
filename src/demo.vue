@@ -6,6 +6,8 @@
                      :dataSource="dataSource"
                      :orderBy.sync="orderBy"
                      :loading.sync="loading"
+                     height="200px"
+                     bordered
                      @update:orderBy="xxx">
             </g-table>
         </div>

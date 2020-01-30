@@ -1,41 +1,44 @@
 <template>
-    <div class="tableWrapper">
-        <table class="g-table" :class="{bordered,compacted,noStripe:!striped}">
-            <thead>
-            <tr>
-                <th><input type="checkbox" @change="onChangeAll" ref="allCheck" :checked="allChecked"></th>
-                <th v-if="numberVisible">#</th>
-                <template v-for="column in columns">
-                    <th :key="column.field">
-                        <div class="wrapper">
-                            {{column.text}}
-                            <span class="iconWrapper" v-if="column.field in orderBy"
-                                  @click="changeSortRule(column.field)">
+    <div class="tableWrapper" ref="wrapper">
+        <div :style="{height,overflow:'auto'}">
+            <table ref="table" class="g-table" :class="{bordered,compacted,noStripe:!striped}">
+                <thead>
+                <tr>
+                    <th><input type="checkbox" @change="onChangeAll" ref="allCheck" :checked="allChecked"></th>
+                    <th v-if="numberVisible">#</th>
+                    <template v-for="column in columns">
+                        <th :key="column.field">
+                            <div class="wrapper">
+                                {{column.text}}
+                                <span class="iconWrapper" v-if="column.field in orderBy"
+                                      @click="changeSortRule(column.field)">
                             <icon name="up"
                                   :class="{active:orderBy[column.field]&&orderBy[column.field]==='asc'}"></icon>
                             <icon name="down"
                                   :class="{active:orderBy[column.field]&&orderBy[column.field]==='desc'}"></icon>
                         </span>
-                        </div>
-                    </th>
-                </template>
-            </tr>
-            </thead>
-            <tbody>
-
-            <template v-for="item,index in dataSource">
-                <tr :key="item.id">
-                    <td><input type="checkbox" @change="onChangeItem(item,$event)"
-                               :checked="inselectedItemsIds(item.id)">
-                    </td>
-                    <td v-if="numberVisible">{{index+1}}</td>
-                    <template v-for="key in Object.keys(item).filter(k=>k!=='id')">
-                        <td :key="key">{{item[key]}}</td>
+                            </div>
+                        </th>
                     </template>
                 </tr>
-            </template>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+
+                <template v-for="item,index in dataSource">
+                    <tr :key="item.id">
+                        <td><input type="checkbox" @change="onChangeItem(item,$event)"
+                                   :checked="inselectedItemsIds(item.id)">
+                        </td>
+                        <td v-if="numberVisible">{{index+1}}</td>
+                        <template v-for="key in Object.keys(item).filter(k=>k!=='id')">
+                            <td :key="key">{{item[key]}}</td>
+                        </template>
+                    </tr>
+                </template>
+                </tbody>
+            </table>
+
+        </div>
         <div :class="{loading}" v-if="loading">
             <icon name="loading"></icon>
         </div>
@@ -49,6 +52,10 @@
         name: "WheelsTable",
         components: {Icon},
         props: {
+            // 包含表头的高度
+            height: {
+                type: String
+            },
             loading: {
                 type: Boolean,
                 default: false
@@ -105,16 +112,36 @@
                 }
             }
         },
-        watch:{
-            loading(){
-                if(this.loading){
-                    setTimeout(()=>{
+        watch: {
+            loading() {
+                if (this.loading) {
+                    setTimeout(() => {
                         this.$emit("update:loading", false)
-                    },3000)
+                    }, 3000)
                 }
+            },
+            selectedItems() {
+                let selectedLength = this.selectedItems.length
+                let dataLength = this.dataSource.length
+                if (selectedLength && selectedLength < dataLength && selectedLength) {
+                    this.$refs.allCheck.indeterminate = true
+                } else
+                    this.$refs.allCheck.indeterminate = false
             }
         },
         methods: {
+            updateWidth() {
+                let table = this.$refs.table
+                let table2 = document.getElementsByClassName('tableCopy')[0]
+                let {width: tableWidth} = table.getBoundingClientRect()
+                table2.style.width = `${tableWidth}px`
+                let tableHeader = Array.from(this.$refs.table.children).filter(node => node.tagName.toLowerCase() === 'thead')[0]
+
+                Array.from(tableHeader.children[0].children).map((node, i) => {
+                    let {width: currentWidth} = node.getBoundingClientRect()
+                    table2.children[0].children[0].children[i].style.width = `${currentWidth}px`
+                })
+            },
             changeSortRule(key) {
                 let copy = this.orderBy
                 // 上->下
@@ -153,13 +180,40 @@
                 this.$emit('update:selectedItems', copy)
             }
         },
-        updated() {
-            let selectedLength = this.selectedItems.length
-            let dataLength = this.dataSource.length
-            if (selectedLength && selectedLength < dataLength && selectedLength) {
-                this.$refs.allCheck.indeterminate = true
-            } else
-                this.$refs.allCheck.indeterminate = false
+        mounted() {
+            let table2 = this.$refs.table.cloneNode(true)
+            this.$refs.wrapper.appendChild(table2)
+
+            // 修改 table2 的宽度，否则接下来 th 的宽度是无法设置成功的
+            let {width: tableWidth} = table2.getBoundingClientRect()
+            table2.style.width = `${tableWidth}px`
+
+            let tableHeader = Array.from(this.$refs.table.children).filter(node => node.tagName.toLowerCase() === 'thead')[0]
+            let tableHeader2
+
+            // 删除 table2 的 tbody
+            Array.from(table2.children).map(node => {
+                if (node.tagName.toLowerCase() !== 'thead') {
+                    node.remove()
+                } else {
+                    tableHeader2 = node
+                }
+            })
+
+            // 修改 table2 中每个 th 的宽度
+            Array.from(tableHeader.children[0].children).map((th, i) => {
+                const {width} = th.getBoundingClientRect()
+                tableHeader2.children[0].children[i].style.width = `${width}px`
+            })
+
+            table2.classList.add('tableCopy')
+            this.onWindowResize = () => {
+                this.updateWidth()
+            }
+            window.addEventListener('resize', this.onWindowResize)
+        },
+        beforeDestroy() {
+            window.removeEventListener('resize', this.onWindowResize)
         }
     }
 </script>
@@ -195,8 +249,8 @@
             }
         }
 
-
         th, td {
+            width: 200px;
             border-bottom: 1px solid $grey;
             text-align: left;
             padding: 8px;
@@ -265,4 +319,10 @@
         }
     }
 
+    .tableCopy {
+        background-color: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 </style>

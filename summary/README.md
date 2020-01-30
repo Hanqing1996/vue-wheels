@@ -1680,5 +1680,19 @@ columns: {
 #### 命名
 * inselectedItemsIds
 > 根据 Id 查找 item 是否在 selectedItems 中，返回值为 boolean 类型
-* 
 
+
+#### beforeDestroy
+* 在 mounted 中注册事件
+```
+this.onWindowResize = () => {
+    this.updateWidth()
+}
+window.addEventListener('resize', this.onWindowResize)
+```
+* 在 beforeDestroy 中销毁注册的事件
+```
+beforeDestroy() {
+    window.removeEventListener('resize', this.onWindowResize)
+}
+```
