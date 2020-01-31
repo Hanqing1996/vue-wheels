@@ -47,6 +47,7 @@
 
 <script>
     import Icon from '../button/icon'
+    import tabs from "../tabs/tabs";
 
     export default {
         name: "WheelsTable",
@@ -130,17 +131,15 @@
             }
         },
         methods: {
-            updateWidth() {
-                let table = this.$refs.table
-                let table2 = document.getElementsByClassName('tableCopy')[0]
-                let {width: tableWidth} = table.getBoundingClientRect()
-                table2.style.width = `${tableWidth}px`
-                let tableHeader = Array.from(this.$refs.table.children).filter(node => node.tagName.toLowerCase() === 'thead')[0]
-
-                Array.from(tableHeader.children[0].children).map((node, i) => {
-                    let {width: currentWidth} = node.getBoundingClientRect()
-                    table2.children[0].children[0].children[i].style.width = `${currentWidth}px`
-                })
+            // 修改 table2 的宽度
+            updateTableWidth() {
+                let {width} = this.table.getBoundingClientRect()
+                this.table2.style.width = `${width}px`
+            },
+            // 修改 table 的 marginTop
+            updateTableMarginTop() {
+                let {height}=this.table2.getBoundingClientRect()
+                this.table.style.marginTop=`${height}px`
             },
             changeSortRule(key) {
                 let copy = this.orderBy
@@ -181,39 +180,25 @@
             }
         },
         mounted() {
-            let table2 = this.$refs.table.cloneNode(true)
+            let table2 = this.$refs.table.cloneNode(false)
+            this.table=this.$refs.table
+            this.table2=table2
+
+            table2.appendChild(this.table.children[0])
             this.$refs.wrapper.appendChild(table2)
-
-            // 修改 table2 的宽度，否则接下来 th 的宽度是无法设置成功的
-            let {width: tableWidth} = table2.getBoundingClientRect()
-            table2.style.width = `${tableWidth}px`
-
-            let tableHeader = Array.from(this.$refs.table.children).filter(node => node.tagName.toLowerCase() === 'thead')[0]
-            let tableHeader2
-
-            // 删除 table2 的 tbody
-            Array.from(table2.children).map(node => {
-                if (node.tagName.toLowerCase() !== 'thead') {
-                    node.remove()
-                } else {
-                    tableHeader2 = node
-                }
-            })
-
-            // 修改 table2 中每个 th 的宽度
-            Array.from(tableHeader.children[0].children).map((th, i) => {
-                const {width} = th.getBoundingClientRect()
-                tableHeader2.children[0].children[i].style.width = `${width}px`
-            })
-
             table2.classList.add('tableCopy')
+
+            this.updateTableMarginTop()
+            this.updateTableWidth()
+
             this.onWindowResize = () => {
-                this.updateWidth()
+                this.updateTableWidth()
             }
             window.addEventListener('resize', this.onWindowResize)
         },
         beforeDestroy() {
             window.removeEventListener('resize', this.onWindowResize)
+            this.table2.remove()
         }
     }
 </script>

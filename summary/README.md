@@ -1681,18 +1681,118 @@ columns: {
 * inselectedItemsIds
 > 根据 Id 查找 item 是否在 selectedItems 中，返回值为 boolean 类型
 
-
 #### beforeDestroy
-* 在 mounted 中注册事件
+* 在 mounted 中注册事件，创造元素
 ```
+table2 = this.$refs.table.cloneNode(true)
+this.table2=table2 // 便于销毁table2
+
 this.onWindowResize = () => {
     this.updateWidth()
 }
 window.addEventListener('resize', this.onWindowResize)
 ```
-* 在 beforeDestroy 中销毁注册的事件
+* 在 beforeDestroy 中销毁注册的事件，创建的元素（防止内存泄漏）
 ```
 beforeDestroy() {
     window.removeEventListener('resize', this.onWindowResize)
 }
+this.table2.remove()
+```
+
+* table 删除 tbody ,thead 宽度也会随之改变
+
+#### DOM操作
+* 获取元素 left,top,width,height
+```
+let {left,top,width,height}=el.getBoundingClientRect()
+```
+* appendChild()
+> 如果被插入的节点已经存在于当前文档的文档树中,则那个节点会首先从原先的位置移除,然后再插入到新的位置.
+* cloneNode()
+```
+// 只复制最表层节点，不复制子节点
+let copy=el.cloneNode(false)
+
+// 复制以el为根节点的整棵DOM树
+let copy=el.cloneNode(true)
+```
+let table2=this.$refs.table.cloneNode(true)
+this.$refs.wrapper.appendChild(table2)
+* 根据a的宽度修改b的宽度
+```
+let {width}=a.getBoundingClientRect()
+b.style.width=`${width}px`
+```
+* 获取 table 的 thead 子节点
+```
+let tableHeader=Array.from(table.children).filter(node=>node.tagName.toLowerCase()==='thead')[0]
+```
+* 删除 table 的 tbody
+```
+let tableHeader2
+Array.from(table.children).map(node=>{
+    if(node.tagName.toLowerCase()!=='thead'){
+        node.remove()
+    } else{
+        tableHeader2=node
+    }
+})
+```
+* 为 table 添加class
+```
+table.classList.add('tableCopy')
+```
+
+
+#### getBoundingClientRect()
+> 返回四个值
+* left:元素相对于左上角视口的横向距离
+* top:元素相对于左上角视口的纵向距离
+* width:元素宽度
+* height:元素高度
+> 注意 left 和 top 不是相对于父元素左上角的距离，是相对于浏览器左上角的距离
+```
+<div class="parent">
+    <div class="box"></div>
+</div>
+```
+```
+*{
+    margin: 0;
+    padding:0;
+}
+.parent{
+    margin: 10px;
+}
+.box{
+    width: 100px;
+    height:200px;
+    background-color: red;
+}
+```
+```
+let box=document.getElementsByClassName('box')[0]
+let {left:left2}=box.getBoundingClientRect()
+console.log(left2);// 10px
+```
+
+#### 固定表头（遇到最难的技术问题）
+1. 尝试复制 table 得到 table2,再去掉 table2 的 tbody。采用定位方式让 thead 固定在 table 头部。
+> 问题:win10的chrome中，滚动条会占17px,这导致 table 整体左移了17px,使得 table2 的宽度与 table 不同
+2. 用js修改 table2 宽度，使之与 table 一致
+> 问题:table 去掉 tbody 后，thead 中的 th 宽度会发生变化
+3. 遍历 table2 的每一个 th,使之宽度与 table 的 th 一致
+> 问题:在浏览器宽度变化时，th 宽度将再次不一致（这是由于 table 有 tbody,而 table2 没有导致的）
+4. 监听 resize 事件,每次浏览器宽度变化时再次修改 table2 宽度和 th宽度
+```
+window.addEventListener('resize', this.updateWidth)
+```
+> 问题:复制后,原先的事件无法被触发了
+5. 换个思路:还是用定位的方式，把 table 的 head 放入空的 table2 中 
+> 问题:head 会把 table 的第一行挡住
+6. 将 table 的 marginTop 设置为 table2 的高度
+```
+let {height}=this.table2.getBoundingClientRect()
+this.table.style.marginTop=`${height}px`
 ```
