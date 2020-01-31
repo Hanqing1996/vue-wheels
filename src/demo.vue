@@ -6,8 +6,10 @@
                      :dataSource="dataSource"
                      :orderBy.sync="orderBy"
                      :loading.sync="loading"
-                     height="200px"
+                     height="300px"
                      bordered
+                     :expendKey="expendKey"
+
                      @update:orderBy="xxx">
             </g-table>
         </div>
@@ -22,6 +24,7 @@
         components: {GTable},
         data() {
             return {
+                expendKey:'description',
                 selectedItems:[],
                 loading:false,
                 columns: [
@@ -34,25 +37,25 @@
                   score:true
                 },
                 dataSource: [{
-                    id: 1, name: '乔斯达', score: 100,height:192
+                    id: 1, name: '乔斯达', score: 100,height:192,description:'OMG1'
                 }, {
-                    id: 2, name: '承太郎', score: 99,height:191
+                    id: 2, name: '承太郎', score: 99,height:191,description:'OMG2'
                 },{
-                    id: 3, name: '东方仗助', score: 89,height:193
+                    id: 3, name: '东方仗助', score: 89,height:193,description:'OMG3'
                 },{
-                    id: 4, name: '花京院', score: 79,height:184
+                    id: 4, name: '花京院', score: 79,height:184,description:'OMG4'
                 },{
-                    id: 5, name: '徐伦', score: 99,height:195
+                    id: 5, name: '徐伦', score: 99,height:195,description:'OMG5'
                 },{
-                    id: 6, name: '迪奥', score: 93,height:189
+                    id: 6, name: '迪奥', score: 93,height:189,description:'OMG6'
                 },{
-                    id: 7, name: '乔纳森', score: 91,height:178
+                    id: 7, name: '乔纳森', score: 91,height:178,description:'OMG7'
                 },{
-                    id: 8, name: '西撒', score: 69,height:188
+                    id: 8, name: '西撒', score: 69,height:188,description:'OMG8'
                 },{
-                    id: 9, name: '莉莎莉莎', score: 73,height:173
+                    id: 9, name: '莉莎莉莎', score: 73,height:173,description:'OMG9'
                 },{
-                    id: 10, name: '丝吉Q', score: 83,height:172
+                    id: 10, name: '丝吉Q', score: 83,height:172,description:'OMG10'
                 }],
 
             }

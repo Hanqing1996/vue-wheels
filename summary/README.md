@@ -1743,6 +1743,10 @@ Array.from(table.children).map(node=>{
 ```
 table.classList.add('tableCopy')
 ```
+* 获取 table 的 border-bottom 宽度（style.borderBottom 可写不可读）
+```
+getComputedStyle(this.table,null).getPropertyValue('border-bottom-width'));
+```
 
 
 #### getBoundingClientRect()
@@ -1796,3 +1800,33 @@ window.addEventListener('resize', this.updateWidth)
 let {height}=this.table2.getBoundingClientRect()
 this.table.style.marginTop=`${height}px`
 ```
+
+#### 两种数据
+* 用户数据
+> 存在数据库里的数据
+* UI数据
+> 表示某行是否展开之类的
+* 两种数据不能放在一起
+```
+[{  id: 1, name: '乔斯达', score: 100,height:192,description:'OMG1',ifRowOPen:true
+}, {
+    id: 2, name: '承太郎', score: 99,height:191,description:'OMG2',ifRowOPen:false
+}]
+```
+* 一般用户数据放在 props 里面，UI数据放在 data 里面（不绝对）
+
+
+#### "第一次点击按钮，展开某行；再次点击，折叠该行"实现思路
+* 特点：复选，可以同时展开多行，每行的展开/折叠状态彼此独立
+* 类似：第一次点击按钮，选中某行；再次点击，取消选中该行
+* 与 nav/collapse/tabs 实现的区别
+    * nav/collapse/tabs 的选中事件是单选的，切换式的（其中 collapse 支持 single 和 multiple 两种模式）。所以需要的 selected 不会是数组型
+    * nav/collapse/tabs 会分为父组件和 item 子组件。往往需要通过 $emit 和 sync 更新父组件的 selected,再传回各个 item 子组件
+* 实现思路：
+1. 在 data 里设置 expendedItems 数组（组件自身维护该数组，所里放在 data 里面），保存被选中的选项
+2. 展开/折叠的依据：当前项是否在 expendedItems 中
+3. 展开后，将该项存入 expendedItems 数组；折叠后，将该项移出 expendedItems 数组；
+
+
+
+

@@ -4,7 +4,8 @@
             <table ref="table" class="g-table" :class="{bordered,compacted,noStripe:!striped}">
                 <thead>
                 <tr>
-                    <th><input type="checkbox" @change="onChangeAll" ref="allCheck" :checked="allChecked"></th>
+                    <th style="width: 3%"></th>
+                    <th style="width: 3%;text-align: center" class="th-center"><input type="checkbox" @change="onChangeAll" ref="allCheck" :checked="allChecked"></th>
                     <th v-if="numberVisible">#</th>
                     <template v-for="column in columns">
                         <th :key="column.field">
@@ -25,16 +26,29 @@
                 <tbody>
 
                 <template v-for="item,index in dataSource">
-                    <tr :key="item.id">
-                        <td><input type="checkbox" @change="onChangeItem(item,$event)"
+                    <tr :key="item.id" class="data">
+                        <th style="width: 3%;text-align: center" class="th-center">
+                            <span class="rowIcon" :class="{open:inexpendedItemsIds(item.id)&&expendKey}">
+                                <icon name="right" @click.native="xxx(item)"></icon>
+                            </span>
+                        </th>
+
+                        <td style="width: 3%;text-align: center" class="th-center"><input type="checkbox" @change="onChangeItem(item,$event)"
                                    :checked="inselectedItemsIds(item.id)">
                         </td>
                         <td v-if="numberVisible">{{index+1}}</td>
-                        <template v-for="key in Object.keys(item).filter(k=>k!=='id')">
+                        <template v-for="key in Object.keys(item).filter(k=>k!=='id'&&k!=='description')">
                             <td :key="key">{{item[key]}}</td>
                         </template>
                     </tr>
+                    <tr v-if="inexpendedItemsIds(item.id)&&expendKey" :key="item[expendKey]">
+                        <td :colspan="1" class="space" style="border: none;width: 3%"></td>
+                        <td :colspan="columns.length" style="border: none">
+                            {{item[expendKey]}}
+                        </td>
+                    </tr>
                 </template>
+
                 </tbody>
             </table>
 
@@ -47,12 +61,15 @@
 
 <script>
     import Icon from '../button/icon'
-    import tabs from "../tabs/tabs";
 
     export default {
         name: "WheelsTable",
         components: {Icon},
         props: {
+            expendKey:{
+                type: [Boolean,String],
+                default:false
+            },
             // 包含表头的高度
             height: {
                 type: String
@@ -97,6 +114,11 @@
                 default: true
             }
         },
+        data(){
+          return {
+              expendedItems:[],
+          }
+        },
         computed: {
             allChecked() {
                 let dataIds = this.dataSource.map(item => item.id).sort()
@@ -131,6 +153,14 @@
             }
         },
         methods: {
+            xxx(item){
+                if(!this.inexpendedItemsIds(item.id)){
+                    this.expendedItems.push(item)
+                } else{
+                    let targetId=item.id
+                    this.expendedItems=this.expendedItems.filter(item=>item.id!==targetId)
+                }
+            },
             // 修改 table2 的宽度
             updateTableWidth() {
                 let {width} = this.table.getBoundingClientRect()
@@ -139,7 +169,9 @@
             // 修改 table 的 marginTop
             updateTableMarginTop() {
                 let {height}=this.table2.getBoundingClientRect()
-                this.table.style.marginTop=`${height}px`
+                let borderBottomWidth=Number(getComputedStyle(this.table,null).getPropertyValue('border-bottom-width').split('px')[0]);
+
+                this.table.style.marginTop=`${height-borderBottomWidth}px`
             },
             changeSortRule(key) {
                 let copy = this.orderBy
@@ -159,6 +191,9 @@
             inselectedItemsIds(id) {
                 return this.selectedItems.filter(i => i.id === id).length > 0
             },
+            inexpendedItemsIds(id) {
+                return this.expendedItems.filter(i => i.id === id).length > 0
+            },
             onChangeAll(e) {
                 let copy = []
                 if (e.target.checked) {
@@ -171,6 +206,8 @@
             onChangeItem(item, e) {
                 let targetId = item.id
                 let copy = JSON.parse(JSON.stringify(this.selectedItems))
+
+                // e.target.checked 变为 true 发生在 onChangeItem 执行之前
                 if (e.target.checked) {
                     copy.push(item)
                 } else {
@@ -242,13 +279,12 @@
         }
 
         tbody {
-            > tr {
+            > .data {
                 &:nth-child(odd) {
                     background-color: $white;
                 }
-
                 &:nth-child(even) {
-                    background-color: lighten($grey, 10%);
+                    background-color: lighten($grey,10%);
                 }
             }
         }
@@ -310,4 +346,16 @@
         top: 0;
         left: 0;
     }
+
+    .rowIcon {
+        display: inline-block;
+        vertical-align: middle;
+        transition: transform 250ms;
+
+        &.open {
+            transform: rotate(90deg);
+        }
+    }
+
+
 </style>
