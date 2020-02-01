@@ -14,38 +14,13 @@
             <p>
                 <strong>代码</strong>
             </p>
-            <div>
-                <div>
-                    <pre><code>{{codeStr}}</code></pre>
+            <div class="code-content" style="height: 0;">
+                <div class="code-content-height">
+                    <pre><code class="html">{{codeStr}}</code></pre>
                 </div>
             </div>
-        </div>
-
-        <h2>按钮组</h2>
-        <p>
-            <strong>预览</strong>
-        </p>
-        <div>
-            <div>
-                <g-button-group>
-                    <g-button icon="left">
-                        上一页
-                    </g-button>
-                    <g-button>
-                        更多
-                    </g-button>
-                    <g-button icon="right">
-                        下一页
-                    </g-button>
-                </g-button-group>
-            </div>
-            <div>
-                <p>
-                    <strong>代码</strong>
-                </p>
-                <div>
-                    <pre><code class="html">{{codeStr2}}</code></pre>
-                </div>
+            <div class="lock-code" @click="showCode(0)" ref="xxx">
+                <g-icon class="icon-down" :name="isShow[0] === false ? 'down' : 'up'"></g-icon>
             </div>
         </div>
     </div>
@@ -55,8 +30,11 @@
     import GButtonGroup from '../../../src/components/button/button-group'
     import GIcon from '../../../src/components/button/icon'
 
+    import mixin from '../mixin'
+
     export default {
         name: "button-demo",
+        mixins: [mixin],
         components: {
             GButton,
             GIcon,
@@ -69,21 +47,7 @@
 <g-button icon="settings">默认按钮</g-button>
 <g-button :loading="true">默认按钮</g-button>
 <g-button disabled>默认按钮</g-button>
-        `,
-
-                codeStr2: `
-<g-button-group>
-    <g-button icon="left">
-    上一页
-    </g-button>
-    <g-button>
-    更多
-    </g-button>
-    <g-button icon="right">
-    下一页
-    </g-button>
-</g-button-group>
-          `
+        `.replace(/^ {8}/gm, '').trim(),
             }
         }
     }

@@ -5,7 +5,7 @@
             <strong>预览</strong>
         </p>
         <div>
-            <div>
+            <div style="margin-bottom: 200px">
                 <g-cascader :source="source" :selected="selected" 　@update:selected="updateSelected($event)"
                             　@update:closeSelected="selected=[]">
                 </g-cascader>
@@ -14,8 +14,15 @@
                 <p>
                     <strong>代码</strong>
                 </p>
-                <div>
-                    <pre><code>{{codeStr}}</code></pre>
+
+                <div class="code-content" style="height: 0;">
+                    <div class="code-content-height">
+                        <pre><code class="html">{{codeStr}}</code></pre>
+                    </div>
+                </div>
+                <div class="lock-code" @click="showCode(0)" ref="xxx">
+                    <g-icon class="icon-down" :name="isShow[0] === false ? 'down' : 'up'"></g-icon>
+                    <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
                 </div>
             </div>
         </div>
@@ -25,10 +32,14 @@
 <script>
     import GCascader from '../../../src/components/cascader/cascader'
     import db from '../../../tests/fixture/db'
+    import GIcon from '../../../src/components/button/icon'
+
+    import mixin from '../mixin'
 
     export default {
         name: "toast-demo",
-        components: {GCascader},
+        mixins: [mixin],
+        components: {GCascader,GIcon},
         data() {
             return {
                 selected: [],
@@ -37,7 +48,7 @@
 <g-cascader :source="source" :selected="selected" 　@update:selected="updateSelected($event)"
             　@update:closeSelected="selected=[]">
 </g-cascader>
-`,
+`.replace(/^ {8}/gm, '').trim(),
             }
         },
         methods: {

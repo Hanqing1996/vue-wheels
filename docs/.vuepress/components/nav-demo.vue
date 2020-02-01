@@ -32,8 +32,14 @@
                 <p>
                     <strong>代码</strong>
                 </p>
-                <div>
-                    <pre><code>{{codeStr}}</code></pre>
+                <div class="code-content" style="height: 0;">
+                    <div class="code-content-height">
+                        <pre><code class="html">{{codeStr}}</code></pre>
+                    </div>
+                </div>
+                <div class="lock-code" @click="showCode(0)" ref="xxx">
+                    <g-icon class="icon-down" :name="isShow[0] === false ? 'down' : 'up'"></g-icon>
+                    <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
                 </div>
             </div>
         </div>
@@ -70,8 +76,14 @@
                 <p>
                     <strong>代码</strong>
                 </p>
-                <div>
-                    <pre><code>{{codeStr2}}</code></pre>
+                <div class="code-content" style="height: 0;">
+                    <div class="code-content-height">
+                        <pre><code class="html">{{codeStr2}}</code></pre>
+                    </div>
+                </div>
+                <div class="lock-code" @click="showCode(1)" ref="xxx">
+                    <g-icon class="icon-down" :name="isShow[1] === false ? 'down' : 'up'"></g-icon>
+                    <span class="lock-code-word">{{isShow[1] === false ? '显示代码' : '隐藏代码'}}</span>
                 </div>
             </div>
         </div>
@@ -81,10 +93,14 @@
     import GNav from '../../../src/components/nav/nav'
     import GNavItem from '../../../src/components/nav/nav-item'
     import GSubNav from '../../../src/components/nav/sub-nav'
+    import GIcon from '../../../src/components/button/icon'
+
+    import mixin from '../mixin'
 
     export default {
         name: "nav-demo",
-        components: {GNav,GNavItem,GSubNav},
+        mixins: [mixin],
+        components: {GNav,GNavItem,GSubNav,GIcon},
         data() {
             return {
                 selected1: 'linkStyle',
@@ -111,7 +127,7 @@
     </g-sub-nav>
     <g-nav-item name="linkStyle">联系方式</g-nav-item>
 </g-nav>
-`,
+`.replace(/^ {8}/gm, '').trim(),
                 codeStr2:`
 <g-nav :selected.sync=selected2 vertical style="width: 200px">
     <g-nav-item name="introduction"><a href="https://baidu.com">平台介绍</a></g-nav-item>
@@ -133,7 +149,7 @@
         </g-sub-nav>
     </g-sub-nav>
     <g-nav-item name="linkStyle">联系方式</g-nav-item>
-</g-nav>`
+</g-nav>`.replace(/^ {8}/gm, '').trim(),
             }
         },
     }

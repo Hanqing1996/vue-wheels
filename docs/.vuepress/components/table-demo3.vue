@@ -1,5 +1,9 @@
 <template>
-    <div>
+    <div class="demo">
+        <h2>行展开</h2>
+        <p>
+            <strong>预览</strong>
+        </p>
         <div>
             <g-table :selectedItems.sync="selectedItems"
                      :columns="columns"
@@ -8,25 +12,37 @@
                      :loading.sync="loading"
                      height="350px"
                      bordered
-
                      :expendKey="expendKey"
                      @update:orderBy="ajaxToRearEnd">
-
                 <template slot="content" slot-scope="{xxx}">
                     <g-button style="margin-right: 10px">编辑</g-button>
                     <g-button>查看</g-button>
                 </template>
             </g-table>
         </div>
+        <div>
+            <p>
+                <strong>代码</strong>
+            </p>
+            <div class="code-content" style="height: 0;">
+                <div class="code-content-height">
+                    <pre><code class="html">{{codeStr3}}</code></pre>
+                </div>
+            </div>
+            <div class="lock-code" @click="showCode(2)" ref="xxx">
+                <g-icon class="icon-down" :name="isShow[2] === false ? 'down' : 'up'"></g-icon>
+                <span class="lock-code-word">{{isShow[2] === false ? '显示代码' : '隐藏代码'}}</span>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-    import GTable from "./components/table/table";
-    import GButton from "./components/button/button";
+    import GTable from "../../../src/components/table/table";
+    import GButton from "../../../src/components/button/button";
 
     export default {
-        name: "demo",
+        name: "table-demo3",
         components: {GTable,GButton},
         data() {
             return {
@@ -39,8 +55,8 @@
                     {text: '身高', field: 'height'},
                 ],
                 orderBy:{
-                  name:'asc',
-                  score:true
+                    name:'asc',
+                    score:true
                 },
                 dataSource: [{
                     id: 1, name: '乔斯达', score: 100,height:192,description:'OMG1'
@@ -63,6 +79,21 @@
                 },{
                     id: 10, name: '丝吉Q', score: 83,height:172,description:'OMG10'
                 }],
+                codeStr3: `
+<g-table :selectedItems.sync="selectedItems"
+         :columns="columns"
+         :dataSource="dataSource"
+         :orderBy.sync="orderBy"
+         :loading.sync="loading"
+         height="350px"
+        :expendKey="expendKey"
+         @update:orderBy="ajaxToRearEnd">
+    <template slot="content" slot-scope="{xxx}">
+        <g-button style="margin-right: 10px">编辑</g-button>
+        <g-button>查看</g-button>
+    </template>
+</g-table>
+`.replace(/^ {8}/gm, '').trim()
 
             }
         },

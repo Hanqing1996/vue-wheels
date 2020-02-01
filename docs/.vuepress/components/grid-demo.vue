@@ -58,8 +58,14 @@
                 <p>
                     <strong>代码</strong>
                 </p>
-                <div>
-                    <pre><code>{{codeStr}}</code></pre>
+                <div class="code-content" style="height: 0;">
+                    <div class="code-content-height">
+                        <pre><code class="html">{{codeStr}}</code></pre>
+                    </div>
+                </div>
+                <div class="lock-code" @click="showCode(0)" ref="xxx">
+                    <g-icon class="icon-down" :name="isShow[0] === false ? 'down' : 'up'"></g-icon>
+                    <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
                 </div>
             </div>
         </div>
@@ -95,11 +101,14 @@
                 </g-row>
             </div>
             <div>
-                <p>
-                    <strong>代码</strong>
-                </p>
-                <div>
-                    <pre><code>{{codeStr2}}</code></pre>
+                <div class="code-content" style="height: 0;">
+                    <div class="code-content-height">
+                        <pre><code class="html">{{codeStr2}}</code></pre>
+                    </div>
+                </div>
+                <div class="lock-code" @click="showCode(1)" ref="xxx">
+                    <g-icon class="icon-down" :name="isShow[1] === false ? 'down' : 'up'"></g-icon>
+                    <span class="lock-code-word">{{isShow[1] === false ? '显示代码' : '隐藏代码'}}</span>
                 </div>
             </div>
         </div>
@@ -141,8 +150,14 @@
             <p>
                 <strong>代码</strong>
             </p>
-            <div>
-                <pre><code>{{codeStr3}}</code></pre>
+            <div class="code-content" style="height: 0;">
+                <div class="code-content-height">
+                    <pre><code class="html">{{codeStr3}}</code></pre>
+                </div>
+            </div>
+            <div class="lock-code" @click="showCode(2)" ref="xxx">
+                <g-icon class="icon-down" :name="isShow[2] === false ? 'down' : 'up'"></g-icon>
+                <span class="lock-code-word">{{isShow[2] === false ? '显示代码' : '隐藏代码'}}</span>
             </div>
         </div>
         <h2>设置offset</h2>
@@ -176,8 +191,14 @@
             <p>
                 <strong>代码</strong>
             </p>
-            <div>
-                <pre><code>{{codeStr4}}</code></pre>
+            <div class="code-content" style="height: 0;">
+                <div class="code-content-height">
+                    <pre><code class="html">{{codeStr4}}</code></pre>
+                </div>
+            </div>
+            <div class="lock-code" @click="showCode(3)" ref="xxx">
+                <g-icon class="icon-down" :name="isShow[3] === false ? 'down' : 'up'"></g-icon>
+                <span class="lock-code-word">{{isShow[3] === false ? '显示代码' : '隐藏代码'}}</span>
             </div>
         </div>
     </div>
@@ -186,10 +207,14 @@
 <script>
     import GCol from '../../../src/components/grid/col'
     import GRow from '../../../src/components/grid/row'
+    import GIcon from '../../../src/components/button/icon'
+
+    import mixin from '../mixin'
 
     export default {
         name: "grid-demo",
-        components: {GCol, GRow},
+        mixins: [mixin],
+        components: {GCol, GRow,GIcon},
         data() {
             return {
                 codeStr: `
@@ -240,7 +265,7 @@
         <div>4</div>
     </g-col>
 </g-row>
-        `,
+        `.replace(/^ {8}/gm, '').trim(),
                 codeStr2: `
 <g-row gutter="6">
     <g-col span="11">
@@ -264,7 +289,7 @@
         <div></div>
     </g-col>
 </g-row>
-        `,
+        `.replace(/^ {8}/gm, '').trim(),
                 codeStr3: `
 <g-row align="left">
     <g-col span="8">
@@ -290,7 +315,7 @@
     <g-col span="8">
         <div></div>
     </g-col>
-</g-row>`,
+</g-row>`.replace(/^ {8}/gm, '').trim(),
                 codeStr4:`
 <g-row>
     <g-col span="8" offset="8">
@@ -311,7 +336,7 @@
         <div>6</div>
     </g-col>
 </g-row>
-                `
+                `.replace(/^ {8}/gm, '').trim(),
             }
         }
     }

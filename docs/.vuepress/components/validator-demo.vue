@@ -22,8 +22,14 @@
                 <p>
                     <strong>代码</strong>
                 </p>
-                <div>
-                    <pre><code>{{codeStr}}</code></pre>
+                <div class="code-content" style="height: 0;">
+                    <div class="code-content-height">
+                        <pre><code class="html">{{codeStr}}</code></pre>
+                    </div>
+                </div>
+                <div class="lock-code" @click="showCode(0)" ref="xxx">
+                    <g-icon class="icon-down" :name="isShow[0] === false ? 'down' : 'up'"></g-icon>
+                    <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
                 </div>
             </div>
         </div>
@@ -33,6 +39,9 @@
 <script>
     import GInput from "../../../src/components/input/input";
     import GButton from "../../../src/components/button/button";
+    import GIcon from '../../../src/components/button/icon'
+
+    import mixin from '../mixin'
 
     import plugin from '../../../src/validatorPlugin'
     import Vue from 'vue'
@@ -41,7 +50,8 @@
 
     export default {
         name: "demo",
-        components: {GInput, GButton},
+        mixins: [mixin],
+        components: {GInput, GButton,GIcon},
         data() {
             return {
                 emailValue: '',
@@ -65,7 +75,7 @@ onClick() {
         data: this.InputData, rules: this.rules
     })
 }
-                `
+                `.replace(/^ {8}/gm, '').trim(),
             }
         },
         computed: {

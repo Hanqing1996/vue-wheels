@@ -1104,6 +1104,7 @@ beEmited事件是g-button内部的元素点击事件通过emit触发的
     vm.$slots.default=['这是<strong style="color: blue">toast</strong>信息']
     ```
 * slot-scope
+> 传递属性
 ```
 <template slot="content" slot-scope="{close}">
     <div>give you anything　<g-button  v-on:click.native="close">close</g-button></div>
@@ -1118,8 +1119,20 @@ methods: {
         this.visible=false// 关闭content
     }
 }
-
 ```
+> 传递对象
+```
+<td>
+    <slot name="content" :xxx="item"></slot>
+</td>
+```
+```
+<template slot="content" slot-scope="{xxx}">
+    {{xxx.name}}
+    <g-button style="margin-right: 10px">编辑</g-button>
+    <g-button>查看</g-button>
+</template>
+```            
 * slots外部一般用一个标签包裹起来
 ```
 <template>

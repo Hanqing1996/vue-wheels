@@ -19,8 +19,14 @@
                 <p>
                     <strong>代码</strong>
                 </p>
-                <div>
-                    <pre><code>{{codeStr}}</code></pre>
+                <div class="code-content" style="height: 0;">
+                    <div class="code-content-height">
+                        <pre><code class="html">{{codeStr}}</code></pre>
+                    </div>
+                </div>
+                <div class="lock-code" @click="showCode(0)" ref="xxx">
+                    <g-icon class="icon-down" :name="isShow[0] === false ? 'down' : 'up'"></g-icon>
+                    <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
                 </div>
             </div>
         </div>
@@ -32,15 +38,20 @@
     import GFooter from '../../../src/components/layout/footer'
     import GContent from '../../../src/components/layout/content'
     import GSider from '../../../src/components/layout/sider'
+    import GIcon from '../../../src/components/button/icon'
+
+    import mixin from '../mixin'
 
     export default {
         name: "layout-demo",
+        mixins: [mixin],
         components: {
             GLayout,
             GHeader,
             GFooter,
             GContent,
-            GSider
+            GSider,
+            GIcon
         },
         data() {
             return {
@@ -53,7 +64,7 @@
         <g-footer class="demo">footer</g-footer>
     </g-layout>
 </g-layout>
-        `,
+        `.replace(/^ {8}/gm, '').trim(),
             }
         }
     }

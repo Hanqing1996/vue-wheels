@@ -1,14 +1,14 @@
 <template>
     <div class="tableWrapper" ref="wrapper">
-        <div :style="{height,overflow:'auto'}">
+        <div :style="{height,overflow:'auto',margin:0,padding:0}">
             <table ref="table" class="g-table" :class="{bordered,compacted,noStripe:!striped}">
                 <thead>
                 <tr>
-                    <th style="width: 3%"></th>
-                    <th style="width: 3%;text-align: center" class="th-center"><input type="checkbox" @change="onChangeAll" ref="allCheck" :checked="allChecked"></th>
-                    <th v-if="numberVisible">#</th>
+                    <th v-if="expendKey" style="width: 30px;text-align: center"></th>
+                    <th  v-if="checkable" style="width: 30px;text-align: center"><input type="checkbox" @change="onChangeAll" ref="allCheck" :checked="allChecked"></th>
+                    <th v-if="numberVisible" style="width: 30px;text-align: center">#</th>
                     <template v-for="column in columns">
-                        <th :key="column.field">
+                        <th :key="column.field" >
                             <div class="wrapper">
                                 {{column.text}}
                                 <span class="iconWrapper" v-if="column.field in orderBy"
@@ -21,29 +21,33 @@
                             </div>
                         </th>
                     </template>
+                    <th style="width: 200px">操作</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <template v-for="item,index in dataSource">
-                    <tr :key="item.id" class="data">
-                        <th style="width: 3%;text-align: center" class="th-center">
+                    <tr :key="item.id" >
+                        <th v-if="expendKey" style="width: 30px;text-align: center" >
                             <span class="rowIcon" :class="{open:inexpendedItemsIds(item.id)&&expendKey}">
                                 <icon name="right" @click.native="xxx(item)"></icon>
                             </span>
                         </th>
 
-                        <td style="width: 3%;text-align: center" class="th-center"><input type="checkbox" @change="onChangeItem(item,$event)"
+                        <td v-if="checkable" style="width: 30px;text-align: center" ><input type="checkbox" @change="onChangeItem(item,$event)"
                                    :checked="inselectedItemsIds(item.id)">
                         </td>
-                        <td v-if="numberVisible">{{index+1}}</td>
+                        <td v-if="numberVisible" style="width: 30px;text-align: center">{{index+1}}</td>
                         <template v-for="key in Object.keys(item).filter(k=>k!=='id'&&k!=='description')">
-                            <td :key="key">{{item[key]}}</td>
+                            <td :key="key" >{{item[key]}}</td>
                         </template>
+                        <td style="width: 200px">
+                            <slot name="content" :xxx="item"></slot>
+                        </td>
                     </tr>
                     <tr v-if="inexpendedItemsIds(item.id)&&expendKey" :key="item[expendKey]">
-                        <td :colspan="1" class="space" style="border: none;width: 3%"></td>
-                        <td :colspan="columns.length" style="border: none">
+                        <td :colspan="1" style="width: 30px;text-align: center"></td>
+                        <td :colspan="columns.length+2">
                             {{item[expendKey]}}
                         </td>
                     </tr>
@@ -53,7 +57,7 @@
             </table>
 
         </div>
-        <div :class="{loading}" v-if="loading">
+        <div :class="{loading}" v-if="loading" style="width: 650px">
             <icon name="loading"></icon>
         </div>
     </div>
@@ -66,6 +70,10 @@
         name: "WheelsTable",
         components: {Icon},
         props: {
+            checkable:{
+                type:Boolean,
+                default:false
+            },
             expendKey:{
                 type: [Boolean,String],
                 default:false
@@ -221,6 +229,9 @@
             this.table=this.$refs.table
             this.table2=table2
 
+
+            this.table2.style.border='none'
+
             table2.appendChild(this.table.children[0])
             this.$refs.wrapper.appendChild(table2)
             table2.classList.add('tableCopy')
@@ -243,6 +254,11 @@
 <style lang="scss" scoped>
     @import "src/var";
 
+    *{
+        margin:0;
+        padding:0;
+    }
+
     $grey: darken($grey, 10%); /*加深10%*/
 
     .tableWrapper {
@@ -250,7 +266,6 @@
     }
 
     .g-table {
-        width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
         border-bottom: 1px solid $grey;
@@ -272,7 +287,7 @@
         }
 
         th, td {
-            width: 200px;
+            width: 90px;
             border-bottom: 1px solid $grey;
             text-align: left;
             padding: 8px;
@@ -326,7 +341,6 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
         height: 100%;
         display: flex;
         align-items: center;
@@ -343,7 +357,7 @@
     .tableCopy {
         background-color: white;
         position: absolute;
-        top: 0;
+        top: 0px;
         left: 0;
     }
 
@@ -356,6 +370,4 @@
             transform: rotate(90deg);
         }
     }
-
-
 </style>
