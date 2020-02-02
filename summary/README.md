@@ -1272,7 +1272,6 @@ methods:{
     }
 }
 ```
-```
 * 如果参数有且只有event，$event可以省略
 ```
 <input type="checkbox" @change="onChangeItem>
@@ -1793,6 +1792,13 @@ let box=document.getElementsByClassName('box')[0]
 let {left:left2}=box.getBoundingClientRect()
 console.log(left2);// 10px
 ```
+> getBoundingClientRect()能返回的top表示的是到窗口顶部的距离，不是到文档顶部的距离
+```
+// 求 el 到文档顶部的距离
+let {top}=el.getBoundingClientRect()
+let height=window.scrollY+top
+```
+> top 可能是负值，表示元素在当前文档顶部之上
 
 #### 固定表头（遇到最难的技术问题）
 1. 尝试复制 table 得到 table2,再去掉 table2 的 tbody。采用定位方式让 thead 固定在 table 头部。
@@ -1814,6 +1820,37 @@ let {height}=this.table2.getBoundingClientRect()
 this.table.style.marginTop=`${height}px`
 ```
 
+
+
+#### sticky
+* 需求：向下滑动滚动条，粘滞内容所在元素与窗口顶部间距离缩小到 distance 时不再缩小。然后向上滑动滚动条，粘滞内容所在元素与窗口顶部间距离逐渐增大到初始距离 initialTp（distance 必须小于等于 initialTop）
+1. 尝试监听 scroll 事件，动态获取粘滞内容所在元素到窗口顶部的距离 top。如果 top 减小到某个值，将元素样式设置为固定定位(position:fiexed,top:0)
+> 问题：这种做法不能实现后面那个条件（然后向上滑动滚动条，粘滞内容所在元素与窗口顶部间距离逐渐增大到初始距离）
+2. 一开始计算好 triggerDistance=initialTop-distance。在元素已处于粘滞状态下，如果scrolY减小到triggerDistance，那么取消元素的固定定位样式，这样子元素就会慢慢滚动到原来的 initialTop 距离了
+>  问题：边缘情况,distance=0,即要求元素能置顶，此时窗口能容纳 n 行,文档共有n+1行（包括粘滞元素），浏览器有滚动条，却无法滚动。
+![](./images/sticky.gif)
+3. 这是由于一旦滑动滚动条，sticky=true，粘滞效果就立马生效，元素立即变为固定定位状态。而 position:fixed 是脱离文档流的，此时文档中只有n行，与窗口容量一致，不需要滚动条。而因为没有滚动条了，window.scrollY被重置为0。那么就立即满足条件window.scrollY < triggerDistance,于是this.sticky = false,粘滞效果失效，文档回归文档流，。此时文档中有n+1行，超过窗口容量，于是需要滚动条，再次重复如上过程，构成死循环。
+```
+mounted() {
+    // 初始 top
+    let initialTop=this.top()
+    let triggerDistance=initialTop-0
+
+    window.addEventListener('scroll', () => {
+        if(this.top()<0){                                   
+            this.sticky=true
+            this.$refs.sticky.style.top='0px'
+        } else if(this.top()==0){
+            if (this.sticky && window.scrollY < triggerDistance) {
+                this.sticky = false
+            }
+        }
+    })
+}
+```
+解决方法很简单，为脱离文档流的元素添加一个父元素，设置父元素的高度为粘滞内容所在元素高度，这样子文档中就始终有n+1行了
+
+
 #### 两种数据
 * 用户数据
 > 存在数据库里的数据
@@ -1828,7 +1865,6 @@ this.table.style.marginTop=`${height}px`
 ```
 * 一般用户数据放在 props 里面，UI数据放在 data 里面（不绝对）
 
-
 #### "第一次点击按钮，展开某行；再次点击，折叠该行"实现思路
 * 特点：复选，可以同时展开多行，每行的展开/折叠状态彼此独立
 * 类似：第一次点击按钮，选中某行；再次点击，取消选中该行
@@ -1841,5 +1877,8 @@ this.table.style.marginTop=`${height}px`
 3. 展开后，将该项存入 expendedItems 数组；折叠后，将该项移出 expendedItems 数组；
 
 
-
+#### window 事件
+* resize:改变浏览器宽度
+* scroll:滚动
+    * window.scrollY
 
