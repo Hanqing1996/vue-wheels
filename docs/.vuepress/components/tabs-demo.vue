@@ -35,8 +35,14 @@
                 <p>
                     <strong>代码</strong>
                 </p>
-                <div>
-                    <pre><code>{{codeStr}}</code></pre>
+                <div class="code-content" style="height: 0;">
+                    <div class="code-content-height">
+                        <pre><code class="html">{{codeStr}}</code></pre>
+                    </div>
+                </div>
+                <div class="lock-code" @click="showCode(0)" ref="xxx">
+                    <g-icon class="icon-down" :name="isShow[0] === false ? 'down' : 'up'"></g-icon>
+                    <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
                 </div>
             </div>
         </div>
@@ -52,8 +58,11 @@
     import GButton from '../../../src/components/button/button'
     import GIcon from '../../../src/components/button/icon'
 
+    import mixin from '../mixin'
+
     export default {
         name: "tabs-demo",
+        mixins: [mixin],
         components: {GTabs, GTabsHead, GTabsBody, GTabsItem, GTabsPane,GButton, GIcon},
         data() {
             return {
@@ -83,7 +92,7 @@
         <g-tabs-pane name="sports">体育新闻</g-tabs-pane>
     </g-tabs-body>
 </g-tabs>
-`,
+`.replace(/^ {8}/gm, '').trim()
             }
         },
         methods: {

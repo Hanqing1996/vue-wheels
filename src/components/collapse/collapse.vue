@@ -50,7 +50,7 @@
 
             // 把父组件的 single 传递给子组件
             this.$children.forEach((vm) => {
-                vm.gutter = this.gutter
+                vm.single = this.single
             })
         }
     }

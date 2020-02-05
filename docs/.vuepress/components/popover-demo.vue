@@ -19,8 +19,14 @@
                 <p>
                     <strong>代码</strong>
                 </p>
-                <div>
-                    <pre><code>{{codeStr}}</code></pre>
+                <div class="code-content" style="height: 0;">
+                    <div class="code-content-height">
+                        <pre><code class="html">{{codeStr}}</code></pre>
+                    </div>
+                </div>
+                <div class="lock-code" @click="showCode(0)" ref="xxx">
+                    <g-icon class="icon-down" :name="isShow[0] === false ? 'down' : 'up'"></g-icon>
+                    <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
                 </div>
             </div>
         </div>
@@ -41,8 +47,14 @@
                 <p>
                     <strong>代码</strong>
                 </p>
-                <div>
-                    <pre><code>{{codeStr}}</code></pre>
+                <div class="code-content" style="height: 0;">
+                    <div class="code-content-height">
+                        <pre><code class="html">{{codeStr2}}</code></pre>
+                    </div>
+                </div>
+                <div class="lock-code" @click="showCode(1)" ref="xxx">
+                    <g-icon class="icon-down" :name="isShow[1] === false ? 'down' : 'up'"></g-icon>
+                    <span class="lock-code-word">{{isShow[1] === false ? '显示代码' : '隐藏代码'}}</span>
                 </div>
             </div>
         </div>
@@ -51,10 +63,14 @@
 <script>
     import GPopover from '../../../src/components/popover/popover'
     import GButton from '../../../src/components/button/button'
+    import GIcon from '../../../src/components/button/icon'
+
+    import mixin from '../mixin'
 
     export default {
         name: "popover-demo",
-        components: {GPopover, GButton},
+        mixins: [mixin],
+        components: {GPopover, GButton,GIcon},
         data() {
             return {
                 codeStr: `
@@ -66,7 +82,7 @@
     </template>
     <g-button style="margin-top: 70px">点我获得anything</g-button>
 </g-popover>
-`,
+`.replace(/^ {8}/gm, '').trim(),
                 codeStr2:`
 <g-popover position="top" 　trigger="hover">
     <template slot="content">
@@ -74,7 +90,7 @@
     </template>
     <g-button  style="margin-top: 30px">点我获得something</g-button>
 </g-popover>
-                `
+`.replace(/^ {8}/gm, '').trim()
             }
         }
     }

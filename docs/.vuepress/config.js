@@ -28,12 +28,13 @@ module.exports = {
                     '/components/pager',
                     '/components/validator',
                     '/components/table',
+                    '/components/sticky',
                 ]
             },
             {
                 title: '总结',
                 collapsable: false,
-                children:['/组件需求分析/','/API设计原则/','/单元测试总结/','/相关插件/','/相关指令/']
+                children:['/组件需求分析/','/API设计原则/','/单元测试总结/','/vue-summary/']
             }
         ]
     },

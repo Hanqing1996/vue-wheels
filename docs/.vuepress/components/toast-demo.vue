@@ -13,8 +13,14 @@
                 <p>
                     <strong>代码</strong>
                 </p>
-                <div>
-                    <pre><code>{{codeStr}}</code></pre>
+                <div class="code-content" style="height: 0;">
+                    <div class="code-content-height">
+                        <pre><code class="html">{{codeStr}}</code></pre>
+                    </div>
+                </div>
+                <div class="lock-code" @click="showCode(0)" ref="xxx">
+                    <g-icon class="icon-down" :name="isShow[0] === false ? 'down' : 'up'"></g-icon>
+                    <span class="lock-code-word">{{isShow[0] === false ? '显示代码' : '隐藏代码'}}</span>
                 </div>
             </div>
         </div>
@@ -23,19 +29,21 @@
 <script>
     import GButton from '../../../src/components/button/button'
     import plugin from '../../../src/toastPlugin'
+    import mixin from '../mixin'
     import Vue from 'vue'
 
     Vue.use(plugin)
 
     export default {
         name: "toast-demo",
+        mixins: [mixin],
         components: {GButton},
         data() {
             return {
                 codeStr: `
 <div id="toastBlock"></div>
 <g-button v-on:click.native="showToast">showToast</g-button>
-`,
+`.replace(/^ {8}/gm, '').trim()
             }
         },
         methods: {

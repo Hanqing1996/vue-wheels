@@ -323,40 +323,6 @@ temp
 
 
 
-#### vue 生命周期
-[测试](https://www.jianshu.com/p/b88572d8f80a)
-![vue 生命周期图示](https://upload-images.jianshu.io/upload_images/11892234-64ee73fa10e1b20a.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)
-1. create:vue实例被创建；
-    * beforeCreate：
-    * created：
-2. mount:vue实例被挂载到真实的DOM节点；
-    * beforeMount：
-    * mounted：
-    * 每刷新一次页面，就重新 create 和 mount 一次
-    * css,innerHTML这些东西只有在实例被挂载之后才能看到，之前是undefined
-3. update:当vue实例里面的data数据变化时，触发组件的重新渲染
-    * beforeUpdate：
-    * updated：
-4. destroy:vue实例被销毁
-    * beforeDestroy：
-    * destroyed：
-
-#### created 和 mounted 的区别
-* created 类似于
-```
-var div=document.createElement('div')
-```
-* mounted 类似于
-```
-document.body.appendChild(div)
-```
-* 父子 created 和 mounted 顺序
-```
-father.created
-children.created
-children.mounted
-father.mounted
-```
 
 #### scss语法
 * &
@@ -580,10 +546,6 @@ Vue.component('child', {
 </div>
 ```
 
-#### 顺序
-* $slot 要在　$mount() 前面
-* $emit() 要在　$destory()前面
-
 #### Vue 实例
 ```
 let vm=new Vue({
@@ -722,20 +684,6 @@ console.log(vm.$el.querySelector('.toast')) // null
 console.log(vm.$el.querySelector('.close')) // <span>xxxx<span>
 ```
 
-#### [.sync修饰符](https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6)
-对于
-```
-this.$emit('update:title', newTitle)
-```
-下面两种写法等价
-```
-<text-document :title="doc.title" @update:title="doc.title = $event"></text-document>
-```
-```
-<text-document :title.sync="doc.title"></text-document>
-```
-也就是说sync的作用是让 title="doc.title" 异步执行多次（响应式）
-
 #### selected
 * 使用tabs组件，在index.html中使用了:selected.sync=selectedTab
 * 使用slides组件，在demo.vue中使用了:selected.sync=sliderSelected
@@ -754,46 +702,6 @@ this.$emit('update:title', newTitle)
 ```
 只有在demo.vue,index.html里可以用sync
 
-
-
-#### vm.$on() vm.$emit()
-* vm.$on('click1',callback):为实例设置监听事件click1
-```
-vm.$on('click1',callback)
-等价于在index.html中这么写
-<g-button @click1="callback"><g-button/>
-```
-* vm.$emit('click1'):触发实例的click1事件
-```
-// 组件g-button内部
-<button @click="$emit('click1')"></button>
-则
-vm.$el.querySelector('button').click()会触发
-```
-
-#### 父子组件通信
-* 父组件会通过 props 向下传数据给子组件
-* 当子组件有事情要告诉父组件时会通过 $emit 事件告诉父组件
-
-#### vue的props和data有什么区别?
-```
-function fn(prop1,prop2){
-    var data1,data2
-}
-```
-不允许的行为
-```
-function fn(prop1,prop2){
-    prop1++
-}
-```
-* props:需要用户(前端开发者)传值,props不允许组件自己修改(要修改,必须先$emit到父组件,再由父组件传入子组件)
-    * 事实上如果修改了,vue会给出警告
-    * 有的值（比如col.gutter,slides-item.visible）属于props,但我们无法直接，在父组件的mounted里进行传值会收到警告,于是我们不得不用data
-* data:不需要用户(前端开发者)传值,data由组件自己修改更新(父组件少传一个参数,起到减少耦合的作用)
-    * sider.vue 的　visible
-    * tabs-item.vue 的　active
-* 但是有的时候传不了 props 只能用 data,比如slide-item的visible    
 
 #### 框架的作用
 * 使团队中的傻逼也写不出垃圾代码
@@ -1034,15 +942,6 @@ let vm4=new Constructor2({
 #### vue的意义
 操作DOM=>操作组件！！！
 
-#### 设计模式
-* 发布订阅模式
-```
-this.eventBus&&this.eventBus.$emit() // 发布
-
-this.eventBus&& this.eventBus.$on() // 订阅
-
-this.eventBus.$off() // 取消订阅
-```
 #### 单向数据流
 * 定义（关键就一句话：组件不可以自己修改自己）
 1. A发起更新,A更新自己:不可以
@@ -1058,9 +957,6 @@ this.eventBus.$off() // 取消订阅
 #### store
 
 
-
-
-
 #### 正交
 一个组件的props必须正交
 
@@ -1070,78 +966,7 @@ this.eventBus.$off() // 取消订阅
 3. 组件slot的DOM元素只能传递接口属性,不能加class,Id之类的
 
 
-#### 在组件上加事件
-* [原生的事件是无法直接添加到组件上的](https://cn.vuejs.org/v2/guide/components-custom-events.html#%E5%B0%86%E5%8E%9F%E7%94%9F%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E5%88%B0%E7%BB%84%E4%BB%B6)
-```
-<g-button @click="onClick"></g-button>
-```
-是没用的
-1. 想要在组件上加原生的DOM事件，必须使用native修饰符
-```
-<g-button  v-on:click.native="close">close</g-button></div>
-```
-2. 通过$emit触发组件上的事件
-```
-<g-button @beEmited="xxx">
-```
-beEmited事件是g-button内部的元素点击事件通过emit触发的
-```
-<template>
-    <button @click="$emit('beEmited')"></button>
-</template>
-```
-
 #### [表驱动编程](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/2838ce98-d198-4e81-8b93-793368c6439b)
-
-#### slot
-* [.$slots 要放在 $mount() 之前](https://github.com/Hanqing1996/vue-wheels/blob/master/src/plugin.js)
-* 向组件的slot中插入HTML内容
-    * 这是一种危险的行为(阻止事件冒泡也是一种危险的行为)
-    * [实现方法](https://github.com/Hanqing1996/vue-wheels/blob/master/src/toast.vue)
-    ```
-    <div v-html="$slots.default[0]"></div>
-
-    vm.$slots.default=['这是<strong style="color: blue">toast</strong>信息']
-    ```
-* slot-scope
-> 传递属性
-```
-<template slot="content" slot-scope="{close}">
-    <div>give you anything　<g-button  v-on:click.native="close">close</g-button></div>
-</template>
-```
-```
-<slot name="content"　:close="closeContent"></slot>
-
-methods: {
-    closeContent(){
-        console.log('oh close');
-        this.visible=false// 关闭content
-    }
-}
-```
-> 传递对象
-```
-<td>
-    <slot name="content" :xxx="item"></slot>
-</td>
-```
-```
-<template slot="content" slot-scope="{xxx}">
-    {{xxx.name}}
-    <g-button style="margin-right: 10px">编辑</g-button>
-    <g-button>查看</g-button>
-</template>
-```            
-* slots外部一般用一个标签包裹起来
-```
-<template>
-    ...
-    <div class="wrapper">
-        <slots><slots>
-    </div>
-</template>
-```
 
 ####
 * 在组件内部注册DOM元素
@@ -1164,48 +989,6 @@ this.$refs.popover.addEventListener('click',this.onClick)　// this.$refs.popove
 const popOver=vm.$refs.a　// popOver是一个vue实例
 const button=popOver.$el.querySelector('button')
 ```
-#### 父组件与组件通信
-* 父组件给子组件传递props(常见的情况是用户在index.html的组件里添加属性)
-```
-<g-collapse :single="true">
-    <g-collapse-item title="标题1" name="1">内容1</g-collapse-item>
-    <g-collapse-item title="标题2" name="2">内容2</g-collapse-item>
-    <g-collapse-item title="标题3" name="3">内容3</g-collapse-item>
-</g-collapse>
-```
-* 父组件根据子组件情况修改父组件data
-```
-mounted() {
-    this.$children.forEach((vm) => {
-        if (vm.$options.name === 'WheelSider') {
-            this.hasSider = true
-        }
-    })
-}
-```
-* 父组件挑选符合条件的子组件,修改子组件data
-```
-mounted() {
-
-    // 把父组件的 gutter 传递给子组件
-    this.$children.forEach((vm) => {
-        vm.gutter = this.gutter
-    })
-}
-```
-* 父组件与符合条件的子组件通信
-```
-this.$children.forEach((vm)=>{
-    if(vm.$options.name==="WheelTabsHead"){
-        vm.$children.forEach((childVm)=>{
-            if(childVm.$options.name=="WheelTabsItem"&&childVm.name==this.selected){
-                this.eventBus&&this.eventBus.$emit('update:selected', this.selected,childVm)
-            }
-        })
-    }
-})
-```
-注意,由于父组件和子组件挂载顺序的原因,所以在父组件的mounted中进行父子通信是最合适的
 
 
 
@@ -1252,7 +1035,6 @@ yarn run deplosh
 #### cascader 需求分析
 ![](./images/1.jpg)
 
-#### 组件的　props 不能以 data-　开头
 
 
 #### 如何解决bug
@@ -1301,15 +1083,6 @@ onChangeItem(item,e){
 
 #### [vue中数组的变动不是响应式的](https://cn.vuejs.org/v2/guide/list.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
 
-
-#### 指令(用于封装DOM操作)
-````
-<div　ref="cascader" @clickOutside="close"></div>
-````
-点击除cascader外的其它位置,则关闭popover,并自动移除对其它位置的监听
-
-// 原先:触发onclickTrigger后,设置对其它位置的监听
-// 使用指令:一开始就设置对其它位置的监听(就算不用指令,这种思路也是正确的)
 
 
 ####　在HTML中,等号左边不支持大小写,右边支持
@@ -1446,72 +1219,6 @@ test:{
 
 > 结果便是 veu-cli 
 
-#### mounted()和updated()
-```
-change(this.data)
-
-mounted() {
-    console.log('data changed');// 不会执行
-}
-updated(){
-    console.log('data changed');// 会执行
-}
-```
-> mounted:只在组件被挂载到DOM元素上时执行一次，data/props的改变不会触发它
-
-> updated:由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。
-
->然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，通常最好使用计算属性或 watcher 取而代之。
-
-#### :class="{selected}"
-```
-<div :class="{selected}">
-    <slot></slot>
-</div>
-
-data(){
-    return {
-        selected:false
-    }
-},
-
-&.selected{
-    background-color: red;
- }
-```
-
-#### $emit 和 $on
-1. $emit和$on必须作用在同一实例上
-> 父组件 A 通过 props 的方式向子组件 B 传递，B to A 通过在 B 组件中 $emit, A 组件中 v-on 的方式实现。
-```
-// A.vue
-<template>
-    <div>
-        <B @travel="callback"></B>
-        ......
-    </div>
-</template>
-
-
-// B.vue
-<template>
-    <div @click="emit">
-    ......
-    </div>
-</template>
-
-methods:{
-    emit(){
-        this.$emit('travel')
-    }
-}
-
-// 注意到$on,$emit
-```
-2. $emit是不冒泡的
-> 我验证过了，确实如此
-
-
 
 #### Nav 实现思路
 1. demo.vue 中，往往通过sync更新currentSelected,保证其内容为当前所选项
@@ -1538,12 +1245,7 @@ mounted() {
 > 在nav组件中，由于一开始popover的显示与否由v-if控制。所以一开始nav.items不包含popover的item,造成了bug。
 ![](./images/11.jpg)
 
-#### v-for
-```
-<span v-for="page in pages" class="pager-item" :class="{active:page===currentPage,separator:page==='...'}">
-     {{page}}
-</span>
-```
+
 
 #### 修改 selected/currentPage 等属性
 错误做法:
@@ -1605,53 +1307,6 @@ npx mddir
 ```
 4. 将其放入代码块中，就是想要的目录结构了
 
-#### watch 就是定向版的 updated
-selectedItems可以是data，也可以是props(由父组件传回)
-```
-watch:{
-    selectedItems(){
-        if(selectedItems.length<10){
-            console.log(长度小于10)
-        }
-    }
-}
-```
-等价于
-```
-updated(){
-    if(this.selectedItems.length<10){
-        console.log(长度小于10)
-    }
-}
-```
-
-#### v-for一定要搭配key=id
-* [为什么想删除第一项，结果确实第三项被删除了](https://jsbin.com/gacokit/8/edit?html,js,output)
-> 可以认为在不加 key 的情况下 vue 是按照索引来判断要删除哪些元素的。
-原先的索引
-```
-0 1 2
-```
-删除第一项，重新生成索引后
-```
-0 1
-```
-vue发现少了最后一项，于是把最后一项删除了，导致了bug
-* 一般用 item.id 作为 key（不能:key=index，原因见上）
-```
-<li v-for="(item,index) in items" :key=item.id>
-    <child>
-    </child>
-    <button @click="remove(index)">删除</button>
-</li>
-```
-* 如果是 template 的话,key 要加在实际的DOM元素上
-```
-<template v-for="item,index in dataSource">
-    <tr :key="item.id">
-    </tr>
-</template>
-```
 
 #### vue 和 react 对比
 > vue 是一个容易的框架（舒服）
@@ -1692,25 +1347,8 @@ columns: {
 #### 命名
 * inselectedItemsIds
 > 根据 Id 查找 item 是否在 selectedItems 中，返回值为 boolean 类型
-
-#### beforeDestroy
-* 在 mounted 中注册事件，创造元素
-```
-table2 = this.$refs.table.cloneNode(true)
-this.table2=table2 // 便于销毁table2
-
-this.onWindowResize = () => {
-    this.updateWidth()
-}
-window.addEventListener('resize', this.onWindowResize)
-```
-* 在 beforeDestroy 中销毁注册的事件，创建的元素（防止内存泄漏）
-```
-beforeDestroy() {
-    window.removeEventListener('resize', this.onWindowResize)
-}
-this.table2.remove()
-```
+* fileList
+> 不是 filesList
 
 * table 删除 tbody ,thead 宽度也会随之改变
 
@@ -1849,7 +1487,10 @@ mounted() {
 }
 ```
 解决方法很简单，为脱离文档流的元素添加一个父元素，设置父元素的高度为粘滞内容所在元素高度，这样子文档中就始终有n+1行了
-
+> 问题:如果粘滞内容是图片呢？网速较慢情况下，img 的 height 是无法直接获取到的，那么设置的父元素的高度就是有误差的
+![](./images/ii.jpg)
+4. 在粘滞元素即将脱离文档流时（这时图片应该已经下载完毕了）才设置父元素的高度
+> 问题:发现在粘滞元素居中情况下，随着滚动，粘滞元素的宽度会发生变化
 
 #### 两种数据
 * 用户数据
@@ -1880,5 +1521,6 @@ mounted() {
 #### window 事件
 * resize:改变浏览器宽度
 * scroll:滚动
-    * window.scrollY
+    * window.scrollY``
 
+#### 跨域是默认不会带上 cookie 信息的
