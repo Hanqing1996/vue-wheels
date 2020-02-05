@@ -1246,48 +1246,6 @@ mounted() {
 ![](./images/11.jpg)
 
 
-
-#### 修改 selected/currentPage 等属性
-错误做法:
-```
-// defaultPage 从未被修改
-<pager :defaultPage="defaultPage"></pager>
-
-props:{
-    defaultPage: {
-        type: Number,
-        required: true
-    }
-}
-data(){
-    return {
-        currentPage:this.defaultPage
-    }
-}
-```
-正确做法：使用sync和$emit
-```
-// currentPage 会在 updateCurrentPage 被触发后被修改
-<pager :currentPage.sync="currentPage"></pager>
-
-props: {
-    currentPage: {
-        type: Number,
-        required: true
-    }
-}
-
-updateCurrentPage(currentPage){
-    this.$emit('update:currentPage',currentPage)
-}
-```
-注意有时 selected 是数组，那么我们要先进行深拷贝
-```
-let copy=JSON.parse(JSON.stringIfy(this.selected))
-copy.push(newItem) // 对 copy 进行一些操作
-this.emit('update:selected',copy) // 单向数据流，让父组件来修改传入的 selected
-```
-
 #### 在 md 文件中生成目录结构
 1. 安装 mddir
 ```
@@ -1521,6 +1479,6 @@ mounted() {
 #### window 事件
 * resize:改变浏览器宽度
 * scroll:滚动
-    * window.scrollY``
+    * window.scrollY
 
 #### 跨域是默认不会带上 cookie 信息的

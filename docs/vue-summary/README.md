@@ -320,36 +320,3 @@ vue发现少了最后一项，于是把最后一项删除了，导致了bug
 <div　ref="cascader" @clickOutside="close"></div>
 ```
 > 点击除 cascader 外的其它位置,则关闭 popover,并自动移除对其它位置的监听
-
-## 开发规范
-#### 及时销毁
-> 在 beforeDestroy 中销毁注册的事件，创建的元素（防止内存泄漏）
-* 在 mounted 中注册事件，创造元素
-```
-table2 = this.$refs.table.cloneNode(true)
-this.table2=table2 // 便于销毁table2
-
-this.onWindowResize = () => {
-    this.updateWidth()
-}
-window.addEventListener('resize', this.onWindowResize)
-```
-* 在 beforeDestroy 中销毁注册的事件，创建的元素（防止内存泄漏）
-```
-beforeDestroy() {
-    window.removeEventListener('resize', this.onWindowResize)
-}
-this.table2.remove()
-```
-#### 传递对象
-* 不安全的写法：直接传递字符串
-> 不安全理由：浏览器对拼写错误的字符串是不会报错的
-```
-res.send(`{id:${req.file.filename}}`)
-```
-* 安全的写法：先构造对象，再转为字符串类型
-```
-let fileName=req.file.filename
-let object={id:fileName}
-res.send(JSON.stringify(object))
-```
