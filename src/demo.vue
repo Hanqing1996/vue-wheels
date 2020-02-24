@@ -1,21 +1,18 @@
 <template>
     <div class="g-wrapper">
         <g-uploader
-                action="http://localhost:3000/upload"
+                action="https://zhq-node-server.herokuapp.com/upload"
                 name="uploadFile"
                 :parseResponse="parseResponse"
                 :fileList.sync="fileList">
-            <g-button>上传</g-button>
-            <template slot="tips">
-                <div>只能上传 300 kb 以内的 png,jpeg 文件</div>
-            </template>
+            <div style="padding: 10px;text-align: center">
+                <g-button icon="upload">上传</g-button>
+            </div>
         </g-uploader>
-        <g-button>保存</g-button>
     </div>
 </template>
 
 <script>
-    // action="https://zhq-node-server.herokuapp.com/upload"
     import GUploader from "./components/uploader/uploader";
     import GButton from './components/button/button'
 
@@ -30,8 +27,9 @@
         methods: {
             // 以指定格式解析后端传回的数据
             parseResponse(response) {
-                let {id} = JSON.parse(response)
-                let url = `http://localhost:3000/preview/${id}`
+                // response 为一串ID
+                let id = response
+                let url = `https://zhq-node-server.herokuapp.com/preview/${id}`
                 return url
             }
         }
@@ -44,5 +42,10 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+
+    svg{
+        width: 25px;
+        height: 25px;
     }
 </style>

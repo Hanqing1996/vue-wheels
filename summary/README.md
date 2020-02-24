@@ -1302,100 +1302,6 @@ columns: {
 },
 ```
 
-#### 命名
-* inselectedItemsIds
-> 根据 Id 查找 item 是否在 selectedItems 中，返回值为 boolean 类型
-* fileList
-> 不是 filesList
-
-* table 删除 tbody ,thead 宽度也会随之改变
-
-#### DOM操作
-* 获取元素 left,top,width,height
-```
-let {left,top,width,height}=el.getBoundingClientRect()
-```
-* appendChild()
-> 如果被插入的节点已经存在于当前文档的文档树中,则那个节点会首先从原先的位置移除,然后再插入到新的位置.
-* cloneNode()
-```
-// 只复制最表层节点，不复制子节点
-let copy=el.cloneNode(false)
-
-// 复制以el为根节点的整棵DOM树
-let copy=el.cloneNode(true)
-```
-let table2=this.$refs.table.cloneNode(true)
-this.$refs.wrapper.appendChild(table2)
-* 根据a的宽度修改b的宽度
-```
-let {width}=a.getBoundingClientRect()
-b.style.width=`${width}px`
-```
-* 获取 table 的 thead 子节点
-```
-let tableHeader=Array.from(table.children).filter(node=>node.tagName.toLowerCase()==='thead')[0]
-```
-* 删除 table 的 tbody
-```
-let tableHeader2
-Array.from(table.children).map(node=>{
-    if(node.tagName.toLowerCase()!=='thead'){
-        node.remove()
-    } else{
-        tableHeader2=node
-    }
-})
-```
-* 为 table 添加class
-```
-table.classList.add('tableCopy')
-```
-* 获取 table 的 border-bottom 宽度（style.borderBottom 可写不可读）
-```
-getComputedStyle(this.table,null).getPropertyValue('border-bottom-width'));
-```
-
-
-#### getBoundingClientRect()
-> 返回四个值
-* left:元素相对于左上角视口的横向距离
-* top:元素相对于左上角视口的纵向距离
-* width:元素宽度
-* height:元素高度
-> 注意 left 和 top 不是相对于父元素左上角的距离，是相对于浏览器左上角的距离
-```
-<div class="parent">
-    <div class="box"></div>
-</div>
-```
-```
-*{
-    margin: 0;
-    padding:0;
-}
-.parent{
-    margin: 10px;
-}
-.box{
-    width: 100px;
-    height:200px;
-    background-color: red;
-}
-```
-```
-let box=document.getElementsByClassName('box')[0]
-let {left:left2}=box.getBoundingClientRect()
-console.log(left2);// 10px
-```
-> getBoundingClientRect()能返回的top表示的是到窗口顶部的距离，不是到文档顶部的距离
-```
-// 求 el 到文档顶部的距离
-let {top}=el.getBoundingClientRect()
-let height=window.scrollY+top
-```
-> top 可能是负值，表示元素在当前文档顶部之上
-
 #### 固定表头（遇到最难的技术问题）
 1. 尝试复制 table 得到 table2,再去掉 table2 的 tbody。采用定位方式让 thead 固定在 table 头部。
 > 问题:win10的chrome中，滚动条会占17px,这导致 table 整体左移了17px,使得 table2 的宽度与 table 不同
@@ -1476,9 +1382,7 @@ mounted() {
 3. 展开后，将该项存入 expendedItems 数组；折叠后，将该项移出 expendedItems 数组；
 
 
-#### window 事件
-* resize:改变浏览器宽度
-* scroll:滚动
-    * window.scrollY
-
 #### 跨域是默认不会带上 cookie 信息的
+
+#### Icon-font 如何生成 svj.js 文件
+我的项目->下载至本地->获取到 iconfont.js 文件-> 将 iconfont.js 加入项目，重命名为 svg.js

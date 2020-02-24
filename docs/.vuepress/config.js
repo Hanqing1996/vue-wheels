@@ -29,6 +29,7 @@ module.exports = {
                     '/components/validator',
                     '/components/table',
                     '/components/sticky',
+                    '/components/uploader',
                 ]
             },
             {

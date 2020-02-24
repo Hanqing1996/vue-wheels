@@ -35,6 +35,7 @@ res.send(JSON.stringify(object))
 ```
 
 ## 重构
+1. 示范
 ```
 let xhr = new XMLHttpRequest()
 xhr.open(this.method, this.action)
@@ -62,6 +63,12 @@ xxx(formData,(response)=>{
     this.url =this.parseResponse(response)
 })
 ```
+2. 重构要点
+* 加注释，明确每部分代码的功能
+* 重复出现的变量/操作，抽取到一个函数里面
+* 最终每个函数不应超过5行
+* 重构是每天都要进行的
+
 
 ## 单向数据流
 > 比如我们要修改组件的 selected 属性
@@ -108,15 +115,11 @@ updateSelected(newItem){
     this.emit('update:selected',copy) // 单向数据流，让父组件来修改传入的 selected
 }
 ```
-用 ES6 语法简化如下
-```
-updateSelected(newItem){
-    this.emit('update:selected',[...this.selected,newItem])
-}
-```
 
 ## 命名
-> 命名一律不使用缩写
+1. 命名一律不使用缩写
+2. 对于一时不知道叫什么的函数，应该暂时起名为 xxx,yyy,zzz...
+
 ### function
 * inselectedItemsIds
 > 根据 Id 查找 item 是否在 selectedItems 中，返回值为 boolean 类型

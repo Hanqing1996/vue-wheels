@@ -122,7 +122,7 @@ this.$emit('update:title', newTitle)
 ```
 下面两种写法等价
 ```
-<text-document :title="doc.title" @update:title="doc.title = $event"></text-document>
+<text-document :doc.title = $event @update:title="doc.title = $event"></text-document>
 ```
 ```
 <text-document :title.sync="doc.title"></text-document>
@@ -199,7 +199,7 @@ this.$children.forEach((vm)=>{
 > 注意,由于父子组件挂载顺序的原因,所以在父组件的mounted中进行父子通信是最合适的
 
 ## 事件
-#### $emit 和 $on
+#### $emit
 1. $emit和$on必须作用在同一实例上
 > 父组件 A 通过 props 的方式向子组件 B 传递，B to A 通过在 B 组件中 $emit, A 组件中 v-on 的方式实现。
 ```
@@ -226,6 +226,67 @@ methods:{
 }
 ```
 2. $emit是不冒泡的
+3. $emit 实现孙子组件向爷爷组件通信
+> 前提：不考虑 eventBus
+```
+<grandPa @fatherSay="console.log('ok,grandPa konw it')">
+    <father @childSay="this.$emit('fatherSay')">
+        <child></child>
+    </father>
+</grandPa>
+
+```
+```
+// child.vue
+this.$emit('childSay')
+```
+
+#### $event
+* 对于原生元素（如 button、input）来说，$event 是原始的 DOM 事件
+```
+<input type="checkbox"  @change=changeStatus($event,item)>
+
+changeStatus(event,item){
+
+}
+```
+> 如果回调函数只有 event 一个参数，那么 $event 可以省略
+```
+<input type="checkbox"  @change=changeStatus>
+
+changeStatus(event){
+
+}
+```
+* 对于自定义组件（如 child）来说，$event 是其自身 $emit 发出的第二个参数
+```
+    <div id="app">
+        <child @click="clickChild(a,$event)"></child>
+    </div>
+
+    Vue.component('child', {
+        data: function () {
+            return {}
+        },
+        template: '<button @click="clickButton">点我</button>',
+        methods: {
+            clickButton() {
+                this.$emit('click', 1,2) // $emit的第二个参数为$event
+            }
+        }
+    })
+
+    var example1 = new Vue({
+        el: '#app',
+        data: {
+        },
+        methods: {
+            clickChild(e) {
+                console.log(e); // 1，说明$event值为1
+            }
+        }
+    })
+```
 
 #### eventBus
 > eventBus 与 $on(),$emit() 同属于发布订阅模式，不同于后者需要依附于某个 vue 实例，eventBus 作为事件中心，独立于各个组件。因此可以利用它实现多组件间通信
@@ -235,6 +296,35 @@ this.eventBus&&this.eventBus.$emit() // 发布
 this.eventBus&&this.eventBus.$on() // 订阅
 
 this.eventBus.$off() // 取消订阅
+```
+
+## 异步
+对于
+```
+<g-uploader :fileList.sync="fileList">{{}}</g-uploader>
+
+data(){
+    fileList:[]
+}
+```
+在 uploader 组件中更新 fileList 后，是无法直接获取最新的 fileList 
+```
+props:{
+    fileList:{
+        type:Array
+    }
+}
+let arr=[{name:'libai'}]
+this.$emit('update:fileList',arr)
+console.log(this.fileList) // []
+```
+这是因为父组件获取到更新后的 fileList 是同步的（即sync是同步的），而父组件将更新后的 fileList 传回给子组件是异步的（即vue 的 render 是同步的）
+```
+let arr=[{name:'libai'}]
+this.$emit('update:fileList',arr)
+setTimeout(()=>{
+    console.log(this.fileList); // [{name:'libai'}]
+})
 ```
 
 
@@ -272,6 +362,12 @@ var div=document.createElement('div')
 document.body.appendChild(div)
 ```
 2. 只在组件被挂载到DOM元素上时执行一次，data/props的改变不会触发它
+3.  mounted 和 updated
+    * 都会重新渲染组件
+    * 第一次打开页面/手动刷新页面，会触发 mounted，点击按钮改变组件 state ，触发 updated
+    * mounted 总是伴随着 updated
+
+
 #### uodated
 > 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，通常最好使用计算属性或 watcher 取而代之。
 #### beforeDestroy

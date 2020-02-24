@@ -3,20 +3,21 @@
         <div @click="onClickUpload" ref="trigger">
             <slot></slot>
         </div>
-
-        <slot name="tips"></slot>
         <div ref="temp" style="height: 0;width: 0;overflow: hidden"></div>
-        <ol>
+        <ol v-if="fileList.length>0" class="fileList" style="border: 1px solid black;padding: 5px">
             <template v-for="file in fileList">
-                <li :key="file.name">
-                    {{file.name}}
+                <li :key="file.name" style="display: flex;flex-direction: row;align-items: center;margin: 10px">
+                    <span style="width: 200px">{{file.name}}</span>
                     <div v-if="file.status==='uploading'" :class="{loading:file.status==='uploading'}">
                         <icon name="loading"></icon>
                     </div>
-                    <g-button @click.native="onRemove(file)">删除</g-button>
+                    <g-button @click.native="onRemove(file)" style="width: 100px">删除</g-button>
                 </li>
             </template>
         </ol>
+        <div v-if="url">
+            <img :src="url" alt="预览图片" ref="img">
+        </div>
     </div>
 </template>
 
@@ -24,21 +25,15 @@
     import GButton from '../button/button'
     import Icon from '../button/icon'
 
-    // http://localhost:3000/upload
     export default {
         name: "uploader",
         components: {GButton,Icon},
         data() {
             return {
-                url: 'about:blank'
+                url:''
             }
         },
         props: {
-            // 文件名
-            name: {
-                type: String,
-                required: true
-            },
             // 服务器地址
             action: {
                 type: String,
@@ -92,32 +87,40 @@
                     name: this.generateName(name),
                     type,
                     size,
-                    status: 'uploading'
+                    status: 'uploading',
                 }
                 this.$emit('update:fileList', [...this.fileList, xxxFile])
 
                 this.sendRequest(formData, (response) => {
-                    let targetName = xxxFile.name
-                    let copy=[...this.fileList]
-                    copy.forEach(file => {
-                        if (file.name === targetName) {
-                            file.status = 'uploaded'
-                        }
-                    })
-                    console.log(copy);
+                    this.afterUploadFile(xxxFile.name)
+                    console.log(response)
                     this.url = this.parseResponse(response)
-                    console.log(this.url);
-
+                    console.log(this.url)
+                },()=>{
+                    this.updateStatusByName(xxxFile.name,'uploadFailed')
                 })
-
             },
-            sendRequest(formData, success) {
+            updateStatusByName(targetName,status){
+                let copy=JSON.parse(JSON.stringify(this.fileList))
+                copy.forEach(file => {
+                    if (file.name === targetName) {
+                        file.status = status
+                    }
+                })
+                this.$emit('update:fileList',copy)
+            },
+            afterUploadFile(targetName){
+                this.updateStatusByName(targetName,'uploaded')
+            },
+            sendRequest(formData, success,fail) {
+
                 let xhr = new XMLHttpRequest()
                 xhr.open(this.method, this.action)
                 xhr.send(formData)
                 xhr.onload = () => {
                     success(xhr.response)
                 }
+                xhr.onerror=fail
             },
             generateName(name) {
                 while (this.fileList.filter(f => f.name === name).length > 0) {
@@ -136,7 +139,9 @@
     @import "src/var";
 
     .g-uploader {
-        border: 1px solid red;
+        > .fileList{
+            list-style: none;
+        }
     }
     .loading {
         > svg {
