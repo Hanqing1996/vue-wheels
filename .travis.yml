@@ -16,4 +16,10 @@ deploy:
   keep_history: true
   on:
     branch: master
-install: travis_wait 30 mvn install
+
+install:
+  # Output something every 10 minutes or Travis kills the job
+  - while sleep 9m; do echo "=====[ $SECONDS seconds still running ]====="; done &
+  - long-living-command
+  # Killing background sleep loop
+  - kill %1
