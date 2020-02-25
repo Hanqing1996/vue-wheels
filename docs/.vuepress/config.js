@@ -35,7 +35,7 @@ module.exports = {
             {
                 title: '总结',
                 collapsable: false,
-                children:['/组件需求分析/','/API设计原则/','/单元测试总结/','/vue-summary/','/开发规范/']
+                children:['/组件需求分析/','/API设计原则/','/单元测试总结/','/vue-cli/','/vue-summary/','/开发流程/','/开发规范/']
             }
         ]
     },

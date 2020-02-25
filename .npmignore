@@ -1,0 +1,10 @@
+/docs/
+/coverage/
+/summary/
+/src/
+/tests/
+/.idea/
+babel.config.js
+karma.conf.js
+deploy.sh
+.travis.yml

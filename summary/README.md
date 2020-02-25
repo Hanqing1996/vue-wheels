@@ -1019,14 +1019,6 @@ collapse-item.vue:38 标题3被更新了
 正确的数据流示范,见collapse组件
 
 
-#### 部署到github
-先生成静态文件，再部署到github
-```
-yarn run docs:build
-yarn run deplosh
-```
-
-
 #### 学习　vuepress
 1. 预览文档标题
 2, 遇到bug,先google

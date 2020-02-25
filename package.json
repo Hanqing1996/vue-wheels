@@ -1,11 +1,11 @@
 {
-  "name": "wheel-10.14",
-  "version": "0.1.0",
+  "name": "zhq-vue-wheel",
+  "version": "1.0.0",
   "description": "UI框架",
-  "private": true,
+  "main": "dist/myWheel.umd.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib --name myWheel src/index.js",
     "test": "cross-env BABEL_ENV=test karma start  --single-run",
     "test:invalid": "vue-cli-service test:unit",
     "docs:dev": "vuepress dev docs",
