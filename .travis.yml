@@ -16,3 +16,4 @@ deploy:
   keep_history: true
   on:
     branch: master
+install: travis_wait 30 mvn install

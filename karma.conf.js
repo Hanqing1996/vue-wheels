@@ -20,8 +20,6 @@ module.exports = function(config) {
         },
         autoWatch: true,
 
-        browsers: ['ChromeHeadless'],
-
-        install: 'travis_wait 30 mvn install'
+        browsers: ['ChromeHeadless']
     })
 }
