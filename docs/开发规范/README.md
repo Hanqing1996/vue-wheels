@@ -1,6 +1,17 @@
 
 # 开发规范
 
+## 持续集成
+#### 持续集成是什么
+1. 持续集成指的是只要代码有变更，就自动运行构建，测试，部署。
+2. 持续集成的好处在于，每次代码的小幅变更，就能看到运行结果，从而不断累积小的变更，而不是在开发周期结束时，一下子合并一大块代码。
+
+#### travis CI 踩坑
+* test
+> 本项目测试框架采用 Karma。在添加测试覆盖率相关内容后，始终无法通过 pass。检查 log 发现，test 没有自动 exit。于是将 script 中的 watch 参数设置为 false，无果。翻阅 Karma 文档，知道了有 命令参数 -- single-run。尝试添加后，成功。 
+* deploy
+> 使用 travis CI 进行 deploy 是需要对 github_token 进行处理的，详情可以参考[这里](https://docs.travis-ci.com/user/deployment/pages/#setting-the-github-token)。主要是两个步骤，一是生成 github_token，用于授权给 CI 平台；二是在 travis CI 中进行环境变量设置，以保证 .travis.yml 能读取到 token。
+
 ## 及时销毁
 > 在 beforeDestroy 中销毁注册的事件，创建的元素（防止内存泄漏）
 * 在 mounted 中注册事件，创造元素

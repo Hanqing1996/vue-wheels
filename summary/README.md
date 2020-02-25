@@ -213,7 +213,7 @@ var vm = new Vue({
 结果为 <div class="2">123</div>,因为class1为undefined,假值,class2为'2'',皆为真值;所以返回数组为[false,true],如果为true,则class名有效
 
 
-#### 发布 wheel 包（需FQ）
+#### parcel 下发布 wheel 包（需FQ）
 1. 更新 package.json
 2. 在 package.json 里将版本号改为 0.0.1，等我们做完了再改成 1.0.0
 3. 创建 index.js，在 index.js 里将你想要导出的内容全部导出
