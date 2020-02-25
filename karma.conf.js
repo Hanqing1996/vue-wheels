@@ -18,8 +18,8 @@ module.exports = function(config) {
             dir: './coverage',
             reporters: [{ type: 'lcov', subdir: '.' }, { type: 'text-summary' }],
         },
-        autoWatch: false,
+        autoWatch: true,
 
-        browsers: ['ChromeHeadless']
+        browsers: ['ChromeHeadless'],
     })
 }
