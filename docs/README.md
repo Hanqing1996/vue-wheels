@@ -1,4 +1,5 @@
-# Wheels UI 组件库
+# zhq-vue-wheel
 
-* 简单易懂够好用
+* 涵盖常见 UI 组件
 * 适合移动端和PC端使用
+* 通过单元测试和 travis CI

@@ -17,7 +17,7 @@ yarn add zhq-vue-wheel -D
 ```
 <template>
     <div id="app">
-        <GButton></Gbutton>
+        <GButton></GButton>
     </div>
 </template>
 <script>
