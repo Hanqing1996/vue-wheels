@@ -26,7 +26,7 @@
 ```
 npx ......
 ```
-* [使用 icon-font 挑选/修改图标](https://xiedaimala.com/tasks/feb587c8-7139-4b1e-95f3-ac429247747a/video_tutorials/88747efd-1306-4752-a8c0-e1b8e63f1862)
+* [使用 icon-font 挑选/修改图标]()
     * 左图标->右图标
     * 获取代码：symbol->在线链接
 * 打包：parcel build test/* --no-cache --no-minify
@@ -460,7 +460,7 @@ child.$mount() // 异步执行
 div.$mount() // 异步执行
 ```
 
-#### [Toast 需求分析](https://xiedaimala.com/tasks/b59fb65d-2450-44c0-8078-51612dbbcc50)
+#### [Toast 需求分析]()
 
 
 #### 工程问题
@@ -966,7 +966,7 @@ let vm4=new Constructor2({
 3. 组件slot的DOM元素只能传递接口属性,不能加class,Id之类的
 
 
-#### [表驱动编程](https://xiedaimala.com/tasks/d746d4c2-5f33-49c8-98b5-ff5c6f22b10b/video_tutorials/2838ce98-d198-4e81-8b93-793368c6439b)
+#### [表驱动编程]()
 
 ####
 * 在组件内部注册DOM元素
@@ -992,7 +992,7 @@ const button=popOver.$el.querySelector('button')
 
 
 
-#### [正确的数据流总是单向的](https://xiedaimala.com/tasks/f81c1fde-03fd-4b23-8ae8-891f046e63e6/video_tutorials/9853353e-ef49-4fe6-bcb6-cdbb79c6f4cb)
+#### [正确的数据流总是单向的]()
 错误的数据流
 ```
 methods:{
@@ -1092,7 +1092,7 @@ this.$on('welcome',xxx)// xxx为一个回调函数
 ![](./images/2.jpg)
 
 #### 状态管理
-* [$on(),$emit(),eventbus的由来](https://xiedaimala.com/tasks/2f5d184a-0f2b-4b20-9317-40ad22af784d/video_tutorials/468647fd-5ec8-433d-be52-2eb0c081e36d)
+* [$on(),$emit(),eventbus的由来]()
 
 * 什么是状态(面试)
 ![](./images/1.jpg)
@@ -1116,6 +1116,7 @@ import count from './src/components/count'
 Maximum call stack size exceeded
 ```
 
+
 #### app.js的作用
 1. app.js(main.js/index.js)中定义了一个挂载在index.html中的div#app上的vue实例，它被认为是所有组件的父组件
 2. 在app.js中注册count.vue，就可以在index.html中的div#app中使用<count></count>。这个道理和在A组件中注册B.vue，就可以在A的template中使用<B></B>是一个道理
@@ -1131,7 +1132,7 @@ Maximum call stack size exceeded
 1. 单页面用前端路由实现，多页面用后端路由实现
 2. 如果想宣传网站（SEO，即google搜索引擎能搜到这个页面）,就用多页面，否则用单页面（比如后台管理页面，不需要也不允许让google搜索到）
 
-#### [RESETful API](https://xiedaimala.com/tasks/755642eb-c302-4bee-86de-3b6876ab9e76/video_tutorials/d7fcb8ab-4a32-476f-b6d8-ec144d19321d):用于解决URL起名字的问题
+#### [RESETful API]():用于解决URL起名字的问题
 ![](./images/6.jpg)
 
 #### 角色和权限是
